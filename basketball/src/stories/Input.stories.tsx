@@ -1,34 +1,40 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
-import { Input } from "../uiComponents/Input";
-import styled from "styled-components";
+import styled from 'styled-components';
+import { FieldInputData } from '../uiComponents/FieldInputData';
 
 export default {
-    title: 'Inputs/Inputs',
-    component: Input,
+  title: 'UI/Inputs',
+  component: FieldInputData,
 } as Meta;
 
 interface IProps {
   text: string;
   disabled: boolean;
-  type: "text" | "password";
+  type: 'text' | 'password';
   isError: boolean;
   errorMessage: string;
-};
+}
 
-export const Inputs = ({ text = 'Login', disabled = false, type = 'text', isError, errorMessage = 'Required' } : IProps) => (
-    <MockContainer>
-        <Input
-          text={text}
-          type={type}
-          disabled={disabled}
-          isError={isError}
-          errorMessage={errorMessage}
-        />
-    </MockContainer>
+export const AllInputs = ({
+  text = 'Login',
+  disabled = false,
+  type = 'text',
+  isError,
+  errorMessage = 'Required',
+}: IProps) => (
+  <MockContainer>
+    <FieldInputData
+      text={text}
+      type={type}
+      disabled={disabled}
+      isError={isError}
+      errorMessage={errorMessage}
+    />
+  </MockContainer>
 );
 
-Inputs.argTypes = {
+AllInputs.argTypes = {
   text: {
     control: {
       type: 'select',
@@ -40,20 +46,20 @@ Inputs.argTypes = {
       type: 'boolean',
     },
   },
-    type: {
-        control: {
-            type: 'select',
-            options: ['text', 'password'],
-        },
+  type: {
+    control: {
+      type: 'select',
+      options: ['text', 'password'],
     },
-    isError: {
-      control: 'boolean',
-    },
-    errorMessage: {
-      control: 'text',
-    },
+  },
+  isError: {
+    control: 'boolean',
+  },
+  errorMessage: {
+    control: 'text',
+  },
 };
 
 const MockContainer = styled.div`
- width: 366px;
+  width: 366px;
 `;
