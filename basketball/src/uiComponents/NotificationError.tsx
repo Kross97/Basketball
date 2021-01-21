@@ -1,0 +1,21 @@
+import React from 'react';
+import styled from 'styled-components';
+import { TextStandart } from './Typography';
+
+interface IProps {
+  text: string;
+}
+
+export const NotificationError = ({ text }: IProps) => (
+  <Container>
+    <TextStandart>{text}</TextStandart>
+  </Container>
+);
+
+const Container = styled.div`
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 4px;
+  background-color: ${({ theme }) => theme.colors.lightRed};
+  color: ${({ theme }) => theme.colors.white};
+ `;
