@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { ButtonAction } from '../uiComponents/ButtonAction';
-import { PaginationCountBtn } from '../uiComponents/PaginationCountBtn';
+import { SizesButton } from '../helpers/types/types';
 
 export default {
   title: 'UI/Buttons',
@@ -9,17 +9,20 @@ export default {
 } as Meta;
 
 interface IProps {
-  type: 'Sign' | 'Add' | 'Cancel',
-  size: 'small' | 'middle' | 'large';
+  isNegativeStyle: boolean;
+  isAdding: boolean;
+  size: SizesButton;
   text: string;
   disabled: boolean;
 }
 
 export const AllButtons = ({
-  type = 'Sign', size = 'middle', text = 'Add', disabled = false,
+  isNegativeStyle = false,
+  isAdding = false, size = 'middle', text = 'Add', disabled = false,
 }: IProps) => (
   <ButtonAction
-    type={type}
+    isNegativeStyle={isNegativeStyle}
+    isAdding={isAdding}
     size={size}
     text={text}
     disabled={disabled}
@@ -27,10 +30,14 @@ export const AllButtons = ({
 );
 
 AllButtons.argsTypes = {
-  type: {
+  isNegativeStyle: {
     control: {
-      type: 'select',
-      options: ['Sign', 'Add', 'Cancel'],
+      type: 'boolean',
+    },
+  },
+  isAdding: {
+    control: {
+      type: 'boolean',
     },
   },
   size: {
@@ -44,26 +51,5 @@ AllButtons.argsTypes = {
   },
   disabled: {
     control: 'boolean',
-  },
-};
-
-interface IProps {
-  number: string;
-}
-
-export const PaginationBtn = ({ number = '1' }: IProps) => (
-  <PaginationCountBtn
-    number={number}
-  />
-);
-
-PaginationBtn.argTypes = {
-  number: {
-    control: {
-      type: 'range',
-      min: 1,
-      max: 100,
-      step: 1,
-    },
   },
 };
