@@ -6,38 +6,32 @@ import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
 import { TextExtraSmall } from './Typography';
 
 export const SideSandwichMenu = () => (
-  <Menu>
-    <ContainerMenu>
-      <TeamsPlayers>
-        <ItemMenu>
-          <TeamsLogo />
-          <TextTeams>Teams</TextTeams>
-        </ItemMenu>
-        <ItemMenu>
-          <PlayerLogo />
-          <TextSignAndPlayers>Players</TextSignAndPlayers>
-        </ItemMenu>
-      </TeamsPlayers>
-      <ItemMenu>
-        <SignOutLogo />
-        <TextSignAndPlayers>Sign out</TextSignAndPlayers>
-      </ItemMenu>
-    </ContainerMenu>
-  </Menu>
+  <ContainerMenu>
+    <TeamsPlayers>
+      <TeamsItem>
+        <TeamsLogo />
+        <TextTeams>Teams</TextTeams>
+      </TeamsItem>
+      <PlayerItem>
+        <PlayerLogo />
+        <TextSignAndPlayers>Players</TextSignAndPlayers>
+      </PlayerItem>
+    </TeamsPlayers>
+    <OutItem>
+      <SignOutLogo />
+      <TextSignAndPlayers>Sign out</TextSignAndPlayers>
+    </OutItem>
+  </ContainerMenu>
 );
-
-const Menu = styled.div`
-  display: flex;
-  padding: 37px 50px 32px;
-  background-color: ${({ theme }) => theme.colors.white};
-  height: 100%;
-  box-sizing: border-box;
-`;
 
 const ContainerMenu = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 37px 50px 32px;
+  background-color: ${({ theme }) => theme.colors.white};
+  box-sizing: border-box;
+  height: 100%;
 `;
 
 const ItemMenu = styled.div`
@@ -47,12 +41,27 @@ const ItemMenu = styled.div`
   cursor: pointer;
 `;
 
+const TeamsItem = styled(ItemMenu)`
+`;
+
+const PlayerItem = styled(ItemMenu)`
+  & svg {
+    fill: ${({ theme }) => theme.colors.red};
+  }
+`;
+
+const OutItem = styled(ItemMenu)`
+  & svg {
+    fill: ${({ theme }) => theme.colors.red};
+  }
+`;
+
 const TeamsPlayers = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   
-  & ${ItemMenu}:nth-child(1) {
+  & ${TeamsItem} {
     margin-bottom: 40px;
   }
 `;
