@@ -16,11 +16,26 @@ export const TextExtraSmall = styled(TextStandart)`
  font-size: 12px;
 `;
 
-export const TextLogo = styled.span`
-  font-family: Orbitron, sans-serif;
+export const TextSmallThin = styled.span`
+  font-family: Avenir, sans-serif;
   font-style: normal;
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 19px;
+`;
+
+export const TextExtraLarge = styled.span`
+  font-family: Avenir, sans-serif;
+  font-style: normal;
+  font-weight: 800;
   font-size: 36px;
-  line-height: 45px;
-  text-transform: uppercase;
+  line-height: 49px;
+`;
+
+export const TextLarge = styled.span`
+  font-family: Avenir, sans-serif;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 24px;
+  line-height: 33px;
 `;
