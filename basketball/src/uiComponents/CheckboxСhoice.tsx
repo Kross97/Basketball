@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 
@@ -10,9 +10,9 @@ interface IProps {
   errorMessage?: string;
 }
 
-export const CheckboxСhoice = ({
+export const CheckboxСhoice: FC<IProps> = ({
   text, disabled, checked, isError = false, errorMessage = '',
-}: IProps) => (
+}) => (
   <Container>
     <CheckboxContainer disabled={disabled}>
       <CheckboxNative checked={checked} disabled={disabled} type="checkbox" />
