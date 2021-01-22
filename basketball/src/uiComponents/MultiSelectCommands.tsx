@@ -1,5 +1,5 @@
 import React from 'react';
-import Select, {} from 'react-select';
+import Select from 'react-select';
 import { theme } from '../themes/theme';
 
 const options = [
@@ -26,16 +26,24 @@ const customStyles = {
       borderColor: theme.colors.lightGrey,
     },
   }),
-  option: (styles: any) => ({
+  option: (styles: any, state: any) => ({
     ...styles,
-    color: theme.colors.grey,
-    ':hover': {
-      backgroundColor: theme.colors.lightestRed,
-      color: theme.colors.white,
+    fontStyle: 'normal',
+    fontWeight: '500',
+    fontSize: '18px',
+    lineHeight: '25px',
+    color: state.isFocused ? theme.colors.white : theme.colors.grey,
+    backgroundColor: (state.isFocused && theme.colors.lightestRed),
+    ':active': {
+      backgroundColor: theme.colors.darkRed,
     },
   }),
   multiValue: (styles: any) => ({
     ...styles,
+    fontStyle: 'normal',
+    fontWeight: 'normal',
+    fontSize: '14px',
+    lineHeight: '19px',
     padding: '3px 4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
@@ -54,7 +62,7 @@ const customStyles = {
   }),
 };
 
-export const MultiSelectPlayers = () => (
+export const MultiSelectCommands = () => (
   <Select
     isMulti
     isClearable

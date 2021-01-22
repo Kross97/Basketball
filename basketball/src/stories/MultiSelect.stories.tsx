@@ -1,16 +1,16 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { MultiSelectPlayers } from '../uiComponents/MultiSelectPlayers';
+import { MultiSelectCommands } from '../uiComponents/MultiSelectCommands';
 
 export default {
-  title: 'UI/Selects',
-  component: MultiSelectPlayers,
+  title: 'UI/SelectsCommands',
+  component: MultiSelectCommands,
 } as Meta;
 
 export const PlayersMultiSelect = () => (
   <MockContainer>
-    <MultiSelectPlayers />
+    <MultiSelectCommands />
   </MockContainer>
 );
 
