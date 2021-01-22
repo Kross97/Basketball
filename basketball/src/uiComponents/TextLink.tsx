@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 
@@ -8,7 +8,7 @@ interface IProps {
   disabled: boolean;
 }
 
-export const TextLink = ({ text, href, disabled }: IProps) => (
+export const TextLink: FC<IProps> = ({ text, href, disabled }) => (
   <CustomLink disabled={disabled} href={href}>
     <LinkText>{text}</LinkText>
   </CustomLink>
