@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC, useState, ChangeEvent } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 
@@ -10,15 +10,29 @@ interface IProps {
   errorMessage?: string;
 }
 
-export const FieldInputData = ({
+export const FieldInputData: FC<IProps> = ({
   text, disabled, type, isError = false, errorMessage = '',
-}: IProps) => (
-  <InputContainer>
-    <TextInput>{text}</TextInput>
-    <CustomInput type={type} disabled={disabled} isError={isError} />
-    {isError && <TextInputError>{errorMessage}</TextInputError>}
-  </InputContainer>
-);
+}) => {
+  const [data, setData] = useState<string>('');
+
+  const changeHandler = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
+    setData(value);
+  };
+
+  return (
+    <InputContainer>
+      <TextInput>{text}</TextInput>
+      <CustomInput
+        onInput={changeHandler}
+        type={type}
+        disabled={disabled}
+        isError={isError}
+        value={data}
+      />
+      {isError && <TextInputError>{errorMessage}</TextInputError>}
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.label`
   display: flex;
@@ -33,7 +47,7 @@ const CustomInput = styled.input<{ isError: boolean }>`
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 14px;
   line-height: 24px;
   color: ${({ theme }) => theme.colors.darkGrey};
@@ -50,6 +64,7 @@ const CustomInput = styled.input<{ isError: boolean }>`
   &:disabled {
     cursor: auto;
     background-color: ${({ theme }) => theme.colors.lightestGrey};
+    color: ${({ theme }) => theme.colors.lightGrey};
   }
 `;
 
