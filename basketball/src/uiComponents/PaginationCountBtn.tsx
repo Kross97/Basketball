@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 
@@ -6,7 +6,7 @@ interface IProps {
   number: string;
 }
 
-export const PaginationCountBtn = ({ number }: IProps) => (
+export const PaginationCountBtn: FC<IProps> = ({ number }) => (
   <PaginationBtn>
     <TextStandart>{number}</TextStandart>
   </PaginationBtn>
