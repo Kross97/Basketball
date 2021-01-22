@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 
@@ -6,7 +6,7 @@ interface IProps {
   text: string;
 }
 
-export const NotificationError = ({ text }: IProps) => (
+export const NotificationError: FC<IProps> = ({ text }) => (
   <Container>
     <TextStandart>{text}</TextStandart>
   </Container>
