@@ -1,4 +1,4 @@
-import playerImage from '../static/Mock_player.svg';
+import playerImage from '../static/mock_player.svg';
 
 export const Player = {
   name: 'Greg Whittington',
