@@ -3,8 +3,8 @@ import { Meta } from '@storybook/react/types-6-0';
 import { PlayerCard } from '../components/PlayerCard';
 
 export default {
-  title: 'Components/PlayerCards/BaseCard',
+  title: 'Components/Card',
   component: PlayerCard,
 } as Meta;
 
-export const PlayerCardBase = () => <PlayerCard id={1} />;
+export const CardBase = () => <PlayerCard id={1} />;
