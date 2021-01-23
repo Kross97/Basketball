@@ -20,6 +20,12 @@ export const theme = {
       middle: '8px 61px',
       large: '10px 142px',
     },
+    cardSizes: {
+      team: '65px 107px',
+      player: '73px 45px 0 45px',
+      teamMobile: '24px 55px 30px 56px',
+      playerMobile: '11px 24px 0 24px',
+    },
   },
   gradient: {
     base: 'linear-gradient(100.45deg, #707070 0%, #393939 100.28%)',

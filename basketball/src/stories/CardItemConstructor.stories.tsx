@@ -13,13 +13,13 @@ export default {
 
 export const TeamItem = () => (
   <MockContainer>
-    <CardItemConstructor item={Team} />
+    <CardItemConstructor type="team" item={Team} />
   </MockContainer>
 );
 
 export const PlayerItem = () => (
   <MockContainer>
-    <CardItemConstructor item={Player} />
+    <CardItemConstructor type="player" item={Player} />
   </MockContainer>
 );
 
