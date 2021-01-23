@@ -33,9 +33,12 @@ export const PlayerCard: FC<IProps> = ({ id }) => {
       </CardNavigation>
       <CardBody>
         <Content>
-          <LogoTeam />
+          <ImagePlayer />
           <DataCard>
-            <TeamName>{Player.name}</TeamName>
+            <PlayerName>
+              {Player.name}
+              <PlayerNumber>{`#${Player.number}`}</PlayerNumber>
+            </PlayerName>
             <DescriptionContainer>
               <ItemDescription>
                 <LabelItem>Position</LabelItem>
@@ -124,7 +127,7 @@ const Separator = styled.span`
 const Links = styled.div``;
 
 const CardBody = styled.div`
-  padding: 65px 0 65px 146px;
+  padding: 65px 0 0 0;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
   
@@ -136,8 +139,10 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
+  align-self: self-start;
   @media(max-width: ${sizeMobile}) {
     text-align: center;
+    align-self: center;
   }
 `;
 
@@ -151,33 +156,40 @@ const Content = styled.div`
   }
 `;
 
-const LogoTeam = styled.div`
-  margin-right: 146px;
+const ImagePlayer = styled.div`
+  margin-right: 56px;
   flex-shrink: 0.1;
   background: url(${Player.avatarUrl}) no-repeat;
+  width: 531px;
+  height: 459px;
   background-size: contain;
-  width: 210px;
-  height: 210px;
   
   @media(max-width: ${sizeMobile}) {
-    width: 140px;
-    height: 140px;
+    width: 185px;
+    height: 144px;
     margin-right: 0;
     margin-bottom: 48px;
   }
 `;
 
-const TeamName = styled(TextExtraLarge)`
+const PlayerName = styled(TextExtraLarge)`
   display: block;
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
+  font-weight: 700;
   
   @media(max-width: ${sizeMobile}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
-    font-weight: 700;
   }
+`;
+
+const PlayerNumber = styled(PlayerName)`
+  display: inline-block;
+  color: ${({ theme }) => theme.colors.lightRed};
+  margin-bottom: 0;
+  margin-left: 10px;
 `;
 
 const ItemDescription = styled.div``;
@@ -186,7 +198,7 @@ const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 54px 80px;
+  gap: 54px 180px;
   
   @media(max-width: ${sizeMobile}) {
     grid-template-columns: 1fr;
@@ -199,15 +211,16 @@ const LabelItem = styled(TextLarge)`
   display: block;
   color: ${({ theme }) => theme.colors.white};
   margin-bottom: 8px;
+  font-weight: 700;
   
   @media(max-width: ${sizeMobile}) {
     font-size: 18px;
     line-height: 25px;
-    font-weight: 700;
   }
 `;
 
 const DataItem = styled(TextStandart)`
+  font-size: 18px;
   color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${sizeMobile}) {

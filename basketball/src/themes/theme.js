@@ -20,4 +20,8 @@ export const theme = {
       large: '10px 142px',
     },
   },
+  gradient: {
+    base: 'linear-gradient(100.45deg, #707070 0%, #393939 100.28%)',
+    mobile: 'linear-gradient(142.15deg, #707070 0%, #393939 98.4%);',
+  },
 };
