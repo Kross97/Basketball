@@ -3,7 +3,8 @@ import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { CardItemConstructor } from '../components/CardItemConstructor';
 import { sizeMobile } from '../helpers/constants/mobileSize';
-import { Team } from '../helpers/Mock_DATA';
+import { Team } from '../helpers/Mock_team';
+import { Player } from '../helpers/Mock_player';
 
 export default {
   title: 'Components/ItemConstructor',
@@ -13,6 +14,12 @@ export default {
 export const TeamItem = () => (
   <MockContainer>
     <CardItemConstructor item={Team} />
+  </MockContainer>
+);
+
+export const PlayerItem = () => (
+  <MockContainer>
+    <CardItemConstructor item={Player} />
   </MockContainer>
 );
 

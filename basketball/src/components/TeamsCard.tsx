@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextLink } from '../uiComponents/TextLink';
-import { Team } from '../helpers/Mock_DATA'; // мок пока не готов сервер
+import { Team } from '../helpers/Mock_team'; // мок пока не готов сервер
 import { TextExtraLarge, TextLarge, TextStandart } from '../uiComponents/Typography';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 

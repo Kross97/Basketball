@@ -1,4 +1,4 @@
-import teamLogo from '../static/mocks/mock_team.svg';
+import teamLogo from '../static/mock_team.svg';
 
 export const Team = {
   name: 'Denver Nuggets',

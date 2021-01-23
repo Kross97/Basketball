@@ -2,7 +2,7 @@ export interface Player {
   'name': string,
   'number': number,
   'position': string,
-  'team': number,
+  'team': string,
   'birthday': string,
   'height': number,
   'weight': number,

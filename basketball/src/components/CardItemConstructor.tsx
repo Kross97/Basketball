@@ -18,7 +18,7 @@ export const CardItemConstructor: FC<IProps> = ({ item }) => (
       <DataItem>
         <Name>
           {item.name}
-          {'number' in item && <NumberPlayer>{item.number}</NumberPlayer>}
+          {'number' in item && <NumberPlayer>{` #${item.number}`}</NumberPlayer>}
         </Name>
         <DescriptionItem>
           {'foundationYear' in item && `Year of foundation: ${item.foundationYear}` }
