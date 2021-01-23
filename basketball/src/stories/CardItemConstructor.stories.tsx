@@ -1,17 +1,18 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { TeamsCardItem } from '../components/TeamsCardItem';
+import { CardItemConstructor } from '../components/CardItemConstructor';
 import { sizeMobile } from '../helpers/constants/mobileSize';
+import { Team } from '../helpers/Mock_DATA';
 
 export default {
-  title: 'Components/TeamsCard/Item',
-  component: TeamsCardItem,
+  title: 'Components/ItemConstructor',
+  component: CardItemConstructor,
 } as Meta;
 
 export const TeamItem = () => (
   <MockContainer>
-    <TeamsCardItem />
+    <CardItemConstructor item={Team} />
   </MockContainer>
 );
 

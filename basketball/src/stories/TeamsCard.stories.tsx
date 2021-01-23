@@ -5,11 +5,11 @@ import { TeamsCard } from '../components/TeamsCard';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
 export default {
-  title: 'Components/TeamsCard/BasicCard',
+  title: 'Components/TeamsCard',
   component: TeamsCard,
 } as Meta;
 
-export const TeamBasic = () => (
+export const TeamCard = () => (
   <MockContainer>
     <TeamsCard id={1} />
   </MockContainer>

@@ -1,22 +1,30 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { Team } from '../helpers/Mock_DATA';
 import { TextSmallThin, TextStandart } from '../uiComponents/Typography';
 import { sizeMobile } from '../helpers/constants/mobileSize';
+import { Player } from '../helpers/interfaces/Player';
+import { Team } from '../helpers/interfaces/Team';
 
-export const TeamsCardItem = () => (
+interface IProps {
+  item: Player | Team;
+}
+
+export const CardItemConstructor: FC<IProps> = ({ item }) => (
   <ContainerCard>
     <BodyCard>
-      <LogoTeam />
+      <LogoItem imageUrl={'avatarUrl' in item ? item.avatarUrl : item.imageUrl} />
     </BodyCard>
     <FooterCard>
-      <DataTeam>
-        <NameTeam>{Team.name}</NameTeam>
-        <FoundationTeam>
-          Year of foundation:
-          {Team.foundationYear}
-        </FoundationTeam>
-      </DataTeam>
+      <DataItem>
+        <Name>
+          {item.name}
+          {'number' in item && <NumberPlayer>{item.number}</NumberPlayer>}
+        </Name>
+        <DescriptionItem>
+          {'foundationYear' in item && `Year of foundation: ${item.foundationYear}` }
+          {'team' in item && `${item.team}` }
+        </DescriptionItem>
+      </DataItem>
     </FooterCard>
   </ContainerCard>
 );
@@ -36,11 +44,11 @@ const BodyCard = styled.div`
   }
 `;
 
-const LogoTeam = styled.div`
+const LogoItem = styled.div<{ imageUrl: string }>`
   width: 150px;
   height: 150px;
   display: inline-block;
-  background: url(${Team.imageUrl}) no-repeat;
+  background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat`};
   background-size: contain;
   
   @media(max-width: ${sizeMobile}) {
@@ -61,13 +69,13 @@ const FooterCard = styled.div`
   }
 `;
 
-const DataTeam = styled.div`
+const DataItem = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
   text-align: center`;
 
-const NameTeam = styled(TextStandart)`
+const Name = styled(TextStandart)`
   display: block;
   margin-bottom: 12px;
   color: ${({ theme }) => theme.colors.white};
@@ -78,7 +86,11 @@ const NameTeam = styled(TextStandart)`
   }
 `;
 
-const FoundationTeam = styled(TextSmallThin)`
+const NumberPlayer = styled(TextStandart)`
+ color: ${({ theme }) => theme.colors.lightRed}
+`;
+
+const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${sizeMobile}) {
