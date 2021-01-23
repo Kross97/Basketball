@@ -41,12 +41,12 @@ export const TeamsCard: FC<IProps> = ({ id }) => {
                 <DataItem>{Team.foundationYear}</DataItem>
               </ItemDescription>
               <ItemDescription>
-                <LabelItem>Division</LabelItem>
-                <DataItem>{Team.division}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
                 <LabelItem>Conference</LabelItem>
                 <DataItem>{Team.conference}</DataItem>
+              </ItemDescription>
+              <ItemDescription>
+                <LabelItem>Division</LabelItem>
+                <DataItem>{Team.division}</DataItem>
               </ItemDescription>
             </DescriptionContainer>
           </DataCard>
@@ -65,10 +65,12 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
-
+  
   @media(max-width: 445px) {
     padding: 15px 16px;
     border-radius: 0;
+    border: none;
+    border-top: 1px solid ${({ theme }) => theme.colors.grey};
   }
 `;
 
@@ -113,12 +115,14 @@ const Separator = styled.span`
 const Links = styled.div``;
 
 const CardBody = styled.div`
-  padding: 65px 0;
+  padding: 65px 0 65px 146px;
   background: ${({ theme }) => theme.gradient.base};
-
+  border-radius: 0 0 10px 10px;
+  
   @media(max-width: ${sizeMobile}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
+    border-radius: 0;
   }
 `;
 
@@ -130,7 +134,7 @@ const DataCard = styled.div`
 
 const Content = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   
   @media(max-width: ${sizeMobile}) {
@@ -163,6 +167,7 @@ const TeamName = styled(TextExtraLarge)`
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
+    font-weight: 700;
   }
 `;
 
@@ -189,6 +194,7 @@ const LabelItem = styled(TextLarge)`
   @media(max-width: ${sizeMobile}) {
     font-size: 18px;
     line-height: 25px;
+    font-weight: 700;
   }
 `;
 

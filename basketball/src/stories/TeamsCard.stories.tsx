@@ -16,6 +16,7 @@ export const TeamBasic = () => (
 );
 
 const MockContainer = styled.div`
+  width: 1140px;
   @media (max-width: ${sizeMobile}) {
     width: 375px;
     height: 606px;

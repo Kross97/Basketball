@@ -32,7 +32,7 @@ const BodyCard = styled.div`
   border-top-right-radius: 4px;
   
   @media(max-width: ${sizeMobile}) {
-    padding: 24px 55px;
+    padding: 23px 56px 30px 55px;
   }
 `;
 
@@ -51,7 +51,7 @@ const LogoTeam = styled.div`
 `;
 
 const FooterCard = styled.div`
-  padding: 24px 15px;
+  padding: 21px 15px 24px;
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
