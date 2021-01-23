@@ -127,7 +127,7 @@ const Separator = styled.span`
 const Links = styled.div``;
 
 const CardBody = styled.div`
-  padding: 65px 0 0 0;
+  padding: 65px 0 0 50px;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
   
@@ -140,6 +140,8 @@ const CardBody = styled.div`
 
 const DataCard = styled.div`
   align-self: self-start;
+  margin-bottom: 65px;
+  
   @media(max-width: ${sizeMobile}) {
     text-align: center;
     align-self: center;
@@ -160,15 +162,17 @@ const ImagePlayer = styled.div`
   margin-right: 56px;
   flex-shrink: 0.1;
   background: url(${Player.avatarUrl}) no-repeat;
-  width: 531px;
-  height: 459px;
+  width: 500px;
+  height: 368px;
   background-size: contain;
+  align-self: flex-end;
   
   @media(max-width: ${sizeMobile}) {
     width: 185px;
     height: 144px;
     margin-right: 0;
     margin-bottom: 48px;
+    align-self: center;
   }
 `;
 

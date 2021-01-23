@@ -15,7 +15,7 @@ export const CardPlayerBase = () => (
   </MockContainer>
 );
 
-export const MockContainer = styled.div`
+const MockContainer = styled.div`
  width: 1140px;
   
   @media(max-width: ${sizeMobile}) {
