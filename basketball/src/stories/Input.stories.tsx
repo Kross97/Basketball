@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { FieldInputData } from '../uiComponents/FieldInputData';
+import { TypesInput } from '../helpers/types/types';
 
 export default {
   title: 'UI/Inputs',
@@ -11,8 +12,8 @@ export default {
 interface IProps {
   text: string;
   disabled: boolean;
-  type: 'text' | 'password';
-  startType: 'text' | 'password';
+  type: TypesInput;
+  startType: TypesInput;
   isError: boolean;
   errorMessage: string;
 }
