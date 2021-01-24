@@ -1,36 +1,47 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { TextLink } from '../uiComponents/TextLink';
 import { TextSmall, TextLabelSignUp } from '../uiComponents/Typography';
 import signUp from '../static/images/sign_up.svg';
+import { addAuthData } from '../store';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
 
-export const SignUp = () => (
-  <SignContainer>
-    <FormContainer>
-      <FormSignUp>
-        <LabelForm>Sign Up</LabelForm>
-        <FieldInputData text="Name" disabled={false} type="text" />
-        <FieldInputData text="Login" disabled={false} type="text" />
-        <FieldInputData text="Password" disabled={false} type="text" />
-        <FieldInputData text="Enter your password again" disabled={false} type="text" />
-        <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
-        <ButtonAction isNegativeStyle={false} isAdding={false} size="large" text="Sign Up" disabled={false} />
-        <TextContainer>
-          <TextSignUp>
-            Already a member?
-          </TextSignUp>
-          <TextLink text="Sign in" href="/signIn" disabled={false} />
-        </TextContainer>
-      </FormSignUp>
-    </FormContainer>
-    <PosterContainer>
-      <PosterSignUp />
-    </PosterContainer>
-  </SignContainer>
-);
+const actionCreators = {
+  addAuthData,
+};
+
+export const SignUp = () => {
+  const { addAuthData: registrationHandler } = useCustomActions(actionCreators);
+
+  return (
+    <SignContainer>
+      <FormContainer>
+        <FormSignUp>
+          <LabelForm>Sign Up</LabelForm>
+          <FieldInputData text="Name" disabled={false} type="text" />
+          <FieldInputData text="Login" disabled={false} type="text" />
+          <FieldInputData text="Password" disabled={false} type="text" />
+          <FieldInputData text="Enter your password again" disabled={false} type="text" />
+          <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
+          <ButtonAction isNegativeStyle={false} isAdding={false} size="large" text="Sign Up" disabled={false} />
+          <TextContainer>
+            <TextSignUp>
+              Already a member?
+            </TextSignUp>
+            <TextLink text="Sign in" href="/signIn" disabled={false} />
+          </TextContainer>
+        </FormSignUp>
+      </FormContainer>
+      <PosterContainer>
+        <PosterSignUp />
+      </PosterContainer>
+    </SignContainer>
+  );
+};
 
 const SignContainer = styled.div`
  display: flex;
@@ -50,7 +61,7 @@ const PosterContainer = styled.div`
   background-color: ${({ theme }) => theme.colors.lightBlue};
 `;
 
-const FormSignUp = styled.div`
+const FormSignUp = styled.form`
   display: flex;
   flex-direction: column;
   gap: 24px;
