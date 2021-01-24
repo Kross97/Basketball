@@ -11,6 +11,7 @@ interface IProps {
   type: 'text' | 'password';
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  name: string;
   changeTypeInput?: () => void;
   isError?: boolean;
   errorMessage?: string;
@@ -23,6 +24,7 @@ export const FieldInputData: FC<IProps> = ({
   type,
   changeHandler,
   value,
+  name,
   changeTypeInput,
   isError = false,
   errorMessage = '',
@@ -31,6 +33,7 @@ export const FieldInputData: FC<IProps> = ({
     <TextInput>{text}</TextInput>
     <CustomInput
       onChange={changeHandler}
+      name={name}
       type={type}
       disabled={disabled}
       isError={isError}
