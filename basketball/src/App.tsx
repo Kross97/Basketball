@@ -1,15 +1,6 @@
 import React from 'react';
-import { get } from './api';
+import { SignUp } from './components/SignUp';
 
-function App() {
-  const handler = async () => {
-    const res = await get('http://dev.trainee.dex-it.ru/api/Auth/SignUp');
-    console.log('RESULT', res);
-  };
-
-  return (
-    <button onClick={handler} type="button">Request</button>
-  );
-}
-
-export default App;
+export const App = () => (
+  <SignUp />
+);
