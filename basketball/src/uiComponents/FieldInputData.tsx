@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
+import { TypesInput } from '../helpers/types/types';
 
 interface IProps {
   text: string;
   disabled: boolean;
-  startType: 'text' | 'password';
-  type: 'text' | 'password';
+  startType: TypesInput;
+  type: TypesInput;
   changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
   value: string;
   name: string;
