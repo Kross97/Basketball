@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { ButtonAction } from '../uiComponents/ButtonAction';
-import { SizesButton } from '../helpers/types/types';
+import { SizesButton, TypesButton } from '../helpers/types/types';
 
 export default {
   title: 'UI/Buttons',
@@ -14,11 +14,16 @@ interface IProps {
   size: SizesButton;
   text: string;
   disabled: boolean;
+  type: TypesButton;
 }
 
 export const AllButtons = ({
   isNegativeStyle = false,
-  isAdding = false, size = 'middle', text = 'Add', disabled = false,
+  isAdding = false,
+  size = 'middle',
+  text = 'Add',
+  disabled = false,
+  type = 'button',
 }: IProps) => (
   <ButtonAction
     isNegativeStyle={isNegativeStyle}
@@ -26,6 +31,7 @@ export const AllButtons = ({
     size={size}
     text={text}
     disabled={disabled}
+    type={type}
   />
 );
 
