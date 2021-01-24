@@ -44,6 +44,7 @@ export const AllInputs = ({
         startType={startType}
         changeHandler={changeHandler}
         value={value}
+        name="name"
         changeTypeInput={changeTypeInput}
         disabled={disabled}
         isError={isError}
