@@ -1,13 +1,15 @@
-import { createReducer, combineReducers, createAction } from '@reduxjs/toolkit';
+import { createSlice, combineReducers } from '@reduxjs/toolkit';
 
-export const addAuthData = createAction('addAuthData');
-
-export const authData = createReducer({
-  auth: {},
-}, {
-  addAuthData: (state, { payload: { auth } }: any) => ({ ...state, ...auth }),
+export const authData = createSlice({
+  name: ' auth',
+  initialState: {
+    authData: {},
+  },
+  reducers: {
+    addAuthData: (state, action: any) => ({ authData: action.payload.authData }),
+  },
 });
 
 export default combineReducers({
-  authData,
+  authData: authData.reducer,
 });

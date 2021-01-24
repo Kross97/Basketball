@@ -1,3 +1,3 @@
 export interface ActionsCreator {
-  [key: string]: () => void;
+  [key: string]: (payload: any) => void;
 }

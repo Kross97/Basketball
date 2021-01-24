@@ -7,25 +7,28 @@ import { ButtonAction } from '../uiComponents/ButtonAction';
 import { TextLink } from '../uiComponents/TextLink';
 import { TextSmall, TextLabelSignUp } from '../uiComponents/Typography';
 import signUp from '../static/images/sign_up.svg';
-import { addAuthData } from '../store';
+import { authData } from '../store';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { TypesInput } from '../helpers/types/types';
 
 const actionCreators = {
-  addAuthData,
+  addAuthData: authData.actions.addAuthData,
 };
 
 export const SignUp = () => {
-  const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: string }>({
+  const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
     passwordRepeat: 'password',
   });
 
-  const { addAuthData: registrationHandler } = useCustomActions(actionCreators);
+  const { addAuthData } = useCustomActions(actionCreators);
+  const result = useSelector((state: any) => state.authData);
+  console.log('RESULT', result);
 
   const changeTypeInput = (name: string) => {
     const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
     setNewTypes({ ...typePasswordInputs, [name]: newType });
-    console.log('REGISTR', registrationHandler, 'SELEC', useSelector);
+    addAuthData({ authData: 'First!' });
   };
 
   return (
@@ -33,10 +36,44 @@ export const SignUp = () => {
       <FormContainer>
         <FormSignUp>
           <LabelForm>Sign Up</LabelForm>
-          <FieldInputData changeHandler={() => console.log('1')} name="userName" text="Name" disabled={false} type="text" startType="text" value="zzz" />
-          <FieldInputData changeHandler={() => console.log('2')} name="login" text="Login" disabled={false} type="text" startType="text" value="zzz" />
-          <FieldInputData changeHandler={() => console.log('3')} name="password" text="Password" disabled={false} type={typePasswordInputs.password} startType="password" changeTypeInput={() => changeTypeInput('password')} value="zzz" />
-          <FieldInputData changeHandler={() => console.log('4')} name="passwordRepeat" text="Enter your password again" disabled={false} type={typePasswordInputs.passwordRepeat} startType="password" changeTypeInput={() => changeTypeInput('passwordRepeat')} value="zzz" />
+          <FieldInputData
+            changeHandler={() => console.log('1')}
+            name="userName"
+            text="Name"
+            disabled={false}
+            type="text"
+            startType="text"
+            value="zzz"
+          />
+          <FieldInputData
+            changeHandler={() => console.log('2')}
+            name="login"
+            text="Login"
+            disabled={false}
+            type="text"
+            startType="text"
+            value="zzz"
+          />
+          <FieldInputData
+            changeHandler={() => console.log('3')}
+            name="password"
+            text="Password"
+            disabled={false}
+            type={typePasswordInputs.password}
+            startType="password"
+            changeTypeInput={() => changeTypeInput('password')}
+            value="zzz"
+          />
+          <FieldInputData
+            changeHandler={() => console.log('4')}
+            name="passwordRepeat"
+            text="Enter your password again"
+            disabled={false}
+            type={typePasswordInputs.passwordRepeat}
+            startType="password"
+            changeTypeInput={() => changeTypeInput('passwordRepeat')}
+            value="zzz"
+          />
           <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
           <ButtonAction
             type="submit"
