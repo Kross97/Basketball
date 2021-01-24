@@ -20,8 +20,8 @@ const PaginationBtn = styled.button`
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-  background-color: ${({ theme }) => theme.colors.red};
-  color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.middleGrey};
   
   &:active {
     background-color: ${({ theme }) => theme.colors.red};

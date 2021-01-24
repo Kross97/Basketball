@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { FieldInputData } from '../uiComponents/FieldInputData';
@@ -12,6 +12,7 @@ interface IProps {
   text: string;
   disabled: boolean;
   type: 'text' | 'password';
+  startType: 'text' | 'password';
   isError: boolean;
   errorMessage: string;
 }
@@ -20,19 +21,37 @@ export const AllInputs = ({
   text = 'Login',
   disabled = false,
   type = 'text',
+  startType = 'text',
   isError,
   errorMessage = 'Required',
-}: IProps) => (
-  <MockContainer>
-    <FieldInputData
-      text={text}
-      type={type}
-      disabled={disabled}
-      isError={isError}
-      errorMessage={errorMessage}
-    />
-  </MockContainer>
-);
+}: IProps) => {
+  const [value, setValue] = useState<string>('');
+  const [typeInput, setTypeInput] = useState<'text' | 'password'>(type);
+
+  const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(target.value);
+  };
+
+  const changeTypeInput = () => {
+    setTypeInput(typeInput === 'text' ? 'password' : 'text');
+  };
+
+  return (
+    <MockContainer>
+      <FieldInputData
+        text={text}
+        type={typeInput}
+        startType={startType}
+        changeHandler={changeHandler}
+        value={value}
+        changeTypeInput={changeTypeInput}
+        disabled={disabled}
+        isError={isError}
+        errorMessage={errorMessage}
+      />
+    </MockContainer>
+  );
+};
 
 AllInputs.argTypes = {
   text: {
@@ -47,6 +66,12 @@ AllInputs.argTypes = {
     },
   },
   type: {
+    control: {
+      type: 'select',
+      options: ['text', 'password'],
+    },
+  },
+  startType: {
     control: {
       type: 'select',
       options: ['text', 'password'],
