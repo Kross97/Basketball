@@ -1,23 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
-// import { useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { TextLink } from '../uiComponents/TextLink';
 import { TextSmall, TextLabelSignUp } from '../uiComponents/Typography';
 import signUp from '../static/images/sign_up.svg';
-// import { addAuthData } from '../store';
-// import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { addAuthData } from '../store';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
 
-// const actionCreators = {
-// addAuthData,
-// };
+const actionCreators = {
+  addAuthData,
+};
 
-export const SignUp = () =>
-// const { addAuthData: registrationHandler } = useCustomActions(actionCreators);
+export const SignUp = () => {
+  const { addAuthData: registrationHandler } = useCustomActions(actionCreators);
 
-  (
+  return (
     <SignContainer>
       <FormContainer>
         <FormSignUp>
@@ -27,7 +27,14 @@ export const SignUp = () =>
           <FieldInputData text="Password" disabled={false} type="text" />
           <FieldInputData text="Enter your password again" disabled={false} type="text" />
           <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
-          <ButtonAction type="submit" isNegativeStyle={false} isAdding={false} size="large" text="Sign Up" disabled={false} />
+          <ButtonAction
+            type="submit"
+            isNegativeStyle={false}
+            isAdding={false}
+            size="large"
+            text="Sign Up"
+            disabled={false}
+          />
           <TextContainer>
             <TextSignUp>
               Already a member?
@@ -41,6 +48,8 @@ export const SignUp = () =>
       </PosterContainer>
     </SignContainer>
   );
+};
+
 const SignContainer = styled.div`
  display: flex;
 `;
