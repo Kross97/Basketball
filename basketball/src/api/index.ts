@@ -1,14 +1,19 @@
 const base = process.env.REACT_APP_URL;
 
-export const request = async (url: string, data: any, token: string | undefined) => {
+// multipart/form-data - для картинки
+
+const request = async (url: string, data: any, token: string | undefined) => {
   const headers = token
     ? {
       Authorization: `Bearer ${token}`,
-    } : {};
+    } : { };
   try {
     const response = await fetch(url, {
       ...data,
-      ...headers,
+      headers: {
+        ...headers,
+        'Content-Type': 'application/json;charset=utf-8',
+      },
     });
     const result = await response.json();
     return result;
@@ -19,8 +24,12 @@ export const request = async (url: string, data: any, token: string | undefined)
 
 export const get = (url: string, token?: string) => request(`${base}${url}`, { method: 'GET' }, token);
 
-export const post = (url: string, body: any, token?: string) => request(`${base}${url}`, { method: 'POST', body }, token);
+export function post<T>(url: string, body: T, token?: string) {
+  return request(`${base}${url}`, { method: 'POST', body }, token);
+}
 
 export const remove = (url: string, token: string) => request(`${base}${url}`, { method: 'DELETE' }, token);
 
-export const put = (url: string, body: any, token: string) => request(`${base}${url}`, { method: 'PUT', body }, token);
+export function put<T>(url: string, body: T, token: string) {
+  return request(`${base}${url}`, { method: 'PUT', body }, token);
+}
