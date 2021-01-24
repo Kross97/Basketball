@@ -24,3 +24,11 @@ export const TextLogo = styled.span`
   line-height: 45px;
   text-transform: uppercase;
 `;
+
+export const TextLabelSignUp = styled.span`
+  font-family: Avenir, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 36px;
+  line-height: 49px;
+`;
