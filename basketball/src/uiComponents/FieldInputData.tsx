@@ -40,7 +40,7 @@ export const FieldInputData: FC<IProps> = ({
       value={value}
     />
     {isError && <TextInputError>{errorMessage}</TextInputError>}
-    {startType === 'password' && <ButtonChangeType onClick={changeTypeInput} typeButton={type} startType={startType} />}
+    {startType === 'password' && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
   </InputContainer>
 );
 

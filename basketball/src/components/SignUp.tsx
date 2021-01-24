@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { FieldInputData } from '../uiComponents/FieldInputData';
@@ -15,17 +15,28 @@ const actionCreators = {
 };
 
 export const SignUp = () => {
+  const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: string }>({
+    password: 'password',
+    passwordRepeat: 'password',
+  });
+
   const { addAuthData: registrationHandler } = useCustomActions(actionCreators);
+
+  const changeTypeInput = (name: string) => {
+    const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
+    setNewTypes({ ...typePasswordInputs, [name]: newType });
+    console.log('REGISTR', registrationHandler, 'SELEC', useSelector);
+  };
 
   return (
     <SignContainer>
       <FormContainer>
         <FormSignUp>
           <LabelForm>Sign Up</LabelForm>
-          <FieldInputData text="Name" disabled={false} type="text" />
-          <FieldInputData text="Login" disabled={false} type="text" />
-          <FieldInputData text="Password" disabled={false} type="text" />
-          <FieldInputData text="Enter your password again" disabled={false} type="text" />
+          <FieldInputData changeHandler={() => console.log('1')} name="userName" text="Name" disabled={false} type="text" startType="text" value="zzz" />
+          <FieldInputData changeHandler={() => console.log('2')} name="login" text="Login" disabled={false} type="text" startType="text" value="zzz" />
+          <FieldInputData changeHandler={() => console.log('3')} name="password" text="Password" disabled={false} type={typePasswordInputs.password} startType="password" changeTypeInput={() => changeTypeInput('password')} value="zzz" />
+          <FieldInputData changeHandler={() => console.log('4')} name="passwordRepeat" text="Enter your password again" disabled={false} type={typePasswordInputs.passwordRepeat} startType="password" changeTypeInput={() => changeTypeInput('passwordRepeat')} value="zzz" />
           <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
           <ButtonAction
             type="submit"
