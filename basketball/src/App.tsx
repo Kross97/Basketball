@@ -1,29 +1,14 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { get } from './api';
 
 function App() {
+  const handler = async () => {
+    const res = await get('http://dev.trainee.dex-it.ru/api/Auth/SignUp');
+    console.log('RESULT', res);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit
-          {' '}
-          <code>src/App.tsx</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <button onClick={handler} type="button">Request</button>
   );
 }
 
