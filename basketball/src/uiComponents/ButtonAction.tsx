@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
-import { SizesButton } from '../helpers/types/types';
+import { SizesButton, TypesButton } from '../helpers/types/types';
 
 interface IProps {
   isNegativeStyle: boolean;
@@ -9,12 +9,13 @@ interface IProps {
   size: SizesButton;
   text: string;
   disabled: boolean;
+  type: TypesButton;
 }
 
 export const ButtonAction: FC<IProps> = ({
-  isNegativeStyle, isAdding, size, text, disabled,
+  type, isNegativeStyle, isAdding, size, text, disabled,
 }) => (
-  <ButtonStyled disabled={disabled} isNegativeStyle={isNegativeStyle} size={size}>
+  <ButtonStyled type={type} disabled={disabled} isNegativeStyle={isNegativeStyle} size={size}>
     <TextStandart>
       {text}
     </TextStandart>
