@@ -8,10 +8,10 @@ export const authDataUser = createSlice({
   },
   reducers: {
     addAuthData: (state, action: any) => ({ ...state, authData: action.payload.authData }),
-    addAuthError: (state, action:any) => ({ ...state, authErrorMessage: `${action.payload.authError[0]}` }),
+    addAuthError: (state, action:any) => ({ ...state, authErrorMessage: action.payload.authError }),
   },
 });
 
-export default combineReducers({
+export const reducer = combineReducers({
   authDataUser: authDataUser.reducer,
 });

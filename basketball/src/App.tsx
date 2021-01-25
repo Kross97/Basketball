@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { SignUp } from './components/SignUp';
+import { SignUp } from './components/signComponents/SignUp';
 
 export const App = () => (
   <Switch>
