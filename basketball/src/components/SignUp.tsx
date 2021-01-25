@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -15,6 +15,7 @@ import { TypesInput } from '../helpers/types/types';
 import { NotificationError } from '../uiComponents/NotificationError';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { ISignUpForm } from '../helpers/interfaces/sign_form_interfaces/SignForms';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
 const actionCreators = {
   requestSignUp: actions.requestSignUp,
