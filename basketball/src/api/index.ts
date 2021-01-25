@@ -7,19 +7,22 @@ const request = async (url: string, data: any, token: string | undefined) => {
     ? {
       Authorization: `Bearer ${token}`,
     } : { };
-  try {
-    const response = await fetch(url, {
-      ...data,
-      headers: {
-        ...headers,
-        'Content-Type': 'application/json;charset=utf-8',
-      },
-    });
-    const result = await response.json();
+  const response = await fetch(url, {
+    ...data,
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json;charset=utf-8',
+    },
+  });
+  const typeResponse = response.headers.get('Content-Type');
+
+  let result;
+  if (typeResponse === 'application/text') {
+    result = await response.text();
     return result;
-  } catch (error) {
-    console.log('Error', error);
   }
+  result = await response.json();
+  return result;
 };
 
 export const get = (url: string, token?: string) => request(`${base}${url}`, { method: 'GET' }, token);

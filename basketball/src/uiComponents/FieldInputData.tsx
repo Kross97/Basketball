@@ -10,9 +10,8 @@ interface IProps {
   disabled: boolean;
   startType: TypesInput;
   type: TypesInput;
-  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  value: string;
   name: string;
+  register?: (field: any) => void;
   changeTypeInput?: () => void;
   isError?: boolean;
   errorMessage?: string;
@@ -23,9 +22,8 @@ export const FieldInputData: FC<IProps> = ({
   disabled,
   startType,
   type,
-  changeHandler,
-  value,
   name,
+  register,
   changeTypeInput,
   isError = false,
   errorMessage = '',
@@ -33,12 +31,11 @@ export const FieldInputData: FC<IProps> = ({
   <InputContainer>
     <TextInput>{text}</TextInput>
     <CustomInput
-      onChange={changeHandler}
       name={name}
       type={type}
       disabled={disabled}
       isError={isError}
-      value={value}
+      ref={register}
     />
     {isError && <TextInputError>{errorMessage}</TextInputError>}
     {startType === 'password' && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}

@@ -10,7 +10,7 @@ export default {
 interface IProps {
   text: string;
   disabled: boolean;
-  checked: boolean;
+  name: string;
   isError: boolean;
   errorMessage: string;
 }
@@ -18,14 +18,14 @@ interface IProps {
 export const AllCheckboxies = ({
   text = 'Text',
   disabled = false,
-  checked = false,
   isError = false,
+  name = 'name',
   errorMessage = '',
 }: IProps) => (
   <CheckboxСhoice
     text={text}
+    name={name}
     disabled={disabled}
-    checked={checked}
     isError={isError}
     errorMessage={errorMessage}
   />
@@ -42,17 +42,17 @@ AllCheckboxies.argsTypes = {
       type: 'boolean',
     },
   },
-  checked: {
-    control: {
-      type: 'boolean',
-    },
-  },
   isError: {
     control: {
       type: 'boolean',
     },
   },
   errorMessage: {
+    control: {
+      type: 'text',
+    },
+  },
+  name: {
     control: {
       type: 'text',
     },

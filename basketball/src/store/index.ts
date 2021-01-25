@@ -1,15 +1,17 @@
 import { createSlice, combineReducers } from '@reduxjs/toolkit';
 
-export const authData = createSlice({
-  name: ' auth',
+export const authDataUser = createSlice({
+  name: 'authDataUser',
   initialState: {
     authData: {},
+    authErrorMessage: '',
   },
   reducers: {
-    addAuthData: (state, action: any) => ({ authData: action.payload.authData }),
+    addAuthData: (state, action: any) => ({ ...state, authData: action.payload.authData }),
+    addAuthError: (state, action:any) => ({ ...state, authErrorMessage: `${action.payload.authError[0]}` }),
   },
 });
 
 export default combineReducers({
-  authData: authData.reducer,
+  authDataUser: authDataUser.reducer,
 });

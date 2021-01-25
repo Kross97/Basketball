@@ -1,87 +1,112 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { TextLink } from '../uiComponents/TextLink';
 import { TextSmall, TextLabelSignUp } from '../uiComponents/Typography';
 import signUp from '../static/images/sign_up.svg';
-import { authData } from '../store';
+import * as actions from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { TypesInput } from '../helpers/types/types';
+import { NotificationError } from '../uiComponents/NotificationError';
 
 const actionCreators = {
-  addAuthData: authData.actions.addAuthData,
+  requestSignUp: actions.requestSignUp,
 };
 
 export const SignUp = () => {
+  const {
+    register,
+    handleSubmit,
+    errors,
+    getValues,
+    watch,
+  } = useForm();
+
+  const watchAccept = watch('acceptAgreement', false);
+
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
     passwordRepeat: 'password',
   });
 
-  const { addAuthData } = useCustomActions(actionCreators);
-  const result = useSelector((state: any) => state.authData);
-  console.log('RESULT', result);
+  const { requestSignUp } = useCustomActions(actionCreators);
+
+  const notificationErrorMessage = useSelector(
+    ({ authDataUser: { authErrorMessage } }: any) => (authErrorMessage),
+  );
 
   const changeTypeInput = (name: string) => {
     const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
     setNewTypes({ ...typePasswordInputs, [name]: newType });
-    addAuthData({ authData: 'First!' });
+  };
+
+  const submitHandler = (data: any) => {
+    requestSignUp({
+      userName: data.userName,
+      login: data.login,
+      password: data.password,
+    });
   };
 
   return (
     <SignContainer>
       <FormContainer>
-        <FormSignUp>
+        <FormSignUp onSubmit={handleSubmit(submitHandler)}>
           <LabelForm>Sign Up</LabelForm>
           <FieldInputData
-            changeHandler={() => console.log('1')}
             name="userName"
             text="Name"
             disabled={false}
             type="text"
             startType="text"
-            value="zzz"
+            isError={!!errors.userName}
+            errorMessage="Required or incorrect enter"
+            register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
           />
           <FieldInputData
-            changeHandler={() => console.log('2')}
             name="login"
             text="Login"
             disabled={false}
             type="text"
             startType="text"
-            value="zzz"
+            isError={!!errors.login}
+            errorMessage="Required or incorrect enter"
+            register={register({ required: true, pattern: /^([^\W\s]+)$/i })}
           />
           <FieldInputData
-            changeHandler={() => console.log('3')}
             name="password"
             text="Password"
             disabled={false}
             type={typePasswordInputs.password}
             startType="password"
             changeTypeInput={() => changeTypeInput('password')}
-            value="zzz"
+            isError={!!errors.password}
+            errorMessage="Required or space exists"
+            register={register({ required: true, pattern: /^([^\s]+)$/i })}
           />
           <FieldInputData
-            changeHandler={() => console.log('4')}
             name="passwordRepeat"
             text="Enter your password again"
             disabled={false}
             type={typePasswordInputs.passwordRepeat}
             startType="password"
             changeTypeInput={() => changeTypeInput('passwordRepeat')}
-            value="zzz"
+            isError={!!errors.passwordRepeat}
+            errorMessage={errors.passwordRepeat?.type === 'validate' ? 'password and repeat password are not the same' : 'Required or space exists'}
+            register={register({ required: true, pattern: /^([^\s]+)$/i, validate: (value) => getValues('password') === value })}
           />
-          <CheckboxСhoice text="I accept the agreement" disabled={false} checked={false} />
+          <CheckboxСhoice name="acceptAgreement" register={register} text="I accept the agreement" disabled={false} />
           <ButtonAction
             type="submit"
             isNegativeStyle={false}
             isAdding={false}
             size="large"
             text="Sign Up"
-            disabled={false}
+            disabled={Object.keys(errors).length > 0 || !watchAccept}
           />
           <TextContainer>
             <TextSignUp>
@@ -89,6 +114,8 @@ export const SignUp = () => {
             </TextSignUp>
             <TextLink text="Sign in" href="/signIn" disabled={false} />
           </TextContainer>
+          {notificationErrorMessage !== ''
+          && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
         </FormSignUp>
       </FormContainer>
       <PosterContainer>
@@ -119,6 +146,7 @@ const PosterContainer = styled.div`
 const FormSignUp = styled.form`
   display: flex;
   flex-direction: column;
+  position: relative;
   gap: 24px;
 `;
 
@@ -143,4 +171,45 @@ const PosterSignUp = styled.div`
 const LabelForm = styled(TextLabelSignUp)`
   color: ${({ theme }) => theme.colors.blue};
   margin-bottom: 6px;
+`;
+
+const animationNotification = keyframes`
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  
+  10% {
+    opacity: 0.1;
+    transform: scale(0.9);
+  }
+  
+  25% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  
+  50% {
+    opacity: 0.6;
+    transform: scale(1.1);
+  }
+  
+  75% {
+    opacity: 0.8;
+    transform: scale(1.2);
+  }
+  
+  100% {
+    opacity: 1;
+    transform: scale(1.3);
+  }
+`;
+
+const Notification = styled.div`
+  position: absolute;
+  bottom: -80px;
+  animation: ${animationNotification} 1s linear;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+  animation-iteration-count: 2;
 `;

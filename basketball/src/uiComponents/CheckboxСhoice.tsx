@@ -5,17 +5,18 @@ import { TextSmall } from './Typography';
 interface IProps {
   text: string;
   disabled: boolean;
-  checked: boolean;
+  name: string;
+  register?: (ref: any) => void;
   isError?: boolean;
   errorMessage?: string;
 }
 
 export const CheckboxСhoice: FC<IProps> = ({
-  text, disabled, checked, isError = false, errorMessage = '',
+  text, disabled, name, register, isError = false, errorMessage = '',
 }) => (
   <Container>
     <CheckboxContainer disabled={disabled}>
-      <CheckboxNative checked={checked} disabled={disabled} type="checkbox" />
+      <CheckboxNative name={name} ref={register} disabled={disabled} type="checkbox" />
       <CheckboxCustom isError={isError}>
         <Arrow />
       </CheckboxCustom>
@@ -79,6 +80,7 @@ const CheckboxNative = styled.input`
   width: 0;
   height: 0;
   position: absolute;
+  cursor: pointer;
 
   &:checked ~ ${CheckboxCustom} ${Arrow} {
     display: block;

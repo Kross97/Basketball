@@ -15,6 +15,7 @@ export const NotificationError: FC<IProps> = ({ text }) => (
 const Container = styled.div`
   display: inline-block;
   padding: 8px 16px;
+  text-align: center;
   border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.lightRed};
   color: ${({ theme }) => theme.colors.white};
