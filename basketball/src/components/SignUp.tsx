@@ -13,6 +13,7 @@ import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { TypesInput } from '../helpers/types/types';
 import { NotificationError } from '../uiComponents/NotificationError';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
 const actionCreators = {
   requestSignUp: actions.requestSignUp,
@@ -37,7 +38,7 @@ export const SignUp = () => {
   const { requestSignUp } = useCustomActions(actionCreators);
 
   const notificationErrorMessage = useSelector(
-    ({ authDataUser: { authErrorMessage } }: any) => (authErrorMessage),
+    ({ authDataUser: { authErrorMessage } }: IStoreReducer) => (authErrorMessage),
   );
 
   const changeTypeInput = (name: string) => {
