@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -43,9 +43,9 @@ export const SignUp = () => {
 
   const { notificationErrorMessage } = useSelector(({
     authDataUser: {
-      authErrorMessage,
+      authErrorMessageSignUp,
     },
-  }: any) => ({ notificationErrorMessage: authErrorMessage }));
+  }: IStoreReducer) => ({ notificationErrorMessage: authErrorMessageSignUp }));
 
   useEffect(() => {
     if (isSuccesRequest) {
@@ -64,8 +64,8 @@ export const SignUp = () => {
       login: data.login,
       password: data.password,
     });
-    if (isSucces) {
-      setSuccesRequest(isSucces);
+    if (isSucces.payload) {
+      setSuccesRequest(isSucces.payload);
     }
   };
 

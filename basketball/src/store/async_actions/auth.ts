@@ -7,15 +7,15 @@ import { RegisterUser, LoginUser } from '../../helpers/interfaces/request_interf
 export const requestSignUp = createAsyncThunk(
   'signUp/request',
   async (newUserData: RegisterUser, { dispatch }) => {
-    dispatch(authDataUser.actions.addAuthError({ authError: [''] }));
+    dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: [''] }));
     try {
       const response = await signUp('Auth/SignUp', newUserData);
       if (/AK_Users_Login/.test(response)) {
-        dispatch(authDataUser.actions.addAuthError({ authError: ['This username is already registered'] }));
+        dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: ['This username is already registered'] }));
         return false;
       } if ('errors' in response) {
         const messageError = Object.values(response.errors)[0];
-        dispatch(authDataUser.actions.addAuthError({ authError: [messageError] }));
+        dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: [messageError] }));
         return false;
       }
       batch(() => {
@@ -26,12 +26,12 @@ export const requestSignUp = createAsyncThunk(
           },
         }));
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
-        dispatch(authDataUser.actions.addAuthError({ authError: [''] }));
+        dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: [''] }));
       });
 
       return true;
-    } catch (err) {
-      console.log('ERROR', err);
+    } catch (error) {
+      console.log('ERROR =>', error);
     }
   },
 );
@@ -39,7 +39,26 @@ export const requestSignUp = createAsyncThunk(
 export const requestSignIn = createAsyncThunk(
   'signIn/request',
   async (dataLogin: LoginUser, { dispatch }) => {
-    const response = await signIn('Auth/SignIn', dataLogin);
-    console.log('RESP', response, 'DISPAT', dispatch);
+    dispatch(authDataUser.actions.addAuthErrorSignIn({ authError: [''] }));
+    try {
+      const response = await signIn('Auth/SignIn', dataLogin);
+      if ('errors' in response) {
+        const messageError = Object.values(response.errors)[0];
+        dispatch(authDataUser.actions.addAuthErrorSignIn({ authError: [messageError] }));
+        return false;
+      }
+      batch(() => {
+        dispatch(authDataUser.actions.addLocalUserData({
+          userData: {
+            login: dataLogin.login,
+            password: dataLogin.password,
+          },
+        }));
+        dispatch(authDataUser.actions.addAuthData({ authData: response }));
+        dispatch(authDataUser.actions.addAuthErrorSignIn({ authError: [''] }));
+      });
+    } catch (error) {
+      console.log('ERROR => ', error);
+    }
   },
 );

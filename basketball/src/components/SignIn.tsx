@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-// import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../uiComponents/FieldInputData';
@@ -14,6 +13,7 @@ import { TypesInput } from '../helpers/types/types';
 import { NotificationError } from '../uiComponents/NotificationError';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { ISignInForm } from '../helpers/interfaces/sign_form_interfaces/SignForms';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
 const actionCreators = {
   requestSignIn: actions.requestSignIn,
@@ -27,8 +27,6 @@ export const SignIn = () => {
     errors,
   } = useForm();
 
-  // const history = useHistory();
-
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
   });
@@ -37,12 +35,12 @@ export const SignIn = () => {
 
   const { notificationErrorMessage, token, userData } = useSelector(({
     authDataUser: {
-      authErrorMessage,
+      authErrorMessageSignIn,
       authData,
       localUserData,
     },
-  }: any) => ({
-    notificationErrorMessage: authErrorMessage,
+  }: IStoreReducer) => ({
+    notificationErrorMessage: authErrorMessageSignIn,
     token: authData.token,
     userData: localUserData,
   }));
