@@ -16,7 +16,7 @@ interface IProps {
 export const Link = ({ text = 'Text', href = '#', disabled = false }: IProps) => (
   <TextLink
     text={text}
-    href={href}
+    to={href}
     disabled={disabled}
   />
 );
