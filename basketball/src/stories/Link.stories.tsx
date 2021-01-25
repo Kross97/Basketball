@@ -9,14 +9,14 @@ export default {
 
 interface IProps {
   text: string;
-  href: string;
+  to: string;
   disabled: boolean;
 }
 
-export const Link = ({ text = 'Text', href = '#', disabled = false }: IProps) => (
+export const Link = ({ text = 'Text', to = '#', disabled = false }: IProps) => (
   <TextLink
     text={text}
-    to={href}
+    to={to}
     disabled={disabled}
   />
 );
@@ -27,7 +27,7 @@ Link.argTypes = {
       type: 'text',
     },
   },
-  href: {
+  to: {
     type: 'text',
   },
   disabled: {

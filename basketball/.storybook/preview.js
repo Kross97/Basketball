@@ -1,4 +1,5 @@
 import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider, createGlobalStyle } from "styled-components";
 import { theme } from "../src/themes/theme";
 
@@ -15,9 +16,11 @@ const GlobalStyle = createGlobalStyle`
 
 export const decorators = [
     (Story) => (
-        <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <Story />
-        </ThemeProvider>
+        <BrowserRouter>
+            <ThemeProvider theme={theme}>
+                <GlobalStyle />
+                <Story />
+            </ThemeProvider>
+        </BrowserRouter>
     ),
 ];
