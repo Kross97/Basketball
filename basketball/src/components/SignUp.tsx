@@ -208,6 +208,7 @@ const animationNotification = keyframes`
 const Notification = styled.div`
   position: absolute;
   bottom: -80px;
+  right: 25px;
   animation: ${animationNotification} 1s linear;
   animation-direction: alternate;
   animation-fill-mode: forwards;
