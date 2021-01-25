@@ -13,6 +13,7 @@ import * as actions from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { TypesInput } from '../helpers/types/types';
 import { NotificationError } from '../uiComponents/NotificationError';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 const actionCreators = {
   requestSignUp: actions.requestSignUp,
@@ -144,6 +145,10 @@ const FormContainer = styled.div`
   flex-grow: 1;
   padding: 226px 120px;
   background-color: ${({ theme }) => theme.colors.white};
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 110px 24px;
+  }
 `;
 
 const PosterContainer = styled.div`
@@ -152,6 +157,10 @@ const PosterContainer = styled.div`
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    display: none;
+  }
 `;
 
 const FormSignUp = styled.form`
@@ -165,7 +174,7 @@ const TextContainer = styled.div`
 `;
 
 const TextSignUp = styled(TextSmall)`
-  color: ${({ theme }) => theme.colors.darkGrey};
+  color: ${({ theme }) => theme.colors.middleGrey};
   margin-right: 5px;
 `;
 
@@ -181,6 +190,10 @@ const PosterSignUp = styled.div`
 const LabelForm = styled(TextLabelSignUp)`
   color: ${({ theme }) => theme.colors.blue};
   margin-bottom: 6px;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    align-self: center;
+  }
 `;
 
 const animationNotification = keyframes`
