@@ -112,7 +112,7 @@ export const SignUp = () => {
             <TextSignUp>
               Already a member?
             </TextSignUp>
-            <TextLink text="Sign in" href="/signIn" disabled={false} />
+            <TextLink text="Sign in" to="/signIn" disabled={false} />
           </TextContainer>
           {notificationErrorMessage !== ''
           && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
