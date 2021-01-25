@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../uiComponents/FieldInputData';
@@ -26,6 +27,7 @@ export const SignUp = () => {
     watch,
   } = useForm();
 
+  const history = useHistory();
   const watchAccept = watch('acceptAgreement', false);
 
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
@@ -35,9 +37,18 @@ export const SignUp = () => {
 
   const { requestSignUp } = useCustomActions(actionCreators);
 
-  const notificationErrorMessage = useSelector(
-    ({ authDataUser: { authErrorMessage } }: any) => (authErrorMessage),
-  );
+  const { notificationErrorMessage, token } = useSelector(({
+    authDataUser: {
+      authErrorMessage,
+      authData,
+    },
+  }: any) => ({ notificationErrorMessage: authErrorMessage, token: authData.token }));
+
+  useEffect(() => {
+    if (token) {
+      history.push('/signIn');
+    }
+  }, [token]);
 
   const changeTypeInput = (name: string) => {
     const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
@@ -112,7 +123,7 @@ export const SignUp = () => {
             <TextSignUp>
               Already a member?
             </TextSignUp>
-            <TextLink text="Sign in" href="/signIn" disabled={false} />
+            <TextLink text="Sign in" to="/signIn" disabled={false} />
           </TextContainer>
           {notificationErrorMessage !== ''
           && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
@@ -146,7 +157,6 @@ const PosterContainer = styled.div`
 const FormSignUp = styled.form`
   display: flex;
   flex-direction: column;
-  position: relative;
   gap: 24px;
 `;
 
@@ -206,9 +216,8 @@ const animationNotification = keyframes`
 `;
 
 const Notification = styled.div`
-  position: absolute;
-  bottom: -80px;
-  right: 25px;
+  display: flex;
+  justify-content: center;
   animation: ${animationNotification} 1s linear;
   animation-direction: alternate;
   animation-fill-mode: forwards;

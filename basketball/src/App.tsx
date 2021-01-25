@@ -7,6 +7,8 @@ export const App = () => (
     <Route exact path="/">
       <SignUp />
     </Route>
-    <Route path="/signIn" />
+    <Route path="/signIn">
+      <div>zzzzzz</div>
+    </Route>
   </Switch>
 );
