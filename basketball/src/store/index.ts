@@ -24,6 +24,6 @@ export const authDataUser = createSlice({
   },
 });
 
-export default combineReducers({
+export const reducer = combineReducers({
   authDataUser: authDataUser.reducer,
 });

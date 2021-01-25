@@ -2,6 +2,8 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 import { signIn, signUp } from '../../api/auth';
 import { authDataUser } from '../index';
+import { RegisterUser } from '../../helpers/interfaces/request_interfaces/Auth';
+import { signRequestErrors } from '../../helpers/constants/signRequestErrors';
 import { RegisterUser, LoginUser } from '../../helpers/interfaces/request_interfaces/Auth';
 
 export const requestSignUp = createAsyncThunk(
@@ -10,6 +12,18 @@ export const requestSignUp = createAsyncThunk(
     dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: [''] }));
     try {
       const response = await signUp('Auth/SignUp', newUserData);
+      if (response.isError) {
+        dispatch(authDataUser.actions.addAuthError({
+          authError: signRequestErrors[response.status],
+        }));
+      } else {
+        batch(() => {
+          dispatch(authDataUser.actions.addAuthData({ authData: response }));
+          dispatch(authDataUser.actions.addAuthError({ authError: '' }));
+        });
+      }
+    } catch (err) {
+      console.log('ERROR', err);
       if (/AK_Users_Login/.test(response)) {
         dispatch(authDataUser.actions.addAuthErrorSignUp({ authError: ['This username is already registered'] }));
         return false;
