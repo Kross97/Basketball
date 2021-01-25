@@ -5,10 +5,14 @@ export const authDataUser = createSlice({
   initialState: {
     authData: {},
     authErrorMessage: '',
+    localUserData: {},
   },
   reducers: {
     addAuthData: (state, action: any) => ({ ...state, authData: action.payload.authData }),
     addAuthError: (state, action:any) => ({ ...state, authErrorMessage: `${action.payload.authError[0]}` }),
+    addLocalUserData: (state, action: any) => (
+      { ...state, localUserData: action.payload.userData }
+    ),
   },
 });
 

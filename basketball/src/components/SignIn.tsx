@@ -1,88 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../uiComponents/FieldInputData';
-import { CheckboxСhoice } from '../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { TextLink } from '../uiComponents/TextLink';
 import { TextSmall, TextLabelSignUp } from '../uiComponents/Typography';
-import signUp from '../static/images/sign_up.svg';
+import signIn from '../static/images/sign_in.svg';
 import * as actions from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { TypesInput } from '../helpers/types/types';
 import { NotificationError } from '../uiComponents/NotificationError';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { ISignUpForm } from '../helpers/interfaces/sign_form_interfaces/SignForms';
+import { ISignInForm } from '../helpers/interfaces/sign_form_interfaces/SignForms';
 
 const actionCreators = {
-  requestSignUp: actions.requestSignUp,
+  requestSignIn: actions.requestSignIn,
 };
 
-export const SignUp = () => {
+export const SignIn = () => {
   const {
     register,
     handleSubmit,
+    setValue,
     errors,
-    getValues,
-    watch,
   } = useForm();
 
-  const history = useHistory();
-  const watchAccept = watch('acceptAgreement', false);
+  // const history = useHistory();
 
-  const [isSuccesRequest, setSuccesRequest] = useState<boolean>(false);
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
-    passwordRepeat: 'password',
   });
 
-  const { requestSignUp } = useCustomActions(actionCreators);
+  const { requestSignIn } = useCustomActions(actionCreators);
 
-  const { notificationErrorMessage } = useSelector(({
+  const { notificationErrorMessage, token, userData } = useSelector(({
     authDataUser: {
       authErrorMessage,
+      authData,
+      localUserData,
     },
-  }: any) => ({ notificationErrorMessage: authErrorMessage }));
+  }: any) => ({
+    notificationErrorMessage: authErrorMessage,
+    token: authData.token,
+    userData: localUserData,
+  }));
 
   useEffect(() => {
-    if (isSuccesRequest) {
-      history.push('/signIn');
+    if (userData.login && userData.password) {
+      setValue('login', userData.login);
+      setValue('password', userData.password);
     }
-  }, [isSuccesRequest]);
+  }, [token]);
 
-  const changeTypeInput = (name: string) => {
-    const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
-    setNewTypes({ ...typePasswordInputs, [name]: newType });
+  const changeTypeInput = () => {
+    const newType = typePasswordInputs.password === 'password' ? 'text' : 'password';
+    setNewTypes({ ...typePasswordInputs, password: newType });
   };
 
-  const submitHandler = async (data: ISignUpForm) => {
-    const isSucces = await requestSignUp({
-      userName: data.userName,
+  const submitHandler = (data: ISignInForm) => {
+    requestSignIn({
       login: data.login,
       password: data.password,
     });
-    if (isSucces) {
-      setSuccesRequest(isSucces);
-    }
   };
 
   return (
     <SignContainer>
       <FormContainer>
         <FormSignUp onSubmit={handleSubmit(submitHandler)}>
-          <LabelForm>Sign Up</LabelForm>
-          <FieldInputData
-            name="userName"
-            text="Name"
-            disabled={false}
-            type="text"
-            startType="text"
-            isError={!!errors.userName}
-            errorMessage="Required or incorrect enter"
-            register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
-          />
+          <LabelForm>Sign In</LabelForm>
           <FieldInputData
             name="login"
             text="Login"
@@ -99,39 +87,27 @@ export const SignUp = () => {
             disabled={false}
             type={typePasswordInputs.password}
             startType="password"
-            changeTypeInput={() => changeTypeInput('password')}
+            changeTypeInput={() => changeTypeInput()}
             isError={!!errors.password}
             errorMessage="Required or space exists"
             register={register({ required: true, pattern: /^([^\s]+)$/i })}
           />
-          <FieldInputData
-            name="passwordRepeat"
-            text="Enter your password again"
-            disabled={false}
-            type={typePasswordInputs.passwordRepeat}
-            startType="password"
-            changeTypeInput={() => changeTypeInput('passwordRepeat')}
-            isError={!!errors.passwordRepeat}
-            errorMessage={errors.passwordRepeat?.type === 'validate' ? 'password and repeat password are not the same' : 'Required or space exists'}
-            register={register({ required: true, pattern: /^([^\s]+)$/i, validate: (value) => getValues('password') === value })}
-          />
-          <CheckboxСhoice name="acceptAgreement" register={register} text="I accept the agreement" disabled={false} />
           <ButtonAction
             type="submit"
             isNegativeStyle={false}
             isAdding={false}
             size="large"
-            text="Sign Up"
-            disabled={Object.keys(errors).length > 0 || !watchAccept}
+            text="Sign In"
+            disabled={Object.keys(errors).length > 0}
           />
           <TextContainer>
             <TextSignUp>
-              Already a member?
+              Not a member yet?
             </TextSignUp>
-            <TextLink text="Sign in" to="/signIn" disabled={false} />
+            <TextLink text="Sign up" to="/" disabled={false} />
           </TextContainer>
           {notificationErrorMessage !== ''
-          && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
+    && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
         </FormSignUp>
       </FormContainer>
       <PosterContainer>
@@ -147,17 +123,17 @@ const SignContainer = styled.div`
 
 const FormContainer = styled.div`
   flex-grow: 1;
-  padding: 226px 120px;
+  padding: 340px 120px 338px;
   background-color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${mobileVersionLayout}) {
-    padding: 110px 24px;
+    padding: 174px 24px 172px;
   }
 `;
 
 const PosterContainer = styled.div`
   flex-grow: 8;
-  padding: 305px 0;
+  padding: 306px 0;
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
@@ -185,7 +161,7 @@ const TextSignUp = styled(TextSmall)`
 const PosterSignUp = styled.div`
   width: 660px;
   height: 414px;
-  background: url(${signUp}) no-repeat;
+  background: url(${signIn}) no-repeat;
   background-size: contain;
   display: inline-block;
 }
