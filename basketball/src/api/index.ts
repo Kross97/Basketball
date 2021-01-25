@@ -14,15 +14,17 @@ const request = async (url: string, data: any, token: string | undefined) => {
       'Content-Type': 'application/json;charset=utf-8',
     },
   });
-  const typeResponse = response.headers.get('Content-Type');
-
-  let result;
-  if (typeResponse === 'application/text') {
-    result = await response.text();
+  if (response.ok) {
+    const typeResponse = response.headers.get('Content-Type');
+    let result;
+    if (typeResponse === 'application/text') {
+      result = await response.text();
+      return result;
+    }
+    result = await response.json();
     return result;
   }
-  result = await response.json();
-  return result;
+  return { isError: true, status: response.status };
 };
 
 export const get = (url: string, token?: string) => request(`${base}${url}`, { method: 'GET' }, token);
