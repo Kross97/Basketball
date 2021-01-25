@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
@@ -9,25 +9,36 @@ import { NotificationError } from '../../uiComponents/NotificationError';
 import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
+import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 
 interface IProps {
   typeForm: string;
   notificationErrorMessage: string;
   submitHandler: (data: any) => void;
+  userData?: ISignInForm,
 }
 
 export const BaseForm: FC<IProps> = ({
   typeForm,
   notificationErrorMessage,
   submitHandler,
+  userData = undefined,
 }) => {
   const {
     register,
     handleSubmit,
     errors,
     getValues,
+    setValue,
     watch,
   } = useForm();
+
+  useEffect(() => {
+    if (userData?.login && userData?.password) {
+      setValue('login', userData.login);
+      setValue('password', userData.password);
+    }
+  }, [userData?.login, userData?.password]);
 
   const watchAccept = watch('acceptAgreement', false);
 

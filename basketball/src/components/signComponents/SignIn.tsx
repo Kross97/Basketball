@@ -1,51 +1,46 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import signUp from '../../static/images/sign_up.svg';
+import signIn from '../../static/images/sign_in.svg';
 import * as actions from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 
 const actionCreators = {
-  requestSignUp: actions.requestSignUp,
+  requestSignIn: actions.requestSignIn,
 };
 
-export const SignUp = () => {
-  const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
-  const { requestSignUp } = useCustomActions(actionCreators);
-  const history = useHistory();
+export const SignIn = () => {
+  const { requestSignIn } = useCustomActions(actionCreators);
 
-  const notificationErrorMessage = useSelector(
-    ({ authDataUser: { authErrorMessageSignUp } }: IStoreReducer) => (authErrorMessageSignUp),
-  );
+  const { notificationErrorMessage, userData } = useSelector(({
+    authDataUser: {
+      authErrorMessageSignIn,
+      localUserData,
+    },
+  }: IStoreReducer) => ({
+    notificationErrorMessage: authErrorMessageSignIn,
+    userData: localUserData,
+  }));
 
-  useEffect(() => {
-    if (isSuccesRequest) {
-      history.push('/signIn');
-    }
-  }, [isSuccesRequest]);
-
-  const submitHandler = async (data: any) => {
-    const isSucces = await requestSignUp({
-      userName: data.userName,
+  const submitHandler = (data: ISignInForm) => {
+    requestSignIn({
       login: data.login,
       password: data.password,
     });
-    if (isSucces.payload) {
-      setTypeRequest(isSucces.payload);
-    }
   };
 
   return (
     <SignContainer>
       <FormContainer>
         <BaseForm
-          typeForm="Sign Up"
+          typeForm="Sign In"
           notificationErrorMessage={notificationErrorMessage}
           submitHandler={submitHandler}
+          userData={userData}
         />
       </FormContainer>
       <PosterContainer>
@@ -61,17 +56,17 @@ const SignContainer = styled.div`
 
 const FormContainer = styled.div`
   flex-grow: 1;
-  padding: 226px 120px;
+  padding: 340px 120px 338px;
   background-color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${mobileVersionLayout}) {
-    padding: 110px 24px;
+    padding: 174px 24px 172px;
   }
 `;
 
 const PosterContainer = styled.div`
   flex-grow: 8;
-  padding: 305px 0;
+  padding: 306px 0;
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
@@ -84,7 +79,7 @@ const PosterContainer = styled.div`
 const PosterSignUp = styled.div`
   width: 660px;
   height: 414px;
-  background: url(${signUp}) no-repeat;
+  background: url(${signIn}) no-repeat;
   background-size: contain;
   display: inline-block;
 }
