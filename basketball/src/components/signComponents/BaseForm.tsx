@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
@@ -33,6 +34,7 @@ export const BaseForm: FC<IProps> = ({
     setValue,
     watch,
   } = useForm();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userData?.login && userData?.password) {
@@ -58,7 +60,7 @@ export const BaseForm: FC<IProps> = ({
       { typeForm === 'Sign Up' && (
       <FieldInputData
         name="userName"
-        text="Name"
+        text={t('name')}
         disabled={false}
         type="text"
         startType="text"
@@ -69,7 +71,7 @@ export const BaseForm: FC<IProps> = ({
       ) }
       <FieldInputData
         name="login"
-        text="Login"
+        text={t('login')}
         disabled={false}
         type="text"
         startType="text"
@@ -79,7 +81,7 @@ export const BaseForm: FC<IProps> = ({
       />
       <FieldInputData
         name="password"
-        text="Password"
+        text={t('password')}
         disabled={false}
         type={typePasswordInputs.password}
         startType="password"
@@ -91,7 +93,7 @@ export const BaseForm: FC<IProps> = ({
       { typeForm === 'Sign Up' && (
       <FieldInputData
         name="passwordRepeat"
-        text="Enter your password again"
+        text={t('passwordRepeat')}
         disabled={false}
         type={typePasswordInputs.passwordRepeat}
         startType="password"
@@ -111,7 +113,7 @@ export const BaseForm: FC<IProps> = ({
       <CheckboxСhoice
         name="acceptAgreement"
         register={register}
-        text="I accept the agreement"
+        text={t('signUpCheck')}
         disabled={false}
       />
       )}
@@ -125,10 +127,10 @@ export const BaseForm: FC<IProps> = ({
       />
       <TextContainer>
         <TextSign>
-          {typeForm === 'Sign Up' ? 'Already a member?' : 'Not a member yet?' }
+          {typeForm === 'Sign Up' ? t('signUpMember') : t('signInMember') }
         </TextSign>
         <TextLink
-          text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
+          text={typeForm === 'Sign Up' ? t('signIn') : t('signUp')}
           to={typeForm === 'Sign Up' ? `${routePaths.signIn}` : `${routePaths.signUp}`}
           disabled={false}
         />

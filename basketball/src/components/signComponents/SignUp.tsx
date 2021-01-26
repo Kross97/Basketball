@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import signUp from '../../static/images/sign_up.svg';
 import * as actions from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -17,6 +18,7 @@ export const SignUp = () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
   const { requestSignUp } = useCustomActions(actionCreators);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const notificationErrorMessage = useSelector(
     ({ authDataUser: { authErrorMessageSignUp } }: IStoreReducer) => (authErrorMessageSignUp),
@@ -43,7 +45,7 @@ export const SignUp = () => {
     <SignContainer>
       <FormContainer>
         <BaseForm
-          typeForm="Sign Up"
+          typeForm={t('signUp')}
           notificationErrorMessage={notificationErrorMessage}
           submitHandler={submitHandler}
         />

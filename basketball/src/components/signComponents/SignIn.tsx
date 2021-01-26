@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import signIn from '../../static/images/sign_in.svg';
 import * as actions from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -15,7 +16,7 @@ const actionCreators = {
 
 export const SignIn = () => {
   const { requestSignIn } = useCustomActions(actionCreators);
-
+  const { t } = useTranslation();
   const { notificationErrorMessage, userData } = useSelector(({
     authDataUser: {
       authErrorMessageSignIn,
@@ -37,7 +38,7 @@ export const SignIn = () => {
     <SignContainer>
       <FormContainer>
         <BaseForm
-          typeForm="Sign In"
+          typeForm={t('signIn')}
           notificationErrorMessage={notificationErrorMessage}
           submitHandler={submitHandler}
           userData={userData}
