@@ -3,70 +3,63 @@ import styled from 'styled-components';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextLink } from '../uiComponents/TextLink';
-import { Player } from '../helpers/MOCK_Player'; // мок пока не готов сервер
+import { Player } from '../helpers/Mock_player';
 import { TextExtraLarge, TextLarge, TextStandart } from '../uiComponents/Typography';
 import { getFullAge } from '../helpers/functions/getFullAge';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
-interface IProps {
-  id: number;
-}
-
-export const PlayerCard: FC<IProps> = ({ id }) => {
-  console.log('ID', id); // id для запроса в редакс , когда сервер заработает
-  return (
-    <ContainerCard>
-      <CardNavigation>
-        <Links>
-          <TextLink text="Main" href="#" disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text="Teams" href="#" disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={`${Player.name}`} href="#" disabled />
-        </Links>
-        <Actions>
-          <BtnCreate type="button" />
-          <BtnDelete type="button">
-            <RemoveIcon />
-          </BtnDelete>
-        </Actions>
-      </CardNavigation>
-      <CardBody>
-        <Content>
-          <ImagePlayer />
-          <DataCard>
-            <PlayerName>
-              {Player.name}
-              <PlayerNumber>{`#${Player.number}`}</PlayerNumber>
-            </PlayerName>
-            <DescriptionContainer>
-              <ItemDescription>
-                <LabelItem>Position</LabelItem>
-                <DataItem>{Player.position}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Team</LabelItem>
-                <DataItem>{Player.team}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Height</LabelItem>
-                <DataItem>{`${Player.height} cm`}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Weight</LabelItem>
-                <DataItem>{`${Player.weight} kg`}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Age</LabelItem>
-                <DataItem>{`${getFullAge(Player.birthday)}`}</DataItem>
-              </ItemDescription>
-            </DescriptionContainer>
-          </DataCard>
-        </Content>
-      </CardBody>
-    </ContainerCard>
-  );
-};
+export const PlayerCard = () => (
+  <ContainerCard>
+    <CardNavigation>
+      <Links>
+        <TextLink text="Main" href="#" disabled={false} />
+        <Separator>/</Separator>
+        <TextLink text="Teams" href="#" disabled={false} />
+        <Separator>/</Separator>
+        <TextLink text={`${Player.name}`} href="#" disabled />
+      </Links>
+      <Actions>
+        <BtnCreate type="button" />
+        <BtnDelete type="button">
+          <RemoveIcon />
+        </BtnDelete>
+      </Actions>
+    </CardNavigation>
+    <CardBody>
+      <Content>
+        <ImagePlayer />
+        <DataCard>
+          <PlayerName>
+            {Player.name}
+            <PlayerNumber>{`#${Player.number}`}</PlayerNumber>
+          </PlayerName>
+          <DescriptionContainer>
+            <ItemDescription>
+              <LabelItem>Position</LabelItem>
+              <DataItem>{Player.position}</DataItem>
+            </ItemDescription>
+            <ItemDescription>
+              <LabelItem>Team</LabelItem>
+              <DataItem>{Player.team}</DataItem>
+            </ItemDescription>
+            <ItemDescription>
+              <LabelItem>Height</LabelItem>
+              <DataItem>{`${Player.height} cm`}</DataItem>
+            </ItemDescription>
+            <ItemDescription>
+              <LabelItem>Weight</LabelItem>
+              <DataItem>{`${Player.weight} kg`}</DataItem>
+            </ItemDescription>
+            <ItemDescription>
+              <LabelItem>Age</LabelItem>
+              <DataItem>{`${getFullAge(Player.birthday)}`}</DataItem>
+            </ItemDescription>
+          </DescriptionContainer>
+        </DataCard>
+      </Content>
+    </CardBody>
+  </ContainerCard>
+);
 
 const ContainerCard = styled.div`
 `;

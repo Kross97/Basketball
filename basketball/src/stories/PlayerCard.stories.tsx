@@ -11,7 +11,7 @@ export default {
 
 export const CardPlayerBase = () => (
   <MockContainer>
-    <PlayerCard id={1} />
+    <PlayerCard />
   </MockContainer>
 );
 

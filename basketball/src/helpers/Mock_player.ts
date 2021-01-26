@@ -1,6 +1,18 @@
 import playerImage from '../static/mock_player.svg';
 
-export const Player = {
+interface IPlayer {
+  name: string,
+  number: number,
+  position: string,
+  team: string,
+  birthday: string,
+  height: number,
+  weight: number,
+  avatarUrl: string,
+  id: number,
+}
+
+export const Player: IPlayer = {
   name: 'Greg Whittington',
   number: 22,
   position: 'Forward',
