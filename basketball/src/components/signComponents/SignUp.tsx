@@ -9,6 +9,7 @@ import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   requestSignUp: actions.requestSignUp,
@@ -26,7 +27,7 @@ export const SignUp = () => {
 
   useEffect(() => {
     if (isSuccesRequest) {
-      history.push('/signIn');
+      history.push(routePaths.signIn);
     }
   }, [isSuccesRequest]);
 

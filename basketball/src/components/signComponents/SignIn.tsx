@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import signIn from '../../static/images/sign_in.svg';
 import * as actions from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -9,13 +10,16 @@ import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   requestSignIn: actions.requestSignIn,
 };
 
 export const SignIn = () => {
+  const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
   const { requestSignIn } = useCustomActions(actionCreators);
+  const history = useHistory();
   const { t } = useTranslation();
   const { notificationErrorMessage, userData } = useSelector(({
     authDataUser: {
@@ -27,11 +31,20 @@ export const SignIn = () => {
     userData: localUserData,
   }));
 
-  const submitHandler = (data: ISignInForm) => {
-    requestSignIn({
+  useEffect(() => {
+    if (isSuccesRequest) {
+      history.push(routePaths.main);
+    }
+  }, [isSuccesRequest]);
+
+  const submitHandler = async (data: ISignInForm) => {
+    const isSucces = await requestSignIn({
       login: data.login,
       password: data.password,
     });
+    if (isSucces.payload) {
+      setTypeRequest(isSucces.payload);
+    }
   };
 
   return (

@@ -14,6 +14,12 @@ export const requestSignUp = createAsyncThunk(
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
+        dispatch(authDataUser.actions.addLocalUserData({
+          userData: {
+            login: newUserData.login,
+            password: newUserData.password,
+          },
+        }));
       });
       return true;
     } catch (error) {

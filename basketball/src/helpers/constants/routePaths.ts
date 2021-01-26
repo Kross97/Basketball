@@ -5,4 +5,5 @@ interface IRoutePath {
 export const routePaths: IRoutePath = {
   signUp: '/',
   signIn: '/signIn',
+  main: '/main/:path',
 };
