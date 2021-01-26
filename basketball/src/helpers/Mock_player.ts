@@ -1,6 +1,6 @@
 import playerImage from '../static/mock_player.svg';
 
-interface IPlayer {
+export interface IPlayer {
   name: string,
   number: number,
   position: string,

@@ -1,23 +1,23 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextLink } from '../uiComponents/TextLink';
 import { Player } from '../helpers/Mock_player';
-import { TextExtraLarge, TextLarge, TextStandart } from '../uiComponents/Typography';
-import { getFullAge } from '../helpers/functions/getFullAge';
+import { TextExtraLarge } from '../uiComponents/Typography';
 import { sizeMobile } from '../helpers/constants/mobileSize';
+import { PlayerItemsDescription } from './cardAdditionalComponents/PlayerItemsDescriptions';
 
 export const PlayerCard = () => (
-  <ContainerCard>
+  <div>
     <CardNavigation>
-      <Links>
+      <div>
         <TextLink text="Main" href="#" disabled={false} />
         <Separator>/</Separator>
         <TextLink text="Teams" href="#" disabled={false} />
         <Separator>/</Separator>
         <TextLink text={`${Player.name}`} href="#" disabled />
-      </Links>
+      </div>
       <Actions>
         <BtnCreate type="button" />
         <BtnDelete type="button">
@@ -34,35 +34,15 @@ export const PlayerCard = () => (
             <PlayerNumber>{`#${Player.number}`}</PlayerNumber>
           </PlayerName>
           <DescriptionContainer>
-            <ItemDescription>
-              <LabelItem>Position</LabelItem>
-              <DataItem>{Player.position}</DataItem>
-            </ItemDescription>
-            <ItemDescription>
-              <LabelItem>Team</LabelItem>
-              <DataItem>{Player.team}</DataItem>
-            </ItemDescription>
-            <ItemDescription>
-              <LabelItem>Height</LabelItem>
-              <DataItem>{`${Player.height} cm`}</DataItem>
-            </ItemDescription>
-            <ItemDescription>
-              <LabelItem>Weight</LabelItem>
-              <DataItem>{`${Player.weight} kg`}</DataItem>
-            </ItemDescription>
-            <ItemDescription>
-              <LabelItem>Age</LabelItem>
-              <DataItem>{`${getFullAge(Player.birthday)}`}</DataItem>
-            </ItemDescription>
+            <PlayerItemsDescription
+              player={Player}
+            />
           </DescriptionContainer>
         </DataCard>
       </Content>
     </CardBody>
-  </ContainerCard>
+  </div>
 );
-
-const ContainerCard = styled.div`
-`;
 
 const CardNavigation = styled.nav`
   display: flex;
@@ -116,8 +96,6 @@ const Separator = styled.span`
   color: ${({ theme }) => theme.colors.lightGrey};
   margin: 0 4px;
 `;
-
-const Links = styled.div``;
 
 const CardBody = styled.div`
   padding: 65px 0 0 50px;
@@ -189,8 +167,6 @@ const PlayerNumber = styled(PlayerName)`
   margin-left: 10px;
 `;
 
-const ItemDescription = styled.div``;
-
 const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -201,26 +177,5 @@ const DescriptionContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;
-  }
-`;
-
-const LabelItem = styled(TextLarge)`
-  display: block;
-  color: ${({ theme }) => theme.colors.white};
-  margin-bottom: 8px;
-  font-weight: 700;
-  
-  @media(max-width: ${sizeMobile}) {
-    font-size: 18px;
-    line-height: 25px;
-  }
-`;
-
-const DataItem = styled(TextStandart)`
-  font-size: 18px;
-  color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${sizeMobile}) {
-    font-size: 14px;
   }
 `;
