@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { theme } from './themes/theme';
 import './index.css';
 import { App } from './App';
-import reducer from './store/index';
+import { reducer } from './store/index';
 import reportWebVitals from './reportWebVitals';
 
 const store = configureStore({
