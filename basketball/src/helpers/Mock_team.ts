@@ -17,14 +17,3 @@ export const Team: ITeam = {
   imageUrl: `${teamLogo}`,
   id: 1,
 };
-
-export interface IItem {
-  label: string,
-  data: string,
-}
-
-export const itemsDescription: IItem[] = [
-  { label: 'Year of foundation', data: `${Team.foundationYear}` },
-  { label: 'Conference', data: `${Team.conference}` },
-  { label: 'Division', data: `${Team.division}` },
-];
