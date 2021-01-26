@@ -1,6 +1,4 @@
-// @ts-ignore
 import { bindActionCreators } from 'redux';
-// @ts-ignore
 import { useDispatch } from 'react-redux';
 import { IActionsCreator } from '../interfaces/ActionsCreator';
 

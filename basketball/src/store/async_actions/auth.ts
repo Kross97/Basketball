@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 import { signIn, signUp } from '../../api/auth';
 import { authDataUser } from '../index';
-import { signRequestErrors } from '../../helpers/constants/signRequestErrors';
+import { signRequestErrors } from '../../api/api_constants/signRequestErrors';
 import { RegisterUser, LoginUser } from '../../helpers/interfaces/request_interfaces/Auth';
 
 export const requestSignUp = createAsyncThunk(
