@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { TextSmallThin, TextStandart } from '../uiComponents/Typography';
-import { sizeMobile } from '../helpers/constants/mobileSize';
-import { Player } from '../helpers/interfaces/Player';
-import { Team } from '../helpers/interfaces/Team';
-import { TypeItem } from '../helpers/types/types';
+import { TextSmallThin, TextStandart } from '../../uiComponents/Typography';
+import { sizeMobile } from '../../helpers/constants/mobileSize';
+import { Player } from '../../helpers/interfaces/Player';
+import { Team } from '../../helpers/interfaces/Team';
+import { TypeItem } from '../../helpers/types/types';
 
 interface IProps {
   type: TypeItem,

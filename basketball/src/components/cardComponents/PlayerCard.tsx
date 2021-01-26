@@ -2,22 +2,22 @@ import React from 'react';
 import styled from 'styled-components';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
-import { TextLink } from '../uiComponents/TextLink';
-import { Team } from '../helpers/Mock_team';
-import { TextExtraLarge } from '../uiComponents/Typography';
-import { sizeMobile } from '../helpers/constants/mobileSize';
-import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
+import { TextLink } from '../../uiComponents/TextLink';
+import { Player } from '../../helpers/Mock_player';
+import { TextExtraLarge } from '../../uiComponents/Typography';
+import { sizeMobile } from '../../helpers/constants/mobileSize';
+import { PlayerItemsDescription } from './cardAdditionalComponents/PlayerItemsDescriptions';
 
-export const TeamsCard = () => (
+export const PlayerCard = () => (
   <div>
     <CardNavigation>
-      <Links>
+      <div>
         <TextLink text="Main" to="Main" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text="Teams" to="Teams" disabled={false} />
+        <TextLink text="Teams" to="Players" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text={`${Team.name}`} to={`${Team.name}`} disabled />
-      </Links>
+        <TextLink text={`${Player.name}`} to={`${Player.name}`} disabled />
+      </div>
       <Actions>
         <BtnCreate type="button" />
         <BtnDelete type="button">
@@ -27,12 +27,15 @@ export const TeamsCard = () => (
     </CardNavigation>
     <CardBody>
       <Content>
-        <LogoTeam />
+        <ImagePlayer />
         <DataCard>
-          <TeamName>{Team.name}</TeamName>
+          <PlayerName>
+            {Player.name}
+            <PlayerNumber>{`#${Player.number}`}</PlayerNumber>
+          </PlayerName>
           <DescriptionContainer>
-            <TeamItemsDescription
-              team={Team}
+            <PlayerItemsDescription
+              player={Player}
             />
           </DescriptionContainer>
         </DataCard>
@@ -47,8 +50,8 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  
-  @media(max-width: 445px) {
+
+  @media (max-width: 445px) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -94,14 +97,12 @@ const Separator = styled.span`
   margin: 0 4px;
 `;
 
-const Links = styled.div``;
-
 const CardBody = styled.div`
-  padding: 65px 0 65px 146px;
+  padding: 65px 0 0 50px;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -109,8 +110,12 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
-  @media(max-width: ${sizeMobile}) {
+  align-self: self-start;
+  margin-bottom: 65px;
+
+  @media (max-width: ${sizeMobile}) {
     text-align: center;
+    align-self: center;
   }
 `;
 
@@ -118,48 +123,57 @@ const Content = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     flex-direction: column;
   }
 `;
 
-const LogoTeam = styled.div`
-  margin-right: 146px;
+const ImagePlayer = styled.div`
+  margin-right: 56px;
   flex-shrink: 0.1;
-  background: url(${Team.imageUrl}) no-repeat;
+  background: url(${Player.avatarUrl}) no-repeat;
+  width: 500px;
+  height: 368px;
   background-size: contain;
-  width: 210px;
-  height: 210px;
-  
-  @media(max-width: ${sizeMobile}) {
-    width: 140px;
-    height: 140px;
+  align-self: flex-end;
+
+  @media (max-width: ${sizeMobile}) {
+    width: 185px;
+    height: 144px;
     margin-right: 0;
     margin-bottom: 48px;
+    align-self: center;
   }
 `;
 
-const TeamName = styled(TextExtraLarge)`
+const PlayerName = styled(TextExtraLarge)`
   display: block;
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${sizeMobile}) {
+  font-weight: 700;
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
-    font-weight: 700;
   }
+`;
+
+const PlayerNumber = styled(PlayerName)`
+  display: inline-block;
+  color: ${({ theme }) => theme.colors.lightRed};
+  margin-bottom: 0;
+  margin-left: 10px;
 `;
 
 const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 54px 80px;
-  
-  @media(max-width: ${sizeMobile}) {
+  gap: 54px 180px;
+
+  @media (max-width: ${sizeMobile}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;

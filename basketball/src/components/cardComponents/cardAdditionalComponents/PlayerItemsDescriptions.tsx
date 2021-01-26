@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { getFullAge } from '../../helpers/functions/getFullAge';
-import { TextLarge, TextStandart } from '../../uiComponents/Typography';
-import { sizeMobile } from '../../helpers/constants/mobileSize';
-import { IPlayer } from '../../helpers/Mock_player';
+import { getFullAge } from '../../../helpers/functions/getFullAge';
+import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
+import { sizeMobile } from '../../../helpers/constants/mobileSize';
+import { IPlayer } from '../../../helpers/Mock_player';
 
 interface IProps {
   player: IPlayer,

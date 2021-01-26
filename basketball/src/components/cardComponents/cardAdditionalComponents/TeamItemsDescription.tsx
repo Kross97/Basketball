@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
-import { TextLarge, TextStandart } from '../../uiComponents/Typography';
-import { sizeMobile } from '../../helpers/constants/mobileSize';
-import { ITeam } from '../../helpers/Mock_team';
+import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
+import { sizeMobile } from '../../../helpers/constants/mobileSize';
+import { ITeam } from '../../../helpers/Mock_team';
 
 interface IProps {
   team: ITeam,
