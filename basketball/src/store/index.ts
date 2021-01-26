@@ -1,5 +1,5 @@
 import { createSlice, combineReducers, PayloadAction } from '@reduxjs/toolkit';
-import { IAddAuth } from '../helpers/interfaces/store_interfaces/Auth';
+import { IAddAuth, ILocalUserData } from '../helpers/interfaces/store_interfaces/Auth';
 
 export const authDataUser = createSlice({
   name: 'authDataUser',
@@ -9,14 +9,25 @@ export const authDataUser = createSlice({
       avatarUrl: '',
       token: '',
     },
-    authErrorMessage: '',
+    authErrorMessageSignUp: '',
+    authErrorMessageSignIn: '',
+    localUserData: {
+      login: '',
+      password: '',
+    },
   },
   reducers: {
-    addAuthData: (state, action: PayloadAction<{ authData: IAddAuth}>) => (
+    addAuthData: (state: any, action: PayloadAction<{ authData: IAddAuth}>) => (
       { ...state, authData: action.payload.authData }
     ),
-    addAuthError: (state, action: PayloadAction<{ authError: string}>) => (
-      { ...state, authErrorMessage: action.payload.authError }
+    addAuthErrorSignUp: (state: any, action: PayloadAction<{ errorSignUp: string}>) => (
+      { ...state, authErrorMessageSignUp: action.payload.errorSignUp }
+    ),
+    addAuthErrorSignIn: (state: any, action: PayloadAction<{ errorSignIn: string}>) => (
+      { ...state, authErrorMessageSignIn: action.payload.errorSignIn }
+    ),
+    addLocalUserData: (state: any, action: PayloadAction<{ userData: ILocalUserData}>) => (
+      { ...state, localUserData: action.payload.userData }
     ),
   },
 });

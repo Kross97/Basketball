@@ -32,8 +32,4 @@ export const theme = {
     base: 'linear-gradient(100.45deg, #707070 0%, #393939 100.28%)',
     mobile: 'linear-gradient(142.15deg, #707070 0%, #393939 98.4%);',
   },
-  gradient: {
-    base: 'linear-gradient(100.45deg, #707070 0%, #393939 100.28%)',
-    mobile: 'linear-gradient(142.15deg, #707070 0%, #393939 98.4%);',
-  },
 };

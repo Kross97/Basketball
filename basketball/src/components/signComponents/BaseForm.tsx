@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
@@ -10,25 +10,36 @@ import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 
 interface IProps {
   typeForm: string;
   notificationErrorMessage: string;
   submitHandler: (data: any) => void;
+  userData?: ISignInForm,
 }
 
 export const BaseForm: FC<IProps> = ({
   typeForm,
   notificationErrorMessage,
   submitHandler,
+  userData = undefined,
 }) => {
   const {
     register,
     handleSubmit,
     errors,
     getValues,
+    setValue,
     watch,
   } = useForm();
+
+  useEffect(() => {
+    if (userData?.login && userData?.password) {
+      setValue('login', userData.login);
+      setValue('password', userData.password);
+    }
+  }, [userData?.login, userData?.password]);
 
   const watchAccept = watch('acceptAgreement', false);
 
@@ -42,7 +53,7 @@ export const BaseForm: FC<IProps> = ({
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
   return (
-    <FormSignUp onSubmit={handleSubmit(submitHandler)}>
+    <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>
       { typeForm === 'Sign Up' && (
       <FieldInputData
@@ -113,22 +124,22 @@ export const BaseForm: FC<IProps> = ({
         disabled={Object.keys(errors).length > 0 || (typeForm === 'Sign Up' && !watchAccept)}
       />
       <TextContainer>
-        <TextSignUp>
+        <TextSign>
           {typeForm === 'Sign Up' ? 'Already a member?' : 'Not a member yet?' }
-        </TextSignUp>
+        </TextSign>
         <TextLink
           text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
-          to={typeForm === 'Sign Up' ? `${routePaths.signUp}` : `${routePaths.signIn}`}
+          to={typeForm === 'Sign Up' ? `${routePaths.signIn}` : `${routePaths.signUp}`}
           disabled={false}
         />
       </TextContainer>
       {notificationErrorMessage !== ''
             && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
-    </FormSignUp>
+    </FormSign>
   );
 };
 
-const FormSignUp = styled.form`
+const FormSign = styled.form`
   display: flex;
   flex-direction: column;
   
@@ -141,7 +152,7 @@ const TextContainer = styled.div`
   align-self: center;
 `;
 
-const TextSignUp = styled(TextSmall)`
+const TextSign = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
   margin-right: 5px;
 `;
@@ -190,6 +201,10 @@ const animationNotification = keyframes`
 const Notification = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: -80px;
+  right: 10%;
+  left: 10%;
   animation: ${animationNotification} 1s linear;
   animation-direction: alternate;
   animation-fill-mode: forwards;

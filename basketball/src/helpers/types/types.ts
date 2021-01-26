@@ -6,3 +6,4 @@ export type TypesButton = 'submit' | 'reset' | 'button';
 
 export type TypesInput = 'text' | 'password';
 
+export type RequestGenericType = string | object;

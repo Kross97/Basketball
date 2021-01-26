@@ -1,3 +1,3 @@
-export interface ActionsCreator {
-  [key: string]: (payload: any) => void;
+export interface IActionsCreator {
+  [key: string]: (payload: any) => any;
 }

@@ -12,11 +12,11 @@ export const TeamsCard = () => (
   <div>
     <CardNavigation>
       <Links>
-        <TextLink text="Main" href="#" disabled={false} />
+        <TextLink text="Main" to="Main" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text="Teams" href="#" disabled={false} />
+        <TextLink text="Teams" to="Teams" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text={`${Team.name}`} href="#" disabled />
+        <TextLink text={`${Team.name}`} to={`${Team.name}`} disabled />
       </Links>
       <Actions>
         <BtnCreate type="button" />

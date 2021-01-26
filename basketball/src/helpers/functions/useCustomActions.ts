@@ -1,8 +1,8 @@
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import { ActionsCreator } from '../interfaces/ActionsCreator';
+import { IActionsCreator } from '../interfaces/ActionsCreator';
 
-export const useCustomActions = (actions: ActionsCreator) => {
+export const useCustomActions = (actions: IActionsCreator) => {
   const dispatch = useDispatch();
   return bindActionCreators(actions, dispatch);
 };
