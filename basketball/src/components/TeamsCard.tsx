@@ -1,63 +1,45 @@
-import React, { FC } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextLink } from '../uiComponents/TextLink';
-import { Team } from '../helpers/Mock_team'; // мок пока не готов сервер
-import { TextExtraLarge, TextLarge, TextStandart } from '../uiComponents/Typography';
+import { Team } from '../helpers/Mock_team';
+import { TextExtraLarge } from '../uiComponents/Typography';
 import { sizeMobile } from '../helpers/constants/mobileSize';
+import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 
-interface IProps {
-  id: number;
-}
-
-export const TeamsCard: FC<IProps> = ({ id }) => {
-  console.log('ID', id); // id для запроса в редакс , когда сервер заработает
-  return (
-    <ContainerCard>
-      <CardNavigation>
-        <Links>
-          <TextLink text="Main" href="#" disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text="Teams" href="#" disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={`${Team.name}`} href="#" disabled />
-        </Links>
-        <Actions>
-          <BtnCreate type="button" />
-          <BtnDelete type="button">
-            <RemoveIcon />
-          </BtnDelete>
-        </Actions>
-      </CardNavigation>
-      <CardBody>
-        <Content>
-          <LogoTeam />
-          <DataCard>
-            <TeamName>{Team.name}</TeamName>
-            <DescriptionContainer>
-              <ItemDescription>
-                <LabelItem>Year of foundation</LabelItem>
-                <DataItem>{Team.foundationYear}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Conference</LabelItem>
-                <DataItem>{Team.conference}</DataItem>
-              </ItemDescription>
-              <ItemDescription>
-                <LabelItem>Division</LabelItem>
-                <DataItem>{Team.division}</DataItem>
-              </ItemDescription>
-            </DescriptionContainer>
-          </DataCard>
-        </Content>
-      </CardBody>
-    </ContainerCard>
-  );
-};
-
-const ContainerCard = styled.div`
-`;
+export const TeamsCard = () => (
+  <div>
+    <CardNavigation>
+      <Links>
+        <TextLink text="Main" href="#" disabled={false} />
+        <Separator>/</Separator>
+        <TextLink text="Teams" href="#" disabled={false} />
+        <Separator>/</Separator>
+        <TextLink text={`${Team.name}`} href="#" disabled />
+      </Links>
+      <Actions>
+        <BtnCreate type="button" />
+        <BtnDelete type="button">
+          <RemoveIcon />
+        </BtnDelete>
+      </Actions>
+    </CardNavigation>
+    <CardBody>
+      <Content>
+        <LogoTeam />
+        <DataCard>
+          <TeamName>{Team.name}</TeamName>
+          <DescriptionContainer>
+            <TeamItemsDescription
+              team={Team}
+            />
+          </DescriptionContainer>
+        </DataCard>
+      </Content>
+    </CardBody>
+  </div>
+);
 
 const CardNavigation = styled.nav`
   display: flex;
@@ -171,8 +153,6 @@ const TeamName = styled(TextExtraLarge)`
   }
 `;
 
-const ItemDescription = styled.div``;
-
 const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -183,25 +163,5 @@ const DescriptionContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;
-  }
-`;
-
-const LabelItem = styled(TextLarge)`
-  display: block;
-  color: ${({ theme }) => theme.colors.white};
-  margin-bottom: 8px;
-  
-  @media(max-width: ${sizeMobile}) {
-    font-size: 18px;
-    line-height: 25px;
-    font-weight: 700;
-  }
-`;
-
-const DataItem = styled(TextStandart)`
-  color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${sizeMobile}) {
-    font-size: 14px;
   }
 `;

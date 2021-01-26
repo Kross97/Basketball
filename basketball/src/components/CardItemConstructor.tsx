@@ -12,7 +12,7 @@ interface IProps {
 }
 
 export const CardItemConstructor: FC<IProps> = ({ type, item }) => (
-  <ContainerCard>
+  <div>
     <BodyCard type={type}>
       <LogoItem type={type} imageUrl={'avatarUrl' in item ? item.avatarUrl : item.imageUrl} />
     </BodyCard>
@@ -28,21 +28,18 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => (
         </DescriptionItem>
       </DataItem>
     </FooterCard>
-  </ContainerCard>
+  </div>
 );
 
-const ContainerCard = styled.div`
-`;
-
 const BodyCard = styled.div<{ type: string }>`
-  padding: ${({ type, theme }) => theme.sizes.cardSizes[type]};
+  padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[type] : '65px 107px')};
   background: ${({ theme }) => theme.gradient.base};
   text-align: center;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   
   @media(max-width: ${sizeMobile}) {
-    padding: ${({ type, theme }) => theme.sizes.cardSizes[`${type}Mobile`]};
+    padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 55px 30px 56px')};
   }
 `;
 

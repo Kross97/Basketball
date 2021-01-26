@@ -11,7 +11,7 @@ export default {
 
 export const TeamCard = () => (
   <MockContainer>
-    <TeamsCard id={1} />
+    <TeamsCard />
   </MockContainer>
 );
 
