@@ -28,7 +28,7 @@ const request = async (url: string, data: IRequestBaseBody, token: string | unde
     result = await response.json();
     return result;
   }
-  return { isError: true, status: response.status };
+  throw { isCustomError: true, status: response.status };
 };
 
 export const get = (url: string, token?: string) => request(`${base}${url}`, { method: 'GET' }, token);

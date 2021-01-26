@@ -9,6 +9,7 @@ import { NotificationError } from '../../uiComponents/NotificationError';
 import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
+import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 
 interface IProps {
@@ -128,7 +129,7 @@ export const BaseForm: FC<IProps> = ({
         </TextSign>
         <TextLink
           text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
-          to={typeForm === 'Sign Up' ? '/signIn' : '/'}
+          to={typeForm === 'Sign Up' ? `${routePaths.signUp}` : `${routePaths.signIn}`}
           disabled={false}
         />
       </TextContainer>
@@ -139,10 +140,12 @@ export const BaseForm: FC<IProps> = ({
 };
 
 const FormSign = styled.form`
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  
+  & label, & button {
+    margin-bottom: 24px;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -156,7 +159,7 @@ const TextSign = styled(TextSmall)`
 
 const LabelForm = styled(TextLabelSignUp)`
   color: ${({ theme }) => theme.colors.blue};
-  margin-bottom: 6px;
+  margin-bottom: 30px;
   
   @media(max-width: ${mobileVersionLayout}) {
     align-self: center;

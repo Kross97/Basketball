@@ -33,5 +33,6 @@ module.exports = {
         "@typescript-eslint/indent": ["error"],
         "import/no-extraneous-dependencies": 0,
         "linebreak-style": 0,
+        "@typescript-eslint/no-throw-literal": 0,
     },
 };
