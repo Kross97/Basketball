@@ -22,6 +22,7 @@ const customStyles = {
     backgroundColor: theme.colors.white,
     borderColor: theme.colors.lightGrey,
     boxShadow: 'none',
+    cursor: 'pointer',
     ':hover': {
       borderColor: theme.colors.lightGrey,
     },
@@ -34,8 +35,10 @@ const customStyles = {
     lineHeight: '25px',
     color: state.isFocused ? theme.colors.white : theme.colors.grey,
     backgroundColor: (state.isFocused && theme.colors.lightestRed),
+    cursor: 'pointer',
     ':active': {
       backgroundColor: theme.colors.darkRed,
+      color: theme.colors.white,
     },
   }),
   multiValue: (styles: any) => ({
