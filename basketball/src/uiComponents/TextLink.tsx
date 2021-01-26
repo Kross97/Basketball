@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
+import { sizeMobile } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -16,6 +17,11 @@ export const TextLink: FC<IProps> = ({ text, href, disabled }) => (
 
 const LinkText = styled(TextSmall)`
   line-height: 19px;
+  font-weight: 600;
+
+  @media(max-width: ${sizeMobile}) {
+    font-size: 12px;
+  }
 `;
 
 const CustomLink = styled.a<{ disabled: boolean }>`

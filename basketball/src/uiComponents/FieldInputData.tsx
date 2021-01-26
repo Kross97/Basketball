@@ -1,43 +1,55 @@
-import React, { FC, useState, ChangeEvent } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
+import closeEyeIcon from '../static/icons/close_eye.svg';
+import eyeIcon from '../static/icons/eye.svg';
+import { TypesInput } from '../helpers/types/types';
 
 interface IProps {
   text: string;
   disabled: boolean;
-  type: 'text' | 'password';
+  startType: TypesInput;
+  type: TypesInput;
+  changeHandler: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  value: string;
+  name: string;
+  changeTypeInput?: () => void;
   isError?: boolean;
   errorMessage?: string;
 }
 
 export const FieldInputData: FC<IProps> = ({
-  text, disabled, type, isError = false, errorMessage = '',
-}) => {
-  const [data, setData] = useState<string>('');
-
-  const changeHandler = ({ target: { value } }: ChangeEvent<HTMLInputElement>) => {
-    setData(value);
-  };
-
-  return (
-    <InputContainer>
-      <TextInput>{text}</TextInput>
-      <CustomInput
-        onInput={changeHandler}
-        type={type}
-        disabled={disabled}
-        isError={isError}
-        value={data}
-      />
-      {isError && <TextInputError>{errorMessage}</TextInputError>}
-    </InputContainer>
-  );
-};
+  text,
+  disabled,
+  startType,
+  type,
+  changeHandler,
+  value,
+  name,
+  changeTypeInput,
+  isError = false,
+  errorMessage = '',
+}) => (
+  <InputContainer>
+    <TextInput>{text}</TextInput>
+    <CustomInput
+      onChange={changeHandler}
+      name={name}
+      type={type}
+      disabled={disabled}
+      isError={isError}
+      value={value}
+    />
+    {isError && <TextInputError>{errorMessage}</TextInputError>}
+    {startType === 'password' && <ButtonChangeType onClick={changeTypeInput} typeButton={type} startType={startType} />}
+  </InputContainer>
+);
 
 const InputContainer = styled.label`
   display: flex;
   flex-direction: column;
   cursor: pointer;
+  position: relative;
 `;
 
 const CustomInput = styled.input<{ isError: boolean }>`
@@ -75,4 +87,16 @@ const TextInput = styled(TextSmall)`
 const TextInputError = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.lightestRed};
   font-size: 12px;
+`;
+
+const ButtonChangeType = styled.button<{ typeButton: string; startType: string; }>`
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: absolute;
+  right: 13px;
+  top: 38px;
+  width: 16px;
+  height: 16px;
+  background: ${({ typeButton, startType }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)}  no-repeat;
 `;
