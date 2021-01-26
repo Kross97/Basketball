@@ -1,16 +1,17 @@
 import React, { FC } from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
-  href: string;
+  to: string;
   disabled: boolean;
 }
 
-export const TextLink: FC<IProps> = ({ text, href, disabled }) => (
-  <CustomLink disabled={disabled} href={href}>
+export const TextLink: FC<IProps> = ({ text, to, disabled }) => (
+  <CustomLink disabled={disabled} to={to}>
     <LinkText>{text}</LinkText>
   </CustomLink>
 );
@@ -24,7 +25,7 @@ const LinkText = styled(TextSmall)`
   }
 `;
 
-const CustomLink = styled.a<{ disabled: boolean }>`
+const CustomLink = styled(Link)<{ disabled: boolean }>`
   cursor: pointer;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   color: ${({ disabled, theme }) => (disabled ? theme.colors.lightGrey : theme.colors.red)}

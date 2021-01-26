@@ -26,13 +26,7 @@ export const AllInputs = ({
   isError,
   errorMessage = 'Required',
 }: IProps) => {
-  const [value, setValue] = useState<string>('');
   const [typeInput, setTypeInput] = useState<'text' | 'password'>(type);
-
-  const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(target.value);
-  };
-
   const changeTypeInput = () => {
     setTypeInput(typeInput === 'text' ? 'password' : 'text');
   };
@@ -43,8 +37,6 @@ export const AllInputs = ({
         text={text}
         type={typeInput}
         startType={startType}
-        changeHandler={changeHandler}
-        value={value}
         name="name"
         changeTypeInput={changeTypeInput}
         disabled={disabled}
