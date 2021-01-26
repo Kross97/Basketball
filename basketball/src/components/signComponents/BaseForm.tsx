@@ -142,7 +142,7 @@ export const BaseForm: FC<IProps> = ({
 const FormSign = styled.form`
   display: flex;
   flex-direction: column;
-  
+  position: relative;
   & label, & button {
     margin-bottom: 24px;
   }
@@ -199,8 +199,6 @@ const animationNotification = keyframes`
 `;
 
 const Notification = styled.div`
-  display: flex;
-  justify-content: center;
   position: absolute;
   bottom: -80px;
   right: 10%;
