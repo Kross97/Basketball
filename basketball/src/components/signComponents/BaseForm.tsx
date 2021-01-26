@@ -9,6 +9,7 @@ import { NotificationError } from '../../uiComponents/NotificationError';
 import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
   typeForm: string;
@@ -116,8 +117,8 @@ export const BaseForm: FC<IProps> = ({
           {typeForm === 'Sign Up' ? 'Already a member?' : 'Not a member yet?' }
         </TextSignUp>
         <TextLink
-          text={typeForm === 'Sign Up' ? 'Sign up' : 'Sign in'}
-          to={typeForm === 'Sign Up' ? '/signIn' : '/'}
+          text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
+          to={typeForm === 'Sign Up' ? `${routePaths.signUp}` : `${routePaths.signIn}`}
           disabled={false}
         />
       </TextContainer>
@@ -130,7 +131,10 @@ export const BaseForm: FC<IProps> = ({
 const FormSignUp = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  
+  & label, & button {
+    margin-bottom: 24px;
+  }
 `;
 
 const TextContainer = styled.div`
@@ -144,7 +148,7 @@ const TextSignUp = styled(TextSmall)`
 
 const LabelForm = styled(TextLabelSignUp)`
   color: ${({ theme }) => theme.colors.blue};
-  margin-bottom: 6px;
+  margin-bottom: 30px;
   
   @media(max-width: ${mobileVersionLayout}) {
     align-self: center;
