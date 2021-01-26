@@ -5,7 +5,7 @@ import { PlayerCard } from '../components/cardComponents/PlayerCard';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
 export default {
-  title: 'Components/Players/BaseCard',
+  title: 'Components/PlayerCard',
   component: PlayerCard,
 } as Meta;
 

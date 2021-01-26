@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import createIcon from '../static/icons/create.svg';
-import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
+import createIcon from '../../static/icons/create.svg';
+import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { Team } from '../../helpers/Mock_team';
 import { TextExtraLarge } from '../../uiComponents/Typography';
