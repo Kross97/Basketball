@@ -13,7 +13,7 @@ export const TextSmall = styled(TextStandart)`
 `;
 
 export const TextExtraSmall = styled(TextStandart)`
- font-size: 12px;
+  font-size: 12px;
 `;
 
 export const TextSmallThin = styled.span`
