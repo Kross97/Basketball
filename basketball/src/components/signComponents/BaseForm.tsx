@@ -52,7 +52,7 @@ export const BaseForm: FC<IProps> = ({
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
   return (
-    <FormSignUp onSubmit={handleSubmit(submitHandler)}>
+    <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>
       { typeForm === 'Sign Up' && (
       <FieldInputData
@@ -123,22 +123,23 @@ export const BaseForm: FC<IProps> = ({
         disabled={Object.keys(errors).length > 0 || (typeForm === 'Sign Up' && !watchAccept)}
       />
       <TextContainer>
-        <TextSignUp>
+        <TextSign>
           {typeForm === 'Sign Up' ? 'Already a member?' : 'Not a member yet?' }
-        </TextSignUp>
+        </TextSign>
         <TextLink
-          text={typeForm === 'Sign Up' ? 'Sign up' : 'Sign in'}
+          text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
           to={typeForm === 'Sign Up' ? '/signIn' : '/'}
           disabled={false}
         />
       </TextContainer>
       {notificationErrorMessage !== ''
             && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
-    </FormSignUp>
+    </FormSign>
   );
 };
 
-const FormSignUp = styled.form`
+const FormSign = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 24px;
@@ -148,7 +149,7 @@ const TextContainer = styled.div`
   align-self: center;
 `;
 
-const TextSignUp = styled(TextSmall)`
+const TextSign = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
   margin-right: 5px;
 `;
@@ -197,6 +198,10 @@ const animationNotification = keyframes`
 const Notification = styled.div`
   display: flex;
   justify-content: center;
+  position: absolute;
+  bottom: -80px;
+  right: 10%;
+  left: 10%;
   animation: ${animationNotification} 1s linear;
   animation-direction: alternate;
   animation-fill-mode: forwards;
