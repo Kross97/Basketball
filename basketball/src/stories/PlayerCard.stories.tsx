@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { PlayerCard } from '../components/PlayerCard';
+import { PlayerCard } from '../components/cardComponents/PlayerCard';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
 export default {

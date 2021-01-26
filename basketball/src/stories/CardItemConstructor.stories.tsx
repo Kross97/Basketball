@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { CardItemConstructor } from '../components/CardItemConstructor';
+import { CardItemConstructor } from '../components/cardComponents/CardItemConstructor';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 import { Team } from '../helpers/Mock_team';
 import { Player } from '../helpers/Mock_player';
