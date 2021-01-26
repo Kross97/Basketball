@@ -129,7 +129,7 @@ export const BaseForm: FC<IProps> = ({
         </TextSign>
         <TextLink
           text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
-          to={typeForm === 'Sign Up' ? `${routePaths.signUp}` : `${routePaths.signIn}`}
+          to={typeForm === 'Sign Up' ? `${routePaths.signIn}` : `${routePaths.signUp}`}
           disabled={false}
         />
       </TextContainer>

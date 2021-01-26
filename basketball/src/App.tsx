@@ -9,7 +9,7 @@ export const App = () => (
     <Route exact path={`${routePaths.signUp}`}>
       <SignUp />
     </Route>
-    <Route path={`${routePaths.signIn}`} />
+    <Route path={`${routePaths.signIn}`}>
       <SignIn />
     </Route>
   </Switch>

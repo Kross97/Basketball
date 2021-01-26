@@ -12,11 +12,11 @@ export const PlayerCard = () => (
   <div>
     <CardNavigation>
       <div>
-        <TextLink text="Main" href="#" disabled={false} />
+        <TextLink text="Main" to="Main" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text="Teams" href="#" disabled={false} />
+        <TextLink text="Teams" to="Players" disabled={false} />
         <Separator>/</Separator>
-        <TextLink text={`${Player.name}`} href="#" disabled />
+        <TextLink text={`${Player.name}`} to={`${Player.name}`} disabled />
       </div>
       <Actions>
         <BtnCreate type="button" />
@@ -50,8 +50,8 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  
-  @media(max-width: 445px) {
+
+  @media (max-width: 445px) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -101,8 +101,8 @@ const CardBody = styled.div`
   padding: 65px 0 0 50px;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -112,8 +112,8 @@ const CardBody = styled.div`
 const DataCard = styled.div`
   align-self: self-start;
   margin-bottom: 65px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     text-align: center;
     align-self: center;
   }
@@ -123,8 +123,8 @@ const Content = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     flex-direction: column;
   }
 `;
@@ -137,8 +137,8 @@ const ImagePlayer = styled.div`
   height: 368px;
   background-size: contain;
   align-self: flex-end;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     width: 185px;
     height: 144px;
     margin-right: 0;
@@ -152,8 +152,8 @@ const PlayerName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   font-weight: 700;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -172,8 +172,8 @@ const DescriptionContainer = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 54px 180px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;
