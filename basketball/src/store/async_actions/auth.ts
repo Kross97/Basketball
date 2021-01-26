@@ -15,6 +15,7 @@ export const requestSignUp = createAsyncThunk(
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
       });
+      return true;
     } catch (error) {
       if (error.isCustomError) {
         dispatch(authDataUser.actions.addAuthErrorSignUp({
@@ -36,6 +37,7 @@ export const requestSignIn = createAsyncThunk(
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthErrorSignIn({ errorSignIn: '' }));
       });
+      return true;
     } catch (error) {
       if (error.isCustomError) {
         dispatch(authDataUser.actions.addAuthErrorSignIn({

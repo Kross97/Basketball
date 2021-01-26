@@ -200,6 +200,8 @@ const animationNotification = keyframes`
 
 const Notification = styled.div`
   position: absolute;
+  display: flex;
+  justify-content: center;
   bottom: -80px;
   right: 10%;
   left: 10%;
