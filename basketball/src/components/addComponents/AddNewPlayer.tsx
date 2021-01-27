@@ -16,10 +16,18 @@ export const AddNewPlayer = () => {
     console.log('DATA', data);
   };
 
+  const loadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const fileImage = event.target.files[0];
+      const formData = new FormData();
+      formData.set('imageLoad', fileImage);
+    }
+  };
+
   return (
     <>
       <AddPlayerContext.Provider value={{ isTeamForm: false, addNewEntity }}>
-        <AddNewEntity isTeamContext={false} />
+        <AddNewEntity loadImage={loadImage} isTeamContext={false} />
       </AddPlayerContext.Provider>
     </>
   );

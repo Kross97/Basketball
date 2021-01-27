@@ -1,12 +1,29 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import addPhotoIcon from '../static/icons/add_photo.svg';
 
-export const ImageUpload = ({ imageSrc = 'start' }) => (
-  <ImageContainer imageSrc={imageSrc}>
-    <AddHover imageSrc={imageSrc} />
-  </ImageContainer>
+interface Iprops {
+  imageSrc?: string;
+  loadImage: (image: any) => void;
+}
+
+export const ImageUpload: FC<Iprops> = ({
+  imageSrc = 'start',
+  loadImage,
+}) => (
+  <label>
+    <InputLoad onChange={loadImage} type="file" />
+    <ImageContainer imageSrc={imageSrc}>
+      <AddHover imageSrc={imageSrc} />
+    </ImageContainer>
+  </label>
 );
+
+const InputLoad = styled.input`
+ width: 0;
+ height: 0;
+  position: absolute;
+`;
 
 const AddHover = styled.div<{ imageSrc: string; }>`
   border-radius: 10px;

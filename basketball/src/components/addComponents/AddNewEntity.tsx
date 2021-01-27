@@ -7,10 +7,12 @@ import { FormAddEntity } from './FormAddEntity';
 
 interface IProps {
   isTeamContext: boolean;
+  loadImage: (image: any) => void;
 }
 
 export const AddNewEntity: FC<IProps> = ({
   isTeamContext,
+  loadImage,
 }) => (
   <ContainerAdd>
     <HeaderAdd>
@@ -21,7 +23,7 @@ export const AddNewEntity: FC<IProps> = ({
       <TextLink text={isTeamContext ? 'Add new team' : 'Add new player'} to="#" disabled />
     </HeaderAdd>
     <BodyAdd>
-      <ImageUpload />
+      <ImageUpload loadImage={loadImage} />
       <FormAddEntity isTeamContext={isTeamContext} />
     </BodyAdd>
   </ContainerAdd>
@@ -48,7 +50,7 @@ const BodyAdd = styled.div`
   justify-content: flex-start;
   padding: 48px 0 48px 73px;
   
-  & div:nth-child(1) {
+  & > label:nth-child(1) {
     margin-right: 136px;
   }
 `;

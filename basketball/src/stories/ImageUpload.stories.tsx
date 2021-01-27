@@ -12,7 +12,7 @@ interface Iprops {
   imageSrc: string;
 }
 
-export const ImageDownload = ({ imageSrc }: Iprops) => <ImageUpload imageSrc={imageSrc} />;
+export const ImageDownload = ({ imageSrc }: Iprops) => <ImageUpload loadImage={(data: any) => { console.log('STORIES_DATA_IMAGE', data); }} imageSrc={imageSrc} />;
 
 ImageDownload.argTypes = {
   imageSrc: {

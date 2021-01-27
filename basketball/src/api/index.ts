@@ -3,8 +3,6 @@ import { RequestGenericType } from '../helpers/types/types';
 
 const base = process.env.REACT_APP_URL;
 
-// multipart/form-data - для картинки
-
 const request = async (url: string, data: IRequestBaseBody, token: string | undefined) => {
   const headers = token
     ? {
@@ -15,7 +13,7 @@ const request = async (url: string, data: IRequestBaseBody, token: string | unde
     // @ts-ignore
     headers: {
       ...headers,
-      'Content-Type': 'application/json;charset=utf-8',
+      'Content-Type': typeof data.body === 'object' ? 'multipart/form-data' : 'application/json;charset=utf-8',
     },
   });
   if (response.ok) {
