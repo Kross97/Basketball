@@ -60,21 +60,19 @@ export const SignUp = () => {
 
 const SignContainer = styled.div`
  display: flex;
+  height: 100vh; 
 `;
 
 const FormContainer = styled.div`
-  flex-grow: 1;
-  padding: 226px 120px;
+  flex-grow: 4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background-color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${mobileVersionLayout}) {
-    padding: 110px 24px;
-  }
 `;
 
 const PosterContainer = styled.div`
   flex-grow: 8;
-  padding: 305px 0;
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
@@ -87,6 +85,7 @@ const PosterContainer = styled.div`
 const PosterSignUp = styled.div`
   width: 660px;
   height: 414px;
+  margin: auto;
   background: url(${signUp}) no-repeat;
   background-size: contain;
   display: inline-block;
