@@ -27,4 +27,9 @@ export default {
     teams: 'Teams',
     out: 'Sign out',
   },
+  emptyEntity: {
+    label: 'Empty here',
+    emptyTeam: 'Add new teams to continue',
+    emptyPlayer: 'Add new players to continue',
+  },
 };

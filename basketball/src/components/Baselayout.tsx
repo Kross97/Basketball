@@ -1,29 +1,50 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
+import { EmptyEntity } from './EmptyEntityComponent';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
-export const BaseLayout = () => (
-  <ContainerLayout>
-    <NavigationHeader />
-    <BodyContainer>
-      <SideSandwichMenu />
-      <ContentLayout>
-        <Switch>
-          <Route exact path="/main/teams">
-            <div>zzzz</div>
-          </Route>
-          <Route exact path="/main/players">
-            <div>xxxx</div>
-          </Route>
-        </Switch>
-      </ContentLayout>
-    </BodyContainer>
-  </ContainerLayout>
-);
+export const ContextMenuProvider = React.createContext({
+  isActiveSideMenu: false,
+  toggleStateMenu: () => {},
+});
 
-const ContainerLayout = styled.div``;
+export const BaseLayout = () => {
+  const [isActiveSideMenu, setStateMenu] = useState(false);
+  const toggleStateMenu = () => {
+    setStateMenu(!isActiveSideMenu);
+  };
+
+  return (
+    <ContainerLayout>
+      <ContextMenuProvider.Provider value={{ isActiveSideMenu, toggleStateMenu }}>
+        <NavigationHeader />
+        <BodyContainer>
+          <BackgroundMenu isActiveSideMenu={isActiveSideMenu} />
+          <SideSandwichMenu />
+          <ContentLayout>
+            <Switch>
+              <Route exact path="/main/teams">
+                <EmptyEntity isTeam />
+              </Route>
+              <Route exact path="/main/players">
+                <EmptyEntity isTeam={false} />
+              </Route>
+            </Switch>
+          </ContentLayout>
+        </BodyContainer>
+      </ContextMenuProvider.Provider>
+    </ContainerLayout>
+  );
+};
+
+const ContainerLayout = styled.div`
+ height: 100vh;
+ display: flex;
+ flex-direction: column; 
+`;
 
 const ContentLayout = styled.div`
  display: flex;
@@ -33,4 +54,18 @@ const ContentLayout = styled.div`
 
 const BodyContainer = styled.div`
   display: flex;
+  flex-grow: 1;
+  position: relative;
+`;
+
+const BackgroundMenu = styled.div<{ isActiveSideMenu: boolean }>`
+  @media(max-width: ${mobileVersionLayout}) {
+    display: ${({ isActiveSideMenu }) => (isActiveSideMenu ? 'block' : 'none')};
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.6); 
+  }
 `;

@@ -7,7 +7,7 @@ import { CheckboxСhoice } from '../../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { TextLink } from '../../uiComponents/TextLink';
 import { NotificationError } from '../../uiComponents/NotificationError';
-import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
+import { TextLabel, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -159,7 +159,7 @@ const TextSign = styled(TextSmall)`
   margin-right: 5px;
 `;
 
-const LabelForm = styled(TextLabelSignUp)`
+const LabelForm = styled(TextLabel)`
   color: ${({ theme }) => theme.colors.blue};
   margin-bottom: 30px;
   

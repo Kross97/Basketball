@@ -28,6 +28,7 @@ i18next
     debug: true,
     lng: 'en',
     fallbackLng: 'en',
+    ns: ['sign', 'team', 'player', 'menu', 'emptyEntity'],
     defaultNS: 'sign',
     resources: {
       en,
