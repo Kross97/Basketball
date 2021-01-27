@@ -3,8 +3,10 @@ import styled from 'styled-components';
 import { Switch, Route } from 'react-router-dom';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
-import { EmptyEntity } from './EmptyEntityComponent';
+// import { EmptyEntity } from './EmptyEntityComponent';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { AddNewTeam } from './addComponents/AddNewTeam';
+import { AddNewPlayer } from './addComponents/AddNewPlayer';
 
 export const ContextMenuProvider = React.createContext({
   isActiveSideMenu: false,
@@ -27,10 +29,10 @@ export const BaseLayout = () => {
           <ContentLayout>
             <Switch>
               <Route exact path="/main/teams">
-                <EmptyEntity isTeam />
+                <AddNewTeam />
               </Route>
               <Route exact path="/main/players">
-                <EmptyEntity isTeam={false} />
+                <AddNewPlayer />
               </Route>
             </Switch>
           </ContentLayout>

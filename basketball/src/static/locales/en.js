@@ -11,16 +11,19 @@ export default {
     signUpCheck: 'I accept the agreement',
   },
   team: {
+    name: 'Team',
     foundation: 'Year of foundation',
     division: 'Division',
     conference: 'Conference',
   },
   player: {
+    name: 'Name',
     position: 'Position',
     team: 'Team',
     height: 'Height',
     weight: 'Weight',
     age: 'Age',
+    number: 'Number',
   },
   menu: {
     players: 'Players',

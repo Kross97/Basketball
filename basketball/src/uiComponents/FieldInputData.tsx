@@ -11,6 +11,7 @@ interface IProps {
   startType: TypesInput;
   type: TypesInput;
   name: string;
+  defaultValue?: string;
   register?: (field: any) => void;
   changeTypeInput?: () => void;
   isError?: boolean;

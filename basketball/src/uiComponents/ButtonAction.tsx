@@ -10,12 +10,19 @@ interface IProps {
   text: string;
   disabled: boolean;
   type: TypesButton;
+  onClick?: () => void;
 }
 
 export const ButtonAction: FC<IProps> = ({
-  type, isNegativeStyle, isAdding, size, text, disabled,
+  type, isNegativeStyle, isAdding, size, text, disabled, onClick,
 }) => (
-  <ButtonStyled type={type} disabled={disabled} isNegativeStyle={isNegativeStyle} size={size}>
+  <ButtonStyled
+    type={type}
+    disabled={disabled}
+    isNegativeStyle={isNegativeStyle}
+    size={size}
+    onClick={onClick}
+  >
     <TextStandart>
       {text}
     </TextStandart>
