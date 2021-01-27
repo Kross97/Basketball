@@ -6,20 +6,10 @@ import { loadNewImage } from '../../store/async_actions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { addNewTeam } from '../../store/async_actions/team';
 
-interface IContext {
-  isTeamForm: boolean;
-  addNewEntity: (data: any) => void;
-}
-
 const actionCreators = {
   loadNewImage,
   addNewTeam,
 };
-
-export const AddTeamContext = React.createContext({
-  isTeamForm: true,
-  addNewEntity: () => { },
-} as IContext);
 
 export const AddNewTeam = () => {
   const token = useSelector(({ authDataUser: { authData } }: IStoreReducer) => authData.token);
@@ -48,9 +38,11 @@ export const AddNewTeam = () => {
 
   return (
     <>
-      <AddTeamContext.Provider value={{ isTeamForm: true, addNewEntity }}>
-        <AddNewEntity loadImage={loadImage} isTeamContext />
-      </AddTeamContext.Provider>
+      <AddNewEntity
+        isTeam
+        loadImage={loadImage}
+        addNewEntity={addNewEntity}
+      />
     </>
   );
 };

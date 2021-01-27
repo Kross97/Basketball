@@ -1,25 +1,26 @@
-import React, { FC, useContext } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
-import { AddTeamContext } from './AddNewTeam';
-import { AddPlayerContext } from './AddNewPlayer';
+import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
+import { positions } from '../../helpers/constants/playerPositions';
 
 interface IProps {
-  isTeamContext: boolean;
+  addNewPlayer: (data: any) => void;
 }
 
-export const FormAddEntity: FC<IProps> = ({
-  isTeamContext,
+export const FormAddPlayer: FC<IProps> = ({
+  addNewPlayer,
 }) => {
+  const [position, setPosition] = useState<string>('');
+  const [team, setTeam] = useState<number>(0);
+  const [positionError, setPositionError] = useState<boolean>(false);
+  const [teamError, setTeamError] = useState<boolean>(false);
+
   const { t } = useTranslation();
-  const {
-    isTeamForm,
-    addNewEntity,
-  } = useContext(isTeamContext ? AddTeamContext : AddPlayerContext);
   const history = useHistory();
   const {
     register,
@@ -31,51 +32,72 @@ export const FormAddEntity: FC<IProps> = ({
     history.goBack();
   };
 
+  const changePosition = (targetPosition: any) => {
+    console.log('VAl', targetPosition, setTeam, setPosition);
+    setPositionError(!targetPosition);
+    setPosition(targetPosition ? targetPosition.value : '');
+  };
+
+  const changeTeam = (targetTeam: any) => {
+    console.log('VAl-2', targetTeam);
+    setTeamError(!targetTeam);
+    setTeam(targetTeam ? targetTeam.value : 0);
+  };
+
+  const addPositionAndTeam = (data: any) => {
+    if (!position && !team) {
+      setPositionError(true);
+      setTeamError(true);
+      return;
+    }
+    if (!team) {
+      setTeamError(true);
+      return;
+    }
+    if (!position) {
+      setPositionError(true);
+      return;
+    }
+    setPositionError(false);
+    setTeamError(false);
+    data = {
+      ...data,
+      position,
+      team,
+    };
+    addNewPlayer(data);
+  };
+
   return (
-    <FormAdd onSubmit={handleSubmit(addNewEntity)}>
+    <FormAdd onSubmit={handleSubmit(addPositionAndTeam)}>
       <FieldInputData
-        text={isTeamForm ? t('team:name') : t('player:name')}
+        text={t('player:name')}
         disabled={false}
         startType="text"
         type="text"
-        isError={!!errors[isTeamForm ? 'team' : 'player']}
+        isError={!!errors.player}
         errorMessage="Required or incorrect enter"
-        name={isTeamForm ? 'team' : 'player'}
+        name="player"
         register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
       />
-      <FieldInputData
-        text={isTeamForm ? t('team:division') : t('player:position')}
-        disabled={false}
-        startType="text"
-        type="text"
-        isError={!!errors[isTeamForm ? 'division' : 'position']}
-        errorMessage="Required or incorrect enter"
-        name={isTeamForm ? 'division' : 'position'}
-        register={register({ required: true, pattern: (isTeamForm ? /^([^\W\d_]{5,22})$/i : /^([^\W\d_]{5,13})$/i) })}
+      <MultiSelectEntities
+        onChange={changePosition}
+        text="Position"
+        isDefault
+        isPlaceholder={false}
+        isMulti={false}
+        isError={positionError}
+        options={positions}
       />
-      <FieldInputData
-        text={isTeamForm ? t('team:conference') : t('player:team')}
-        disabled={false}
-        startType="text"
-        type="text"
-        isError={!!errors[isTeamForm ? 'conference' : 'team']}
-        errorMessage="Required or incorrect enter"
-        name={isTeamForm ? 'conference' : 'team'}
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+      <MultiSelectEntities
+        onChange={changeTeam}
+        text="Team"
+        isDefault
+        isPlaceholder={false}
+        isMulti={false}
+        isError={teamError}
+        options={positions}
       />
-      {isTeamForm && (
-      <FieldInputData
-        text="Foundation"
-        disabled={false}
-        startType="text"
-        type="text"
-        isError={!!errors.foundation}
-        errorMessage="Required or incorrect enter"
-        name="foundation"
-        register={register({ required: true, pattern: /^([^\D_]{4})$/i })}
-      />
-      )}
-      {!isTeamForm && (
       <PlayerData>
         <FieldInputData
           text="Height"
@@ -118,7 +140,6 @@ export const FormAddEntity: FC<IProps> = ({
           register={register({ required: true, pattern: /^([^\D_]{1,2})$/i })}
         />
       </PlayerData>
-      )}
       <BtnGroup>
         <ButtonAction
           onClick={cancelAddNewEntity}
@@ -134,7 +155,7 @@ export const FormAddEntity: FC<IProps> = ({
           isAdding={false}
           size="middle"
           text="Save"
-          disabled={false}
+          disabled={Object.keys(errors).length > 0}
           type="submit"
         />
       </BtnGroup>
@@ -145,7 +166,7 @@ export const FormAddEntity: FC<IProps> = ({
 const FormAdd = styled.form`
   display: flex;
   flex-direction: column;
-  
+
   & label {
     margin-bottom: 24px;
   }
@@ -160,10 +181,10 @@ const BtnGroup = styled.div`
 const PlayerData = styled.div`
  display: grid;
  grid-template-columns: 1fr 1fr ;
- grid-template-rows: 1fr 1fr; 
+ grid-template-rows: 1fr 1fr;
  grid-column-gap: 24px;
-  
+
  @media( max-width: 1500px) {
    grid-template-columns: repeat(2, 171px) ;
- } 
+ }
  `;

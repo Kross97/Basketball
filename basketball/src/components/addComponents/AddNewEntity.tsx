@@ -3,28 +3,33 @@ import styled from 'styled-components';
 import { TextLink } from '../../uiComponents/TextLink';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ImageUpload } from '../../uiComponents/ImageUpload';
-import { FormAddEntity } from './FormAddEntity';
+import { FormAddPlayer } from './FormAddPlayer';
+import { FormAddTeam } from './FormAddTeam';
 
 interface IProps {
-  isTeamContext: boolean;
+  isTeam: boolean;
+  addNewEntity: (data: any) => void;
   loadImage: (image: any) => void;
 }
 
 export const AddNewEntity: FC<IProps> = ({
-  isTeamContext,
+  isTeam,
+  addNewEntity,
   loadImage,
 }) => (
   <ContainerAdd>
     <HeaderAdd>
       <TextLink text="Main" to={routePaths.mainBase} disabled={false} />
       <Separator>/</Separator>
-      <TextLink text={isTeamContext ? 'Teams' : 'Players'} to={`${routePaths.mainBase}/${isTeamContext ? 'teams' : 'players'}`} disabled={false} />
+      <TextLink text={isTeam ? 'Teams' : 'Players'} to={`${routePaths.mainBase}/${isTeam ? 'teams' : 'players'}`} disabled={false} />
       <Separator>/</Separator>
-      <TextLink text={isTeamContext ? 'Add new team' : 'Add new player'} to="#" disabled />
+      <TextLink text={isTeam ? 'Add new team' : 'Add new player'} to="#" disabled />
     </HeaderAdd>
     <BodyAdd>
       <ImageUpload loadImage={loadImage} />
-      <FormAddEntity isTeamContext={isTeamContext} />
+      {isTeam
+        ? <FormAddTeam addNewTeam={addNewEntity} />
+        : <FormAddPlayer addNewPlayer={addNewEntity} />}
     </BodyAdd>
   </ContainerAdd>
 );
