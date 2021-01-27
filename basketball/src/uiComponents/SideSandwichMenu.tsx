@@ -20,11 +20,11 @@ export const SideSandwichMenu = () => {
         <AutthorizedContainer>
           <AuthorizedUserLogo name="Jon Smith" />
         </AutthorizedContainer>
-        <TeamItem currentPath={path} onClick={() => history.push('teams')}>
+        <TeamItem currentPath={path} onClick={() => history.push('/main/teams')}>
           <TeamsLogo />
           <TextExtraSmall>Teams</TextExtraSmall>
         </TeamItem>
-        <PlayerItem currentPath={path} onClick={() => history.push('players')}>
+        <PlayerItem currentPath={path} onClick={() => history.push('/main/players')}>
           <PlayerLogo />
           <TextExtraSmall>Players</TextExtraSmall>
         </PlayerItem>

@@ -33,7 +33,7 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isSuccesRequest) {
-      history.push(routePaths.main);
+      history.push(routePaths.mainBase);
     }
   }, [isSuccesRequest]);
 

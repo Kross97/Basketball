@@ -13,7 +13,7 @@ export const App = () => (
     <Route path={`${routePaths.signIn}`}>
       <SignIn />
     </Route>
-    <Route path={`${routePaths.main}`}>
+    <Route path={[`${routePaths.mainArgs}`, `${routePaths.mainBase}`]}>
       <BaseLayout />
     </Route>
   </Switch>
