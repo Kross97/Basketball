@@ -152,14 +152,9 @@ const FormAdd = styled.form`
 `;
 
 const BtnGroup = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  
-  & button:nth-child(2) {
-    margin-left: 24px;
-    flex-grow: 2;
-  }
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 24px;
 `;
 
 const PlayerData = styled.div`
