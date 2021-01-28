@@ -9,5 +9,6 @@ export const addEntityError = createSlice({
     addErrorMessage: (state, {
       payload: { errorMessage },
     }: PayloadAction<{ errorMessage: string }>) => ({ errorMessage }),
+    clearErrorMessage: () => ({ errorMessage: '' }),
   },
 });

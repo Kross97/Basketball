@@ -6,9 +6,10 @@ import { addPlayer } from '../../api/player';
 export const addNewPlayer = createAsyncThunk(
   'addNewPlayer',
   async (playerData: any, { dispatch }) => {
-    dispatch(addEntityError.actions.addErrorMessage({ errorMessage: '' }));
+    dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await addPlayer('Player/Add', playerData.player, playerData.token);
+      dispatch(addEntityError.actions.clearErrorMessage());
       console.log('PLAYER_REQUEST =>', result);
     } catch (error) {
       if (error.isCustomError) {

@@ -112,7 +112,7 @@ const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
   }
 
   @media(max-width: ${mobileVersionLayout}) {
-    margin-left: 24px;
+    margin-left: 22px;
     & svg {
       margin-right: 15px;
     }

@@ -8,10 +8,16 @@ const customStyles = {
   clearIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
+    '@media(max-width: 800px)': {
+      padding: '5px',
+    },
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
+    '@media(max-width: 800px)': {
+      padding: '5px',
+    },
   }),
   control: (styles: any, state: any) => ({
     ...styles,
@@ -21,6 +27,9 @@ const customStyles = {
     cursor: 'pointer',
     ':hover': {
       borderColor: theme.colors.lightGrey,
+    },
+    '@media(max-width: 1000px)': {
+      minHeight: '20px',
     },
   }),
   option: (styles: any, state: any) => ({
@@ -44,6 +53,7 @@ const customStyles = {
     fontSize: '14px',
     lineHeight: '19px',
     padding: '3px 4px',
+    borderRadius: '4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
   }),
@@ -54,6 +64,7 @@ const customStyles = {
     fontSize: '14px',
     lineHeight: '19px',
     padding: '3px 4px',
+    borderRadius: '4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
   }),
@@ -68,6 +79,12 @@ const customStyles = {
     fontSize: '14px',
     lineHeight: '24px',
     color: theme.colors.middleGrey,
+  }),
+  input: (styles: any) => ({
+    ...styles,
+    '@media(max-width: 1000px)': {
+      height: '20px',
+    },
   }),
 };
 

@@ -9,7 +9,9 @@ import { FormAddTeam } from './FormAddTeam';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { NotificationError } from '../../uiComponents/NotificationError';
 import { imageLoadData } from '../../store/reducers/image';
+import { addEntityError } from '../../store/reducers/addingError';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
+import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 
 interface IProps {
   isTeam: boolean;
@@ -19,6 +21,7 @@ interface IProps {
 
 const actionCreators = {
   clearImgSrc: imageLoadData.actions.clearSrcImage,
+  clearErrorMessage: addEntityError.actions.clearErrorMessage,
 };
 
 export const AddNewEntity: FC<IProps> = ({
@@ -26,10 +29,11 @@ export const AddNewEntity: FC<IProps> = ({
   addNewEntity,
   loadImage,
 }) => {
-  const { clearImgSrc } = useCustomActions(actionCreators);
+  const { clearImgSrc, clearErrorMessage } = useCustomActions(actionCreators);
 
   useEffect(() => {
     clearImgSrc();
+    clearErrorMessage();
   }, []);
 
   const { srcImage, errorMessage } = useSelector((state: IStoreReducer) => (
@@ -67,10 +71,20 @@ const ContainerAdd = styled.div`
   border-radius: 10px;
   position: relative;
   background-color: ${({ theme }) => theme.colors.white};
+
+  @media(max-width: ${mobileVersionLayout}) {
+    border-radius: 0;
+    flex-grow: 1;
+    margin: 16px auto auto;
+  }
 `;
 
 const HeaderAdd = styled.div`
   padding: 26px 0 19px 32px;
+
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 15px 0 15px 16px;
+  }
 `;
 
 const Separator = styled.span`
@@ -85,6 +99,25 @@ const BodyAdd = styled.div`
   
   & > label:nth-child(1) {
     margin-right: 136px;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-direction: column;
+    align-items: center;
+    padding: 63px 0 48px 0;
+    
+    & > label:nth-child(1) {
+      margin-right: 0;
+      margin-bottom: 48px;
+    }
+    
+    & input {
+      padding: 4px 12px;
+    }
+    
+    & button {
+      padding: 4px 58px;
+    }
   }
 `;
 

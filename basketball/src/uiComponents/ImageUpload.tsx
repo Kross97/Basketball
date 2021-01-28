@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import addPhotoIcon from '../static/icons/add_photo.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface Iprops {
   imageSrc?: string;
@@ -20,9 +21,7 @@ export const ImageUpload: FC<Iprops> = ({
 );
 
 const InputLoad = styled.input`
- width: 0;
- height: 0;
-  position: absolute;
+  display: none;
 `;
 
 const AddHover = styled.div<{ imageSrc: string; }>`
@@ -40,7 +39,7 @@ const AddHover = styled.div<{ imageSrc: string; }>`
   &:hover {
     background-color: rgba(48, 48, 48, 0.8);
   }
-  @media (max-width: 445px) {
+  @media (max-width: ${mobileVersionLayout}) {
     background-size: 41px 40px;
   }
 `;
@@ -57,7 +56,7 @@ const ImageContainer = styled.div<{ imageSrc: string; }>`
   }) => (imageSrc === '' ? `${theme.colors.grey} url(${addPhotoIcon}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
   background-size: ${({ imageSrc }) => (imageSrc === '' ? '74px 75px' : 'contain')};
   
-  @media (max-width: 445px) {
+  @media (max-width: ${mobileVersionLayout}) {
     background-size: ${({ imageSrc }) => (imageSrc === '' ? '41px 40px' : 'contain')};
     width: 185px;
     height: 144px;
