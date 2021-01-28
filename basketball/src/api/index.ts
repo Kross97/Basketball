@@ -1,19 +1,22 @@
 import { IRequestBaseBody } from '../helpers/interfaces/request_interfaces/RequestBase';
 import { RequestGenericType } from '../helpers/types/types';
 
-const base = process.env.REACT_APP_URL;
+const base = process.env.REACT_APP_API;
 
 const request = async (url: string, data: IRequestBaseBody, token: string | undefined) => {
-  const headers = token
+  const headersForToken = token
     ? {
       Authorization: `Bearer ${token}`,
     } : { };
+  const headerForMultiPart = typeof data.body === 'string' ? {
+    'Content-Type': 'application/json;charset=utf-8',
+  } : {};
   const response = await fetch(url, {
     ...data,
     // @ts-ignore
     headers: {
-      ...headers,
-      'Content-Type': typeof data.body === 'object' ? 'multipart/form-data' : 'application/json;charset=utf-8',
+      ...headersForToken,
+      ...headerForMultiPart,
     },
   });
   if (response.ok) {
