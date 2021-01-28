@@ -12,7 +12,12 @@ import { ContextMenuProvider } from '../components/Baselayout';
 export const SideSandwichMenu = () => {
   const history = useHistory();
   const { path } = useParams<{ path: string}>();
-  const { isActiveSideMenu } = useContext(ContextMenuProvider);
+  const { isActiveSideMenu, toggleStateMenu } = useContext(ContextMenuProvider);
+
+  const clickIconHandler = (route: string) => {
+    toggleStateMenu();
+    history.push(`/main/${route}`);
+  };
 
   return (
     <ContainerMenu isActiveMenu={isActiveSideMenu}>
@@ -20,11 +25,11 @@ export const SideSandwichMenu = () => {
         <AutthorizedContainer>
           <AuthorizedUserLogo name="Jon Smith" />
         </AutthorizedContainer>
-        <TeamItem currentPath={path} onClick={() => history.push('/main/teams')}>
+        <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />
           <TextExtraSmall>Teams</TextExtraSmall>
         </TeamItem>
-        <PlayerItem currentPath={path} onClick={() => history.push('/main/players')}>
+        <PlayerItem currentPath={path} onClick={() => clickIconHandler('players')}>
           <PlayerLogo />
           <TextExtraSmall>Players</TextExtraSmall>
         </PlayerItem>
@@ -65,6 +70,7 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
     left: ${({ isActiveMenu }) => (isActiveMenu ? '0' : '-210px')};
     padding-bottom: 27px;
     position: absolute;
+    z-index: 2;
   }
 `;
 

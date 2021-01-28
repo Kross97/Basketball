@@ -62,6 +62,7 @@ const BodyContainer = styled.div`
 
 const BackgroundMenu = styled.div<{ isActiveSideMenu: boolean }>`
   @media(max-width: ${mobileVersionLayout}) {
+    z-index: 1;
     display: ${({ isActiveSideMenu }) => (isActiveSideMenu ? 'block' : 'none')};
     position: absolute;
     top: 0;

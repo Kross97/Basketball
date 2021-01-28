@@ -12,18 +12,19 @@ const actionCreators = {
 };
 
 export const AddNewTeam = () => {
-  const token = useSelector(({ authDataUser: { authData } }: IStoreReducer) => authData.token);
+  const { token, srcImage } = useSelector((
+    { authDataUser: { authData }, imageLoadData }: IStoreReducer,
+  ) => (
+    { token: authData.token, srcImage: imageLoadData.srcImage }
+  ));
   const { loadNewImage: loadTeamImage, addNewTeam: addTeam } = useCustomActions(actionCreators);
 
   const addNewEntity = (data: any) => {
     const team = {
-      name: data.team,
-      foundationYear: Number(data.foundation),
-      division: data.division,
-      conference: data.conference,
-      imageUrl: '#',
+      ...data,
+      foundationYear: Number(data.foundationYear),
+      imageUrl: srcImage,
     };
-    console.log('TEAM', team);
     addTeam({ team, token });
   };
 
@@ -31,7 +32,7 @@ export const AddNewTeam = () => {
     if (event.target.files) {
       const fileImage = event.target.files[0];
       const formData = new FormData();
-      formData.set('imageLoad', fileImage);
+      formData.set('file', fileImage);
       loadTeamImage({ file: formData, token });
     }
   };

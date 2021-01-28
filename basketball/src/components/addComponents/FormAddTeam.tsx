@@ -32,9 +32,9 @@ export const FormAddTeam: FC<IProps> = ({
         disabled={false}
         startType="text"
         type="text"
-        isError={!!errors.team}
+        isError={!!errors.name}
         errorMessage="Required or incorrect enter"
-        name="team"
+        name="name"
         register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
       />
       <FieldInputData
@@ -45,7 +45,7 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.division}
         errorMessage="Required or incorrect enter"
         name="division"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,22})$/i })}
+        register={register}
       />
       <FieldInputData
         text={t('team:conference')}
@@ -55,16 +55,16 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.conference}
         errorMessage="Required or incorrect enter"
         name="conference"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+        register={register}
       />
       <FieldInputData
         text="Foundation"
         disabled={false}
         startType="text"
         type="text"
-        isError={!!errors.foundation}
+        isError={!!errors.foundationYear}
         errorMessage="Required or incorrect enter"
-        name="foundation"
+        name="foundationYear"
         register={register({ required: true, pattern: /^([^\D_]{4})$/i })}
       />
 
