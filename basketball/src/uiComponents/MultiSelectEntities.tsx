@@ -39,8 +39,13 @@ const customStyles = {
     fontSize: '18px',
     lineHeight: '25px',
     color: state.isFocused ? theme.colors.white : theme.colors.grey,
+    backgroundImage: (state.data.imageSrc && `url(${state.data.imageSrc})`),
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'right 35px center',
+    backgroundSize: '22px 22px',
     backgroundColor: (state.isFocused && theme.colors.lightestRed),
     cursor: 'pointer',
+
     ':active': {
       backgroundColor: theme.colors.darkRed,
       color: theme.colors.white,
