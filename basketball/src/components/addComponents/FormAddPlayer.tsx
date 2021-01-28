@@ -31,7 +31,7 @@ export const FormAddPlayer: FC<IProps> = ({
   } = useForm();
 
   const cancelAddNewEntity = () => {
-    history.goBack();
+    history.replace('/main/players');
   };
 
   const changePosition = (targetPosition: any) => {
@@ -66,7 +66,7 @@ export const FormAddPlayer: FC<IProps> = ({
         isError={!!errors.player}
         errorMessage="Required or incorrect enter"
         name="player"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+        register={register({ required: true, pattern: /^([^\W\d_]{4,})([\s\D])+([^\W\d_]+)$/i })}
       />
       <MultiSelectEntities
         onChange={changePosition}
@@ -93,7 +93,7 @@ export const FormAddPlayer: FC<IProps> = ({
           isError={!!errors.height}
           errorMessage="Required or incorrect enter"
           name="height"
-          register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
+          register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
         />
         <FieldInputData
           text="Width"

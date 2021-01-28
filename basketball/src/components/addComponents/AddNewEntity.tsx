@@ -17,6 +17,8 @@ interface IProps {
   isTeam: boolean;
   addNewEntity: (data: any) => void;
   loadImage: (image: any) => void;
+  entityUpdate?: any;
+  imageEntity?: string | undefined;
 }
 
 const actionCreators = {
@@ -28,6 +30,8 @@ export const AddNewEntity: FC<IProps> = ({
   isTeam,
   addNewEntity,
   loadImage,
+  entityUpdate,
+  imageEntity,
 }) => {
   const { clearImgSrc, clearErrorMessage } = useCustomActions(actionCreators);
 
@@ -56,9 +60,9 @@ export const AddNewEntity: FC<IProps> = ({
         <TextLink text={isTeam ? 'Add new team' : 'Add new player'} to="#" disabled />
       </HeaderAdd>
       <BodyAdd>
-        <ImageUpload imageSrc={srcImage} loadImage={loadImage} />
+        <ImageUpload defaultImage={imageEntity} imageSrc={srcImage} loadImage={loadImage} />
         {isTeam
-          ? <FormAddTeam addNewTeam={addNewEntity} />
+          ? <FormAddTeam teamUpdate={entityUpdate} addNewTeam={addNewEntity} />
           : <FormAddPlayer addNewPlayer={addNewEntity} />}
       </BodyAdd>
       {errorMessage !== '' && <Notification><NotificationError text={errorMessage} /></Notification>}

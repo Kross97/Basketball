@@ -24,10 +24,12 @@ export const FieldInputData: FC<IProps> = ({
   startType,
   type,
   name,
+  defaultValue,
   register,
   changeTypeInput,
   isError = false,
   errorMessage = '',
+
 }) => (
   <InputContainer>
     <TextInput>{text}</TextInput>
@@ -36,6 +38,7 @@ export const FieldInputData: FC<IProps> = ({
       type={type}
       disabled={disabled}
       isError={isError}
+      defaultValue={defaultValue}
       ref={register}
     />
     {isError && <TextInputError>{errorMessage}</TextInputError>}

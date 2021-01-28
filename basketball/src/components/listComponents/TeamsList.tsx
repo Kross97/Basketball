@@ -5,7 +5,7 @@ import { Route, Switch } from 'react-router-dom';
 import { ListBase } from './ListBase';
 import { EmptyEntity } from '../EmptyEntityComponent';
 import { teamsSelector } from '../../store/selectors/teamsSelector';
-import { AddNewPlayer } from '../addComponents/AddNewPlayer';
+import { AddNewTeam } from '../addComponents/AddNewTeam';
 import { TeamsCard } from '../cardComponents/TeamsCard';
 
 export const TeamsList = () => {
@@ -16,8 +16,8 @@ export const TeamsList = () => {
         <Route exact path="/main/teams">
           { teams.length > 0 ? <ListBase entities={teams} /> : <EmptyEntity isTeam /> }
         </Route>
-        <Route exact path="/main/teams/addTeam">
-          <AddNewPlayer />
+        <Route exact path={['/main/teams/addTeam/:id', '/main/teams/addTeam']}>
+          <AddNewTeam />
         </Route>
         <Route path="/main/teams/:id">
           <TeamsCard />

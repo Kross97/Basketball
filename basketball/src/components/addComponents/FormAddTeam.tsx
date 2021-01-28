@@ -8,13 +8,16 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 
 interface IProps {
   addNewTeam: (data: any) => void;
+  teamUpdate: any;
 }
 
 export const FormAddTeam: FC<IProps> = ({
   addNewTeam,
+  teamUpdate,
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
+
   const {
     register,
     handleSubmit,
@@ -22,11 +25,12 @@ export const FormAddTeam: FC<IProps> = ({
   } = useForm();
 
   const cancelAddNewEntity = () => {
-    history.goBack();
+    history.replace('/main/teams');
   };
-
+  console.log('FROM', teamUpdate);
   return (
     <FormAdd onSubmit={handleSubmit(addNewTeam)}>
+      {teamUpdate && <input type="hidden" name="id" ref={register} value={teamUpdate.id} />}
       <FieldInputData
         text={t('team:name')}
         disabled={false}
@@ -35,7 +39,8 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.name}
         errorMessage="Required or incorrect enter"
         name="name"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+        defaultValue={teamUpdate ? teamUpdate.name : ''}
+        register={register({ required: true, pattern: /^([^\W\d_]{5,})([\s\D])+([^\W\d_]+)$/i })}
       />
       <FieldInputData
         text={t('team:division')}
@@ -45,6 +50,7 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.division}
         errorMessage="Required or incorrect enter"
         name="division"
+        defaultValue={teamUpdate ? teamUpdate.division : ''}
         register={register}
       />
       <FieldInputData
@@ -55,6 +61,7 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.conference}
         errorMessage="Required or incorrect enter"
         name="conference"
+        defaultValue={teamUpdate ? teamUpdate.conference : ''}
         register={register}
       />
       <FieldInputData
@@ -65,6 +72,7 @@ export const FormAddTeam: FC<IProps> = ({
         isError={!!errors.foundationYear}
         errorMessage="Required or incorrect enter"
         name="foundationYear"
+        defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}
         register={register({ required: true, pattern: /^([^\D_]{4})$/i })}
       />
 

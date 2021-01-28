@@ -1,30 +1,48 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 // import { team } from '../../helpers/Mock_team';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { sizeMobile } from '../../helpers/constants/mobileSize';
+import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import imageUknow from '../../static/images/item_not_image.png';
+import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
+import { removeTeam } from '../../store/async_actions/team';
+import { useCustomActions } from '../../helpers/functions/useCustomActions';
+
+const actionCreators = {
+  removeTeam,
+};
 
 export const TeamsCard = () => {
   const { id } = useParams<{ id: string }>();
-  console.log('IDs', id);
-  const team = useSelector(({ teamsDataReducer }: IStoreReducer) => teamsDataReducer.entities[id]);
+
+  const history = useHistory();
+  const { team, token } = useSelector(({ teamsDataReducer, authDataUser }: IStoreReducer) => ({
+    team: teamsDataReducer.entities[id],
+    token: authDataUser.authData.token,
+  }));
+
+  const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
   if (!team) {
     return <></>;
   }
-  if (!regExpImageTeam.test(team.imageUrl)) {
-    team.imageUrl = imageUknow;
-  }
+
+  const teamUpdate = () => {
+    history.replace(`/main/teams/addTeam/${team.id}`);
+  };
+
+  const deleteCurrentTeam = () => {
+    deleteTeam({ id, token });
+    history.replace('/main/teams');
+  };
   return (
-    <div>
+    <ContainerCard>
       <CardNavigation>
         <Links>
           <TextLink text="Main" to="/main" disabled={false} />
@@ -34,15 +52,15 @@ export const TeamsCard = () => {
           <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
         </Links>
         <Actions>
-          <BtnCreate type="button" />
-          <BtnDelete type="button">
+          <BtnCreate onClick={teamUpdate} type="button" />
+          <BtnDelete onClick={deleteCurrentTeam} type="button">
             <RemoveIcon />
           </BtnDelete>
         </Actions>
       </CardNavigation>
       <CardBody>
         <Content>
-          <LogoTeam imageUrl={team.imageUrl} />
+          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUnknow} />
           <DataCard>
             <TeamName>{team.name}</TeamName>
             <DescriptionContainer>
@@ -53,9 +71,18 @@ export const TeamsCard = () => {
           </DataCard>
         </Content>
       </CardBody>
-    </div>
+    </ContainerCard>
   );
 };
+
+const ContainerCard = styled.div`
+  margin: 32px auto;
+
+  @media(max-width: ${mobileVersionLayout}) {
+    margin: 16px 0;
+    flex-grow: 1;
+  }
+`;
 
 const CardNavigation = styled.nav`
   display: flex;
@@ -63,8 +90,9 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
+  background-color: ${({ theme }) => theme.colors.white};  
   
-  @media(max-width: 445px) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -117,7 +145,7 @@ const CardBody = styled.div`
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -125,7 +153,7 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     text-align: center;
   }
 `;
@@ -135,7 +163,7 @@ const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     flex-direction: column;
   }
 `;
@@ -143,12 +171,12 @@ const Content = styled.div`
 const LogoTeam = styled.div<{ imageUrl: string}>`
   margin-right: 146px;
   flex-shrink: 0.1;
-  background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat`};
+  background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat center`};
   background-size: contain;
   width: 210px;
   height: 210px;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     width: 140px;
     height: 140px;
     margin-right: 0;
@@ -161,7 +189,7 @@ const TeamName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -175,7 +203,7 @@ const DescriptionContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   gap: 54px 80px;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;

@@ -5,16 +5,18 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface Iprops {
   imageSrc?: string;
+  defaultImage?: string | undefined;
   loadImage: (image: any) => void;
 }
 
 export const ImageUpload: FC<Iprops> = ({
   imageSrc = '',
   loadImage,
+  defaultImage,
 }) => (
   <label>
     <InputLoad onChange={loadImage} type="file" />
-    <ImageContainer imageSrc={imageSrc}>
+    <ImageContainer defaultImage={defaultImage} imageSrc={imageSrc}>
       <AddHover imageSrc={imageSrc} />
     </ImageContainer>
   </label>
@@ -44,7 +46,7 @@ const AddHover = styled.div<{ imageSrc: string; }>`
   }
 `;
 
-const ImageContainer = styled.div<{ imageSrc: string; }>`
+const ImageContainer = styled.div<{defaultImage: string | undefined; imageSrc: string; }>`
   border-radius: 10px;
   cursor: pointer;
   width: 336px;
@@ -52,12 +54,12 @@ const ImageContainer = styled.div<{ imageSrc: string; }>`
   position: relative;
   background: ${({
     imageSrc,
+    defaultImage,
     theme,
-  }) => (imageSrc === '' ? `${theme.colors.grey} url(${addPhotoIcon}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
-  background-size: ${({ imageSrc }) => (imageSrc === '' ? '74px 75px' : 'contain')};
+  }) => (imageSrc === '' ? `${theme.colors.grey} url(${defaultImage}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
+  background-size: contain;
   
   @media (max-width: ${mobileVersionLayout}) {
-    background-size: ${({ imageSrc }) => (imageSrc === '' ? '41px 40px' : 'contain')};
     width: 185px;
     height: 144px;
   }
