@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import Select from 'react-select';
 import styled from 'styled-components';
 import { theme } from '../themes/theme';
-import { TextSmall } from './Typography';
+import { TextSmall, TextExtraSmall } from './Typography';
 
 const customStyles = {
   clearIndicator: (styles: any) => ({
@@ -21,12 +21,13 @@ const customStyles = {
   }),
   control: (styles: any, state: any) => ({
     ...styles,
-    backgroundColor: theme.colors.white,
-    borderColor: state.selectProps.isError ? theme.colors.red : theme.colors.lightGrey,
+    backgroundColor: theme.colors.lightestGrey,
+    borderColor: state.selectProps.isError ? theme.colors.lightestRed : 'transparent',
     boxShadow: 'none',
     cursor: 'pointer',
     ':hover': {
       borderColor: theme.colors.lightGrey,
+      backgroundColor: theme.colors.lightestGrey,
     },
     '@media(max-width: 1000px)': {
       minHeight: '20px',
@@ -136,6 +137,7 @@ const TextLabel = styled(TextSmall)`
   color: ${(props) => props.theme.colors.middleGrey};
 `;
 
-const TextError = styled(TextSmall)`
-  color: ${(props) => props.theme.colors.red};
+const TextError = styled(TextExtraSmall)`
+  color: ${(props) => props.theme.colors.lightestRed};
+  
 `;
