@@ -8,7 +8,7 @@ interface Iprops {
 }
 
 export const ImageUpload: FC<Iprops> = ({
-  imageSrc = 'start',
+  imageSrc = '',
   loadImage,
 }) => (
   <label>
@@ -27,7 +27,7 @@ const InputLoad = styled.input`
 
 const AddHover = styled.div<{ imageSrc: string; }>`
   border-radius: 10px;
-  display: ${({ imageSrc }) => (imageSrc === 'start' ? 'none' : 'block')};
+  display: block;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -54,11 +54,11 @@ const ImageContainer = styled.div<{ imageSrc: string; }>`
   background: ${({
     imageSrc,
     theme,
-  }) => (imageSrc === 'start' ? `${theme.colors.grey} url(${addPhotoIcon}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
-  background-size: ${({ imageSrc }) => (imageSrc === 'start' ? '74px 75px' : 'contain')};
+  }) => (imageSrc === '' ? `${theme.colors.grey} url(${addPhotoIcon}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
+  background-size: ${({ imageSrc }) => (imageSrc === '' ? '74px 75px' : 'contain')};
   
   @media (max-width: 445px) {
-    background-size: ${({ imageSrc }) => (imageSrc === 'start' ? '41px 40px' : 'contain')};
+    background-size: ${({ imageSrc }) => (imageSrc === '' ? '41px 40px' : 'contain')};
     width: 185px;
     height: 144px;
   }

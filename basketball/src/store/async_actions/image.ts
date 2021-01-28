@@ -1,9 +1,21 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveImage } from '../../api/image';
+import { IImageData } from '../../helpers/interfaces/request_interfaces/Image';
+import { imageLoadData } from '../reducers/image';
+import { imageRequestErrors } from '../../api/api_constants/imageRequestError';
+import { addEntityError } from '../reducers/addingError';
 
 export const loadNewImage = createAsyncThunk('imageLoad',
-  async (imageData: any) => {
-    console.log('IMAAAGEEE');
-    const result = await saveImage('Image/SaveImage', imageData.file, imageData.token);
-    console.log('RESULt', result);
+  async (imageData: IImageData, { dispatch }) => {
+    dispatch(addEntityError.actions.addErrorMessage({ errorMessage: '' }));
+    try {
+      const result = await saveImage('Image/SaveImage', imageData.file, imageData.token);
+      dispatch(imageLoadData.actions.addSrcImage({ srcImage: result }));
+    } catch (error) {
+      if (error.isCustomError) {
+        dispatch(addEntityError.actions.addErrorMessage({
+          errorMessage: imageRequestErrors[error.status],
+        }));
+      }
+    }
   });
