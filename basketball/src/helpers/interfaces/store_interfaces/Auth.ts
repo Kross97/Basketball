@@ -8,3 +8,17 @@ export interface ILocalUserData {
   login: string,
   password: string,
 }
+
+export interface IStateAuthData {
+  authData: {
+    name: string,
+    avatarUrl: string,
+    token: string,
+  },
+  authErrorMessageSignUp: string,
+  authErrorMessageSignIn: string,
+  localUserData: {
+    login: string,
+    password: string,
+  },
+}

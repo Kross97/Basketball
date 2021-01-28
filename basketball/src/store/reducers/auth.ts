@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAddAuth, ILocalUserData } from '../../helpers/interfaces/store_interfaces/Auth';
+import { IAddAuth, ILocalUserData, IStateAuthData } from '../../helpers/interfaces/store_interfaces/Auth';
 
 export const authDataUser = createSlice({
   name: 'authDataUser',
@@ -17,16 +17,17 @@ export const authDataUser = createSlice({
     },
   },
   reducers: {
-    addAuthData: (state: any, action: PayloadAction<{ authData: IAddAuth}>) => (
+    addAuthData: (state: IStateAuthData, action: PayloadAction<{ authData: IAddAuth}>) => (
       { ...state, authData: action.payload.authData }
     ),
-    addAuthErrorSignUp: (state: any, action: PayloadAction<{ errorSignUp: string}>) => (
+    addAuthErrorSignUp: (state: IStateAuthData, action: PayloadAction<{ errorSignUp: string}>) => (
       { ...state, authErrorMessageSignUp: action.payload.errorSignUp }
     ),
-    addAuthErrorSignIn: (state: any, action: PayloadAction<{ errorSignIn: string}>) => (
+    addAuthErrorSignIn: (state: IStateAuthData, action: PayloadAction<{ errorSignIn: string}>) => (
       { ...state, authErrorMessageSignIn: action.payload.errorSignIn }
     ),
-    addLocalUserData: (state: any, action: PayloadAction<{ userData: ILocalUserData}>) => (
+    addLocalUserData: (state: IStateAuthData,
+      action: PayloadAction<{ userData: ILocalUserData}>) => (
       { ...state, localUserData: action.payload.userData }
     ),
   },
