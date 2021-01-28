@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import { TextLabel, TextLarge } from '../uiComponents/Typography';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import teamsEmpty from '../static/images/empty_teams.svg';
@@ -15,12 +16,14 @@ export const EmptyEntity: FC<IProps> = ({
   isTeam,
 }) => {
   const { t } = useTranslation();
+  const history = useHistory();
   return (
     <ContainerEntity>
       <ImageEmpty isTeam={isTeam} />
       <LabelEmpty>{t('emptyEntity:label')}</LabelEmpty>
       <TextEntity>{isTeam ? t('emptyEntity:emptyTeam') : t('emptyEntity:emptyPlayer')}</TextEntity>
       <ButtonAction
+        onClick={() => history.push(isTeam ? 'teams/addTeam' : 'players/addPlayer')}
         isNegativeStyle={false}
         isAdding
         size="large"

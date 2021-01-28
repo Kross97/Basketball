@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addTeam } from '../../api/team';
+import { addTeam, getTeams } from '../../api/team';
 import { addEntityError } from '../reducers/addingError';
 import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
+import { teamsDataReducer } from '../reducers/team';
 
 export const addNewTeam = createAsyncThunk('addNewplayer',
   async (teamData: any, { dispatch }) => {
@@ -18,3 +19,12 @@ export const addNewTeam = createAsyncThunk('addNewplayer',
       }
     }
   });
+
+export const loadAllCommands = createAsyncThunk(
+  'loadAllCommands',
+  async (token: string, { dispatch }) => {
+    const result = await getTeams('Team/GetTeams', token);
+    console.log('TEAMS =>', result);
+    dispatch(teamsDataReducer.actions.setAllTeams(result.data));
+  },
+);

@@ -1,45 +1,61 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
-import { Team } from '../../helpers/Mock_team';
+// import { team } from '../../helpers/Mock_team';
 import { TextExtraLarge } from '../../uiComponents/Typography';
 import { sizeMobile } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
+import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import imageUknow from '../../static/images/item_not_image.png';
+import { regExpImageTeam } from '../../helpers/constants/regularExp';
 
-export const TeamsCard = () => (
-  <div>
-    <CardNavigation>
-      <Links>
-        <TextLink text="Main" to="Main" disabled={false} />
-        <Separator>/</Separator>
-        <TextLink text="Teams" to="Teams" disabled={false} />
-        <Separator>/</Separator>
-        <TextLink text={`${Team.name}`} to={`${Team.name}`} disabled />
-      </Links>
-      <Actions>
-        <BtnCreate type="button" />
-        <BtnDelete type="button">
-          <RemoveIcon />
-        </BtnDelete>
-      </Actions>
-    </CardNavigation>
-    <CardBody>
-      <Content>
-        <LogoTeam />
-        <DataCard>
-          <TeamName>{Team.name}</TeamName>
-          <DescriptionContainer>
-            <TeamItemsDescription
-              team={Team}
-            />
-          </DescriptionContainer>
-        </DataCard>
-      </Content>
-    </CardBody>
-  </div>
-);
+export const TeamsCard = () => {
+  const { id } = useParams<{ id: string }>();
+  console.log('IDs', id);
+  const team = useSelector(({ teamsDataReducer }: IStoreReducer) => teamsDataReducer.entities[id]);
+  if (!team) {
+    return <></>;
+  }
+  if (!regExpImageTeam.test(team.imageUrl)) {
+    team.imageUrl = imageUknow;
+  }
+  return (
+    <div>
+      <CardNavigation>
+        <Links>
+          <TextLink text="Main" to="/main" disabled={false} />
+          <Separator>/</Separator>
+          <TextLink text="Teams" to="/main/teams" disabled={false} />
+          <Separator>/</Separator>
+          <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
+        </Links>
+        <Actions>
+          <BtnCreate type="button" />
+          <BtnDelete type="button">
+            <RemoveIcon />
+          </BtnDelete>
+        </Actions>
+      </CardNavigation>
+      <CardBody>
+        <Content>
+          <LogoTeam imageUrl={team.imageUrl} />
+          <DataCard>
+            <TeamName>{team.name}</TeamName>
+            <DescriptionContainer>
+              <TeamItemsDescription
+                team={team}
+              />
+            </DescriptionContainer>
+          </DataCard>
+        </Content>
+      </CardBody>
+    </div>
+  );
+};
 
 const CardNavigation = styled.nav`
   display: flex;
@@ -124,10 +140,10 @@ const Content = styled.div`
   }
 `;
 
-const LogoTeam = styled.div`
+const LogoTeam = styled.div<{ imageUrl: string}>`
   margin-right: 146px;
   flex-shrink: 0.1;
-  background: url(${Team.imageUrl}) no-repeat;
+  background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat`};
   background-size: contain;
   width: 210px;
   height: 210px;

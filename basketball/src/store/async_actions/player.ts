@@ -1,7 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { addEntityError } from '../reducers/addingError';
 import { playerRequestErrors } from '../../api/api_constants/playerRequestErrors';
-import { addPlayer } from '../../api/player';
+import { addPlayer, getPlayers } from '../../api/player';
+import { playersDataReducer } from '../reducers/player';
 
 export const addNewPlayer = createAsyncThunk(
   'addNewPlayer',
@@ -18,5 +19,14 @@ export const addNewPlayer = createAsyncThunk(
         }));
       }
     }
+  },
+);
+
+export const loadAllPlayers = createAsyncThunk(
+  'loadAllPlayers',
+  async (token: string, { dispatch }) => {
+    const result = await getPlayers('Player/GetPlayers', token);
+    console.log('PLAYERS =>', result);
+    dispatch(playersDataReducer.actions.setAllPlayers(result.data));
   },
 );

@@ -12,5 +12,6 @@ export const teamsDataReducer = createSlice({
     deleteOneTeam: teamsAdapter.removeOne,
     clearTeams: teamsAdapter.removeAll,
     updateTeam: teamsAdapter.updateOne,
+    setAllTeams: teamsAdapter.setAll,
   },
 });

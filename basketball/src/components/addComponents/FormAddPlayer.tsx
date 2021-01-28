@@ -3,10 +3,12 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
+import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
 
 interface IProps {
   addNewPlayer: (data: any) => void;
@@ -18,6 +20,8 @@ export const FormAddPlayer: FC<IProps> = ({
   const [position, setPosition] = useState<string>('');
   const [team, setTeam] = useState<string>('');
 
+  const teamsOptions = useSelector(teamsForSelectPlayer);
+  console.log('TEAMS-OPTIONS', teamsOptions);
   const { t } = useTranslation();
   const history = useHistory();
   const {
@@ -78,7 +82,7 @@ export const FormAddPlayer: FC<IProps> = ({
         isPlaceholder={false}
         isMulti={false}
         isError={!!errors.team}
-        options={[]}
+        options={teamsOptions}
       />
       <PlayerData>
         <FieldInputData

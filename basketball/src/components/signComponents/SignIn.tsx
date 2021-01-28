@@ -11,28 +11,40 @@ import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignF
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { loadAllPlayers } from '../../store/async_actions/player';
+import { loadAllCommands } from '../../store/async_actions/team';
 
 const actionCreators = {
   requestSignIn: actions.requestSignIn,
+  loadAllCommands,
+  loadAllPlayers,
 };
 
 export const SignIn = () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
-  const { requestSignIn } = useCustomActions(actionCreators);
+  const {
+    requestSignIn,
+    loadAllCommands: getAllCommands,
+    loadAllPlayers: getPlayers,
+  } = useCustomActions(actionCreators);
   const history = useHistory();
   const { t } = useTranslation();
-  const { notificationErrorMessage, userData } = useSelector(({
+  const { notificationErrorMessage, userData, token } = useSelector(({
     authDataUser: {
       authErrorMessageSignIn,
       localUserData,
+      authData,
     },
   }: IStoreReducer) => ({
     notificationErrorMessage: authErrorMessageSignIn,
     userData: localUserData,
+    token: authData.token,
   }));
 
   useEffect(() => {
     if (isSuccesRequest) {
+      getAllCommands(token);
+      getPlayers(token);
       history.push(routePaths.mainBase);
     }
   }, [isSuccesRequest]);
