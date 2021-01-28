@@ -16,9 +16,7 @@ export const FormAddPlayer: FC<IProps> = ({
   addNewPlayer,
 }) => {
   const [position, setPosition] = useState<string>('');
-  const [team, setTeam] = useState<number>(0);
-  const [positionError, setPositionError] = useState<boolean>(false);
-  const [teamError, setTeamError] = useState<boolean>(false);
+  const [team, setTeam] = useState<string>('');
 
   const { t } = useTranslation();
   const history = useHistory();
@@ -33,43 +31,29 @@ export const FormAddPlayer: FC<IProps> = ({
   };
 
   const changePosition = (targetPosition: any) => {
-    console.log('VAl', targetPosition, setTeam, setPosition);
-    setPositionError(!targetPosition);
-    setPosition(targetPosition ? targetPosition.value : '');
+    if (targetPosition) {
+      delete errors.position;
+      setPosition(targetPosition.value);
+    } else {
+      errors.position = true;
+      setPosition('');
+    }
   };
 
   const changeTeam = (targetTeam: any) => {
-    console.log('VAl-2', targetTeam);
-    setTeamError(!targetTeam);
-    setTeam(targetTeam ? targetTeam.value : 0);
-  };
-
-  const addPositionAndTeam = (data: any) => {
-    if (!position && !team) {
-      setPositionError(true);
-      setTeamError(true);
-      return;
+    if (targetTeam) {
+      delete errors.team;
+      setTeam(targetTeam.value);
+    } else {
+      errors.team = true;
+      setTeam('');
     }
-    if (!team) {
-      setTeamError(true);
-      return;
-    }
-    if (!position) {
-      setPositionError(true);
-      return;
-    }
-    setPositionError(false);
-    setTeamError(false);
-    data = {
-      ...data,
-      position,
-      team,
-    };
-    addNewPlayer(data);
   };
 
   return (
-    <FormAdd onSubmit={handleSubmit(addPositionAndTeam)}>
+    <FormAdd onSubmit={handleSubmit(addNewPlayer)}>
+      <input type="hidden" name="position" ref={register({ required: true })} value={position} />
+      <input type="hidden" name="team" ref={register({ required: true })} value={team} />
       <FieldInputData
         text={t('player:name')}
         disabled={false}
@@ -83,20 +67,18 @@ export const FormAddPlayer: FC<IProps> = ({
       <MultiSelectEntities
         onChange={changePosition}
         text="Position"
-        isDefault
         isPlaceholder={false}
         isMulti={false}
-        isError={positionError}
+        isError={!!errors.position}
         options={positions}
       />
       <MultiSelectEntities
         onChange={changeTeam}
         text="Team"
-        isDefault
         isPlaceholder={false}
         isMulti={false}
-        isError={teamError}
-        options={positions}
+        isError={!!errors.team}
+        options={[]}
       />
       <PlayerData>
         <FieldInputData
@@ -124,9 +106,9 @@ export const FormAddPlayer: FC<IProps> = ({
           disabled={false}
           startType="text"
           type="text"
-          isError={!!errors.age}
+          isError={!!errors.birthday}
           errorMessage="Required or incorrect enter"
-          name="age"
+          name="birthday"
           register={register({ required: true, pattern: /^([^\D_]{2})$/i })}
         />
         <FieldInputData

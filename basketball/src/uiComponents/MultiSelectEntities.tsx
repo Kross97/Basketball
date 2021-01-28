@@ -81,7 +81,7 @@ interface IProps {
   isMulti: boolean,
   isPlaceholder: boolean,
   onChange: (value: any) => void;
-  isDefault?: boolean;
+  defaultValue?: IOptions;
   isError?: boolean,
   text?: string;
 }
@@ -90,14 +90,13 @@ export const MultiSelectEntities: FC<IProps> = ({
   isMulti,
   isPlaceholder,
   text,
+  defaultValue,
   isError,
-  //  isDefault,
   onChange,
 }) => (
   <label>
     {text && <TextLabel>{text}</TextLabel>}
     <Select
-      defaultValue={options[0]}
       onChange={onChange}
       placeholder={isPlaceholder}
       isMulti={isMulti}
@@ -105,6 +104,7 @@ export const MultiSelectEntities: FC<IProps> = ({
       isError={isError}
       styles={customStyles}
       options={options}
+      defaultValue={defaultValue}
     />
     {isError && <TextError>Required</TextError>}
   </label>
