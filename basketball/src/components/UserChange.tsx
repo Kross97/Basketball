@@ -5,24 +5,14 @@ import { useForm } from 'react-hook-form';
 import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
-import { loadNewImage } from '../store/async_actions/image';
-import { imageLoadData } from '../store/reducers/image';
-import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { ContextMenuProvider } from './Baselayout';
 
-const actionCreators = {
-  loadNewImage,
-  addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
-};
-
 export const UserChange = () => {
   const { toggleStateChangeMenu } = useContext(ContextMenuProvider);
-  const { token, avatarUrl, srcImage } = useSelector((state: IStoreReducer) => (
+  const { avatarUrl } = useSelector((state: IStoreReducer) => (
     {
-      token: state.authDataUser.authData.token,
       avatarUrl: state.authDataUser.authData.avatarUrl,
-      srcImage: state.imageLoadData.srcImage,
     }
   ));
   const {
@@ -30,26 +20,14 @@ export const UserChange = () => {
     handleSubmit,
     errors,
   } = useForm();
-  const { loadNewImage: loadUserImage, addSrcImageExisting } = useCustomActions(actionCreators);
-
-  const loadImage = (imageData: React.ChangeEvent<HTMLInputElement> | string) => {
-    if (typeof imageData !== 'string' && imageData.target.files) {
-      const fileImage = imageData.target.files[0];
-      const formData = new FormData();
-      formData.set('file', fileImage);
-      loadUserImage({ file: formData, token });
-    } else {
-      addSrcImageExisting({ srcImage: imageData });
-    }
-  };
 
   const changeUserData = (data: any) => {
     console.log('DATA_CHANGE', data);
   };
   return (
-    <ConteinerUserChange onClick={toggleStateChangeMenu}>
+    <ContainerUserChange onClick={toggleStateChangeMenu}>
       <FormChange onSubmit={handleSubmit(changeUserData)}>
-        <ImageUpload imageSrc={srcImage} loadImage={loadImage} defaultImage={avatarUrl} />
+        <ImageUpload defaultImage={avatarUrl} />
         <FieldInputData
           text="Name"
           disabled={false}
@@ -79,11 +57,11 @@ export const UserChange = () => {
           />
         </BtnGroup>
       </FormChange>
-    </ConteinerUserChange>
+    </ContainerUserChange>
   );
 };
 
-const ConteinerUserChange = styled.div`
+const ContainerUserChange = styled.div`
   position: absolute;
   display: flex;
   cursor: pointer;

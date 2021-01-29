@@ -1,39 +1,58 @@
 import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import addPhotoIcon from '../static/icons/add_photo.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { imageLoadData } from '../store/reducers/image';
+import { loadNewImage } from '../store/async_actions/image';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
 interface IProps {
-  imageSrc?: string;
   defaultImage?: string | undefined;
-  loadImage: (image: any) => void;
 }
 
 const actionCreators = {
+  loadNewImage,
   clearSrcImage: imageLoadData.actions.clearSrcImage,
+  addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
 };
 
 export const ImageUpload: FC<IProps> = ({
-  imageSrc = '',
-  loadImage,
   defaultImage,
 }) => {
-  const { clearSrcImage } = useCustomActions(actionCreators);
+  const { token, srcImage } = useSelector((state: IStoreReducer) => ({
+    token: state.authDataUser.authData.token,
+    srcImage: state.imageLoadData.srcImage,
+  }));
+
+  const {
+    clearSrcImage,
+    loadNewImage: downloadImage,
+    addSrcImageExisting,
+  } = useCustomActions(actionCreators);
 
   useEffect(() => {
     clearSrcImage();
     if (defaultImage) {
-      loadImage(defaultImage);
+      addSrcImageExisting({ srcImage: defaultImage });
     }
   }, [defaultImage]);
+
+  const loadImage = (imageData: React.ChangeEvent<HTMLInputElement>) => {
+    if (imageData.target.files) {
+      const fileImage = imageData.target.files[0];
+      const formData = new FormData();
+      formData.set('file', fileImage);
+      downloadImage({ file: formData, token });
+    }
+  };
 
   return (
     <label>
       <InputLoad onChange={loadImage} type="file" />
-      <ImageContainer defaultImage={defaultImage} imageSrc={imageSrc}>
-        <AddHover imageSrc={imageSrc} />
+      <ImageContainer imageSrc={srcImage}>
+        <AddHover />
       </ImageContainer>
     </label>
   );
@@ -43,7 +62,7 @@ const InputLoad = styled.input`
   display: none;
 `;
 
-const AddHover = styled.div<{ imageSrc: string; }>`
+const AddHover = styled.div`
   border-radius: 10px;
   display: block;
   position: absolute;
@@ -63,17 +82,13 @@ const AddHover = styled.div<{ imageSrc: string; }>`
   }
 `;
 
-const ImageContainer = styled.div<{defaultImage: string | undefined; imageSrc: string; }>`
+const ImageContainer = styled.div<{ imageSrc: string; }>`
   border-radius: 10px;
   cursor: pointer;
   width: 336px;
   height: 261px;
   position: relative;
-  background: ${({
-    imageSrc,
-    defaultImage,
-    theme,
-  }) => (imageSrc === '' ? `${theme.colors.grey} url(${defaultImage}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
+  background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat center 6px`};
   background-size: contain;
   
   @media (max-width: ${mobileVersionLayout}) {

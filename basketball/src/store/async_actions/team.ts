@@ -30,7 +30,6 @@ export const loadAllCommands = createAsyncThunk(
   'loadAllCommands',
   async (token: string, { dispatch }) => {
     const result = await getTeams('Team/GetTeams', token);
-    console.log('TEAMS =>', result);
     dispatch(teamsDataReducer.actions.setAllTeams(result.data));
   },
 );

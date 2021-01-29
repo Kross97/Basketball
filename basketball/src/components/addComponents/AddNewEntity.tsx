@@ -17,7 +17,6 @@ import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 interface IProps {
   isTeam: boolean;
   addNewEntity: (data: any) => void;
-  loadImage: (image: any) => void;
   entityUpdate?: ITeam | IPlayer | undefined;
   imageEntity?: string | undefined;
 }
@@ -29,7 +28,6 @@ const actionCreators = {
 export const AddNewEntity: FC<IProps> = ({
   isTeam,
   addNewEntity,
-  loadImage,
   entityUpdate,
   imageEntity,
 }) => {
@@ -39,9 +37,8 @@ export const AddNewEntity: FC<IProps> = ({
     clearErrorMessage();
   }, []);
 
-  const { srcImage, errorMessage } = useSelector((state: IStoreReducer) => (
+  const { errorMessage } = useSelector((state: IStoreReducer) => (
     {
-      srcImage: state.imageLoadData.srcImage,
       errorMessage: state.addEntityError.errorMessage,
     }));
 
@@ -59,7 +56,7 @@ export const AddNewEntity: FC<IProps> = ({
         <TextLink text={isTeam ? 'Add new team' : 'Add new player'} to="#" disabled />
       </HeaderAdd>
       <BodyAdd>
-        <ImageUpload defaultImage={imageEntity} imageSrc={srcImage} loadImage={loadImage} />
+        <ImageUpload defaultImage={imageEntity} />
         {isTeam
           ? <FormAddTeam teamUpdate={entityUpdate as ITeam} addNewTeam={addNewEntity} />
           : <FormAddPlayer playerUpdate={entityUpdate as IPlayer} addNewPlayer={addNewEntity} />}

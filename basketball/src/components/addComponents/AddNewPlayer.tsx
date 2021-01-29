@@ -29,10 +29,8 @@ export const AddNewPlayer = () => {
     }
   ));
   const {
-    loadNewImage: loadPlayerImage,
     addNewPlayer: addPlayer,
     updateSelectedPlayer: updatePlayer,
-    addSrcImageExisting,
   } = useCustomActions(actionCreators);
 
   const addNewEntity = async (data: any) => {
@@ -64,22 +62,10 @@ export const AddNewPlayer = () => {
     }
   };
 
-  const loadImage = (imageData: React.ChangeEvent<HTMLInputElement> | string) => {
-    if (typeof imageData !== 'string' && imageData.target.files) {
-      const fileImage = imageData.target.files[0];
-      const formData = new FormData();
-      formData.set('file', fileImage);
-      loadPlayerImage({ file: formData, token });
-    } else {
-      addSrcImageExisting({ srcImage: imageData });
-    }
-  };
-
   return (
     <>
       <AddNewEntity
         addNewEntity={addNewEntity}
-        loadImage={loadImage}
         isTeam={false}
         entityUpdate={playerUpdate}
         imageEntity={playerUpdate ? playerUpdate.avatarUrl : undefined}

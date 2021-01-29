@@ -47,6 +47,4 @@ const HeaderTeams = styled.div`
 `;
 
 const TeamsBody = styled.div`
- max-height: 50%;
- overflow: auto; 
 `;
