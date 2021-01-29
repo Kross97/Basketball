@@ -1,7 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { batch } from 'react-redux';
 import { addEntityError } from '../reducers/addingError';
 import { playerRequestErrors } from '../../api/api_constants/playerRequestErrors';
-import { addPlayer, getPlayers } from '../../api/player';
+import {
+  addPlayer, getPlayers, deletePlayer, updatePlayer,
+} from '../../api/player';
 import { playersDataReducer } from '../reducers/player';
 
 export const addNewPlayer = createAsyncThunk(
@@ -10,8 +13,11 @@ export const addNewPlayer = createAsyncThunk(
     dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await addPlayer('Player/Add', playerData.player, playerData.token);
-      dispatch(addEntityError.actions.clearErrorMessage());
-      console.log('PLAYER_REQUEST =>', result);
+      batch(() => {
+        dispatch(playersDataReducer.actions.addOnePlayer(result));
+        dispatch(addEntityError.actions.clearErrorMessage());
+      });
+      return true;
     } catch (error) {
       if (error.isCustomError) {
         dispatch(addEntityError.actions.addErrorMessage({
@@ -26,7 +32,35 @@ export const loadAllPlayers = createAsyncThunk(
   'loadAllPlayers',
   async (token: string, { dispatch }) => {
     const result = await getPlayers('Player/GetPlayers', token);
-    console.log('PLAYERS =>', result);
     dispatch(playersDataReducer.actions.setAllPlayers(result.data));
+  },
+);
+
+export const removeSelectedPlayer = createAsyncThunk(
+  'deletePlayer',
+  async (removeData: any, { dispatch }) => {
+    const result = await deletePlayer(`Player/Delete?id=${removeData.id}`, removeData.token);
+    dispatch(playersDataReducer.actions.deleteOnePlayer(result.id));
+  },
+);
+
+export const updateSelectedPlayer = createAsyncThunk(
+  'updatePlayer',
+  async ({ player, token }: any, { dispatch }) => {
+    dispatch(addEntityError.actions.clearErrorMessage());
+    try {
+      const result = await updatePlayer('Player/Update', player, token);
+      dispatch(playersDataReducer.actions.updatePlayer({
+        // eslint-disable-next-line max-len
+        id: player.id, changes: { ...result, team: player.team }, // временно пока сервер не будет кидать айди команды
+      }));
+      return true;
+    } catch (error) {
+      if (error.isCustomError) {
+        dispatch(addEntityError.actions.addErrorMessage({
+          errorMessage: playerRequestErrors[error.status],
+        }));
+      }
+    }
   },
 );

@@ -1,28 +1,52 @@
 import React from 'react';
-// import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
+import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
+import { teamsSelector } from '../../store/selectors/teamsSelector';
 import { ListBase } from './ListBase';
 import { EmptyEntity } from '../EmptyEntityComponent';
-import { teamsSelector } from '../../store/selectors/teamsSelector';
-import { AddNewTeam } from '../addComponents/AddNewTeam';
-import { TeamsCard } from '../cardComponents/TeamsCard';
+import { FieldSearch } from '../../uiComponents/FieldSearch';
+import { ButtonAction } from '../../uiComponents/ButtonAction';
 
 export const TeamsList = () => {
   const teams = useSelector(teamsSelector);
+  const history = useHistory();
   return (
-    <>
-      <Switch>
-        <Route exact path="/main/teams">
-          { teams.length > 0 ? <ListBase entities={teams} /> : <EmptyEntity isTeam /> }
-        </Route>
-        <Route exact path={['/main/teams/addTeam/:id', '/main/teams/addTeam']}>
-          <AddNewTeam />
-        </Route>
-        <Route path="/main/teams/:id">
-          <TeamsCard />
-        </Route>
-      </Switch>
-    </>
+    <ContainerTeams>
+      <HeaderTeams>
+        <FieldSearch />
+        <ButtonAction
+          isNegativeStyle={false}
+          isAdding
+          size="small"
+          text="Add"
+          disabled={false}
+          type="button"
+          onClick={() => history.push('/main/teams/addTeam')}
+        />
+      </HeaderTeams>
+      <TeamsBody>
+        { teams.length > 0 ? <ListBase type="team" entities={teams} /> : <EmptyEntity isTeam /> }
+      </TeamsBody>
+    </ContainerTeams>
   );
 };
+
+const ContainerTeams = styled.div`
+  margin: 32px auto 0;
+`;
+
+const HeaderTeams = styled.div`
+ display: flex;
+ justify-content: space-between;
+ margin-bottom: 32px; 
+  
+  & > div:nth-child(1) {
+    flex-grow: 0.18;
+  }
+`;
+
+const TeamsBody = styled.div`
+ max-height: 50%;
+ overflow: auto; 
+`;

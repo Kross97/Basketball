@@ -13,6 +13,8 @@ interface IProps {
 
 export const AuthorizedLogo = ({ name }: IProps) => (
   <AuthorizedUserLogo
+    onClick={() => console.log('click')}
+    avatarUrl=""
     name={name}
   />
 );

@@ -3,13 +3,14 @@ import styled from 'styled-components';
 import { getFullAge } from '../../../helpers/functions/getFullAge';
 import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
 import { sizeMobile } from '../../../helpers/constants/mobileSize';
-import { IPlayer } from '../../../helpers/Mock_player';
+import { IPlayer } from '../../../helpers/interfaces/store_interfaces/Player';
 
 interface IProps {
   player: IPlayer,
+  teamName: string,
 }
 
-export const PlayerItemsDescription: FC<IProps> = ({ player }) => (
+export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => (
   <>
     <div>
       <LabelItem>Position</LabelItem>
@@ -17,7 +18,7 @@ export const PlayerItemsDescription: FC<IProps> = ({ player }) => (
     </div>
     <div>
       <LabelItem>Team</LabelItem>
-      <DataItem>{player.team}</DataItem>
+      <DataItem>{teamName}</DataItem>
     </div>
     <div>
       <LabelItem>Height</LabelItem>

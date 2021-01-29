@@ -10,7 +10,7 @@ export const loadNewImage = createAsyncThunk('imageLoad',
     dispatch(addEntityError.actions.addErrorMessage({ errorMessage: '' }));
     try {
       const result = await saveImage('Image/SaveImage', imageData.file, imageData.token);
-      dispatch(imageLoadData.actions.addSrcImage({ srcImage: result }));
+      dispatch(imageLoadData.actions.addSrcImageServer({ srcImage: result }));
     } catch (error) {
       if (error.isCustomError) {
         dispatch(addEntityError.actions.addErrorMessage({

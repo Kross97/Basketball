@@ -1,13 +1,16 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
+import { TypeItem } from '../../helpers/types/types';
 
 interface IProps {
   entities: any[],
+  type: TypeItem,
 }
 
 export const ListBase: FC<IProps> = ({
   entities,
+  type,
 }) => {
   console.log('___');
   return (
@@ -15,7 +18,7 @@ export const ListBase: FC<IProps> = ({
       {entities.map((entity) => (
         <CardItemConstructor
           key={entity.id}
-          type="team"
+          type={type}
           item={entity}
         />
       ))}
@@ -28,6 +31,4 @@ const ListContainer = styled.div`
  grid-template-columns: 1fr 1fr 1fr;
  grid-column-gap: 24px;
  grid-row-gap: 24px;
-  margin: 32px auto;
-
 `;

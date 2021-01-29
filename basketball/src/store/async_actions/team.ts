@@ -1,5 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { addTeam, getTeams, deleteTeam } from '../../api/team';
+import { batch } from 'react-redux';
+import {
+  addTeam, getTeams, deleteTeam, updateTeam,
+} from '../../api/team';
 import { addEntityError } from '../reducers/addingError';
 import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
 import { teamsDataReducer } from '../reducers/team';
@@ -9,8 +12,11 @@ export const addNewTeam = createAsyncThunk('addNewplayer',
     dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await addTeam('Team/Add', teamData.team, teamData.token);
-      dispatch(addEntityError.actions.clearErrorMessage());
-      console.log('TEAM_REQUEST =>', result);
+      batch(() => {
+        dispatch(teamsDataReducer.actions.addOneTeam(result));
+        dispatch(addEntityError.actions.clearErrorMessage());
+      });
+      return true;
     } catch (error) {
       if (error.isCustomError) {
         dispatch(addEntityError.actions.addErrorMessage({
@@ -37,6 +43,28 @@ export const removeTeam = createAsyncThunk(
       dispatch(teamsDataReducer.actions.deleteOneTeam(result.id));
     } catch (error) {
       console.log('ERROR', error);
+    }
+  },
+);
+
+export const updateCurrentTeam = createAsyncThunk(
+  'updateTeam',
+  async (updateData: any, { dispatch }) => {
+    dispatch(addEntityError.actions.clearErrorMessage());
+    try {
+      const result = await updateTeam('Team/Update', updateData.team, updateData.token);
+      batch(() => {
+        console.log('UPDATE =>', result);
+        dispatch(teamsDataReducer.actions.updateTeam({ id: result.id, changes: { ...result } }));
+        dispatch(addEntityError.actions.clearErrorMessage());
+      });
+      return true;
+    } catch (error) {
+      if (error.isCustomError) {
+        dispatch(addEntityError.actions.addErrorMessage({
+          errorMessage: teamRequestErrors[error.status],
+        }));
+      }
     }
   },
 );

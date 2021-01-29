@@ -5,10 +5,11 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 
 interface IProps {
   addNewTeam: (data: any) => void;
-  teamUpdate: any;
+  teamUpdate: ITeam | undefined;
 }
 
 export const FormAddTeam: FC<IProps> = ({
@@ -27,7 +28,7 @@ export const FormAddTeam: FC<IProps> = ({
   const cancelAddNewEntity = () => {
     history.replace('/main/teams');
   };
-  console.log('FROM', teamUpdate);
+
   return (
     <FormAdd onSubmit={handleSubmit(addNewTeam)}>
       {teamUpdate && <input type="hidden" name="id" ref={register} value={teamUpdate.id} />}

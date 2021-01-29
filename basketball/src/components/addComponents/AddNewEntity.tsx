@@ -8,21 +8,21 @@ import { FormAddPlayer } from './FormAddPlayer';
 import { FormAddTeam } from './FormAddTeam';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { NotificationError } from '../../uiComponents/NotificationError';
-import { imageLoadData } from '../../store/reducers/image';
 import { addEntityError } from '../../store/reducers/addingError';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 
 interface IProps {
   isTeam: boolean;
   addNewEntity: (data: any) => void;
   loadImage: (image: any) => void;
-  entityUpdate?: any;
+  entityUpdate?: ITeam | IPlayer | undefined;
   imageEntity?: string | undefined;
 }
 
 const actionCreators = {
-  clearImgSrc: imageLoadData.actions.clearSrcImage,
   clearErrorMessage: addEntityError.actions.clearErrorMessage,
 };
 
@@ -33,10 +33,9 @@ export const AddNewEntity: FC<IProps> = ({
   entityUpdate,
   imageEntity,
 }) => {
-  const { clearImgSrc, clearErrorMessage } = useCustomActions(actionCreators);
+  const { clearErrorMessage } = useCustomActions(actionCreators);
 
   useEffect(() => {
-    clearImgSrc();
     clearErrorMessage();
   }, []);
 
@@ -62,8 +61,8 @@ export const AddNewEntity: FC<IProps> = ({
       <BodyAdd>
         <ImageUpload defaultImage={imageEntity} imageSrc={srcImage} loadImage={loadImage} />
         {isTeam
-          ? <FormAddTeam teamUpdate={entityUpdate} addNewTeam={addNewEntity} />
-          : <FormAddPlayer addNewPlayer={addNewEntity} />}
+          ? <FormAddTeam teamUpdate={entityUpdate as ITeam} addNewTeam={addNewEntity} />
+          : <FormAddPlayer playerUpdate={entityUpdate as IPlayer} addNewPlayer={addNewEntity} />}
       </BodyAdd>
       {errorMessage !== '' && <Notification><NotificationError text={errorMessage} /></Notification>}
     </ContainerAdd>

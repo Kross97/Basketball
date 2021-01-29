@@ -1,26 +1,50 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useHistory } from 'react-router-dom';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { PlayerList } from './listComponents/PlayerList';
-import { TeamsList } from './listComponents/TeamsList';
+import { PlayersRouter } from './listComponents/PlayersRouter';
+import { TeamsRouter } from './listComponents/TeamsRouter';
+import { UserChange } from './UserChange';
+import { routePaths } from '../helpers/constants/routePaths';
 
 export const ContextMenuProvider = React.createContext({
   isActiveSideMenu: false,
+  isShowMenuChange: false,
   toggleStateMenu: () => {},
+  toggleStateChangeMenu: () => {},
 });
 
 export const BaseLayout = () => {
+  const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
+  const history = useHistory();
   const [isActiveSideMenu, setStateMenu] = useState(false);
+  const [isShowMenuChange, setStateMenuChange] = useState<boolean>(false);
   const toggleStateMenu = () => {
     setStateMenu(!isActiveSideMenu);
   };
 
+  const toggleStateChangeMenu = () => {
+    setStateMenuChange(!isShowMenuChange);
+  };
+
+  useEffect(() => {
+    if (!isAuthorized) {
+      history.replace(routePaths.signIn);
+    }
+  }, [isAuthorized]);
+
   return (
     <ContainerLayout>
-      <ContextMenuProvider.Provider value={{ isActiveSideMenu, toggleStateMenu }}>
+      <ContextMenuProvider.Provider value={{
+        isActiveSideMenu,
+        toggleStateMenu,
+        isShowMenuChange,
+        toggleStateChangeMenu,
+      }}
+      >
+        {isShowMenuChange && <UserChange />}
         <NavigationHeader />
         <BodyContainer>
           <BackgroundMenu isActiveSideMenu={isActiveSideMenu} />
@@ -28,10 +52,10 @@ export const BaseLayout = () => {
           <ContentLayout>
             <Switch>
               <Route path="/main/teams">
-                <TeamsList />
+                <TeamsRouter />
               </Route>
               <Route path="/main/players">
-                <PlayerList />
+                <PlayersRouter />
               </Route>
             </Switch>
           </ContentLayout>
@@ -45,6 +69,7 @@ const ContainerLayout = styled.div`
  height: 100vh;
  display: flex;
  flex-direction: column; 
+ position: relative;
 `;
 
 const ContentLayout = styled.div`

@@ -9,19 +9,23 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
 import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { getFullAge } from '../../helpers/functions/getFullAge';
 
 interface IProps {
   addNewPlayer: (data: any) => void;
+  playerUpdate: IPlayer | undefined;
 }
 
 export const FormAddPlayer: FC<IProps> = ({
   addNewPlayer,
+  playerUpdate,
 }) => {
-  const [position, setPosition] = useState<string>('');
-  const [team, setTeam] = useState<string>('');
+  const [position, setPosition] = useState<string>(() => (playerUpdate ? playerUpdate.position : ''));
+  const [team, setTeam] = useState<string>(() => (playerUpdate ? `${playerUpdate.team}` : ''));
 
   const teamsOptions = useSelector(teamsForSelectPlayer);
-  console.log('TEAMS-OPTIONS', teamsOptions);
+
   const { t } = useTranslation();
   const history = useHistory();
   const {
@@ -56,6 +60,7 @@ export const FormAddPlayer: FC<IProps> = ({
 
   return (
     <FormAdd onSubmit={handleSubmit(addNewPlayer)}>
+      {playerUpdate && <input type="hidden" name="id" ref={register} value={playerUpdate.id} />}
       <input type="hidden" name="position" ref={register({ required: true })} value={position} />
       <input type="hidden" name="team" ref={register({ required: true })} value={team} />
       <FieldInputData
@@ -63,10 +68,11 @@ export const FormAddPlayer: FC<IProps> = ({
         disabled={false}
         startType="text"
         type="text"
-        isError={!!errors.player}
+        isError={!!errors.name}
         errorMessage="Required or incorrect enter"
-        name="player"
-        register={register({ required: true, pattern: /^([^\W\d_]{4,})([\s\D])+([^\W\d_]+)$/i })}
+        name="name"
+        defaultValue={playerUpdate && playerUpdate.name}
+        register={register({ required: true, pattern: /^([^\W\d_]{3,})([\s\D])+([^\W\d_]+)$/i })}
       />
       <MultiSelectEntities
         onChange={changePosition}
@@ -74,6 +80,10 @@ export const FormAddPlayer: FC<IProps> = ({
         isPlaceholder={false}
         isMulti={false}
         isError={!!errors.position}
+        defaultValue={playerUpdate && {
+          value: playerUpdate.position,
+          label: playerUpdate.position,
+        }}
         options={positions}
       />
       <MultiSelectEntities
@@ -81,6 +91,8 @@ export const FormAddPlayer: FC<IProps> = ({
         text="Team"
         isPlaceholder={false}
         isMulti={false}
+        defaultValue={playerUpdate
+        && teamsOptions.find((option) => option.value === playerUpdate.team)}
         isError={!!errors.team}
         options={teamsOptions}
       />
@@ -93,16 +105,18 @@ export const FormAddPlayer: FC<IProps> = ({
           isError={!!errors.height}
           errorMessage="Required or incorrect enter"
           name="height"
+          defaultValue={playerUpdate && playerUpdate.height}
           register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
         />
         <FieldInputData
-          text="Width"
+          text="Weight"
           disabled={false}
           startType="text"
           type="text"
-          isError={!!errors.width}
+          isError={!!errors.weight}
           errorMessage="Required or incorrect enter"
-          name="width"
+          name="weight"
+          defaultValue={playerUpdate && playerUpdate.weight}
           register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
         />
         <FieldInputData
@@ -113,6 +127,7 @@ export const FormAddPlayer: FC<IProps> = ({
           isError={!!errors.birthday}
           errorMessage="Required or incorrect enter"
           name="birthday"
+          defaultValue={playerUpdate && getFullAge(playerUpdate.birthday)}
           register={register({ required: true, pattern: /^([^\D_]{2})$/i })}
         />
         <FieldInputData
@@ -123,6 +138,7 @@ export const FormAddPlayer: FC<IProps> = ({
           isError={!!errors.number}
           errorMessage="Required or incorrect enter"
           name="number"
+          defaultValue={playerUpdate && playerUpdate.number}
           register={register({ required: true, pattern: /^([^\D_]{1,2})$/i })}
         />
       </PlayerData>

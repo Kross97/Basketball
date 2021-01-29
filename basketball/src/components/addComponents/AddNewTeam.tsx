@@ -5,42 +5,67 @@ import { AddNewEntity } from './AddNewEntity';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { loadNewImage } from '../../store/async_actions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { addNewTeam } from '../../store/async_actions/team';
+import { addNewTeam, updateCurrentTeam } from '../../store/async_actions/team';
+import { imageLoadData } from '../../store/reducers/image';
 
 const actionCreators = {
   loadNewImage,
   addNewTeam,
+  updateCurrentTeam,
+  addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
 };
 
 export const AddNewTeam = () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
 
-  const { token, srcImage } = useSelector((
-    { authDataUser: { authData }, imageLoadData }: IStoreReducer,
-  ) => (
-    { token: authData.token, srcImage: imageLoadData.srcImage }
+  const { token, srcImage } = useSelector((state: IStoreReducer) => (
+    {
+      token: state.authDataUser.authData.token,
+      srcImage: state.imageLoadData.srcImage,
+    }
   ));
   const teamUpdate = useSelector(({ teamsDataReducer }: IStoreReducer) => (
-    id ? teamsDataReducer.entities[id] : null));
-  const { loadNewImage: loadTeamImage, addNewTeam: addTeam } = useCustomActions(actionCreators);
+    id ? teamsDataReducer.entities[id] : undefined));
+  const {
+    loadNewImage: loadTeamImage,
+    addNewTeam: addTeam,
+    updateCurrentTeam: updateTeam,
+    addSrcImageExisting,
+  } = useCustomActions(actionCreators);
 
-  const addNewEntity = (data: any) => {
+  const addNewEntity = async (data: any) => {
     const team = {
       ...data,
       foundationYear: Number(data.foundationYear),
       imageUrl: srcImage,
     };
-    addTeam({ team, token });
-    history.push('/main/teams');
+
+    if ('id' in team) {
+      const {
+        payload: isSuccesUpdate,
+      } = updateTeam({ team: { ...team, id: Number(team.id) }, token });
+
+      if (isSuccesUpdate) {
+        history.replace('/main/teams');
+      }
+      return;
+    }
+
+    const { payload: isSuccesAdd } = await addTeam({ team, token });
+    if (isSuccesAdd) {
+      history.push('/main/teams');
+    }
   };
 
-  const loadImage = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files) {
-      const fileImage = event.target.files[0];
+  const loadImage = (imageData: React.ChangeEvent<HTMLInputElement> | string) => {
+    if (typeof imageData !== 'string' && imageData.target.files) {
+      const fileImage = imageData.target.files[0];
       const formData = new FormData();
       formData.set('file', fileImage);
       loadTeamImage({ file: formData, token });
+    } else {
+      addSrcImageExisting({ srcImage: imageData });
     }
   };
 

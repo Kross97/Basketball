@@ -1,26 +1,43 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
 import addPhotoIcon from '../static/icons/add_photo.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { imageLoadData } from '../store/reducers/image';
 
-interface Iprops {
+interface IProps {
   imageSrc?: string;
   defaultImage?: string | undefined;
   loadImage: (image: any) => void;
 }
 
-export const ImageUpload: FC<Iprops> = ({
+const actionCreators = {
+  clearSrcImage: imageLoadData.actions.clearSrcImage,
+};
+
+export const ImageUpload: FC<IProps> = ({
   imageSrc = '',
   loadImage,
   defaultImage,
-}) => (
-  <label>
-    <InputLoad onChange={loadImage} type="file" />
-    <ImageContainer defaultImage={defaultImage} imageSrc={imageSrc}>
-      <AddHover imageSrc={imageSrc} />
-    </ImageContainer>
-  </label>
-);
+}) => {
+  const { clearSrcImage } = useCustomActions(actionCreators);
+
+  useEffect(() => {
+    clearSrcImage();
+    if (defaultImage) {
+      loadImage(defaultImage);
+    }
+  }, [defaultImage]);
+
+  return (
+    <label>
+      <InputLoad onChange={loadImage} type="file" />
+      <ImageContainer defaultImage={defaultImage} imageSrc={imageSrc}>
+        <AddHover imageSrc={imageSrc} />
+      </ImageContainer>
+    </label>
+  );
+};
 
 const InputLoad = styled.input`
   display: none;

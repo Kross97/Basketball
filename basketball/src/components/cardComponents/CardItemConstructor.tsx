@@ -1,11 +1,15 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { TextSmallThin, TextStandart } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { Player } from '../../helpers/interfaces/Player';
 import { Team } from '../../helpers/interfaces/Team';
 import { TypeItem } from '../../helpers/types/types';
+import imageUknow from '../../static/images/item_not_image.png';
+import { regExpImageTeam } from '../../helpers/constants/regularExp';
+import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 
 interface IProps {
   type: TypeItem,
@@ -15,6 +19,12 @@ interface IProps {
 export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
   const history = useHistory();
 
+  const idTeam = type === 'team' ? item.id : (item as Player).team;
+
+  const teamName = useSelector(({
+    teamsDataReducer: { entities },
+  }: IStoreReducer) => (idTeam ? (entities[idTeam] as Team).name : undefined));
+
   const showItemCard = () => {
     if (type === 'team') {
       history.push(`teams/${item.id}`);
@@ -23,20 +33,22 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
     history.push(`players/${item.id}`);
   };
 
+  const typeItemUrl = 'avatarUrl' in item ? item.avatarUrl : item.imageUrl;
+  const actualImage = !regExpImageTeam.test(typeItemUrl) ? imageUknow : typeItemUrl;
   return (
     <ContainerCard onClick={showItemCard}>
       <BodyCard type={type}>
-        <LogoItem type={type} imageUrl={'avatarUrl' in item ? item.avatarUrl : item.imageUrl} />
+        <LogoItem type={type} imageUrl={actualImage} />
       </BodyCard>
       <FooterCard>
         <DataItem>
           <Name>
-            {item.name}
+            {(type === 'team' && teamName) || item.name}
             {'number' in item && <NumberPlayer>{` #${item.number}`}</NumberPlayer>}
           </Name>
           <DescriptionItem>
             {'foundationYear' in item && `Year of foundation: ${item.foundationYear}`}
-            {'team' in item && `${item.team}`}
+            {(type === 'player' && teamName) && `${teamName}`}
           </DescriptionItem>
         </DataItem>
       </FooterCard>
@@ -71,7 +83,7 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   @media(max-width: ${mobileVersionLayout}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
-    background-position-x: 4px;
+    background-position-x: ${({ type }) => (type === 'team' ? '4px' : 'center')};
   }
 `;
 

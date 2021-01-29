@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { ReactComponent as TeamsLogo } from '../static/icons/group_person.svg';
 import { ReactComponent as PlayerLogo } from '../static/icons/person.svg';
 import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
@@ -8,22 +9,38 @@ import { TextExtraSmall } from './Typography';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import { ContextMenuProvider } from '../components/Baselayout';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { routePaths } from '../helpers/constants/routePaths';
 
 export const SideSandwichMenu = () => {
   const history = useHistory();
   const { path } = useParams<{ path: string}>();
-  const { isActiveSideMenu, toggleStateMenu } = useContext(ContextMenuProvider);
+  const {
+    isActiveSideMenu,
+    toggleStateMenu,
+    toggleStateChangeMenu,
+  } = useContext(ContextMenuProvider);
+
+  const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
+    name: authData.name,
+    avatarUrl: authData.avatarUrl,
+  }));
 
   const clickIconHandler = (route: string) => {
     toggleStateMenu();
     history.push(`/main/${route}`);
   };
 
+  const goOutSite = () => {
+    localStorage.removeItem('authorized_basketball');
+    history.replace(routePaths.signIn);
+  };
+
   return (
     <ContainerMenu isActiveMenu={isActiveSideMenu}>
       <TeamsPlayers>
         <AutthorizedContainer>
-          <AuthorizedUserLogo name="Jon Smith" />
+          <AuthorizedUserLogo onClick={toggleStateChangeMenu} name={name} avatarUrl={avatarUrl} />
         </AutthorizedContainer>
         <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />
@@ -34,7 +51,7 @@ export const SideSandwichMenu = () => {
           <TextExtraSmall>Players</TextExtraSmall>
         </PlayerItem>
       </TeamsPlayers>
-      <OutItem>
+      <OutItem onClick={goOutSite}>
         <SignOutLogo />
         <TextSignAndPlayers>Sign out</TextSignAndPlayers>
       </OutItem>

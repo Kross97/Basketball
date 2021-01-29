@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall, TextStandart, TextExtraSmall } from './Typography';
-import { Player } from '../helpers/storybook_mock_constants/Player';
+import { IPlayer } from '../helpers/interfaces/store_interfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
-  players: Player[],
+  players: IPlayer[],
 }
 
 export const EnumerationPlayersTeam: FC<IProps> = ({ players }) => (
@@ -63,7 +64,7 @@ const HeadEnumeration = styled(TextStandart)`
   color: ${({ theme }) => theme.colors.middleGrey};
   padding: 14px 0 14px 32px;
 
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 12px 0 12px 16px;
   }
 `;
@@ -75,7 +76,7 @@ const Specifications = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.grey};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 8px 16px;
   }
 `;
@@ -84,7 +85,7 @@ const NumberPlayer = styled.div`
   gap: 48px;
   display: flex;
 
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     gap: 32px;
   }
 `;
@@ -93,7 +94,7 @@ const PersonalData = styled.div`
   gap: 84px;
   display: flex;
   
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;
@@ -101,8 +102,10 @@ const PersonalData = styled.div`
 const ContainerEnumeration = styled.div`
   border-radius: 10px;
   border: ${({ theme }) => `1px solid ${theme.colors.grey}`};
-
-  @media(max-width: 650px) {
+  background-color: ${({ theme }) => theme.colors.white};
+  margin-top: 24px;
+  
+  @media(max-width: ${mobileVersionLayout}) {
     border-radius: 0;
     border-right: none;
     border-left: none;
@@ -118,7 +121,7 @@ const ItemPlayer = styled.div<{ isLastPlayer: boolean }>`
   box-sizing: border-box;
   border-bottom: ${({ isLastPlayer, theme }) => (isLastPlayer ? 'none' : `1px solid ${theme.colors.grey}`)};
 
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 5px 18px 5px 14px;
   }
 `;
@@ -126,7 +129,7 @@ const ItemPlayer = styled.div<{ isLastPlayer: boolean }>`
 const ContainerPlayerImage = styled.div`
  display: flex;
  gap: 34px;
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     gap: 18px;
   }
 `;
@@ -166,7 +169,7 @@ const ContainerDataPlayer = styled.div`
   gap: 82px;
   align-self: center;
 
-  @media(max-width: 650px) {
+  @media(max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;

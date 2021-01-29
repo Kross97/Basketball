@@ -46,6 +46,7 @@ export const SignIn = () => {
       getAllCommands(token);
       getPlayers(token);
       history.push(routePaths.mainBase);
+      localStorage.setItem('authorized_basketball', 'success');
     }
   }, [isSuccesRequest]);
 

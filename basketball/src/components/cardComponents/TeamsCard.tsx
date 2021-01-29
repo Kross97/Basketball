@@ -5,15 +5,18 @@ import { useSelector } from 'react-redux';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
-// import { team } from '../../helpers/Mock_team';
 import { TextExtraLarge } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import imageUnknow from '../../static/images/item_not_image.png';
+import imageUknown from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { removeTeam } from '../../store/async_actions/team';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
+import { playerCurrentTeam } from '../../store/selectors/playersSelector';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 
 const actionCreators = {
   removeTeam,
@@ -21,17 +24,14 @@ const actionCreators = {
 
 export const TeamsCard = () => {
   const { id } = useParams<{ id: string }>();
-
+  const playersCurrentTeam = useSelector((state: IStoreReducer) => playerCurrentTeam(state, id));
   const history = useHistory();
   const { team, token } = useSelector(({ teamsDataReducer, authDataUser }: IStoreReducer) => ({
-    team: teamsDataReducer.entities[id],
+    team: teamsDataReducer.entities[id] as ITeam,
     token: authDataUser.authData.token,
   }));
 
   const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
-  if (!team) {
-    return <></>;
-  }
 
   const teamUpdate = () => {
     history.replace(`/main/teams/addTeam/${team.id}`);
@@ -52,7 +52,7 @@ export const TeamsCard = () => {
           <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
         </Links>
         <Actions>
-          <BtnCreate onClick={teamUpdate} type="button" />
+          <BtnUpdate onClick={teamUpdate} type="button" />
           <BtnDelete onClick={deleteCurrentTeam} type="button">
             <RemoveIcon />
           </BtnDelete>
@@ -60,7 +60,7 @@ export const TeamsCard = () => {
       </CardNavigation>
       <CardBody>
         <Content>
-          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUnknow} />
+          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUknown} />
           <DataCard>
             <TeamName>{team.name}</TeamName>
             <DescriptionContainer>
@@ -71,13 +71,17 @@ export const TeamsCard = () => {
           </DataCard>
         </Content>
       </CardBody>
+      { playersCurrentTeam.length > 0 && (
+      <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />
+      )}
     </ContainerCard>
   );
 };
 
 const ContainerCard = styled.div`
   margin: 32px auto;
-
+  flex-grow: 0.2;
+  
   @media(max-width: ${mobileVersionLayout}) {
     margin: 16px 0;
     flex-grow: 1;
@@ -110,7 +114,7 @@ const Button = styled.button`
   box-sizing: border-box;
 `;
 
-const BtnCreate = styled(Button)`
+const BtnUpdate = styled(Button)`
   background: url(${createIcon}) no-repeat 4px 3px;
   background-size: 17px;
   margin-right: 22px;
