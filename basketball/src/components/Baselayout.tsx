@@ -30,13 +30,13 @@ export const BaseLayout = () => {
   };
 
   useEffect(() => {
-    if (!isAuthorized) { // не забыть заменить !isAuthorized
+    if (isAuthorized) { // не забыть заменить !isAuthorized
       history.replace(routePaths.signIn);
     }
   }, [isAuthorized]);
 
   return (
-    <ContainerLayout>
+    <ContainerLayout isShowMenuChange={isShowMenuChange}>
       <ContextMenuProvider.Provider value={{
         isActiveSideMenu,
         toggleStateMenu,
@@ -65,11 +65,12 @@ export const BaseLayout = () => {
   );
 };
 
-const ContainerLayout = styled.div`
+const ContainerLayout = styled.div<{ isShowMenuChange: boolean }>`
  height: 100vh;
  display: flex;
  flex-direction: column; 
  position: relative;
+ overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')}; 
 `;
 
 const ContentLayout = styled.div`

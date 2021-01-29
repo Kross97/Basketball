@@ -30,5 +30,11 @@ export const authDataUser = createSlice({
       action: PayloadAction<{ userData: ILocalUserData}>) => (
       { ...state, localUserData: action.payload.userData }
     ),
+    changeAuthData: ({ authData }: IStateAuthData,
+      action: PayloadAction<{ changeData: any}>) => {
+      const { changeData } = action.payload;
+      authData.name = changeData.name;
+      authData.avatarUrl = changeData.avatarUrl;
+    },
   },
 });

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
-import { signIn, signUp } from '../../api/auth';
+import { signIn, signUp, changeUserData } from '../../api/auth';
 import { authDataUser } from '../reducers/auth';
 import { RegisterUser, IResponseSignUpSucces, LoginUser } from '../../helpers/interfaces/request_interfaces/Auth';
 import { signRequestErrors } from '../../api/api_constants/signRequestErrors';
@@ -51,5 +51,14 @@ export const requestSignIn = createAsyncThunk(
         }));
       }
     }
+  },
+);
+
+export const changeAuthData = createAsyncThunk(
+  'changeUser',
+  async (changeData: any, { dispatch }) => {
+    const result = await changeUserData('Auth/Change', changeData.change, changeData.token);
+    dispatch(authDataUser.actions.changeAuthData({ changeData: changeData.change }));
+    console.log('RESULT', result);
   },
 );

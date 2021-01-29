@@ -7,14 +7,24 @@ import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { ContextMenuProvider } from './Baselayout';
+import { changeAuthData } from '../store/async_actions/auth';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
+
+const actionCreators = {
+  changeAuthData,
+};
 
 export const UserChange = () => {
   const { toggleStateChangeMenu } = useContext(ContextMenuProvider);
-  const { avatarUrl } = useSelector((state: IStoreReducer) => (
+  const { avatarUrl, srcImage } = useSelector((state: IStoreReducer) => (
     {
+      srcImage: state.imageLoadData.srcImage,
       avatarUrl: state.authDataUser.authData.avatarUrl,
     }
   ));
+
+  const { changeAuthData: changeDataUser } = useCustomActions(actionCreators);
+
   const {
     register,
     handleSubmit,
@@ -22,11 +32,15 @@ export const UserChange = () => {
   } = useForm();
 
   const changeUserData = (data: any) => {
-    console.log('DATA_CHANGE', data);
+    console.log('DATA_CHANGE', data, changeDataUser, srcImage);
+  };
+
+  const stopSurfacing = (event: React.MouseEvent<HTMLFormElement>) => {
+    event.stopPropagation();
   };
   return (
     <ContainerUserChange onClick={toggleStateChangeMenu}>
-      <FormChange onSubmit={handleSubmit(changeUserData)}>
+      <FormChange onClick={stopSurfacing} onSubmit={handleSubmit(changeUserData)}>
         <ImageUpload defaultImage={avatarUrl} />
         <FieldInputData
           text="Name"
@@ -46,6 +60,7 @@ export const UserChange = () => {
             text="Cancel"
             disabled={false}
             type="button"
+            onClick={toggleStateChangeMenu}
           />
           <ButtonAction
             isNegativeStyle={false}
@@ -77,10 +92,15 @@ const FormChange = styled.form`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: auto;
+  margin: auto ;
   border-radius: 10px;
   padding: 20px;
   background-color: ${({ theme }) => theme.colors.white};
+  
+  & > label:nth-child(2) {
+    align-self: stretch;
+    margin: 17px;
+  }
 `;
 
 const BtnGroup = styled.div`
