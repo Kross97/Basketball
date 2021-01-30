@@ -47,7 +47,7 @@ const ContainerEntity = styled.div`
   @media(max-width: ${mobileVersionLayout}) {
     border-radius: 0;
     flex-grow: 1;
-    padding: 79px 55px 48px;
+    padding: 79px 0 48px;
   }
 `;
 

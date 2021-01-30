@@ -1,10 +1,16 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import search from '../static/icons/search.svg';
 
-export const FieldSearch = () => (
+interface IProps {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const FieldSearch: FC<IProps> = ({
+  onChange,
+}) => (
   <SearchContainer>
-    <CustomSearch type="text" placeholder="Search..." />
+    <CustomSearch onChange={onChange} type="text" placeholder="Search..." />
   </SearchContainer>
 );
 

@@ -6,6 +6,7 @@ import {
   addPlayer, getPlayers, deletePlayer, updatePlayer,
 } from '../../api/player';
 import { playersDataReducer } from '../reducers/player';
+import { IOption } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 
 export const addNewPlayer = createAsyncThunk(
   'addNewPlayer',
@@ -62,5 +63,15 @@ export const updateSelectedPlayer = createAsyncThunk(
         }));
       }
     }
+  },
+);
+
+export const loadChunkPlayers = createAsyncThunk(
+  'loadChunkPlayers',
+  async ({ chunkData, token }: any, { dispatch }) => {
+    const teamsIdsQuery = chunkData.teams.map((team: IOption) => `&TeamIds=${team.value}`).join('');
+    const result = await getPlayers(`Player/GetPlayers?Name=${chunkData.name}${teamsIdsQuery}&Page=${chunkData.page}&PageSize=${chunkData.size}`, token);
+    console.log('RESULT => ', result);
+    dispatch(playersDataReducer.actions.loadChunkPlayers({ chunkData: result }));
   },
 );

@@ -74,7 +74,11 @@ export const FormAddTeam: FC<IProps> = ({
         errorMessage="Required or incorrect enter"
         name="foundationYear"
         defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}
-        register={register({ required: true, pattern: /^([^\D_]{4})$/i })}
+        register={register({
+          required: true,
+          pattern: /^([^\D_]{4})$/i,
+          validate: (value) => value <= (new Date()).getFullYear(),
+        })}
       />
 
       <BtnGroup>

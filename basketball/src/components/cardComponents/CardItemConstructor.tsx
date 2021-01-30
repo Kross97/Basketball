@@ -23,7 +23,7 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
 
   const teamName = useSelector(({
     teamsDataReducer: { entities },
-  }: IStoreReducer) => (idTeam ? (entities[idTeam] as Team).name : undefined));
+  }: IStoreReducer) => (idTeam ? (entities[idTeam] as Team)?.name : undefined));
 
   const showItemCard = () => {
     if (type === 'team') {
@@ -83,7 +83,8 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   @media(max-width: ${mobileVersionLayout}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
-    background-position-x: ${({ type }) => (type === 'team' ? '4px' : 'center')};
+    display: ${({ type }) => (type === 'team' ? 'inline-block' : 'block')};
+    background-position: ${({ type }) => (type === 'team' ? 'center' : '8px 2px;')};
   }
 `;
 

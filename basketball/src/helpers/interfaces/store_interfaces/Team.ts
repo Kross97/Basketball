@@ -6,3 +6,10 @@ export interface ITeam {
   imageUrl: string,
   id: number,
 }
+
+export interface IChunkDataTeams {
+  data: ITeam[],
+  count: number,
+  page: number,
+  size: number,
+}

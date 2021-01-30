@@ -18,7 +18,7 @@ export const PlayersMultiSelect = () => (
   <MockContainer>
     <MultiSelectEntities
       onChange={console.log}
-      isPlaceholder
+      isPlaceholder="Select..."
       isMulti
       options={options}
     />

@@ -9,3 +9,10 @@ export interface IPlayer {
   avatarUrl: string,
   id: number,
 }
+
+export interface IChunkPlayers {
+  data: IPlayer[],
+  count: number,
+  page: number,
+  size: number,
+}

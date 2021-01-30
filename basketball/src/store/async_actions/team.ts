@@ -67,3 +67,12 @@ export const updateCurrentTeam = createAsyncThunk(
     }
   },
 );
+
+export const loadChunkTeams = createAsyncThunk(
+  'loadChunkTeams',
+  async ({ chunkData, token }: any, { dispatch }) => {
+    console.log('CHUNK_DATA_FETCH =>', chunkData);
+    const result = await getTeams(`Team/GetTeams?Name=${chunkData.name}&Page=${chunkData.page}&PageSize=${chunkData.size}`, token);
+    dispatch(teamsDataReducer.actions.loadChunkTeams({ chunkData: result }));
+  },
+);

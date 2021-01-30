@@ -77,8 +77,9 @@ export const FormAddPlayer: FC<IProps> = ({
       <MultiSelectEntities
         onChange={changePosition}
         text="Position"
-        isPlaceholder={false}
+        isPlaceholder="Select..."
         isMulti={false}
+        isForm
         isError={!!errors.position}
         defaultValue={playerUpdate && {
           value: playerUpdate.position,
@@ -89,8 +90,9 @@ export const FormAddPlayer: FC<IProps> = ({
       <MultiSelectEntities
         onChange={changeTeam}
         text="Team"
-        isPlaceholder={false}
+        isPlaceholder="Select..."
         isMulti={false}
+        isForm
         defaultValue={playerUpdate
         && teamsOptions.find((option) => option.value === playerUpdate.team)}
         isError={!!errors.team}

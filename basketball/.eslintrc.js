@@ -35,5 +35,6 @@ module.exports = {
         "linebreak-style": 0,
         "@typescript-eslint/no-throw-literal": 0,
         "no-param-reassign": 0,
+        "no-nested-ternary": 0,
     },
 };

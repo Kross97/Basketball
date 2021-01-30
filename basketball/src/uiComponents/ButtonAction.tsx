@@ -38,7 +38,8 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
   padding: ${({ size, theme }) => theme.sizes.buttonsSizes[size]};
   background-color: ${({ isNegativeStyle, theme }) => (isNegativeStyle ? theme.colors.white : theme.colors.red)};
   color: ${({ isNegativeStyle, theme }) => (isNegativeStyle ? theme.colors.grey : theme.colors.white)};
-
+  max-height: 40px;
+  
   &:hover {
     background-color: ${({
     isNegativeStyle,

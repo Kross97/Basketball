@@ -19,15 +19,15 @@ const customStyles = {
       padding: '5px',
     },
   }),
-  control: (styles: any, state: any) => ({
+  control: (styles: any, { selectProps }: any) => ({
     ...styles,
-    backgroundColor: theme.colors.lightestGrey,
-    borderColor: state.selectProps.isError ? theme.colors.lightestRed : 'transparent',
+    backgroundColor: selectProps.isForm ? theme.colors.lightestGrey : theme.colors.white,
+    borderColor: selectProps.isError ? theme.colors.lightestRed : selectProps.isForm ? 'transparent' : theme.colors.lightGrey,
     boxShadow: 'none',
     cursor: 'pointer',
     ':hover': {
       borderColor: theme.colors.lightGrey,
-      backgroundColor: theme.colors.lightestGrey,
+      backgroundColor: selectProps.isForm ? theme.colors.lightestGrey : theme.colors.white,
     },
     '@media(max-width: 1000px)': {
       minHeight: '20px',
@@ -92,6 +92,47 @@ const customStyles = {
       height: '20px',
     },
   }),
+  menuList: (styles: any) => ({
+    ...styles,
+    scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
+    scrollbarWidth: 'thin',
+
+    '::-webkit-scrollbar-track': {
+      backgroundColor: theme.colors.lightestGrey,
+    },
+
+    '::-webkit-scrollbar-thumb': {
+      '-webkit-border-radius': '0px',
+      borderRadius: '0px',
+      backgroundColor: theme.colors.grey,
+    },
+
+    '::-webkit-scrollbar': {
+      width: '5px',
+    },
+  }),
+  valueContainer: (styles: any) => ({
+    ...styles,
+    maxWidth: '300px',
+    overflow: 'auto',
+    maxHeight: '40px',
+    scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
+    scrollbarWidth: 'thin',
+
+    '::-webkit-scrollbar-track': {
+      backgroundColor: theme.colors.lightestGrey,
+    },
+
+    '::-webkit-scrollbar-thumb': {
+      '-webkit-border-radius': '0px',
+      borderRadius: '0px',
+      backgroundColor: theme.colors.grey,
+    },
+
+    '::-webkit-scrollbar': {
+      width: '1px',
+    },
+  }),
 };
 
 interface IOptions {
@@ -102,8 +143,9 @@ interface IOptions {
 interface IProps {
   options: IOptions[],
   isMulti: boolean,
-  isPlaceholder: boolean,
+  isPlaceholder: string,
   onChange: (value: any) => void;
+  isForm?: boolean;
   defaultValue?: IOptions;
   isError?: boolean,
   text?: string;
@@ -113,6 +155,7 @@ export const MultiSelectEntities: FC<IProps> = ({
   isMulti,
   isPlaceholder,
   text,
+  isForm,
   defaultValue,
   isError,
   onChange,
@@ -125,6 +168,7 @@ export const MultiSelectEntities: FC<IProps> = ({
       isMulti={isMulti}
       isClearable
       isError={isError}
+      isForm={isForm}
       styles={customStyles}
       options={options}
       defaultValue={defaultValue}

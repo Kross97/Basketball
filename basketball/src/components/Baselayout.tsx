@@ -70,7 +70,24 @@ const ContainerLayout = styled.div<{ isShowMenuChange: boolean }>`
  display: flex;
  flex-direction: column; 
  position: relative;
- overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')}; 
+ overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')};
+  scrollbar-сolor: ${({ theme }) => `${theme.colors.lightestGrey} ${theme.colors.grey}`};
+  scrollbar-width: thin;
+
+
+&::-webkit-scrollbar-track {
+  background-color:  ${({ theme }) => theme.colors.lightestGrey};
+}
+
+&::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 0;
+  border-radius: 0;
+  background-color: ${({ theme }) => theme.colors.grey};
+}
+
+  &::-webkit-scrollbar {
+    width: 7px;
+  }
 `;
 
 const ContentLayout = styled.div`
