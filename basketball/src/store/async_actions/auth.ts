@@ -57,8 +57,9 @@ export const requestSignIn = createAsyncThunk(
 export const changeAuthData = createAsyncThunk(
   'changeUser',
   async (changeData: any, { dispatch }) => {
-    const result = await changeUserData('Auth/Change', changeData.change, changeData.token);
+    console.log('CHANGE', changeData);
     dispatch(authDataUser.actions.changeAuthData({ changeData: changeData.change }));
+    const result = await changeUserData('Auth/Change', changeData.change, changeData.token);
     console.log('RESULT', result);
   },
 );

@@ -16,9 +16,10 @@ const actionCreators = {
 
 export const UserChange = () => {
   const { toggleStateChangeMenu } = useContext(ContextMenuProvider);
-  const { avatarUrl, srcImage } = useSelector((state: IStoreReducer) => (
+  const { avatarUrl, token, srcImage } = useSelector((state: IStoreReducer) => (
     {
       srcImage: state.imageLoadData.srcImage,
+      token: state.authDataUser.authData.token,
       avatarUrl: state.authDataUser.authData.avatarUrl,
     }
   ));
@@ -32,7 +33,8 @@ export const UserChange = () => {
   } = useForm();
 
   const changeUserData = (data: any) => {
-    console.log('DATA_CHANGE', data, changeDataUser, srcImage);
+    changeDataUser({ change: { userName: data.userName, avatarUrl: srcImage }, token });
+    toggleStateChangeMenu();
   };
 
   const stopSurfacing = (event: React.MouseEvent<HTMLFormElement>) => {
@@ -47,9 +49,9 @@ export const UserChange = () => {
           disabled={false}
           startType="text"
           type="text"
-          name="name"
-          register={register}
-          isError={!!errors.name}
+          name="userName"
+          register={register({ required: true })}
+          isError={!!errors.userName}
           errorMessage="Required or incorrect enter"
         />
         <BtnGroup>

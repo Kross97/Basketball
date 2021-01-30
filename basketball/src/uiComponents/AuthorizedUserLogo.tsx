@@ -36,6 +36,9 @@ const UserLogo = styled.div<{ avatarUrl: string | null }>`
   width: 30px;
   height: 30px;
   background: ${({ avatarUrl }) => (avatarUrl ? `url(${avatarUrl}) no-repeat` : `url(${profileLogo}) no-repeat`)};
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
   
   @media(max-width: ${mobileVersionLayout}) {
     width: 40px;

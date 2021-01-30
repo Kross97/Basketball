@@ -30,7 +30,7 @@ export const BaseLayout = () => {
   };
 
   useEffect(() => {
-    if (isAuthorized) { // не забыть заменить !isAuthorized
+    if (!isAuthorized) { // не забыть заменить !isAuthorized
       history.replace(routePaths.signIn);
     }
   }, [isAuthorized]);

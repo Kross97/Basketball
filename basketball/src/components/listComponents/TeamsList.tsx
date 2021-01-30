@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import { teamsSelector } from '../../store/selectors/teamsSelector';
 import { ListBase } from './ListBase';
 import { EmptyEntity } from '../EmptyEntityComponent';
@@ -28,6 +29,9 @@ export const TeamsList = () => {
       <TeamsBody>
         { teams.length > 0 ? <ListBase type="team" entities={teams} /> : <EmptyEntity isTeam /> }
       </TeamsBody>
+      <TeamsFooter>
+        <ReactPaginate pageCount={10} pageRangeDisplayed={4} marginPagesDisplayed={10} />
+      </TeamsFooter>
     </ContainerTeams>
   );
 };
@@ -48,3 +52,5 @@ const HeaderTeams = styled.div`
 
 const TeamsBody = styled.div`
 `;
+
+const TeamsFooter = styled.div``;

@@ -33,7 +33,7 @@ export const authDataUser = createSlice({
     changeAuthData: ({ authData }: IStateAuthData,
       action: PayloadAction<{ changeData: any}>) => {
       const { changeData } = action.payload;
-      authData.name = changeData.name;
+      authData.name = changeData.userName;
       authData.avatarUrl = changeData.avatarUrl;
     },
   },
