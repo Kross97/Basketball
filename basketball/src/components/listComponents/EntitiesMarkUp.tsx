@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
+import { useTranslation } from 'react-i18next';
 import { teamsChunkSelector, teamsForSelectPlayer, allTeamsSelector } from '../../store/selectors/teamsSelector';
 import { playersChunkSelector, allPlayersSelector } from '../../store/selectors/playersSelector';
 import { ListBase } from './ListBase';
@@ -35,6 +36,7 @@ interface IProps {
 export const EntitiesMarkUp: FC<IProps> = ({
   isTeam,
 }) => {
+  const { t } = useTranslation();
   const selectedChunk = useSelector<IStoreReducer>(
     isTeam
       ? teamsChunkSelector
@@ -108,7 +110,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
             <MultiSelectEntities
               options={teamsOptions}
               isMulti
-              isPlaceholder="Select..."
+              isPlaceholder={t('markup:select')}
               isForm={false}
               onChange={addCommandSearch}
             />
@@ -117,7 +119,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
             isNegativeStyle={false}
             isAdding
             size="small"
-            text="Add"
+            text={t('markup:add')}
             disabled={false}
             type="button"
             onClick={() => history.push(isTeam ? '/main/teams/addTeam' : '/main/players/addPlayer')}

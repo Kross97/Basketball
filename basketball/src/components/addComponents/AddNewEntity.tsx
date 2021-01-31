@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { TextLink } from '../../uiComponents/TextLink';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ImageUpload } from '../../uiComponents/ImageUpload';
@@ -32,7 +33,7 @@ export const AddNewEntity: FC<IProps> = ({
   imageEntity,
 }) => {
   const { clearErrorMessage } = useCustomActions(actionCreators);
-
+  const { t } = useTranslation();
   useEffect(() => {
     clearErrorMessage();
   }, []);
@@ -45,15 +46,15 @@ export const AddNewEntity: FC<IProps> = ({
   return (
     <ContainerAdd>
       <HeaderAdd>
-        <TextLink text="Main" to={routePaths.mainBase} disabled={false} />
+        <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
         <Separator>/</Separator>
         <TextLink
-          text={isTeam ? 'Teams' : 'Players'}
+          text={isTeam ? t('team:teams') : t('player:players')}
           to={`${routePaths.mainBase}/${isTeam ? 'teams' : 'players'}`}
           disabled={false}
         />
         <Separator>/</Separator>
-        <TextLink text={isTeam ? 'Add new team' : 'Add new player'} to="#" disabled />
+        <TextLink text={isTeam ? t('team:addTeam') : t('player:addPlayer')} to="#" disabled />
       </HeaderAdd>
       <BodyAdd>
         <ImageUpload defaultImage={imageEntity} />

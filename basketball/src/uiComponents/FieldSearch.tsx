@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import search from '../static/icons/search.svg';
 
 interface IProps {
@@ -8,11 +9,14 @@ interface IProps {
 
 export const FieldSearch: FC<IProps> = ({
   onChange,
-}) => (
-  <SearchContainer>
-    <CustomSearch onChange={onChange} type="text" placeholder="Search..." />
-  </SearchContainer>
-);
+}) => {
+  const { t } = useTranslation();
+  return (
+    <SearchContainer>
+      <CustomSearch onChange={onChange} type="text" placeholder={t('markup:search')} />
+    </SearchContainer>
+  );
+};
 
 const SearchContainer = styled.div`
 display: flex;

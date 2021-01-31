@@ -38,7 +38,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.name}
-        errorMessage="Required or incorrect enter"
+        errorMessage={t('errorsForm:required')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
         register={register({ required: true, pattern: /^([^\W\d_]{5,})([\s\D])+([^\W\d_]+)$/i })}
@@ -49,7 +49,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.division}
-        errorMessage="Required or incorrect enter"
+        errorMessage={t('errorsForm:required')}
         name="division"
         defaultValue={teamUpdate ? teamUpdate.division : ''}
         register={register}
@@ -60,18 +60,18 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.conference}
-        errorMessage="Required or incorrect enter"
+        errorMessage={t('errorsForm:required')}
         name="conference"
         defaultValue={teamUpdate ? teamUpdate.conference : ''}
         register={register}
       />
       <FieldInputData
-        text="Foundation"
+        text={t('team:foundation')}
         disabled={false}
         startType="text"
         type="text"
         isError={!!errors.foundationYear}
-        errorMessage="Required or incorrect enter"
+        errorMessage={t('errorsForm:required')}
         name="foundationYear"
         defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}
         register={register({
@@ -87,7 +87,7 @@ export const FormAddTeam: FC<IProps> = ({
           isNegativeStyle
           isAdding={false}
           size="middle"
-          text="Cancel"
+          text={t('buttons:cancel')}
           disabled={false}
           type="button"
         />
@@ -95,7 +95,7 @@ export const FormAddTeam: FC<IProps> = ({
           isNegativeStyle={false}
           isAdding={false}
           size="middle"
-          text="Save"
+          text={t('buttons:save')}
           disabled={Object.keys(errors).length > 0}
           type="submit"
         />

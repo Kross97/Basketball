@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
@@ -27,6 +28,7 @@ export const TeamsCard = () => {
   const { id } = useParams<{ id: string }>();
   const playersCurrentTeam = useSelector((state: IStoreReducer) => playerCurrentTeam(state, id));
   const history = useHistory();
+  const { t } = useTranslation();
   const { team, token, errorMessage } = useSelector((
     {
       teamsDataReducer,
@@ -54,9 +56,9 @@ export const TeamsCard = () => {
     <ContainerCard>
       <CardNavigation>
         <Links>
-          <TextLink text="Main" to="/main" disabled={false} />
+          <TextLink text={t('main')} to="/main" disabled={false} />
           <Separator>/</Separator>
-          <TextLink text="Teams" to="/main/teams" disabled={false} />
+          <TextLink text={t('team:teams')} to="/main/teams" disabled={false} />
           <Separator>/</Separator>
           <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
         </Links>

@@ -76,8 +76,8 @@ export const FormAddPlayer: FC<IProps> = ({
       />
       <MultiSelectEntities
         onChange={changePosition}
-        text="Position"
-        isPlaceholder="Select..."
+        text={t('player:position')}
+        isPlaceholder={t('player:select')}
         isMulti={false}
         isForm
         isError={!!errors.position}
@@ -89,8 +89,8 @@ export const FormAddPlayer: FC<IProps> = ({
       />
       <MultiSelectEntities
         onChange={changeTeam}
-        text="Team"
-        isPlaceholder="Select..."
+        text={t('player:team')}
+        isPlaceholder={t('player:select')}
         isMulti={false}
         isForm
         defaultValue={playerUpdate
@@ -100,45 +100,45 @@ export const FormAddPlayer: FC<IProps> = ({
       />
       <PlayerData>
         <FieldInputData
-          text="Height (cm)"
+          text={t('player:heightForm')}
           disabled={false}
           startType="text"
           type="text"
           isError={!!errors.height}
-          errorMessage="Required or incorrect enter"
+          errorMessage={t('errorsForm:required')}
           name="height"
           defaultValue={playerUpdate && playerUpdate.height}
           register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
         />
         <FieldInputData
-          text="Weight (kg)"
+          text={t('player:weightForm')}
           disabled={false}
           startType="text"
           type="text"
           isError={!!errors.weight}
-          errorMessage="Required or incorrect enter"
+          errorMessage={t('errorsForm:required')}
           name="weight"
           defaultValue={playerUpdate && playerUpdate.weight}
           register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
         />
         <FieldInputData
-          text="Birth day"
+          text={t('player:birthday')}
           disabled={false}
           startType="date"
           type="date"
           isError={!!errors.birthday}
-          errorMessage="Required or incorrect enter"
+          errorMessage={t('errorsForm:required')}
           name="birthday"
           defaultValue={playerUpdate && playerUpdate.birthday.slice(0, 10)}
           register={register({ required: true })}
         />
         <FieldInputData
-          text="Number"
+          text={t('player:number')}
           disabled={false}
           startType="text"
           type="text"
           isError={!!errors.number}
-          errorMessage="Required or incorrect enter"
+          errorMessage={t('errorsForm:required')}
           name="number"
           defaultValue={playerUpdate && playerUpdate.number}
           register={register({ required: true, pattern: /^([^\D_]{1,2})$/i })}
@@ -150,7 +150,7 @@ export const FormAddPlayer: FC<IProps> = ({
           isNegativeStyle
           isAdding={false}
           size="middle"
-          text="Cancel"
+          text={t('buttons:cancel')}
           disabled={false}
           type="button"
         />
@@ -158,7 +158,7 @@ export const FormAddPlayer: FC<IProps> = ({
           isNegativeStyle={false}
           isAdding={false}
           size="middle"
-          text="Save"
+          text={t('buttons:save')}
           disabled={Object.keys(errors).length > 0}
           type="submit"
         />

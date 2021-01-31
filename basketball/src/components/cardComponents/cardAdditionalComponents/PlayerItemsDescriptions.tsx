@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import { getFullAge } from '../../../helpers/functions/getFullAge';
 import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
 import { sizeMobile } from '../../../helpers/constants/mobileSize';
@@ -10,30 +11,33 @@ interface IProps {
   teamName: string,
 }
 
-export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => (
-  <>
-    <div>
-      <LabelItem>Position</LabelItem>
-      <DataItem>{player.position}</DataItem>
-    </div>
-    <div>
-      <LabelItem>Team</LabelItem>
-      <DataItem>{teamName}</DataItem>
-    </div>
-    <div>
-      <LabelItem>Height</LabelItem>
-      <DataItem>{`${player.height} cm`}</DataItem>
-    </div>
-    <div>
-      <LabelItem>Weight</LabelItem>
-      <DataItem>{`${player.weight} kg`}</DataItem>
-    </div>
-    <div>
-      <LabelItem>Age</LabelItem>
-      <DataItem>{`${getFullAge(player.birthday)}`}</DataItem>
-    </div>
-  </>
-);
+export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => {
+  const { t } = useTranslation();
+  return (
+    <>
+      <div>
+        <LabelItem>{t('player:position')}</LabelItem>
+        <DataItem>{player.position}</DataItem>
+      </div>
+      <div>
+        <LabelItem>{t('player:team')}</LabelItem>
+        <DataItem>{teamName}</DataItem>
+      </div>
+      <div>
+        <LabelItem>{t('player:height')}</LabelItem>
+        <DataItem>{`${player.height} cm`}</DataItem>
+      </div>
+      <div>
+        <LabelItem>{t('player:weight')}</LabelItem>
+        <DataItem>{`${player.weight} kg`}</DataItem>
+      </div>
+      <div>
+        <LabelItem>{t('player:age')}</LabelItem>
+        <DataItem>{`${getFullAge(player.birthday)}`}</DataItem>
+      </div>
+    </>
+  );
+};
 
 const LabelItem = styled(TextLarge)`
   display: block;

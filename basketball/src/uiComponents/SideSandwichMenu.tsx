@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { ReactComponent as TeamsLogo } from '../static/icons/group_person.svg';
 import { ReactComponent as PlayerLogo } from '../static/icons/person.svg';
 import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
@@ -15,6 +16,7 @@ import { routePaths } from '../helpers/constants/routePaths';
 export const SideSandwichMenu = () => {
   const history = useHistory();
   const { path } = useParams<{ path: string}>();
+  const { t } = useTranslation();
   const {
     isActiveSideMenu,
     toggleStateMenu,
@@ -44,16 +46,16 @@ export const SideSandwichMenu = () => {
         </AutthorizedContainer>
         <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />
-          <TextExtraSmall>Teams</TextExtraSmall>
+          <TextExtraSmall>{t('menu:teams')}</TextExtraSmall>
         </TeamItem>
         <PlayerItem currentPath={path} onClick={() => clickIconHandler('players')}>
           <PlayerLogo />
-          <TextExtraSmall>Players</TextExtraSmall>
+          <TextExtraSmall>{t('menu:players')}</TextExtraSmall>
         </PlayerItem>
       </TeamsPlayers>
       <OutItem onClick={goOutSite}>
         <SignOutLogo />
-        <TextSignAndPlayers>Sign out</TextSignAndPlayers>
+        <TextSignAndPlayers>{t('menu:out')}</TextSignAndPlayers>
       </OutItem>
     </ContainerMenu>
   );

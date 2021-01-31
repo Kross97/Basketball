@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
@@ -24,6 +25,7 @@ const actionCreators = {
 export const PlayerCard = () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
+  const { t } = useTranslation();
   const { removeSelectedPlayer: removePlayer } = useCustomActions(actionCreators);
 
   const { player, token, errorMessage } = useSelector(({
@@ -56,9 +58,9 @@ export const PlayerCard = () => {
     <CardContainer>
       <CardNavigation>
         <div>
-          <TextLink text="Main" to="/main" disabled={false} />
+          <TextLink text={t('main')} to="/main" disabled={false} />
           <Separator>/</Separator>
-          <TextLink text="Players" to="/main/players" disabled={false} />
+          <TextLink text={t('player:players')} to="/main/players" disabled={false} />
           <Separator>/</Separator>
           <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
         </div>
