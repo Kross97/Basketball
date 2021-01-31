@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
@@ -10,6 +10,7 @@ import { ContextMenuProvider } from './Baselayout';
 import { changeAuthData } from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { NotificationError } from '../uiComponents/NotificationError';
 
 const actionCreators = {
   changeAuthData,
@@ -17,13 +18,19 @@ const actionCreators = {
 
 export const UserChange = () => {
   const { toggleStateChangeMenu } = useContext(ContextMenuProvider);
-  const { avatarUrl, token, srcImage } = useSelector((state: IStoreReducer) => (
+  const {
+    avatarUrl,
+    token,
+    srcImage,
+    errorMessage,
+  } = useSelector((state: IStoreReducer) => (
     {
       srcImage: state.imageLoadData.srcImage,
       token: state.authDataUser.authData.token,
       avatarUrl: state.authDataUser.authData.avatarUrl,
+      errorMessage: state.addEntityError.errorMessage,
     }
-  ));
+  ), shallowEqual);
 
   const { changeAuthData: changeDataUser } = useCustomActions(actionCreators);
 
@@ -34,8 +41,16 @@ export const UserChange = () => {
   } = useForm();
 
   const changeUserData = (data: any) => {
-    changeDataUser({ change: { userName: data.userName, avatarUrl: srcImage }, token });
-    toggleStateChangeMenu();
+    changeDataUser({
+      change: {
+        userName: data.userName,
+        avatarUrl: srcImage,
+      },
+      token,
+    });
+    if (errorMessage) {
+      toggleStateChangeMenu();
+    }
   };
 
   const stopSurfacing = (event: React.MouseEvent<HTMLFormElement>) => {
@@ -74,6 +89,7 @@ export const UserChange = () => {
             type="submit"
           />
         </BtnGroup>
+        {errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
       </FormChange>
     </ContainerUserChange>
   );
@@ -92,6 +108,7 @@ const ContainerUserChange = styled.div`
 `;
 
 const FormChange = styled.form`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -122,4 +139,13 @@ const BtnGroup = styled.div`
     margin-right: 0;
     margin-bottom: 16px;
   }
+`;
+
+const NotificationContainer = styled.div`
+ position: absolute;
+  bottom: -30px;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
 `;

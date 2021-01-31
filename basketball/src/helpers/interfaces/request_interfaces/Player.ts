@@ -1,4 +1,6 @@
-export interface Player {
+import { IOption } from '../components_interfaces/StateAndEvents';
+
+export interface IPlayer {
   name: string,
   number: number,
   position: string,
@@ -9,7 +11,7 @@ export interface Player {
   avatarUrl: string
 }
 
-export interface PlayerUpdate {
+export interface IPlayerUpdate {
   name: string,
   number: number,
   position: string,
@@ -19,4 +21,29 @@ export interface PlayerUpdate {
   weight: number,
   avatarUrl: string,
   id: number
+}
+
+export interface IAddDataPlayer {
+  player: IPlayer,
+  token: string,
+}
+
+export interface IRemoveDataPlayer {
+  id: string,
+  token: string,
+}
+
+export interface IUpdateDataPlayer {
+  player: IPlayerUpdate,
+  token: string,
+}
+
+export interface IDataLoadChunk {
+  chunkData: {
+    name: string,
+    teams: IOption[],
+    page: number,
+    size: number,
+  },
+  token: string,
 }

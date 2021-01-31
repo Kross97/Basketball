@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
@@ -174,47 +174,11 @@ const LabelForm = styled(TextLabel)`
   }
 `;
 
-const animationNotification = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  
-  10% {
-    opacity: 0.1;
-    transform: scale(0.9);
-  }
-  
-  25% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-  
-  75% {
-    opacity: 0.8;
-    transform: scale(1.2);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: scale(1.3);
-  }
-`;
-
 const Notification = styled.div`
   position: absolute;
+  bottom: -80px;
+  right: 0;
+  left: 0;
   display: flex;
   justify-content: center;
-  bottom: -80px;
-  right: 10%;
-  left: 10%;
-  animation: ${animationNotification} 1s linear;
-  animation-direction: alternate;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 2;
 `;

@@ -3,12 +3,15 @@ import { batch } from 'react-redux';
 import {
   addTeam, getTeams, deleteTeam, updateTeam,
 } from '../../api/team';
+import {
+  IDataAddTeam, IDataDeleteTeam, IDataUpdateTeam, IDataLoadChunkTeams,
+} from '../../helpers/interfaces/request_interfaces/Team';
 import { addEntityError } from '../reducers/addingError';
 import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
 import { teamsDataReducer } from '../reducers/team';
 
 export const addNewTeam = createAsyncThunk('addNewplayer',
-  async (teamData: any, { dispatch }) => {
+  async (teamData: IDataAddTeam, { dispatch }) => {
     dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await addTeam('Team/Add', teamData.team, teamData.token);
@@ -36,7 +39,7 @@ export const loadAllCommands = createAsyncThunk(
 
 export const removeTeam = createAsyncThunk(
   'removeTeam',
-  async (removeData: any, { dispatch }) => {
+  async (removeData: IDataDeleteTeam, { dispatch }) => {
     try {
       const result = await deleteTeam(`Team/Delete?id=${removeData.id}`, removeData.token);
       dispatch(teamsDataReducer.actions.deleteOneTeam(result.id));
@@ -48,12 +51,11 @@ export const removeTeam = createAsyncThunk(
 
 export const updateCurrentTeam = createAsyncThunk(
   'updateTeam',
-  async (updateData: any, { dispatch }) => {
+  async (updateData: IDataUpdateTeam, { dispatch }) => {
     dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await updateTeam('Team/Update', updateData.team, updateData.token);
       batch(() => {
-        console.log('UPDATE =>', result);
         dispatch(teamsDataReducer.actions.updateTeam({ id: result.id, changes: { ...result } }));
         dispatch(addEntityError.actions.clearErrorMessage());
       });
@@ -70,8 +72,7 @@ export const updateCurrentTeam = createAsyncThunk(
 
 export const loadChunkTeams = createAsyncThunk(
   'loadChunkTeams',
-  async ({ chunkData, token }: any, { dispatch }) => {
-    console.log('CHUNK_DATA_FETCH =>', chunkData);
+  async ({ chunkData, token }: IDataLoadChunkTeams, { dispatch }) => {
     const result = await getTeams(`Team/GetTeams?Name=${chunkData.name}&Page=${chunkData.page}&PageSize=${chunkData.size}`, token);
     dispatch(teamsDataReducer.actions.loadChunkTeams({ chunkData: result }));
   },
