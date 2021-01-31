@@ -82,17 +82,23 @@ const Specifications = styled.div`
 `;
 
 const NumberPlayer = styled.div`
-  gap: 48px;
   display: flex;
-
+  & > span:nth-of-type(1) {
+    margin-right: 48px;
+  }
   @media(max-width: ${mobileVersionLayout}) {
-    gap: 32px;
+    & > span:nth-of-type(1) {
+      margin-right: 32px;
+    }
   }
 `;
 
 const PersonalData = styled.div`
-  gap: 84px;
   display: flex;
+  
+  & > span:nth-of-type(1), & > span:nth-of-type(2) {
+    margin-right: 84px;
+  }
   
   @media(max-width: ${mobileVersionLayout}) {
     display: none;
@@ -128,9 +134,14 @@ const ItemPlayer = styled.div<{ isLastPlayer: boolean }>`
 
 const ContainerPlayerImage = styled.div`
  display: flex;
- gap: 34px;
+  
+  & > span:nth-of-type(1) {
+    margin-right: 35px;
+  }
   @media(max-width: ${mobileVersionLayout}) {
-    gap: 18px;
+    & > span:nth-of-type(1) {
+      margin-right: 18px;
+    }
   }
 `;
 
@@ -138,7 +149,6 @@ const ContainerImage = styled.div`
  display: flex;
   align-items: center;
  justify-content: space-between;
- gap: 10px; 
 `;
 
 const ImagePlayer = styled.div<{ imageSrc: string}>`
@@ -147,6 +157,7 @@ const ImagePlayer = styled.div<{ imageSrc: string}>`
  border-radius: 25px;
  background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat -5px 1px`};
  background-size: cover; 
+  margin-right: 10px;
 `;
 
 const PositionName = styled.div`
@@ -166,7 +177,7 @@ const PositionPlayer = styled(TextExtraSmall)`
 const ContainerDataPlayer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 16px;
-  gap: 82px;
+  grid-column-gap: 82px;
   align-self: center;
 
   @media(max-width: ${mobileVersionLayout}) {

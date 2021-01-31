@@ -220,12 +220,13 @@ const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 54px 80px;
+  grid-row-gap: 54px;
+  grid-column-gap: 80px;
   
   @media(max-width: ${mobileVersionLayout}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 43px;
+    grid-row-gap: 43px;
   }
 `;
 
