@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
 import { sizeMobile } from '../../../helpers/constants/mobileSize';
-import { ITeam } from '../../../helpers/Mock_team';
+import { ITeam } from '../../../helpers/interfaces/store_interfaces/Team';
 
 interface IProps {
   team: ITeam,

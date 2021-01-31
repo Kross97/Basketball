@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
 import { TypeItem } from '../../helpers/types/types';
 import { mobileVersionLayout, mobileVersionList } from '../../helpers/constants/mobileSize';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 
 interface IProps {
-  entities: any[],
+  entities: any,
   type: TypeItem,
 }
 
@@ -14,7 +16,7 @@ export const ListBase: FC<IProps> = ({
   type,
 }) => (
   <ListContainer>
-    {entities.map((entity) => (
+    {entities.map((entity: ITeam | IPlayer) => (
       <CardItemConstructor
         key={entity.id}
         type={type}

@@ -9,11 +9,12 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
 import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
-import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer, IPostionOption, ITeamOption } from '../../helpers/interfaces/store_interfaces/Player';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 
 interface IProps {
-  addNewPlayer: (data: any) => void;
+  addNewPlayer: (data: IFormAddPlayer) => void;
   playerUpdate: IPlayer | undefined;
 }
 
@@ -38,7 +39,7 @@ export const FormAddPlayer: FC<IProps> = ({
     history.replace(routePaths.players);
   };
 
-  const changePosition = (targetPosition: any) => {
+  const changePosition = (targetPosition: IPostionOption) => {
     if (targetPosition) {
       delete errors.position;
       setPosition(targetPosition.value);
@@ -48,7 +49,7 @@ export const FormAddPlayer: FC<IProps> = ({
     }
   };
 
-  const changeTeam = (targetTeam: any) => {
+  const changeTeam = (targetTeam: ITeamOption) => {
     if (targetTeam) {
       delete errors.team;
       setTeam(targetTeam.value);

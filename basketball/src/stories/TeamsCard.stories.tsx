@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { TeamsCard } from '../components/cardComponents/TeamsCard';
+import { TeamsCard } from './TeamCardForStories';
 import { sizeMobile } from '../helpers/constants/mobileSize';
 
 export default {

@@ -4,8 +4,8 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TextSmallThin, TextStandart } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
-import { Player } from '../../helpers/interfaces/Player';
-import { Team } from '../../helpers/interfaces/Team';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { TypeItem } from '../../helpers/types/types';
 import imageUknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
@@ -14,17 +14,17 @@ import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
   type: TypeItem,
-  item: Player | Team;
+  item: IPlayer | ITeam;
 }
 
 export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
   const history = useHistory();
 
-  const idTeam = type === 'team' ? item.id : (item as Player).team;
+  const idTeam = type === 'team' ? item.id : (item as IPlayer).team;
 
   const teamName = useSelector(({
     teamsDataReducer: { entities },
-  }: IStoreReducer) => (idTeam ? (entities[idTeam] as Team)?.name : undefined));
+  }: IStoreReducer) => (idTeam ? (entities[idTeam] as ITeam)?.name : undefined));
 
   const showItemCard = () => {
     if (type === 'team') {

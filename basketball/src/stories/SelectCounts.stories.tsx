@@ -21,4 +21,5 @@ export const Select = () => (
 
 const MockContainer = styled.div`
   width: 88px;
+  margin-top: 130px;
 `;

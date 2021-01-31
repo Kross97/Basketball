@@ -1,5 +1,6 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
+import styled from 'styled-components';
 import { NotificationError } from '../uiComponents/NotificationError';
 
 export default {
@@ -14,9 +15,11 @@ interface IProps {
 export const ErrorNotification = ({
   text = 'User with the specified username / password was not found.',
 }: IProps) => (
-  <NotificationError
-    text={text}
-  />
+  <MockContainer>
+    <NotificationError
+      text={text}
+    />
+  </MockContainer>
 );
 
 ErrorNotification.argTypes = {
@@ -26,3 +29,7 @@ ErrorNotification.argTypes = {
     },
   },
 };
+
+const MockContainer = styled.div`
+  width: 500px;
+`;

@@ -23,3 +23,8 @@ export interface IStateAuthData {
     password: string,
   },
 }
+
+export interface IChangeDataUser {
+  userName: string,
+  avatarUrl: string,
+}

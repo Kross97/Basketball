@@ -21,7 +21,6 @@ interface IProps {
 export const AllInputs = ({
   text = 'Login',
   disabled = false,
-  type = 'text',
   startType = 'text',
   isError,
   errorMessage = 'Required',

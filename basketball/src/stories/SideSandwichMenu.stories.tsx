@@ -15,7 +15,7 @@ export const SandwichMenu = () => (
 );
 
 const MockCotainer = styled.div`
-  display: inline-block;
+  display: inline-flex;
   height: 690px;
   border: 1px solid #D1D1D1;
 `;

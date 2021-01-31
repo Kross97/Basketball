@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IAddAuth, ILocalUserData, IStateAuthData } from '../../helpers/interfaces/store_interfaces/Auth';
+import {
+  IAddAuth, ILocalUserData, IStateAuthData, IChangeDataUser,
+} from '../../helpers/interfaces/store_interfaces/Auth';
 
 export const authDataUser = createSlice({
   name: 'authDataUser',
@@ -35,7 +37,7 @@ export const authDataUser = createSlice({
       { ...state, localUserData: action.payload.userData }
     ),
     changeAuthData: ({ authData }: IStateAuthData,
-      action: PayloadAction<{ changeData: any}>) => {
+      action: PayloadAction<{ changeData: IChangeDataUser}>) => {
       const { changeData } = action.payload;
       authData.name = changeData.userName;
       authData.avatarUrl = changeData.avatarUrl;

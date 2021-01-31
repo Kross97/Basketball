@@ -8,6 +8,7 @@ import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { addNewTeam, updateCurrentTeam } from '../../store/async_actions/team';
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 
 const actionCreators = {
   loadNewImage,
@@ -33,7 +34,7 @@ export const AddNewTeam = () => {
     updateCurrentTeam: updateTeam,
   } = useCustomActions(actionCreators);
 
-  const addNewEntity = async (data: any) => {
+  const addNewEntity = async (data: IFormAddTeam) => {
     const team = {
       ...data,
       foundationYear: Number(data.foundationYear),

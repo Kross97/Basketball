@@ -8,6 +8,7 @@ import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { addNewPlayer, updateSelectedPlayer } from '../../store/async_actions/player';
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 
 const actionCreators = {
   loadNewImage,
@@ -33,7 +34,7 @@ export const AddNewPlayer = () => {
     updateSelectedPlayer: updatePlayer,
   } = useCustomActions(actionCreators);
 
-  const addNewEntity = async (data: any) => {
+  const addNewEntity = async (data: IFormAddPlayer) => {
     const player = {
       ...data,
       team: Number(data.team),
@@ -46,7 +47,13 @@ export const AddNewPlayer = () => {
     if ('id' in player) {
       const {
         payload: isSuccessUpdate,
-      } = await updatePlayer({ player: { ...player, id: Number(player.id) }, token });
+      } = await updatePlayer({
+        player: {
+          ...player,
+          id: Number(player.id),
+        },
+        token,
+      });
 
       if (isSuccessUpdate) {
         history.replace(routePaths.players);

@@ -7,9 +7,10 @@ import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 
 interface IProps {
-  addNewTeam: (data: any) => void;
+  addNewTeam: (data: IFormAddTeam) => void;
   teamUpdate: ITeam | undefined;
 }
 

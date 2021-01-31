@@ -25,3 +25,26 @@ export interface IDataSelected {
 }
 
 export type ISelectedDataAll = ITeam[] | IPlayer[];
+
+export interface IDataChangeUser {
+  userName: string,
+}
+
+export interface IFormAddPlayer {
+  birthday: string,
+  height: string,
+  name: string,
+  number: string,
+  position: string,
+  team: string,
+  weight: string,
+  id?: string,
+}
+
+export interface IFormAddTeam {
+  conference: string,
+  division: string,
+  foundationYear: string,
+  name: string,
+  id?: string,
+}

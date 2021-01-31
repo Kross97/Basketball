@@ -11,6 +11,7 @@ import { changeAuthData } from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationError } from '../uiComponents/NotificationError';
+import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
 
 const actionCreators = {
   changeAuthData,
@@ -40,7 +41,7 @@ export const UserChange = () => {
     errors,
   } = useForm();
 
-  const changeUserData = async (data: any) => {
+  const changeUserData = async (data: IDataChangeUser) => {
     const { payload: isSuccessChanged } = await changeDataUser({
       change: {
         userName: data.userName,

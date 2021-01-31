@@ -16,3 +16,14 @@ export interface IChunkPlayers {
   page: number,
   size: number,
 }
+
+export interface IPostionOption {
+  value: string,
+  label: string,
+}
+
+export interface ITeamOption {
+  value: string,
+  label: string,
+  imageSrc: string,
+}
