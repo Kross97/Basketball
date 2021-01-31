@@ -12,6 +12,7 @@ import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
+import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
 
 interface IProps {
   typeForm: string;
@@ -66,7 +67,7 @@ export const BaseForm: FC<IProps> = ({
         startType="text"
         isError={!!errors.userName}
         errorMessage="Required or incorrect enter"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+        register={register({ required: true, pattern: regExpName })}
       />
       ) }
       <FieldInputData
@@ -77,7 +78,7 @@ export const BaseForm: FC<IProps> = ({
         startType="text"
         isError={!!errors.login}
         errorMessage="Required or incorrect enter"
-        register={register({ required: true, pattern: /^([^\W\s]+)$/i })}
+        register={register({ required: true, pattern: regExpLogin })}
       />
       <FieldInputData
         name="password"
@@ -88,7 +89,7 @@ export const BaseForm: FC<IProps> = ({
         changeTypeInput={() => changeTypeInput('password')}
         isError={!!errors.password}
         errorMessage="Required or space exists"
-        register={register({ required: true, pattern: /^([^\s]+)$/i })}
+        register={register({ required: true, pattern: regExpPassword })}
       />
       { typeForm === 'Sign Up' && (
       <FieldInputData
@@ -104,7 +105,7 @@ export const BaseForm: FC<IProps> = ({
           : 'Required or space exists'}
         register={register({
           required: true,
-          pattern: /^([^\s]+)$/i,
+          pattern: regExpPassword,
           validate: (value) => getValues('password') === value,
         })}
       />

@@ -8,6 +8,7 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { regExpName, regExpYear } from '../../helpers/constants/regularExp';
 
 interface IProps {
   addNewTeam: (data: IFormAddTeam) => void;
@@ -43,7 +44,7 @@ export const FormAddTeam: FC<IProps> = ({
         errorMessage={t('errorsForm:required')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})([\s\D])+([^\W\d_]+)$/i })}
+        register={register({ required: true, pattern: regExpName })}
       />
       <FieldInputData
         text={t('team:division')}
@@ -78,7 +79,7 @@ export const FormAddTeam: FC<IProps> = ({
         defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}
         register={register({
           required: true,
-          pattern: /^([^\D_]{4})$/i,
+          pattern: regExpYear,
           validate: (value) => value <= (new Date()).getFullYear(),
         })}
       />

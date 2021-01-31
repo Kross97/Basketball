@@ -12,6 +12,7 @@ import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationError } from '../uiComponents/NotificationError';
 import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
+import { regExpName } from '../helpers/constants/regularExp';
 
 const actionCreators = {
   changeAuthData,
@@ -67,7 +68,7 @@ export const UserChange = () => {
           startType="text"
           type="text"
           name="userName"
-          register={register({ required: true })}
+          register={register({ required: true, pattern: regExpName })}
           isError={!!errors.userName}
           errorMessage="Required or incorrect enter"
         />

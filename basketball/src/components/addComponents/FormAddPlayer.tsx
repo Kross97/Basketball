@@ -12,6 +12,7 @@ import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
 import { IPlayer, IPostionOption, ITeamOption } from '../../helpers/interfaces/store_interfaces/Player';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { regExpName } from '../../helpers/constants/regularExp';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -73,7 +74,7 @@ export const FormAddPlayer: FC<IProps> = ({
         errorMessage="Required or incorrect enter"
         name="name"
         defaultValue={playerUpdate && playerUpdate.name}
-        register={register({ required: true, pattern: /^([^\W\d_]{3,})([\s\D])+([^\W\d_]+)$/i })}
+        register={register({ required: true, pattern: regExpName })}
       />
       <MultiSelectEntities
         onChange={changePosition}
