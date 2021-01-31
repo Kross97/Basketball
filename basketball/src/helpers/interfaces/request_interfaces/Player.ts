@@ -30,6 +30,7 @@ export interface IAddDataPlayer {
 
 export interface IRemoveDataPlayer {
   id: string,
+  history: any,
   token: string,
 }
 

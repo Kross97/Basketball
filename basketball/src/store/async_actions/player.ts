@@ -43,8 +43,18 @@ export const loadAllPlayers = createAsyncThunk(
 export const removeSelectedPlayer = createAsyncThunk(
   'deletePlayer',
   async (removeData: IRemoveDataPlayer, { dispatch }) => {
-    const result = await deletePlayer(`Player/Delete?id=${removeData.id}`, removeData.token);
-    dispatch(playersDataReducer.actions.deleteOnePlayer(result.id));
+    dispatch(addEntityError.actions.clearErrorMessage());
+    try {
+      const result = await deletePlayer(`Player/Delete?id=${removeData.id}`, removeData.token);
+      removeData.history.replace('/main/players');
+      dispatch(playersDataReducer.actions.deleteOnePlayer(result.id));
+    } catch (error) {
+      if (error.isCustomError) {
+        dispatch(addEntityError.actions.addErrorMessage({
+          errorMessage: playerRequestErrors[error.status],
+        }));
+      }
+    }
   },
 );
 

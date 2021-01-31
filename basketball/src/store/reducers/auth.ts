@@ -11,6 +11,7 @@ export const authDataUser = createSlice({
     },
     authErrorMessageSignUp: '',
     authErrorMessageSignIn: '',
+    errorChangeMessage: '',
     localUserData: {
       login: '',
       password: '',
@@ -25,6 +26,9 @@ export const authDataUser = createSlice({
     ),
     addAuthErrorSignIn: (state: IStateAuthData, action: PayloadAction<{ errorSignIn: string}>) => (
       { ...state, authErrorMessageSignIn: action.payload.errorSignIn }
+    ),
+    addErrorChangeUser: (state: IStateAuthData, action: PayloadAction<{ errorChange: string}>) => (
+      { ...state, errorChangeMessage: action.payload.errorChange }
     ),
     addLocalUserData: (state: IStateAuthData,
       action: PayloadAction<{ userData: ILocalUserData}>) => (

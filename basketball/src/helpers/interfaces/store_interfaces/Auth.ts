@@ -17,6 +17,7 @@ export interface IStateAuthData {
   },
   authErrorMessageSignUp: string,
   authErrorMessageSignIn: string,
+  errorChangeMessage: string,
   localUserData: {
     login: string,
     password: string,

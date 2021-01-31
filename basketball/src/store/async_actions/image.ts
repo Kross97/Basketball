@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { saveImage, deleteImage } from '../../api/image';
-import { IImageData, IDataDeleted } from '../../helpers/interfaces/request_interfaces/Image';
+import { saveImage } from '../../api/image';
+import { IImageData } from '../../helpers/interfaces/request_interfaces/Image';
 import { imageLoadData } from '../reducers/image';
 import { imageRequestErrors } from '../../api/api_constants/imageRequestError';
 import { addEntityError } from '../reducers/addingError';
@@ -19,10 +19,3 @@ export const loadNewImage = createAsyncThunk('imageLoad',
       }
     }
   });
-
-export const deleteImageEntity = createAsyncThunk(
-  'deleteImage',
-  ({ srcImage, token }: IDataDeleted) => {
-    deleteImage(`Image/DeleteImage?fileName=${srcImage}`, token);
-  },
-);

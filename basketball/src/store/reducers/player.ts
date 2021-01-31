@@ -16,6 +16,7 @@ export const playersDataReducer = createSlice({
     addOnePlayer: playersAdapter.addOne,
     addManyPlayers: playersAdapter.addMany,
     deleteOnePlayer: playersAdapter.removeOne,
+    deleteManyPlayers: playersAdapter.removeMany,
     clearPlayers: playersAdapter.removeAll,
     updatePlayer: playersAdapter.updateOne,
     setAllPlayers: playersAdapter.setAll,

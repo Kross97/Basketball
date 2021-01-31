@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
@@ -15,6 +15,7 @@ import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
+import { NotificationError } from '../../uiComponents/NotificationError';
 
 const actionCreators = {
   removeSelectedPlayer,
@@ -25,13 +26,16 @@ export const PlayerCard = () => {
   const history = useHistory();
   const { removeSelectedPlayer: removePlayer } = useCustomActions(actionCreators);
 
-  const { player, token } = useSelector(({
+  const { player, token, errorMessage } = useSelector(({
     playersDataReducer: { entities },
     authDataUser,
+    addEntityError,
   }: IStoreReducer) => ({
+    errorMessage: addEntityError.errorMessage,
     player: entities[id] as IPlayer,
     token: authDataUser.authData.token,
-  }));
+  }), shallowEqual);
+
   const teamName = useSelector(({ teamsDataReducer: { entities } }: IStoreReducer) => ((
     entities[player.team] as ITeam).name));
 
@@ -40,8 +44,12 @@ export const PlayerCard = () => {
   };
 
   const removeCurrentPlayer = () => {
-    removePlayer({ id: player.id, token });
-    history.replace('/main/players');
+    removePlayer({
+      id: player.id,
+      srcImage: player.avatarUrl,
+      token,
+      history,
+    });
   };
 
   return (
@@ -79,6 +87,7 @@ export const PlayerCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
+        {errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
       </CardBody>
     </CardContainer>
   );
@@ -149,6 +158,7 @@ const Separator = styled.span`
 
 const CardBody = styled.div`
   padding: 65px 0 0 50px;
+  position: relative;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
 
@@ -228,5 +238,22 @@ const DescriptionContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;
+  }
+`;
+
+const NotificationContainer = styled.div`
+  position: absolute;
+  bottom: -40px;
+  left: 40%;
+
+  @media(max-width: 800px) {
+    left: 30%;
+  }
+  
+  @media(max-width: 600px) {
+    left: 20%;
+  }
+  @media(max-width: 350px) {
+    left: 10%;
   }
 `;

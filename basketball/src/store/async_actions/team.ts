@@ -9,6 +9,8 @@ import {
 import { addEntityError } from '../reducers/addingError';
 import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
 import { teamsDataReducer } from '../reducers/team';
+import { deletePlayer } from '../../api/player';
+import { playersDataReducer } from '../reducers/player';
 
 export const addNewTeam = createAsyncThunk('addNewplayer',
   async (teamData: IDataAddTeam, { dispatch }) => {
@@ -40,11 +42,25 @@ export const loadAllCommands = createAsyncThunk(
 export const removeTeam = createAsyncThunk(
   'removeTeam',
   async (removeData: IDataDeleteTeam, { dispatch }) => {
+    dispatch(addEntityError.actions.clearErrorMessage());
     try {
+      const idsPlayersTeam = removeData.playersCurrentTeam.map((player) => player.id);
+      idsPlayersTeam.forEach((id) => {
+        deletePlayer(`Player/Delete?id=${id}`, removeData.token);
+      });
       const result = await deleteTeam(`Team/Delete?id=${removeData.id}`, removeData.token);
-      dispatch(teamsDataReducer.actions.deleteOneTeam(result.id));
+      removeData.history.replace('/main/teams');
+      batch(() => {
+        dispatch(playersDataReducer.actions.deleteManyPlayers(idsPlayersTeam));
+        dispatch(teamsDataReducer.actions.deleteOneTeam(result.id));
+        dispatch(addEntityError.actions.clearErrorMessage());
+      });
     } catch (error) {
-      console.log('ERROR', error);
+      if (error.isCustomError) {
+        dispatch(addEntityError.actions.addErrorMessage({
+          errorMessage: teamRequestErrors[error.status],
+        }));
+      }
     }
   },
 );

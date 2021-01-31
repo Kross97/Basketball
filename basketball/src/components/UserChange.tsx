@@ -28,7 +28,7 @@ export const UserChange = () => {
       srcImage: state.imageLoadData.srcImage,
       token: state.authDataUser.authData.token,
       avatarUrl: state.authDataUser.authData.avatarUrl,
-      errorMessage: state.addEntityError.errorMessage,
+      errorMessage: state.authDataUser.errorChangeMessage,
     }
   ), shallowEqual);
 
@@ -40,15 +40,15 @@ export const UserChange = () => {
     errors,
   } = useForm();
 
-  const changeUserData = (data: any) => {
-    changeDataUser({
+  const changeUserData = async (data: any) => {
+    const { payload: isSuccessChanged } = await changeDataUser({
       change: {
         userName: data.userName,
         avatarUrl: srcImage,
       },
       token,
     });
-    if (errorMessage) {
+    if (isSuccessChanged) {
       toggleStateChangeMenu();
     }
   };
@@ -133,11 +133,10 @@ const BtnGroup = styled.div`
   
   @media(max-width: ${mobileVersionLayout}) {
     flex-direction: column;
-  }
-
-  & > button:nth-child(1) {
-    margin-right: 0;
-    margin-bottom: 16px;
+    & > button:nth-child(1) {
+      margin-right: 0;
+      margin-bottom: 16px;
+    }
   }
 `;
 

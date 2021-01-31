@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
@@ -9,7 +9,7 @@ import { TextExtraLarge } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import imageUknown from '../../static/images/item_not_image.png';
+import imageUnknown from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { removeTeam } from '../../store/async_actions/team';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -17,6 +17,7 @@ import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
 import { playerCurrentTeam } from '../../store/selectors/playersSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { NotificationError } from '../../uiComponents/NotificationError';
 
 const actionCreators = {
   removeTeam,
@@ -26,10 +27,17 @@ export const TeamsCard = () => {
   const { id } = useParams<{ id: string }>();
   const playersCurrentTeam = useSelector((state: IStoreReducer) => playerCurrentTeam(state, id));
   const history = useHistory();
-  const { team, token } = useSelector(({ teamsDataReducer, authDataUser }: IStoreReducer) => ({
+  const { team, token, errorMessage } = useSelector((
+    {
+      teamsDataReducer,
+      authDataUser,
+      addEntityError,
+    }: IStoreReducer,
+  ) => ({
     team: teamsDataReducer.entities[id] as ITeam,
     token: authDataUser.authData.token,
-  }));
+    errorMessage: addEntityError.errorMessage,
+  }), shallowEqual);
 
   const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
 
@@ -38,8 +46,9 @@ export const TeamsCard = () => {
   };
 
   const deleteCurrentTeam = () => {
-    deleteTeam({ id, token });
-    history.replace('/main/teams');
+    deleteTeam({
+      id, history, playersCurrentTeam, token,
+    });
   };
   return (
     <ContainerCard>
@@ -60,7 +69,7 @@ export const TeamsCard = () => {
       </CardNavigation>
       <CardBody>
         <Content>
-          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUknown} />
+          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUnknown} />
           <DataCard>
             <TeamName>{team.name}</TeamName>
             <DescriptionContainer>
@@ -70,6 +79,7 @@ export const TeamsCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
+        { errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
       </CardBody>
       { playersCurrentTeam.length > 0 && (
       <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />
@@ -81,6 +91,7 @@ export const TeamsCard = () => {
 const ContainerCard = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
+  position: relative;
   
   @media(max-width: ${mobileVersionLayout}) {
     margin: 16px 0;
@@ -148,6 +159,7 @@ const CardBody = styled.div`
   padding: 65px 0 65px 146px;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
+  position: relative;
   
   @media(max-width: ${mobileVersionLayout}) {
     padding: 48px 15px 43px;
@@ -211,5 +223,22 @@ const DescriptionContainer = styled.div`
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 43px;
+  }
+`;
+
+const NotificationContainer = styled.div`
+  position: absolute;
+  bottom: -40px;
+  left: 40%;
+
+  @media(max-width: 800px) {
+    left: 30%;
+  }
+  
+  @media(max-width: 600px) {
+    left: 20%;
+  }
+  @media(max-width: 350px) {
+    left: 10%;
   }
 `;

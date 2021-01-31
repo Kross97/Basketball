@@ -1,3 +1,5 @@
+import { IPlayer } from '../store_interfaces/Player';
+
 export interface ITeam {
   name: string,
   foundationYear: number,
@@ -22,6 +24,8 @@ export interface IDataAddTeam {
 
 export interface IDataDeleteTeam {
   id: string,
+  history: any,
+  playersCurrentTeam: IPlayer[],
   token: string,
 }
 

@@ -6,7 +6,6 @@ import {
   RegisterUser, IResponseSignSucces, LoginUser, IChangedDataUser,
 } from '../../helpers/interfaces/request_interfaces/Auth';
 import { signRequestErrors } from '../../api/api_constants/signRequestErrors';
-import { addEntityError } from '../reducers/addingError';
 
 export const requestSignUp = createAsyncThunk(
   'signUp/request',
@@ -60,16 +59,21 @@ export const requestSignIn = createAsyncThunk(
 export const changeAuthData = createAsyncThunk(
   'changeUser',
   async (changeData: IChangedDataUser, { dispatch }) => {
-    dispatch(addEntityError.actions.addErrorMessage({ errorMessage: '' }));
+    dispatch(authDataUser.actions.addErrorChangeUser({ errorChange: '' }));
     try {
-      dispatch(authDataUser.actions.changeAuthData({ changeData: changeData.change }));
       await changeUserData('Auth/Change', changeData.change, changeData.token);
+      batch(() => {
+        dispatch(authDataUser.actions.changeAuthData({ changeData: changeData.change }));
+        dispatch(authDataUser.actions.addErrorChangeUser({ errorChange: '' }));
+      });
+      return true;
     } catch (error) {
       if (error.isCustomError) {
-        dispatch(addEntityError.actions.addErrorMessage({
-          errorMessage: signRequestErrors[error.status],
+        dispatch(authDataUser.actions.addErrorChangeUser({
+          errorChange: signRequestErrors[error.status],
         }));
       }
+      return false;
     }
   },
 );

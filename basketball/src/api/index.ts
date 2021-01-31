@@ -20,6 +20,9 @@ const request = async (url: string, data: IRequestBaseBody, token: string | unde
     },
   });
   if (response.ok) {
+    if (response.headers.get('Content-Length') === '0') {
+      return true;
+    }
     const typeResponse = response.headers.get('Content-Type');
     let result;
     if (typeResponse === 'application/text') {
@@ -29,6 +32,7 @@ const request = async (url: string, data: IRequestBaseBody, token: string | unde
     result = await response.json();
     return result;
   }
+
   throw { isCustomError: true, status: response.status };
 };
 
