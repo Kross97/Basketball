@@ -26,7 +26,7 @@ export const AllInputs = ({
   isError,
   errorMessage = 'Required',
 }: IProps) => {
-  const [typeInput, setTypeInput] = useState<'text' | 'password'>(type);
+  const [typeInput, setTypeInput] = useState<'text' | 'password'>('text');
   const changeTypeInput = () => {
     setTypeInput(typeInput === 'text' ? 'password' : 'text');
   };

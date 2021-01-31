@@ -37,6 +37,12 @@ const ListContainer = styled.div`
   }
 
   @media(max-width: ${mobileVersionLayout}) {
+    grid-template-columns: 220px 220px;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
+  }
+
+  @media(max-width: 600px) {
     grid-template-columns: 180px 180px;
     grid-column-gap: 12px;
     grid-row-gap: 12px;

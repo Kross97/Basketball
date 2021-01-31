@@ -145,6 +145,12 @@ const FormSign = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
+  
+  & button > span {
+    display: block;
+    width: 65px;
+  }
+  
   & label, & button {
     margin-bottom: 24px;
   }

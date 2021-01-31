@@ -10,7 +10,7 @@ import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
 import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
-import { getFullAge } from '../../helpers/functions/getFullAge';
+// import { getFullAge } from '../../helpers/functions/getFullAge';
 
 interface IProps {
   addNewPlayer: (data: any) => void;
@@ -100,7 +100,7 @@ export const FormAddPlayer: FC<IProps> = ({
       />
       <PlayerData>
         <FieldInputData
-          text="Height"
+          text="Height (cm)"
           disabled={false}
           startType="text"
           type="text"
@@ -111,7 +111,7 @@ export const FormAddPlayer: FC<IProps> = ({
           register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
         />
         <FieldInputData
-          text="Weight"
+          text="Weight (kg)"
           disabled={false}
           startType="text"
           type="text"
@@ -122,15 +122,15 @@ export const FormAddPlayer: FC<IProps> = ({
           register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
         />
         <FieldInputData
-          text="Age"
+          text="Birth day"
           disabled={false}
-          startType="text"
-          type="text"
+          startType="date"
+          type="date"
           isError={!!errors.birthday}
           errorMessage="Required or incorrect enter"
           name="birthday"
-          defaultValue={playerUpdate && getFullAge(playerUpdate.birthday)}
-          register={register({ required: true, pattern: /^([^\D_]{2})$/i })}
+          defaultValue={playerUpdate && playerUpdate.birthday.slice(0, 10)}
+          register={register({ required: true })}
         />
         <FieldInputData
           text="Number"

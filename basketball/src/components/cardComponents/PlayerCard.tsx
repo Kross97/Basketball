@@ -50,7 +50,7 @@ export const PlayerCard = () => {
         <div>
           <TextLink text="Main" to="/main" disabled={false} />
           <Separator>/</Separator>
-          <TextLink text="Teams" to="/main/players" disabled={false} />
+          <TextLink text="Players" to="/main/players" disabled={false} />
           <Separator>/</Separator>
           <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
         </div>

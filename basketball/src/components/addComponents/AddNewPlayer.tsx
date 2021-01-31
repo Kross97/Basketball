@@ -5,7 +5,6 @@ import { AddNewEntity } from './AddNewEntity';
 import { loadNewImage } from '../../store/async_actions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import { getBirthdaty } from '../../helpers/functions/getBirthday';
 import { addNewPlayer, updateSelectedPlayer } from '../../store/async_actions/player';
 import { imageLoadData } from '../../store/reducers/image';
 
@@ -40,7 +39,6 @@ export const AddNewPlayer = () => {
       number: Number(data.number),
       weight: Number(data.weight),
       height: Number(data.height),
-      birthday: getBirthdaty(data.birthday),
       avatarUrl: srcImage,
     };
 

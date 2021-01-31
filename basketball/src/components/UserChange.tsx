@@ -9,6 +9,7 @@ import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { ContextMenuProvider } from './Baselayout';
 import { changeAuthData } from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 const actionCreators = {
   changeAuthData,
@@ -112,4 +113,13 @@ const BtnGroup = styled.div`
  & > button:nth-child(1) {
    margin-right: 20px;
  } 
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-direction: column;
+  }
+
+  & > button:nth-child(1) {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
 `;

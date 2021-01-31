@@ -76,7 +76,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
   };
 
   const changeSize = (option: IOption) => {
-    const newSizeChunk = { ...chunkData, size: option.value };
+    const newSizeChunk = { ...chunkData, page: 1, size: option.value };
     setChunkData(newSizeChunk);
     loadNewChunk({ chunkData: newSizeChunk, token });
   };
@@ -137,11 +137,12 @@ export const EntitiesMarkUp: FC<IProps> = ({
             containerClassName={style.paginationContainer}
             activeClassName={style.activeClassName}
             onPageChange={changePage}
-            initialPage={0}
+            initialPage={chunkData.page - 1}
             pageCount={typedSelectedChunk.countEntities / typedSelectedChunk.sizePageEntities}
             pageRangeDisplayed={2}
             marginPagesDisplayed={1}
           />
+
           <SelectCounts onChange={changeSize} />
         </TeamsFooter>
       </ContainerTeams>
@@ -176,6 +177,7 @@ const HeaderTeams = styled.div`
     }
     & > button {
       padding: 3.5px 0;
+      margin-top: 16px;
     }
   }
 `;
