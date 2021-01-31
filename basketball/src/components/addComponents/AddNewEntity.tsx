@@ -50,7 +50,7 @@ export const AddNewEntity: FC<IProps> = ({
         <Separator>/</Separator>
         <TextLink
           text={isTeam ? t('team:teams') : t('player:players')}
-          to={`${routePaths.mainBase}/${isTeam ? 'teams' : 'players'}`}
+          to={isTeam ? routePaths.teams : routePaths.players}
           disabled={false}
         />
         <Separator>/</Separator>

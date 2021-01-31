@@ -19,6 +19,7 @@ import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTea
 import { playerCurrentTeam } from '../../store/selectors/playersSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { NotificationError } from '../../uiComponents/NotificationError';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   removeTeam,
@@ -44,7 +45,7 @@ export const TeamsCard = () => {
   const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
 
   const teamUpdate = () => {
-    history.replace(`/main/teams/addTeam/${team.id}`);
+    history.replace(`${routePaths.teamAdd}/${team.id}`);
   };
 
   const deleteCurrentTeam = () => {
@@ -56,9 +57,9 @@ export const TeamsCard = () => {
     <ContainerCard>
       <CardNavigation>
         <Links>
-          <TextLink text={t('main')} to="/main" disabled={false} />
+          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
           <Separator>/</Separator>
-          <TextLink text={t('team:teams')} to="/main/teams" disabled={false} />
+          <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
           <Separator>/</Separator>
           <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
         </Links>

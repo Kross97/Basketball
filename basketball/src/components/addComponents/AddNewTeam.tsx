@@ -7,6 +7,7 @@ import { loadNewImage } from '../../store/async_actions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { addNewTeam, updateCurrentTeam } from '../../store/async_actions/team';
 import { imageLoadData } from '../../store/reducers/image';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   loadNewImage,
@@ -45,14 +46,14 @@ export const AddNewTeam = () => {
       } = await updateTeam({ team: { ...team, id: Number(team.id) }, token });
 
       if (isSuccesUpdate) {
-        history.replace('/main/teams');
+        history.replace(routePaths.teams);
       }
       return;
     }
 
     const { payload: isSuccesAdd } = await addTeam({ team, token });
     if (isSuccesAdd) {
-      history.push('/main/teams');
+      history.push(routePaths.teams);
     }
   };
 

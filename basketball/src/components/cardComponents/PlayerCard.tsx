@@ -17,6 +17,7 @@ import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { NotificationError } from '../../uiComponents/NotificationError';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   removeSelectedPlayer,
@@ -42,7 +43,7 @@ export const PlayerCard = () => {
     entities[player.team] as ITeam).name));
 
   const playerUpdate = () => {
-    history.replace(`/main/players/addPlayer/${player.id}`);
+    history.replace(`${routePaths.playerAdd}/${player.id}`);
   };
 
   const removeCurrentPlayer = () => {
@@ -58,9 +59,9 @@ export const PlayerCard = () => {
     <CardContainer>
       <CardNavigation>
         <div>
-          <TextLink text={t('main')} to="/main" disabled={false} />
+          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
           <Separator>/</Separator>
-          <TextLink text={t('player:players')} to="/main/players" disabled={false} />
+          <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
           <Separator>/</Separator>
           <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
         </div>

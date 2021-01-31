@@ -7,6 +7,7 @@ import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { addNewPlayer, updateSelectedPlayer } from '../../store/async_actions/player';
 import { imageLoadData } from '../../store/reducers/image';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   loadNewImage,
@@ -48,7 +49,7 @@ export const AddNewPlayer = () => {
       } = await updatePlayer({ player: { ...player, id: Number(player.id) }, token });
 
       if (isSuccessUpdate) {
-        history.replace('/main/players');
+        history.replace(routePaths.players);
       }
       return;
     }
@@ -56,7 +57,7 @@ export const AddNewPlayer = () => {
       payload: isSuccessAdding,
     } = await addPlayer({ player, token });
     if (isSuccessAdding) {
-      history.push('/main/players');
+      history.push(routePaths.players);
     }
   };
 

@@ -10,7 +10,7 @@ import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
 import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
-// import { getFullAge } from '../../helpers/functions/getFullAge';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
   addNewPlayer: (data: any) => void;
@@ -35,7 +35,7 @@ export const FormAddPlayer: FC<IProps> = ({
   } = useForm();
 
   const cancelAddNewEntity = () => {
-    history.replace('/main/players');
+    history.replace(routePaths.players);
   };
 
   const changePosition = (targetPosition: any) => {

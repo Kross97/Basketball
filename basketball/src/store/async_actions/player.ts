@@ -10,6 +10,7 @@ import {
 } from '../../helpers/interfaces/request_interfaces/Player';
 import { playersDataReducer } from '../reducers/player';
 import { IOption } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 export const addNewPlayer = createAsyncThunk(
   'addNewPlayer',
@@ -46,7 +47,7 @@ export const removeSelectedPlayer = createAsyncThunk(
     dispatch(addEntityError.actions.clearErrorMessage());
     try {
       const result = await deletePlayer(`Player/Delete?id=${removeData.id}`, removeData.token);
-      removeData.history.replace('/main/players');
+      removeData.history.replace(routePaths.players);
       dispatch(playersDataReducer.actions.deleteOnePlayer(result.id));
     } catch (error) {
       if (error.isCustomError) {

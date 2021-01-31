@@ -7,6 +7,7 @@ import { ButtonAction } from '../uiComponents/ButtonAction';
 import teamsEmpty from '../static/images/empty_teams.svg';
 import playersEmpty from '../static/images/empty_players.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { routePaths } from '../helpers/constants/routePaths';
 
 interface IProps {
   isTeam: boolean;
@@ -23,7 +24,7 @@ export const EmptyEntity: FC<IProps> = ({
       <LabelEmpty>{t('emptyEntity:label')}</LabelEmpty>
       <TextEntity>{isTeam ? t('emptyEntity:emptyTeam') : t('emptyEntity:emptyPlayer')}</TextEntity>
       <ButtonAction
-        onClick={() => history.push(isTeam ? 'teams/addTeam' : 'players/addPlayer')}
+        onClick={() => history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd)}
         isNegativeStyle={false}
         isAdding
         size="large"

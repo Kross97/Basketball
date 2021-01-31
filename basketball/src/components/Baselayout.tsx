@@ -30,7 +30,7 @@ export const BaseLayout = () => {
   };
 
   useEffect(() => {
-    if (!isAuthorized) { // не забыть заменить !isAuthorized
+    if (!isAuthorized) {
       history.replace(routePaths.signIn);
     }
   }, [isAuthorized]);
@@ -51,10 +51,10 @@ export const BaseLayout = () => {
           <SideSandwichMenu />
           <ContentLayout>
             <Switch>
-              <Route path="/main/teams">
+              <Route path={routePaths.teams}>
                 <TeamsRouter />
               </Route>
-              <Route path="/main/players">
+              <Route path={routePaths.players}>
                 <PlayersRouter />
               </Route>
             </Switch>

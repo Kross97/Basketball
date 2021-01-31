@@ -3,17 +3,18 @@ import { Switch, Route } from 'react-router-dom';
 import { AddNewPlayer } from '../addComponents/AddNewPlayer';
 import { PlayerCard } from '../cardComponents/PlayerCard';
 import { EntitiesMarkUp } from './EntitiesMarkUp';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 export const PlayersRouter = () => (
   <>
     <Switch>
-      <Route exact path="/main/players">
+      <Route exact path={routePaths.players}>
         <EntitiesMarkUp isTeam={false} />
       </Route>
-      <Route exact path={['/main/players/addPlayer/:id', '/main/players/addPlayer']}>
+      <Route exact path={[routePaths.playerUpdate, routePaths.playerAdd]}>
         <AddNewPlayer />
       </Route>
-      <Route path="/main/players/:id">
+      <Route path={routePaths.playerItem}>
         <PlayerCard />
       </Route>
     </Switch>

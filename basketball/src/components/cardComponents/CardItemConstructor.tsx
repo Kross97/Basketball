@@ -10,6 +10,7 @@ import { TypeItem } from '../../helpers/types/types';
 import imageUknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
   type: TypeItem,
@@ -27,10 +28,10 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
 
   const showItemCard = () => {
     if (type === 'team') {
-      history.push(`teams/${item.id}`);
+      history.push(`${routePaths.teams}/${item.id}`);
       return;
     }
-    history.push(`players/${item.id}`);
+    history.push(`${routePaths.players}/${item.id}`);
   };
 
   const typeItemUrl = 'avatarUrl' in item ? item.avatarUrl : item.imageUrl;

@@ -23,6 +23,7 @@ import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { SearchNotFound } from './SearchNotFound';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreator = {
   loadChunkTeams,
@@ -122,7 +123,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
             text={t('markup:add')}
             disabled={false}
             type="button"
-            onClick={() => history.push(isTeam ? '/main/teams/addTeam' : '/main/players/addPlayer')}
+            onClick={() => history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd)}
           />
         </HeaderTeams>
         <TeamsBody>

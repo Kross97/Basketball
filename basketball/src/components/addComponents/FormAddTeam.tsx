@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
   addNewTeam: (data: any) => void;
@@ -26,7 +27,7 @@ export const FormAddTeam: FC<IProps> = ({
   } = useForm();
 
   const cancelAddNewEntity = () => {
-    history.replace('/main/teams');
+    history.replace(routePaths.teams);
   };
 
   return (

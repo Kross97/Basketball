@@ -11,6 +11,7 @@ import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
 import { teamsDataReducer } from '../reducers/team';
 import { deletePlayer } from '../../api/player';
 import { playersDataReducer } from '../reducers/player';
+import { routePaths } from '../../helpers/constants/routePaths';
 
 export const addNewTeam = createAsyncThunk('addNewplayer',
   async (teamData: IDataAddTeam, { dispatch }) => {
@@ -49,7 +50,7 @@ export const removeTeam = createAsyncThunk(
         deletePlayer(`Player/Delete?id=${id}`, removeData.token);
       });
       const result = await deleteTeam(`Team/Delete?id=${removeData.id}`, removeData.token);
-      removeData.history.replace('/main/teams');
+      removeData.history.replace(routePaths.teams);
       batch(() => {
         dispatch(playersDataReducer.actions.deleteManyPlayers(idsPlayersTeam));
         dispatch(teamsDataReducer.actions.deleteOneTeam(result.id));
