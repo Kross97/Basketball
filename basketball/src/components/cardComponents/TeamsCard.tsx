@@ -1,45 +1,106 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useHistory, useParams } from 'react-router-dom';
+import { useSelector, shallowEqual } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
-import { Team } from '../../helpers/Mock_team';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { sizeMobile } from '../../helpers/constants/mobileSize';
+import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
+import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import imageUnknown from '../../static/images/item_not_image.png';
+import { regExpImageTeam } from '../../helpers/constants/regularExp';
+import { removeTeam } from '../../store/async_actions/team';
+import { useCustomActions } from '../../helpers/functions/useCustomActions';
+import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
+import { playerCurrentTeam } from '../../store/selectors/playersSelector';
+import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { NotificationError } from '../../uiComponents/NotificationError';
+import { routePaths } from '../../helpers/constants/routePaths';
 
-export const TeamsCard = () => (
-  <div>
-    <CardNavigation>
-      <Links>
-        <TextLink text="Main" to="Main" disabled={false} />
-        <Separator>/</Separator>
-        <TextLink text="Teams" to="Teams" disabled={false} />
-        <Separator>/</Separator>
-        <TextLink text={`${Team.name}`} to={`${Team.name}`} disabled />
-      </Links>
-      <Actions>
-        <BtnCreate type="button" />
-        <BtnDelete type="button">
-          <RemoveIcon />
-        </BtnDelete>
-      </Actions>
-    </CardNavigation>
-    <CardBody>
-      <Content>
-        <LogoTeam />
-        <DataCard>
-          <TeamName>{Team.name}</TeamName>
-          <DescriptionContainer>
-            <TeamItemsDescription
-              team={Team}
-            />
-          </DescriptionContainer>
-        </DataCard>
-      </Content>
-    </CardBody>
-  </div>
-);
+const actionCreators = {
+  removeTeam,
+};
+
+export const TeamsCard = () => {
+  const { id } = useParams<{ id: string }>();
+  const playersCurrentTeam = useSelector((state: IStoreReducer) => playerCurrentTeam(state, id));
+  const history = useHistory();
+  const { t } = useTranslation();
+  const { team, token, errorMessage } = useSelector((
+    {
+      teamsDataReducer,
+      authDataUser,
+      addEntityError,
+    }: IStoreReducer,
+  ) => ({
+    team: teamsDataReducer.entities[id] as ITeam,
+    token: authDataUser.authData.token,
+    errorMessage: addEntityError.errorMessage,
+  }), shallowEqual);
+
+  const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
+
+  const teamUpdate = () => {
+    history.replace(`${routePaths.teamAdd}/${team.id}`);
+  };
+
+  const deleteCurrentTeam = () => {
+    deleteTeam({
+      id, history, playersCurrentTeam, token,
+    });
+  };
+  return (
+    <ContainerCard>
+      <CardNavigation>
+        <Links>
+          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
+          <Separator>/</Separator>
+          <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
+          <Separator>/</Separator>
+          <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
+        </Links>
+        <Actions>
+          <BtnUpdate onClick={teamUpdate} type="button" />
+          <BtnDelete onClick={deleteCurrentTeam} type="button">
+            <RemoveIcon />
+          </BtnDelete>
+        </Actions>
+      </CardNavigation>
+      <CardBody>
+        <Content>
+          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUnknown} />
+          <DataCard>
+            <TeamName>{team.name}</TeamName>
+            <DescriptionContainer>
+              <TeamItemsDescription
+                team={team}
+              />
+            </DescriptionContainer>
+          </DataCard>
+        </Content>
+        { errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
+      </CardBody>
+      { playersCurrentTeam.length > 0 && (
+      <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />
+      )}
+    </ContainerCard>
+  );
+};
+
+const ContainerCard = styled.div`
+  margin: 32px auto;
+  flex-grow: 0.2;
+  position: relative;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    margin: 16px 0;
+    flex-grow: 1;
+  }
+`;
 
 const CardNavigation = styled.nav`
   display: flex;
@@ -47,8 +108,9 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
+  background-color: ${({ theme }) => theme.colors.white};  
   
-  @media(max-width: 445px) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -66,7 +128,7 @@ const Button = styled.button`
   box-sizing: border-box;
 `;
 
-const BtnCreate = styled(Button)`
+const BtnUpdate = styled(Button)`
   background: url(${createIcon}) no-repeat 4px 3px;
   background-size: 17px;
   margin-right: 22px;
@@ -100,8 +162,9 @@ const CardBody = styled.div`
   padding: 65px 0 65px 146px;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
+  position: relative;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -109,7 +172,7 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     text-align: center;
   }
 `;
@@ -119,20 +182,20 @@ const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     flex-direction: column;
   }
 `;
 
-const LogoTeam = styled.div`
+const LogoTeam = styled.div<{ imageUrl: string}>`
   margin-right: 146px;
   flex-shrink: 0.1;
-  background: url(${Team.imageUrl}) no-repeat;
+  background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat center`};
   background-size: contain;
   width: 210px;
   height: 210px;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     width: 140px;
     height: 140px;
     margin-right: 0;
@@ -145,7 +208,7 @@ const TeamName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -157,11 +220,29 @@ const DescriptionContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
-  gap: 54px 80px;
+  grid-row-gap: 54px;
+  grid-column-gap: 80px;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 43px;
+    grid-row-gap: 43px;
+  }
+`;
+
+const NotificationContainer = styled.div`
+  position: absolute;
+  bottom: -40px;
+  left: 40%;
+
+  @media(max-width: 800px) {
+    left: 30%;
+  }
+  
+  @media(max-width: 600px) {
+    left: 20%;
+  }
+  @media(max-width: 350px) {
+    left: 10%;
   }
 `;

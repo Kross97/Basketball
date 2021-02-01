@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
+import { useTranslation } from 'react-i18next';
 import search from '../static/icons/search.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
-export const FieldSearch = () => (
-  <SearchContainer>
-    <CustomSearch type="text" placeholder="Search..." />
-  </SearchContainer>
-);
+interface IProps {
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export const FieldSearch: FC<IProps> = ({
+  onChange,
+}) => {
+  const { t } = useTranslation();
+  return (
+    <SearchContainer>
+      <CustomSearch onChange={onChange} type="text" placeholder={t('markup:search')} />
+    </SearchContainer>
+  );
+};
 
 const SearchContainer = styled.div`
 display: flex;
@@ -31,5 +42,9 @@ const CustomSearch = styled.input`
     font-size: 14px;
     line-height: 24px;
     color: ${({ theme }) => theme.colors.middleGrey};
+  }
+
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 4px 12px;
   }
 `;

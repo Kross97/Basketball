@@ -1,17 +1,19 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
-import { ReactComponent as ProfileLogo } from '../static/icons/profile.svg';
-import { sizeMobile } from '../helpers/constants/mobileSize';
+import profileLogo from '../static/icons/profile.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   name: string;
+  avatarUrl: string | null;
+  onClick: () => void;
 }
 
-export const AuthorizedUserLogo: FC<IProps> = ({ name }) => (
-  <ContainerLogo>
+export const AuthorizedUserLogo: FC<IProps> = ({ name, avatarUrl, onClick }) => (
+  <ContainerLogo onClick={onClick}>
     <LogoText>{name}</LogoText>
-    <UserLogo />
+    <UserLogo avatarUrl={avatarUrl} />
   </ContainerLogo>
 );
 
@@ -22,18 +24,23 @@ const LogoText = styled(TextSmall)`
 const ContainerLogo = styled.div`
   display: inline-flex;
   align-items: center;
+  cursor: pointer;
   
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     flex-direction: row-reverse;
   }
 `;
 
-const UserLogo = styled(ProfileLogo)`
+const UserLogo = styled.div<{ avatarUrl: string | null }>`
   margin-left: 19px;
   width: 30px;
   height: 30px;
-
-  @media(max-width: ${sizeMobile}) {
+  background: ${({ avatarUrl }) => (avatarUrl ? `url(${avatarUrl}) no-repeat` : `url(${profileLogo}) no-repeat`)};
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  
+  @media(max-width: ${mobileVersionLayout}) {
     width: 40px;
     height: 40px;
     margin-left: 0;

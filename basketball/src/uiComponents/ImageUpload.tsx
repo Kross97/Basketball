@@ -1,16 +1,70 @@
-import React from 'react';
+import React, { FC, useEffect } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import addPhotoIcon from '../static/icons/add_photo.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { imageLoadData } from '../store/reducers/image';
+import { loadNewImage } from '../store/async_actions/image';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
-export const ImageUpload = ({ imageSrc = 'start' }) => (
-  <ImageContainer imageSrc={imageSrc}>
-    <AddHover imageSrc={imageSrc} />
-  </ImageContainer>
-);
+interface IProps {
+  defaultImage?: string | undefined;
+}
 
-const AddHover = styled.div<{ imageSrc: string; }>`
+const actionCreators = {
+  loadNewImage,
+  clearSrcImage: imageLoadData.actions.clearSrcImage,
+  addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
+};
+
+export const ImageUpload: FC<IProps> = ({
+  defaultImage,
+}) => {
+  const { token, srcImage } = useSelector((state: IStoreReducer) => ({
+    token: state.authDataUser.authData.token,
+    srcImage: state.imageLoadData.srcImage,
+  }));
+
+  const {
+    clearSrcImage,
+    loadNewImage: downloadImage,
+    addSrcImageExisting,
+  } = useCustomActions(actionCreators);
+
+  useEffect(() => {
+    clearSrcImage();
+    if (defaultImage) {
+      addSrcImageExisting({ srcImage: defaultImage });
+    }
+  }, [defaultImage]);
+
+  const loadImage = (imageData: React.ChangeEvent<HTMLInputElement>) => {
+    if (imageData.target.files) {
+      const fileImage = imageData.target.files[0];
+      const formData = new FormData();
+      formData.set('file', fileImage);
+      downloadImage({ file: formData, token });
+    }
+  };
+
+  return (
+    <label>
+      <InputLoad onChange={loadImage} type="file" />
+      <ImageContainer imageSrc={srcImage}>
+        <AddHover />
+      </ImageContainer>
+    </label>
+  );
+};
+
+const InputLoad = styled.input`
+  display: none;
+`;
+
+const AddHover = styled.div`
   border-radius: 10px;
-  display: ${({ imageSrc }) => (imageSrc === 'start' ? 'none' : 'block')};
+  display: block;
   position: absolute;
   top: 0;
   bottom: 0;
@@ -23,7 +77,7 @@ const AddHover = styled.div<{ imageSrc: string; }>`
   &:hover {
     background-color: rgba(48, 48, 48, 0.8);
   }
-  @media (max-width: 445px) {
+  @media (max-width: ${mobileVersionLayout}) {
     background-size: 41px 40px;
   }
 `;
@@ -34,14 +88,10 @@ const ImageContainer = styled.div<{ imageSrc: string; }>`
   width: 336px;
   height: 261px;
   position: relative;
-  background: ${({
-    imageSrc,
-    theme,
-  }) => (imageSrc === 'start' ? `${theme.colors.grey} url(${addPhotoIcon}) no-repeat center center` : `${theme.colors.white} url(${imageSrc}) no-repeat center 7px`)};
-  background-size: ${({ imageSrc }) => (imageSrc === 'start' ? '74px 75px' : 'contain')};
+  background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat center 6px`};
+  background-size: contain;
   
-  @media (max-width: 445px) {
-    background-size: ${({ imageSrc }) => (imageSrc === 'start' ? '41px 40px' : 'contain')};
+  @media (max-width: ${mobileVersionLayout}) {
     width: 185px;
     height: 144px;
   }

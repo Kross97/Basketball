@@ -1,9 +1,11 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
 import { TypesInput } from '../helpers/types/types';
+import calendarIcon from '../static/icons/calendar.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -11,6 +13,7 @@ interface IProps {
   startType: TypesInput;
   type: TypesInput;
   name: string;
+  defaultValue?: string | number;
   register?: (field: any) => void;
   changeTypeInput?: () => void;
   isError?: boolean;
@@ -23,33 +26,43 @@ export const FieldInputData: FC<IProps> = ({
   startType,
   type,
   name,
+  defaultValue,
   register,
   changeTypeInput,
   isError = false,
   errorMessage = '',
-}) => (
-  <InputContainer>
-    <TextInput>{text}</TextInput>
-    <CustomInput
-      name={name}
-      type={type}
-      disabled={disabled}
-      isError={isError}
-      ref={register}
-    />
-    {isError && <TextInputError>{errorMessage}</TextInputError>}
-    {startType === 'password' && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
-  </InputContainer>
-);
+
+}) => {
+  const [isDateChanged, setDateChange] = useState<boolean>(() => (
+    typeof defaultValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(defaultValue)));
+  return (
+    <InputContainer onChange={() => setDateChange(true)}>
+      <TextInput>{text}</TextInput>
+      <CustomInput
+        name={name}
+        type={type}
+        disabled={disabled}
+        isError={isError}
+        defaultValue={defaultValue}
+        ref={register}
+        isDateChanged={isDateChanged}
+      />
+      {isError && <TextInputError>{errorMessage}</TextInputError>}
+      {startType === 'password'
+    && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.label`
   display: flex;
   flex-direction: column;
   cursor: pointer;
   position: relative;
+  outline: none;
 `;
 
-const CustomInput = styled.input<{ isError: boolean }>`
+const CustomInput = styled.input<{ type: string, isError: boolean, isDateChanged: boolean }>`
   outline: none;
   border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
   border-radius: 4px;
@@ -59,8 +72,8 @@ const CustomInput = styled.input<{ isError: boolean }>`
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  color: ${({ theme }) => theme.colors.darkGrey};
-
+  color: ${({ isDateChanged, type, theme }) => (!isDateChanged && type === 'date' ? 'transparent' : theme.colors.darkGrey)};
+  background: ${({ type }) => type === 'date' && `url(${calendarIcon}) no-repeat right 14px center`};
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightGrey};
   }
@@ -75,6 +88,22 @@ const CustomInput = styled.input<{ isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
+  
+  &::-webkit-calendar-picker-indicator {
+    position: absolute;
+    cursor: pointer;
+    background: none;
+    outline: none;
+    top: 0;
+    left: -30px;
+    width: 100%;
+    height: 100%;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 4px 12px;
+  }
+  
 `;
 
 const TextInput = styled(TextSmall)`

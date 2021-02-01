@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
-import { sizeMobile } from '../helpers/constants/mobileSize';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -20,7 +20,7 @@ const LinkText = styled(TextSmall)`
   line-height: 19px;
   font-weight: 600;
 
-  @media(max-width: ${sizeMobile}) {
+  @media(max-width: ${mobileVersionLayout}) {
     font-size: 12px;
   }
 `;

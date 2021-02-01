@@ -14,7 +14,7 @@ export interface LoginUser {
   password: string
 }
 
-export interface IResponseSignUpSucces {
+export interface IResponseSignSucces {
   name: string,
   avatarUrl: string,
   token: string,
@@ -23,4 +23,12 @@ export interface IResponseSignUpSucces {
 export interface IResponseSignUpErrors {
   isError: boolean,
   status: number,
+}
+
+export interface IChangedDataUser {
+  change: {
+    userName: string,
+    avatarUrl: string,
+  }
+  token: string,
 }

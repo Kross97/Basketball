@@ -40,7 +40,7 @@ export const TextLarge = styled.span`
   line-height: 33px;
 `;
 
-export const TextLabelSignUp = styled.span`
+export const TextLabel = styled.span`
   font-family: Avenir, sans-serif;
   font-style: normal;
   font-weight: normal;

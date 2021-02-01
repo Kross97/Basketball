@@ -10,7 +10,7 @@ export default {
 
 export const SearchInput = () => (
   <MockContainer>
-    <FieldSearch />
+    <FieldSearch onChange={(({ target: { value } }) => console.log('change => ', value))} />
   </MockContainer>
 );
 

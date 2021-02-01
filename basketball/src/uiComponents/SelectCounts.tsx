@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { FC } from 'react';
 import Select from 'react-select';
 import { theme } from '../themes/theme';
 
@@ -34,12 +34,30 @@ const customStyles = {
     backgroundColor: theme.colors.white,
     borderColor: theme.colors.lightGrey,
     boxShadow: 'none',
+    width: '90px',
+    height: '40px',
+    '@media(max-width: 800px)': {
+      width: '80px',
+      height: '28px',
+    },
     ':hover': {
       borderColor: theme.colors.lightGrey,
     },
   }),
+  menu: (styles: any) => ({
+    ...styles,
+    position: 'absolute',
+    top: '-150px',
+  }),
 };
-export const SelectCounts = () => (
+
+interface IProps {
+  onChange: (e: any) => void;
+}
+
+export const SelectCounts: FC<IProps> = ({
+  onChange,
+}) => (
   <Select
     isMulti={false}
     isClearable={false}
@@ -47,5 +65,6 @@ export const SelectCounts = () => (
     defaultValue={counts[0]}
     options={counts}
     placeholder={false}
+    onChange={onChange}
   />
 );

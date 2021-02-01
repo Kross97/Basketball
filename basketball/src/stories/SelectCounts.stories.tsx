@@ -8,12 +8,18 @@ export default {
   component: SelectCounts,
 } as Meta;
 
+interface IOption {
+  value: string,
+  label: string,
+}
+
 export const Select = () => (
   <MockContainer>
-    <SelectCounts />
+    <SelectCounts onChange={(option: IOption) => console.log('option =>', option)} />
   </MockContainer>
 );
 
 const MockContainer = styled.div`
   width: 88px;
+  margin-top: 130px;
 `;

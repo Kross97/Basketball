@@ -1,16 +1,18 @@
 import React, { FC, useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { TextLink } from '../../uiComponents/TextLink';
 import { NotificationError } from '../../uiComponents/NotificationError';
-import { TextLabelSignUp, TextSmall } from '../../uiComponents/Typography';
+import { TextLabel, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
+import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
 
 interface IProps {
   typeForm: string;
@@ -33,6 +35,7 @@ export const BaseForm: FC<IProps> = ({
     setValue,
     watch,
   } = useForm();
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userData?.login && userData?.password) {
@@ -58,40 +61,40 @@ export const BaseForm: FC<IProps> = ({
       { typeForm === 'Sign Up' && (
       <FieldInputData
         name="userName"
-        text="Name"
+        text={t('name')}
         disabled={false}
         type="text"
         startType="text"
         isError={!!errors.userName}
         errorMessage="Required or incorrect enter"
-        register={register({ required: true, pattern: /^([^\W\d_]{5,})$/i })}
+        register={register({ required: true, pattern: regExpName })}
       />
       ) }
       <FieldInputData
         name="login"
-        text="Login"
+        text={t('login')}
         disabled={false}
         type="text"
         startType="text"
         isError={!!errors.login}
         errorMessage="Required or incorrect enter"
-        register={register({ required: true, pattern: /^([^\W\s]+)$/i })}
+        register={register({ required: true, pattern: regExpLogin })}
       />
       <FieldInputData
         name="password"
-        text="Password"
+        text={t('password')}
         disabled={false}
         type={typePasswordInputs.password}
         startType="password"
         changeTypeInput={() => changeTypeInput('password')}
         isError={!!errors.password}
         errorMessage="Required or space exists"
-        register={register({ required: true, pattern: /^([^\s]+)$/i })}
+        register={register({ required: true, pattern: regExpPassword })}
       />
       { typeForm === 'Sign Up' && (
       <FieldInputData
         name="passwordRepeat"
-        text="Enter your password again"
+        text={t('passwordRepeat')}
         disabled={false}
         type={typePasswordInputs.passwordRepeat}
         startType="password"
@@ -102,7 +105,7 @@ export const BaseForm: FC<IProps> = ({
           : 'Required or space exists'}
         register={register({
           required: true,
-          pattern: /^([^\s]+)$/i,
+          pattern: regExpPassword,
           validate: (value) => getValues('password') === value,
         })}
       />
@@ -111,7 +114,7 @@ export const BaseForm: FC<IProps> = ({
       <CheckboxСhoice
         name="acceptAgreement"
         register={register}
-        text="I accept the agreement"
+        text={t('signUpCheck')}
         disabled={false}
       />
       )}
@@ -125,10 +128,10 @@ export const BaseForm: FC<IProps> = ({
       />
       <TextContainer>
         <TextSign>
-          {typeForm === 'Sign Up' ? 'Already a member?' : 'Not a member yet?' }
+          {typeForm === 'Sign Up' ? t('signUpMember') : t('signInMember') }
         </TextSign>
         <TextLink
-          text={typeForm === 'Sign Up' ? 'Sign in' : 'Sign up'}
+          text={typeForm === 'Sign Up' ? t('signIn') : t('signUp')}
           to={typeForm === 'Sign Up' ? `${routePaths.signIn}` : `${routePaths.signUp}`}
           disabled={false}
         />
@@ -143,6 +146,12 @@ const FormSign = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
+  
+  & button > span {
+    display: block;
+    width: 65px;
+  }
+  
   & label, & button {
     margin-bottom: 24px;
   }
@@ -157,7 +166,7 @@ const TextSign = styled(TextSmall)`
   margin-right: 5px;
 `;
 
-const LabelForm = styled(TextLabelSignUp)`
+const LabelForm = styled(TextLabel)`
   color: ${({ theme }) => theme.colors.blue};
   margin-bottom: 30px;
   
@@ -166,45 +175,11 @@ const LabelForm = styled(TextLabelSignUp)`
   }
 `;
 
-const animationNotification = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-  
-  10% {
-    opacity: 0.1;
-    transform: scale(0.9);
-  }
-  
-  25% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-  
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-  
-  75% {
-    opacity: 0.8;
-    transform: scale(1.2);
-  }
-  
-  100% {
-    opacity: 1;
-    transform: scale(1.3);
-  }
-`;
-
 const Notification = styled.div`
   position: absolute;
   bottom: -80px;
-  right: 10%;
-  left: 10%;
-  animation: ${animationNotification} 1s linear;
-  animation-direction: alternate;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 2;
+  right: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
 `;

@@ -1,24 +1,28 @@
 import { IRequestBaseBody } from '../helpers/interfaces/request_interfaces/RequestBase';
 import { RequestGenericType } from '../helpers/types/types';
 
-const base = process.env.REACT_APP_URL;
-
-// multipart/form-data - для картинки
+const base = process.env.REACT_APP_API;
 
 const request = async (url: string, data: IRequestBaseBody, token: string | undefined) => {
-  const headers = token
+  const headersForToken = token
     ? {
       Authorization: `Bearer ${token}`,
     } : { };
+  const headerForMultiPart = typeof data.body === 'string' ? {
+    'Content-Type': 'application/json;charset=utf-8',
+  } : {};
   const response = await fetch(url, {
     ...data,
     // @ts-ignore
     headers: {
-      ...headers,
-      'Content-Type': 'application/json;charset=utf-8',
+      ...headersForToken,
+      ...headerForMultiPart,
     },
   });
   if (response.ok) {
+    if (response.headers.get('Content-Length') === '0') {
+      return true;
+    }
     const typeResponse = response.headers.get('Content-Type');
     let result;
     if (typeResponse === 'application/text') {
@@ -28,6 +32,7 @@ const request = async (url: string, data: IRequestBaseBody, token: string | unde
     result = await response.json();
     return result;
   }
+
   throw { isCustomError: true, status: response.status };
 };
 

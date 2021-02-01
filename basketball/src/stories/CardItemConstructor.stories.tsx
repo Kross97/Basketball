@@ -1,10 +1,9 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { CardItemConstructor } from '../components/cardComponents/CardItemConstructor';
-import { sizeMobile } from '../helpers/constants/mobileSize';
-import { Team } from '../helpers/Mock_team';
-import { Player } from '../helpers/Mock_player';
+import { CardItemConstructor } from './CardItemForStories';
+import { Team } from '../helpers/storybook_mock_constants/Mock_team';
+import { Player } from '../helpers/storybook_mock_constants/Mock_player';
 
 export default {
   title: 'Components/ItemConstructor',
@@ -27,8 +26,4 @@ const MockContainer = styled.div`
   width: 364px;
   height: 380px;
   
-  @media(max-width: ${sizeMobile}) {
-    width: 170px;
-    height: 180px;
-  }
 `;

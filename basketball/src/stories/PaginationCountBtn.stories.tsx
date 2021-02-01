@@ -1,6 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { PaginationCountBtn } from '../uiComponents/PaginationCountBtn';
+import { PagginationBtn } from '../helpers/types/types';
 
 export default {
   title: 'UI/Buttons',
@@ -8,22 +9,20 @@ export default {
 } as Meta;
 
 interface IProps {
-  number: string;
+  type: PagginationBtn;
 }
 
-export const PaginationBtn = ({ number = '1' }: IProps) => (
+export const PaginationBtn = ({ type = 'break' }: IProps) => (
   <PaginationCountBtn
-    number={number}
+    type={type}
   />
 );
 
 PaginationBtn.argTypes = {
-  number: {
+  type: {
     control: {
-      type: 'range',
-      min: 1,
-      max: 100,
-      step: 1,
+      type: 'select',
+      options: ['break', 'prev', 'next'],
     },
   },
 };

@@ -1,16 +1,27 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { MultiSelectCommands } from '../uiComponents/MultiSelectCommands';
+import { MultiSelectEntities } from '../uiComponents/MultiSelectEntities';
 
 export default {
   title: 'UI/SelectsCommands',
-  component: MultiSelectCommands,
+  component: MultiSelectEntities,
 } as Meta;
+
+const options = [
+  { value: 'chocolate', label: 'Chocolate' },
+  { value: 'red', label: 'Red' },
+  { value: 'strawberry', label: 'Strawberry' },
+  { value: 'vanilla', label: 'Vanilla' }];
 
 export const PlayersMultiSelect = () => (
   <MockContainer>
-    <MultiSelectCommands />
+    <MultiSelectEntities
+      onChange={console.log}
+      isPlaceholder="Select..."
+      isMulti
+      options={options}
+    />
   </MockContainer>
 );
 
