@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/Basketball/static/css/main.425b4b7c.chunk.css",
-    "main.js": "/Basketball/static/js/main.e4543557.chunk.js",
-    "main.js.map": "/Basketball/static/js/main.e4543557.chunk.js.map",
+    "main.js": "/Basketball/static/js/main.4f078386.chunk.js",
+    "main.js.map": "/Basketball/static/js/main.4f078386.chunk.js.map",
     "runtime-main.js": "/Basketball/static/js/runtime-main.068f2e77.js",
     "runtime-main.js.map": "/Basketball/static/js/runtime-main.068f2e77.js.map",
-    "static/js/2.bed0946b.chunk.js": "/Basketball/static/js/2.bed0946b.chunk.js",
-    "static/js/2.bed0946b.chunk.js.map": "/Basketball/static/js/2.bed0946b.chunk.js.map",
+    "static/js/2.87ad73c8.chunk.js": "/Basketball/static/js/2.87ad73c8.chunk.js",
+    "static/js/2.87ad73c8.chunk.js.map": "/Basketball/static/js/2.87ad73c8.chunk.js.map",
     "static/js/3.9a2bb7e2.chunk.js": "/Basketball/static/js/3.9a2bb7e2.chunk.js",
     "static/js/3.9a2bb7e2.chunk.js.map": "/Basketball/static/js/3.9a2bb7e2.chunk.js.map",
     "index.html": "/Basketball/index.html",
     "static/css/main.425b4b7c.chunk.css.map": "/Basketball/static/css/main.425b4b7c.chunk.css.map",
-    "static/js/2.bed0946b.chunk.js.LICENSE.txt": "/Basketball/static/js/2.bed0946b.chunk.js.LICENSE.txt",
+    "static/js/2.87ad73c8.chunk.js.LICENSE.txt": "/Basketball/static/js/2.87ad73c8.chunk.js.LICENSE.txt",
     "static/media/index.css": "/Basketball/static/media/Avenir-Medium.78f0f895.ttf",
     "static/media/add_photo.06bd5fc8.svg": "/Basketball/static/media/add_photo.06bd5fc8.svg",
     "static/media/ball.36f19b2f.svg": "/Basketball/static/media/ball.36f19b2f.svg",
@@ -34,8 +34,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.068f2e77.js",
-    "static/js/2.bed0946b.chunk.js",
+    "static/js/2.87ad73c8.chunk.js",
     "static/css/main.425b4b7c.chunk.css",
-    "static/js/main.e4543557.chunk.js"
+    "static/js/main.4f078386.chunk.js"
   ]
 }
