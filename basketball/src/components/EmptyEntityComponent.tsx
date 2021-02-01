@@ -49,6 +49,10 @@ const ContainerEntity = styled.div`
     border-radius: 0;
     flex-grow: 1;
     padding: 79px 0 48px;
+
+    & > button:nth-of-type(1) {
+      padding: 4px 142px;
+    }
   }
 `;
 

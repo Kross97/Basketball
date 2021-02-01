@@ -92,6 +92,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean, isDateChanged
     position: absolute;
     cursor: pointer;
     background: none;
+    outline: none;
     top: 0;
     left: -30px;
     width: 100%;

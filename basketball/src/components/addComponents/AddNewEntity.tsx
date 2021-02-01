@@ -61,8 +61,8 @@ export const AddNewEntity: FC<IProps> = ({
         {isTeam
           ? <FormAddTeam teamUpdate={entityUpdate as ITeam} addNewTeam={addNewEntity} />
           : <FormAddPlayer playerUpdate={entityUpdate as IPlayer} addNewPlayer={addNewEntity} />}
+        {errorMessage !== '' && <Notification><NotificationError text={errorMessage} /></Notification>}
       </BodyAdd>
-      {errorMessage !== '' && <Notification><NotificationError text={errorMessage} /></Notification>}
     </ContainerAdd>
   );
 };
@@ -70,7 +70,6 @@ const ContainerAdd = styled.div`
   flex-grow: 0.5;
   margin: 32px auto auto;
   border-radius: 10px;
-  position: relative;
   background-color: ${({ theme }) => theme.colors.white};
 
   @media(max-width: ${mobileVersionLayout}) {
@@ -97,6 +96,7 @@ const BodyAdd = styled.div`
   display: flex;
   justify-content: flex-start;
   padding: 48px 0 48px 73px;
+  position: relative;
   
   & > label:nth-child(1) {
     margin-right: 136px;
@@ -158,11 +158,17 @@ const Notification = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
-  bottom: -80px;
-  right: 10%;
-  left: 10%;
+  width: 50%;
+  bottom: -20px;
+  left: 28%;
   animation: ${animationNotification} 1.5s linear;
   animation-direction: alternate;
   animation-fill-mode: forwards;
   animation-iteration-count: 2;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    bottom: unset;
+    top: 20px;
+    left: 24%;
+  }
 `;

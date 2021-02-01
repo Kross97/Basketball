@@ -8,7 +8,7 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
-import { regExpName, regExpYear } from '../../helpers/constants/regularExp';
+import { regExpYear, regExpCommandName, regExpDivision } from '../../helpers/constants/regularExp';
 
 interface IProps {
   addNewTeam: (data: IFormAddTeam) => void;
@@ -44,7 +44,7 @@ export const FormAddTeam: FC<IProps> = ({
         errorMessage={t('errorsForm:required')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
-        register={register({ required: true, pattern: regExpName })}
+        register={register({ required: true, pattern: regExpCommandName })}
       />
       <FieldInputData
         text={t('team:division')}
@@ -55,7 +55,7 @@ export const FormAddTeam: FC<IProps> = ({
         errorMessage={t('errorsForm:required')}
         name="division"
         defaultValue={teamUpdate ? teamUpdate.division : ''}
-        register={register}
+        register={register({ pattern: regExpDivision })}
       />
       <FieldInputData
         text={t('team:conference')}
@@ -66,7 +66,7 @@ export const FormAddTeam: FC<IProps> = ({
         errorMessage={t('errorsForm:required')}
         name="conference"
         defaultValue={teamUpdate ? teamUpdate.conference : ''}
-        register={register}
+        register={register({ pattern: /^[^\W\d]{5,}$/ })}
       />
       <FieldInputData
         text={t('team:foundation')}

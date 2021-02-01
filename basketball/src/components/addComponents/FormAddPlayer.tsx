@@ -132,7 +132,10 @@ export const FormAddPlayer: FC<IProps> = ({
           errorMessage={t('errorsForm:required')}
           name="birthday"
           defaultValue={playerUpdate && playerUpdate.birthday.slice(0, 10)}
-          register={register({ required: true })}
+          register={register({
+            required: true,
+            validate: (value) => new Date(value) < new Date(Date.now()),
+          })}
         />
         <FieldInputData
           text={t('player:number')}
