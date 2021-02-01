@@ -9,6 +9,7 @@ import { addNewTeam, updateCurrentTeam } from '../../store/async_actions/team';
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { FormAddTeam } from './FormAddTeam';
 
 const actionCreators = {
   loadNewImage,
@@ -59,13 +60,11 @@ export const AddNewTeam = () => {
   };
 
   return (
-    <>
-      <AddNewEntity
-        isTeam
-        addNewEntity={addNewEntity}
-        entityUpdate={teamUpdate}
-        imageEntity={teamUpdate ? teamUpdate.imageUrl : undefined}
-      />
-    </>
+    <AddNewEntity
+      isTeam
+      imageEntity={teamUpdate ? teamUpdate.imageUrl : undefined}
+    >
+      <FormAddTeam teamUpdate={teamUpdate} addNewTeam={addNewEntity} />
+    </AddNewEntity>
   );
 };

@@ -9,6 +9,7 @@ import { addNewPlayer, updateSelectedPlayer } from '../../store/async_actions/pl
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { FormAddPlayer } from './FormAddPlayer';
 
 const actionCreators = {
   loadNewImage,
@@ -69,13 +70,11 @@ export const AddNewPlayer = () => {
   };
 
   return (
-    <>
-      <AddNewEntity
-        addNewEntity={addNewEntity}
-        isTeam={false}
-        entityUpdate={playerUpdate}
-        imageEntity={playerUpdate ? playerUpdate.avatarUrl : undefined}
-      />
-    </>
+    <AddNewEntity
+      isTeam={false}
+      imageEntity={playerUpdate ? playerUpdate.avatarUrl : undefined}
+    >
+      <FormAddPlayer playerUpdate={playerUpdate} addNewPlayer={addNewEntity} />
+    </AddNewEntity>
   );
 };
