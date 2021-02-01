@@ -5,6 +5,7 @@ import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
 import { TypesInput } from '../helpers/types/types';
 import calendarIcon from '../static/icons/calendar.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -97,6 +98,10 @@ const CustomInput = styled.input<{ type: string, isError: boolean, isDateChanged
     left: -30px;
     width: 100%;
     height: 100%;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 4px 12px;
   }
   
 `;

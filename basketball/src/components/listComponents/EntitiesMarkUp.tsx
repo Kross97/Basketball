@@ -175,11 +175,7 @@ const HeaderTeams = styled.div`
     & > div:nth-child(1) {
       margin-bottom: 16px;
     }
-    & > div:nth-child(1) input {
-      padding: 4px 12px;
-    }
     & > button {
-      padding: 3.5px 0;
       margin-top: 16px;
     }
   }

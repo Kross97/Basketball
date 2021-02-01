@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import search from '../static/icons/search.svg';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,5 +42,9 @@ const CustomSearch = styled.input`
     font-size: 14px;
     line-height: 24px;
     color: ${({ theme }) => theme.colors.middleGrey};
+  }
+
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 4px 12px;
   }
 `;

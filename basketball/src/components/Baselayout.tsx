@@ -19,13 +19,16 @@ export const ContextMenuProvider = React.createContext({
 export const BaseLayout = () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
   const history = useHistory();
-  const [isActiveSideMenu, setStateMenu] = useState(false);
+  const [isActiveSideMenu, setStateMenuSide] = useState(false);
   const [isShowMenuChange, setStateMenuChange] = useState<boolean>(false);
   const toggleStateMenu = () => {
-    setStateMenu(!isActiveSideMenu);
+    setStateMenuSide(!isActiveSideMenu);
   };
 
   const toggleStateChangeMenu = () => {
+    if (!isShowMenuChange) {
+      history.push(routePaths.mainBase);
+    }
     setStateMenuChange(!isShowMenuChange);
   };
 
