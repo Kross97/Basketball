@@ -7,7 +7,7 @@ import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 
 interface IProps {
-  entities: any,
+  entities: (ITeam | IPlayer)[],
   type: TypeItem,
 }
 
