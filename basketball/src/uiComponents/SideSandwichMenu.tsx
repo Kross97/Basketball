@@ -72,7 +72,7 @@ export const SideSandwichMenu = () => {
 
 const AutthorizedContainer = styled.div`
     display: none;
-    padding: 20px 58px 20px 20px;
+    padding: 20px 0 20px 20px;
     border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 
   @media(max-width: ${mobileVersionLayout}) {
@@ -83,10 +83,10 @@ const AutthorizedContainer = styled.div`
 const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   display: flex;
   margin-top: 5px;
-  flex-grow: 0.23;
+  flex-basis: 140px;
+  flex-shrink: 0;
   flex-direction: column;
   justify-content: space-between;
-  // padding: 37px 0 32px;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   transition: 0.7s ease-out;
@@ -97,7 +97,6 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
     top: 0;
     bottom: 0;
     left: ${({ isActiveMenu }) => (isActiveMenu ? '0' : '-500px')};
-    padding-bottom: 27px;
     position: absolute;
     z-index: 2;
     width: 50%;
@@ -109,10 +108,11 @@ const ItemMenu = styled.div`
   flex-direction: column;
   align-items: center;
   cursor: pointer;
-  
+
   @media(max-width: ${mobileVersionLayout}) {
     flex-direction: row;
-    margin-left: 21px;
+    margin-left: 25px;
+    justify-content: flex-start;
     & svg {
       margin-right: 9px;
     }
@@ -136,8 +136,7 @@ const TeamItem = styled(ItemMenu)<{ currentPath: string }>`
     fill: ${({ currentPath, theme }) => (currentPath === 'teams' ? theme.colors.red : theme.colors.middleGrey)};
  }
   @media(max-width: ${mobileVersionLayout}) {
-    margin-top: 29px;
-    margin-bottom: 20px;
+    justify-content: flex-start;
   }
 `;
 
@@ -158,12 +157,8 @@ const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
   &:hover svg {
     fill: ${({ theme }) => theme.colors.lightRed};
   }
-
   @media(max-width: ${mobileVersionLayout}) {
-    margin-left: 22px;
-    & svg {
-      margin-right: 15px;
-    }
+    justify-content: flex-start;
   }
 `;
 
@@ -181,6 +176,10 @@ const OutItem = styled(ItemMenu)`
   &:active svg {
     fill: ${({ theme }) => theme.colors.red}
   }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    padding: 45px 0 32px 0;
+  }
 `;
 
 const TeamsPlayers = styled.div`
@@ -194,6 +193,8 @@ const TeamsPlayers = styled.div`
   }
   
   @media(max-width: ${mobileVersionLayout}) {
+    flex-grow: 0.1;
+    
     & ${ItemMenu}:nth-child(1) {
       margin-bottom: 33px;
     }

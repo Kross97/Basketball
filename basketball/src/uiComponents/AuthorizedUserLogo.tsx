@@ -12,14 +12,10 @@ interface IProps {
 
 export const AuthorizedUserLogo: FC<IProps> = ({ name, avatarUrl, onClick }) => (
   <ContainerLogo onClick={onClick}>
-    <LogoText>{name}</LogoText>
+    <TextSmall>{name}</TextSmall>
     <UserLogo avatarUrl={avatarUrl} />
   </ContainerLogo>
 );
-
-const LogoText = styled(TextSmall)`
- font-weight: 600;
-`;
 
 const ContainerLogo = styled.div`
   display: inline-flex;
