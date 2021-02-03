@@ -102,6 +102,7 @@ const BodyAdd = styled.div`
     & > label:nth-child(1) {
       margin-right: 0;
       margin-bottom: 48px;
+      align-self: center;
     }
 
     & input {
