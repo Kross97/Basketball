@@ -6,38 +6,34 @@ interface IProps {
   text: string;
   disabled: boolean;
   name: string;
+  onChange?: () => void;
   register?: (ref: any) => void;
   isError?: boolean;
   errorMessage?: string;
 }
 
 export const CheckboxСhoice: FC<IProps> = ({
-  text, disabled, name, register, isError = false, errorMessage = '',
+  text, disabled, name, onChange, register, isError = false, errorMessage = '',
 }) => (
-  <Container>
+  <div>
     <CheckboxContainer disabled={disabled}>
-      <CheckboxNative name={name} ref={register} disabled={disabled} type="checkbox" />
+      <CheckboxNative onChange={onChange} name={name} ref={register} disabled={disabled} type="checkbox" />
       <CheckboxCustom isError={isError}>
         <Arrow />
       </CheckboxCustom>
       <TextCheckBox>{text}</TextCheckBox>
     </CheckboxContainer>
     {isError && <TextError>{errorMessage}</TextError>}
-  </Container>
+  </div>
 );
 
-const Container = styled.div`
-  display: inline-flex;
-  flex-direction: column;
-`;
-
 const CheckboxContainer = styled.label<{ disabled: boolean }>`
-  display: inline-flex;
+  display: flex;
+  align-items: center;
   cursor: ${({ disabled }) => (disabled ? 'auto' : 'pointer')};
 `;
 
 const TextCheckBox = styled(TextSmall)`
-  line-height: normal;
   margin-left: 10px;
 `;
 

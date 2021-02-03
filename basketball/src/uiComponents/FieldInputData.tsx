@@ -13,6 +13,7 @@ interface IProps {
   startType: TypesInput;
   type: TypesInput;
   name: string;
+  onChange?: () => void;
   defaultValue?: string | number;
   register?: (field: any) => void;
   changeTypeInput?: () => void;
@@ -24,6 +25,7 @@ export const FieldInputData: FC<IProps> = ({
   text,
   disabled,
   startType,
+  onChange,
   type,
   name,
   defaultValue,
@@ -36,9 +38,10 @@ export const FieldInputData: FC<IProps> = ({
   const [isDateChanged, setDateChange] = useState<boolean>(() => (
     typeof defaultValue === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(defaultValue)));
   return (
-    <InputContainer onChange={() => setDateChange(true)}>
+    <InputContainer htmlFor={name} onChange={() => setDateChange(true)}>
       <TextInput>{text}</TextInput>
       <CustomInput
+        onChange={onChange}
         name={name}
         type={type}
         disabled={disabled}
@@ -64,12 +67,13 @@ const InputContainer = styled.label`
 
 const CustomInput = styled.input<{ type: string, isError: boolean, isDateChanged: boolean }>`
   outline: none;
+  box-sizing: border-box;
   border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
   border-radius: 4px;
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   line-height: 24px;
   color: ${({ isDateChanged, type, theme }) => (!isDateChanged && type === 'date' ? 'transparent' : theme.colors.darkGrey)};
@@ -121,8 +125,12 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
   cursor: pointer;
   position: absolute;
   right: 13px;
-  top: 38px;
+  top: 37px;
   width: 16px;
   height: 16px;
   background: ${({ typeButton, startType }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)}  no-repeat;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    top: 34px;
+  }
 `;
