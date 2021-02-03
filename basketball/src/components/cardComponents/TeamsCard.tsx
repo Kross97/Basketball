@@ -18,7 +18,7 @@ import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
 import { playerCurrentTeam } from '../../store/selectors/playersSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
-import { NotificationError } from '../../uiComponents/NotificationError';
+import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
@@ -82,7 +82,7 @@ export const TeamsCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
-        { errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
+        { errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
       </CardBody>
       { playersCurrentTeam.length > 0 && (
       <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />

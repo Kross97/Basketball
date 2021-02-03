@@ -10,7 +10,7 @@ import { ContextMenuProvider } from './Baselayout';
 import { changeAuthData } from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { NotificationError } from '../uiComponents/NotificationError';
+import { NotificationMessage } from '../uiComponents/NotificationMessage';
 import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
 import { regExpName } from '../helpers/constants/regularExp';
 
@@ -91,7 +91,7 @@ export const UserChange = () => {
             type="submit"
           />
         </BtnGroup>
-        {errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
+        {errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
       </FormChange>
     </ContainerUserChange>
   );

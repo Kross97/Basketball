@@ -4,10 +4,11 @@ import { TextStandart } from './Typography';
 
 interface IProps {
   text: string;
+  isError: boolean;
 }
 
-export const NotificationError: FC<IProps> = ({ text }) => (
-  <Container>
+export const NotificationMessage: FC<IProps> = ({ text, isError }) => (
+  <Container isError={isError}>
     <TextStandart>{text}</TextStandart>
   </Container>
 );
@@ -44,7 +45,7 @@ const animationNotification = keyframes`
   }
 `;
 
-const Container = styled.div`
+const Container = styled.div<{ isError: boolean }>`
   width: 100%;
   animation: ${animationNotification} 1.7s linear;
   animation-direction: alternate;
@@ -54,6 +55,6 @@ const Container = styled.div`
   padding: 8px 16px;
   text-align: center;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors.lightRed};
+  background-color: ${({ theme, isError }) => isError ? theme.colors.lightRed : theme.colors.green};
   color: ${({ theme }) => theme.colors.white};
  `;

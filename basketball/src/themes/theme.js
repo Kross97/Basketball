@@ -14,6 +14,7 @@ export const theme = {
     darkGrey: '#303030',
     white: '#FFFFFF',
     yellow: '#D9AD3A',
+    green: '#8EC181',
   },
   sizes: {
     buttonsSizes: {

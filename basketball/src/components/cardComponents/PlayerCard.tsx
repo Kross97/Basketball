@@ -16,7 +16,7 @@ import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { NotificationError } from '../../uiComponents/NotificationError';
+import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
@@ -90,7 +90,7 @@ export const PlayerCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
-        {errorMessage !== '' && <NotificationContainer><NotificationError text={errorMessage} /></NotificationContainer>}
+        {errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
       </CardBody>
     </CardContainer>
   );

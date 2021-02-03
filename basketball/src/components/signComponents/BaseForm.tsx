@@ -6,7 +6,7 @@ import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { TextLink } from '../../uiComponents/TextLink';
-import { NotificationError } from '../../uiComponents/NotificationError';
+import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { TextLabel, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
@@ -58,19 +58,19 @@ export const BaseForm: FC<IProps> = ({
   return (
     <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>
-      { typeForm === 'Sign Up' && (
-      <FieldInputData
-        name="userName"
-        text={t('name')}
-        disabled={false}
-        type="text"
-        startType="text"
-        onChange={() => trigger('userName')}
-        isError={!!errors.userName}
-        errorMessage={formSignErrors[errors.userName?.type]}
-        register={register({ required: true, pattern: regExpName })}
-      />
-      ) }
+      {typeForm === 'Sign Up' && (
+        <FieldInputData
+          name="userName"
+          text={t('name')}
+          disabled={false}
+          type="text"
+          startType="text"
+          onChange={() => trigger('userName')}
+          isError={!!errors.userName}
+          errorMessage={formSignErrors[errors.userName?.type]}
+          register={register({ required: true, pattern: regExpName })}
+        />
+      )}
       <FieldInputData
         name="login"
         text={t('login')}
@@ -94,34 +94,34 @@ export const BaseForm: FC<IProps> = ({
         errorMessage={formSignErrors[errors.password?.type]}
         register={register({ required: true, pattern: regExpPassword })}
       />
-      { typeForm === 'Sign Up' && (
-      <FieldInputData
-        name="passwordRepeat"
-        text={t('passwordRepeat')}
-        disabled={false}
-        type={typePasswordInputs.passwordRepeat}
-        startType="password"
-        onChange={() => trigger('passwordRepeat')}
-        changeTypeInput={() => changeTypeInput('passwordRepeat')}
-        isError={!!errors.passwordRepeat}
-        errorMessage={formSignErrors[errors.passwordRepeat?.type]}
-        register={register({
-          required: true,
-          pattern: regExpPassword,
-          validate: (value) => getValues('password') === value,
-        })}
-      />
-      ) }
-      { typeForm === 'Sign Up' && (
-      <CheckboxСhoice
-        name="acceptAgreement"
-        register={register({ required: true })}
-        text={t('signUpCheck')}
-        disabled={false}
-        onChange={() => trigger('acceptAgreement')}
-        isError={!!errors.acceptAgreement}
-        errorMessage="Required"
-      />
+      {typeForm === 'Sign Up' && (
+        <FieldInputData
+          name="passwordRepeat"
+          text={t('passwordRepeat')}
+          disabled={false}
+          type={typePasswordInputs.passwordRepeat}
+          startType="password"
+          onChange={() => trigger('passwordRepeat')}
+          changeTypeInput={() => changeTypeInput('passwordRepeat')}
+          isError={!!errors.passwordRepeat}
+          errorMessage={formSignErrors[errors.passwordRepeat?.type]}
+          register={register({
+            required: true,
+            pattern: regExpPassword,
+            validate: (value) => getValues('password') === value,
+          })}
+        />
+      )}
+      {typeForm === 'Sign Up' && (
+        <CheckboxСhoice
+          name="acceptAgreement"
+          register={register({ required: true })}
+          text={t('signUpCheck')}
+          disabled={false}
+          onChange={() => trigger('acceptAgreement')}
+          isError={!!errors.acceptAgreement}
+          errorMessage="Required"
+        />
       )}
       <ButtonAction
         type="submit"
@@ -133,7 +133,7 @@ export const BaseForm: FC<IProps> = ({
       />
       <TextContainer>
         <TextSign>
-          {typeForm === 'Sign Up' ? t('signUpMember') : t('signInMember') }
+          {typeForm === 'Sign Up' ? t('signUpMember') : t('signInMember')}
         </TextSign>
         <TextLink
           text={typeForm === 'Sign Up' ? t('signIn') : t('signUp')}
@@ -142,7 +142,14 @@ export const BaseForm: FC<IProps> = ({
         />
       </TextContainer>
       {notificationErrorMessage
-            && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
+            && (
+            <Notification>
+              <NotificationMessage
+                isError
+                text={notificationErrorMessage}
+              />
+            </Notification>
+            )}
     </FormSign>
   );
 };
@@ -151,16 +158,16 @@ const FormSign = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
-  
+
   & button > span {
     display: block;
     width: 65px;
   }
-  
-  & > label, &  > button, & > div:nth-of-type(1) {
+
+  & > label, & > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
-  
+
 `;
 
 const TextContainer = styled.div`
@@ -175,8 +182,8 @@ const TextSign = styled(TextSmall)`
 const LabelForm = styled(TextLabel)`
   color: ${({ theme }) => theme.colors.blue};
   margin-bottom: 30px;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     align-self: center;
   }
 `;

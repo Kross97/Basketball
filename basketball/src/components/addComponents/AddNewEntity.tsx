@@ -6,7 +6,7 @@ import { TextLink } from '../../uiComponents/TextLink';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ImageUpload } from '../../uiComponents/ImageUpload';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import { NotificationError } from '../../uiComponents/NotificationError';
+import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { addEntityError } from '../../store/reducers/addingError';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
@@ -52,7 +52,7 @@ export const AddNewEntity: FC<IProps> = ({
       <BodyAdd>
         <ImageUpload defaultImage={imageEntity} />
         {children}
-        {errorMessage !== '' && <Notification><NotificationError text={errorMessage} /></Notification>}
+        {errorMessage !== '' && <Notification><NotificationMessage isError text={errorMessage} /></Notification>}
       </BodyAdd>
     </ContainerAdd>
   );

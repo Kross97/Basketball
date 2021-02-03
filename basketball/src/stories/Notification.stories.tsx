@@ -1,11 +1,11 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
-import { NotificationError } from '../uiComponents/NotificationError';
+import { NotificationMessage } from '../uiComponents/NotificationMessage';
 
 export default {
   title: 'UI/Notification',
-  component: NotificationError,
+  component: NotificationMessage,
 } as Meta;
 
 interface IProps {
@@ -16,13 +16,33 @@ export const ErrorNotification = ({
   text = 'User with the specified username / password was not found.',
 }: IProps) => (
   <MockContainer>
-    <NotificationError
+    <NotificationMessage
+      isError
+      text={text}
+    />
+  </MockContainer>
+);
+
+export const SuccessNotification = ({
+  text = 'User with the specified username / password was not found.',
+}: IProps) => (
+  <MockContainer>
+    <NotificationMessage
+      isError={false}
       text={text}
     />
   </MockContainer>
 );
 
 ErrorNotification.argTypes = {
+  text: {
+    control: {
+      type: 'text',
+    },
+  },
+};
+
+SuccessNotification.argTypes = {
   text: {
     control: {
       type: 'text',
