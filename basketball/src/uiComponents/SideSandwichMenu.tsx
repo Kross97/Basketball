@@ -83,9 +83,10 @@ const AutthorizedContainer = styled.div`
 const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   display: flex;
   margin-top: 5px;
+  flex-grow: 0.23;
   flex-direction: column;
   justify-content: space-between;
-  padding: 37px 50px 32px;
+  // padding: 37px 0 32px;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   transition: 0.7s ease-out;
@@ -119,8 +120,16 @@ const ItemMenu = styled.div`
 `;
 
 const TeamItem = styled(ItemMenu)<{ currentPath: string }>`
-  margin-bottom: 40px;
   color: ${({ currentPath, theme }) => (currentPath === 'teams' ? theme.colors.red : theme.colors.middleGrey)};
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
+  &:active {
+    background: ${({ theme }) => theme.gradient.sandwichButton};
+  }
+  &:hover svg {
+    fill: ${({ theme }) => theme.colors.lightRed};
+  }
   & svg {
    width: 22px;
    height: 14px;
@@ -133,11 +142,21 @@ const TeamItem = styled(ItemMenu)<{ currentPath: string }>`
 `;
 
 const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
+  flex-grow: 1;
+  justify-content: center;
+  align-items: center;
   color: ${({ currentPath, theme }) => (currentPath === 'players' ? theme.colors.red : theme.colors.middleGrey)};
   & svg {
     width: 16px;
     height: 16px;
     fill: ${({ currentPath, theme }) => (currentPath === 'players' ? theme.colors.red : theme.colors.middleGrey)};
+  }
+
+  &:active {
+    background: ${({ theme }) => theme.gradient.sandwichButton};
+  }
+  &:hover svg {
+    fill: ${({ theme }) => theme.colors.lightRed};
   }
 
   @media(max-width: ${mobileVersionLayout}) {
@@ -160,6 +179,7 @@ const TeamsPlayers = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex-grow: 0.2;
   
   & ${ItemMenu}:nth-child(1) {
     margin-bottom: 40px;

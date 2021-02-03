@@ -31,6 +31,7 @@ export const theme = {
   },
   gradient: {
     base: 'linear-gradient(100.45deg, #707070 0%, #393939 100.28%)',
-    mobile: 'linear-gradient(142.15deg, #707070 0%, #393939 98.4%);',
+    mobile: 'linear-gradient(142.15deg, #707070 0%, #393939 98.4%)',
+    sandwichButton: 'linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(236,236,236,1) 100%, rgba(255,255,255,1) 100%)',
   },
 };
