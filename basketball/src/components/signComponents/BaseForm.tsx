@@ -13,6 +13,7 @@ import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
+import { formSignErrors } from '../../helpers/constants/formErrors';
 
 interface IProps {
   typeForm: string;
@@ -66,7 +67,7 @@ export const BaseForm: FC<IProps> = ({
         startType="text"
         onChange={() => trigger('userName')}
         isError={!!errors.userName}
-        errorMessage="Required or incorrect enter"
+        errorMessage={formSignErrors[errors.userName?.type]}
         register={register({ required: true, pattern: regExpName })}
       />
       ) }
@@ -78,7 +79,7 @@ export const BaseForm: FC<IProps> = ({
         startType="text"
         onChange={() => trigger('login')}
         isError={!!errors.login}
-        errorMessage="Required or incorrect enter"
+        errorMessage={formSignErrors[errors.login?.type]}
         register={register({ required: true, pattern: regExpLogin })}
       />
       <FieldInputData
@@ -90,7 +91,7 @@ export const BaseForm: FC<IProps> = ({
         onChange={() => trigger('password')}
         changeTypeInput={() => changeTypeInput('password')}
         isError={!!errors.password}
-        errorMessage="Required or space exists"
+        errorMessage={formSignErrors[errors.password?.type]}
         register={register({ required: true, pattern: regExpPassword })}
       />
       { typeForm === 'Sign Up' && (
@@ -103,9 +104,7 @@ export const BaseForm: FC<IProps> = ({
         onChange={() => trigger('passwordRepeat')}
         changeTypeInput={() => changeTypeInput('passwordRepeat')}
         isError={!!errors.passwordRepeat}
-        errorMessage={errors.passwordRepeat?.type === 'validate'
-          ? 'password and repeat password are not the same'
-          : 'Required or space exists'}
+        errorMessage={formSignErrors[errors.passwordRepeat?.type]}
         register={register({
           required: true,
           pattern: regExpPassword,

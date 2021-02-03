@@ -14,7 +14,7 @@ import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 import { regExpName } from '../../helpers/constants/regularExp';
 import { validateBirthDay } from '../../helpers/functions/validateBirthDay';
-import { FormAddPlayerErrors } from '../../helpers/constants/formErrors';
+import { formAddErrors } from '../../helpers/constants/formErrors';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -74,7 +74,7 @@ export const FormAddPlayer: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.name}
-        errorMessage={FormAddPlayerErrors[errors.name?.type]}
+        errorMessage={formAddErrors[errors.name?.type]}
         name="name"
         onChange={() => trigger('name')}
         defaultValue={playerUpdate && playerUpdate.name}
@@ -111,7 +111,7 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.height}
-          errorMessage={FormAddPlayerErrors[errors.height?.type]}
+          errorMessage={formAddErrors[errors.height?.type]}
           name="height"
           onChange={() => trigger('height')}
           defaultValue={playerUpdate && playerUpdate.height}
@@ -123,7 +123,7 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.weight}
-          errorMessage={FormAddPlayerErrors[errors.weight?.type]}
+          errorMessage={formAddErrors[errors.weight?.type]}
           name="weight"
           onChange={() => trigger('weight')}
           defaultValue={playerUpdate && playerUpdate.weight}
@@ -135,7 +135,7 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="date"
           type="date"
           isError={!!errors.birthday}
-          errorMessage={FormAddPlayerErrors[errors.birthday?.type]}
+          errorMessage={formAddErrors[errors.birthday?.type]}
           name="birthday"
           onChange={() => trigger('birthday')}
           defaultValue={playerUpdate && playerUpdate.birthday.slice(0, 10)}
@@ -150,7 +150,7 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.number}
-          errorMessage={FormAddPlayerErrors[errors.number?.type]}
+          errorMessage={formAddErrors[errors.number?.type]}
           name="number"
           onChange={() => trigger('number')}
           defaultValue={playerUpdate && playerUpdate.number}
