@@ -69,24 +69,24 @@ export const BaseLayout = () => {
 };
 
 const ContainerLayout = styled.div<{ isShowMenuChange: boolean }>`
- height: 100vh;
- display: flex;
- flex-direction: column; 
- position: relative;
- overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')};
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')};
   scrollbar-сolor: ${({ theme }) => `${theme.colors.lightestGrey} ${theme.colors.grey}`};
   scrollbar-width: thin;
 
 
-&::-webkit-scrollbar-track {
-  background-color:  ${({ theme }) => theme.colors.lightestGrey};
-}
+  &::-webkit-scrollbar-track {
+    background-color: ${({ theme }) => theme.colors.lightestGrey};
+  }
 
-&::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 0;
-  border-radius: 0;
-  background-color: ${({ theme }) => theme.colors.grey};
-}
+  &::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background-color: ${({ theme }) => theme.colors.grey};
+  }
 
   &::-webkit-scrollbar {
     width: 7px;
@@ -94,9 +94,12 @@ const ContainerLayout = styled.div<{ isShowMenuChange: boolean }>`
 `;
 
 const ContentLayout = styled.div`
- display: flex;
+  display: flex;
   flex-grow: 1;
- background-color: ${({ theme }) => theme.colors.lightestGrey};
+  background-color: ${({ theme }) => theme.colors.lightestGrey};
+  
+  @media(max-width: ${mobileVersionLayout}) {}
+  justify-content: center;
 `;
 
 const BodyContainer = styled.div`
@@ -106,7 +109,7 @@ const BodyContainer = styled.div`
 `;
 
 const BackgroundMenu = styled.div<{ isActiveSideMenu: boolean }>`
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     z-index: 1;
     display: ${({ isActiveSideMenu }) => (isActiveSideMenu ? 'block' : 'none')};
     position: absolute;
@@ -114,6 +117,6 @@ const BackgroundMenu = styled.div<{ isActiveSideMenu: boolean }>`
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: rgba(0, 0, 0, 0.6); 
+    background-color: rgba(0, 0, 0, 0.6);
   }
 `;

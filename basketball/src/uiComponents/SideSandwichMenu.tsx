@@ -79,17 +79,18 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   padding: 37px 50px 32px;
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
-  transition: 1s ease;
+  transition: 0.7s ease-out;
   
   @media(max-width: ${mobileVersionLayout}) {
     margin-top: 0;
     padding: 0;
     top: 0;
     bottom: 0;
-    left: ${({ isActiveMenu }) => (isActiveMenu ? '0' : '-210px')};
+    left: ${({ isActiveMenu }) => (isActiveMenu ? '0' : '-500px')};
     padding-bottom: 27px;
     position: absolute;
     z-index: 2;
+    width: 50%;
   }
 `;
 

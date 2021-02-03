@@ -24,7 +24,7 @@ export const theme = {
     cardSizes: {
       team: '65px 107px',
       player: '73px 45px 0 45px',
-      teamMobile: '24px 55px 30px 56px',
+      teamMobile: '24px 0 30px 0',
       playerMobile: '11px 24px 0 24px',
     },
   },

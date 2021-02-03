@@ -158,6 +158,10 @@ const ContainerTeams = styled.div`
   margin: 32px auto 0;
   display: flex;
   flex-direction: column;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    margin: 32px 0 0;
+  }
 `;
 
 const HeaderTeams = styled.div`

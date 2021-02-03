@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
 import { TypeItem } from '../../helpers/types/types';
-import { mobileVersionLayout, mobileVersionList } from '../../helpers/constants/mobileSize';
+import { mobileVersionList, sizeMobile, mobileLayout } from '../../helpers/constants/mobileSize';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 
@@ -29,6 +29,7 @@ export const ListBase: FC<IProps> = ({
 const ListContainer = styled.div`
  display: grid;
  grid-template-columns: 1fr 1fr 1fr;
+ grid-template-rows: 1fr 1fr; 
  grid-column-gap: 24px;
  grid-row-gap: 24px;
   
@@ -38,9 +39,26 @@ const ListContainer = styled.div`
     grid-row-gap: 24px;
   }
   
-  @media(max-width: ${mobileVersionLayout}) {
-    grid-template-columns: 180px 180px;
+  @media(max-width: ${sizeMobile}) {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
     grid-column-gap: 12px;
     grid-row-gap: 12px;
+  }
+  
+  @media(max-width: ${mobileLayout}) {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @media(max-width: 475px) {
+    grid-template-columns: 180px 180px;
+  }
+  
+  @media(max-width: 385px) {
+    grid-template-columns: 150px 150px;
+  }
+  
+  @media(max-width: 325px) {
+    grid-template-columns: 115px 115px;
   }
 `;

@@ -8,14 +8,14 @@ const customStyles = {
   clearIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 910px)': {
+    '@media(max-width: 550px)': {
       padding: '5px',
     },
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 910px)': {
+    '@media(max-width: 550px)': {
       padding: '5px',
     },
   }),

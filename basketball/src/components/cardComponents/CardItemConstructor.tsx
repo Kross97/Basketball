@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TextSmallThin, TextStandart } from '../../uiComponents/Typography';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { sizeMobile } from '../../helpers/constants/mobileSize';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { TypeItem } from '../../helpers/types/types';
@@ -68,8 +68,8 @@ const BodyCard = styled.div<{ type: string }>`
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
   
-  @media(max-width: ${mobileVersionLayout}) {
-    padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 55px 30px 56px')};
+  @media(max-width: ${sizeMobile}) {
+    padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 0 30px 0')};
   }
 `;
 
@@ -81,7 +81,7 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   background-size: contain;
   background-position: center;
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${sizeMobile}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
     display: ${({ type }) => (type === 'team' ? 'inline-block' : 'block')};
@@ -95,7 +95,7 @@ const FooterCard = styled.div`
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${sizeMobile}) {
     padding: 19px 10px;
   }
 `;
@@ -110,17 +110,23 @@ const Name = styled(TextStandart)`
   display: block;
   margin-bottom: 12px;
   color: ${({ theme }) => theme.colors.white};
-
-  @media(max-width: ${mobileVersionLayout}) {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  align-self: center;
+  max-width: 94%;
+  
+  @media(max-width: ${sizeMobile}) {
     font-size: 12px;
     margin-bottom: 6px;
+    line-height: 150%;
   }
 `;
 
 const NumberPlayer = styled(TextStandart)`
  color: ${({ theme }) => theme.colors.lightRed};
 
- @media (max-width: ${mobileVersionLayout}) {
+ @media (max-width: ${sizeMobile}) {
   font-size: 12px;
 }
 `;
@@ -128,7 +134,7 @@ const NumberPlayer = styled(TextStandart)`
 const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.white};
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${sizeMobile}) {
     font-size: 10px;
     line-height: 14px;
   }
