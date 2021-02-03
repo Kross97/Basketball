@@ -73,10 +73,9 @@ const Arrow = styled.div`
 `;
 
 const CheckboxNative = styled.input`
-  width: 0;
-  height: 0;
+  display: none;
   position: absolute;
-  cursor: pointer;
+
 
   &:checked ~ ${CheckboxCustom} ${Arrow} {
     display: block;

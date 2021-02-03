@@ -22,10 +22,10 @@ export const requestSignUp = createAsyncThunk(
             password: newUserData.password,
           },
         }));
-        localStorage.setItem('token_basketball', response.token);
-        localStorage.setItem('name_basketball', response.name);
-        localStorage.setItem('avatarUrl_basketball', response.avatarUrl);
       });
+      localStorage.setItem('token_basketball', response.token);
+      localStorage.setItem('name_basketball', response.name);
+      localStorage.setItem('avatarUrl_basketball', response.avatarUrl);
       return true;
     } catch (error) {
       if (error.isCustomError) {
@@ -48,6 +48,9 @@ export const requestSignIn = createAsyncThunk(
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthErrorSignIn({ errorSignIn: '' }));
       });
+      localStorage.setItem('token_basketball', response.token);
+      localStorage.setItem('name_basketball', response.name);
+      localStorage.setItem('avatarUrl_basketball', response.avatarUrl);
       return true;
     } catch (error) {
       if (error.isCustomError) {
