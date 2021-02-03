@@ -25,7 +25,7 @@ export const SignIn = () => {
   const {
     requestSignIn: signIn,
     loadAllCommands: getAllCommands,
-    loadAllPlayers: getPlayers,
+    loadAllPlayers: getAllPlayers,
   } = useCustomActions(actionCreators);
   const history = useHistory();
   const { t } = useTranslation();
@@ -45,7 +45,7 @@ export const SignIn = () => {
     if (isSuccesRequest) {
       localStorage.setItem('authorized_basketball', 'success');
       getAllCommands(token);
-      getPlayers(token);
+      getAllPlayers(token);
       history.push(routePaths.teams);
     }
   }, [isSuccesRequest]);
