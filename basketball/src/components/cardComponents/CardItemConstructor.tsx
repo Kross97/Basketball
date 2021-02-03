@@ -133,6 +133,10 @@ const NumberPlayer = styled(TextStandart)`
 
 const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.white};
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 99%;
   
   @media(max-width: ${sizeMobile}) {
     font-size: 10px;
