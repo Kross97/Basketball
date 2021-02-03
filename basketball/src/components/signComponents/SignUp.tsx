@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import signUp from '../../static/images/sign_up.svg';
-import * as actions from '../../store/async_actions/auth';
+import signUpImage from '../../static/images/sign_up.svg';
+import { requestSignUp } from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
@@ -12,12 +12,12 @@ import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
-  requestSignUp: actions.requestSignUp,
+  requestSignUp,
 };
 
 export const SignUp = () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
-  const { requestSignUp } = useCustomActions(actionCreators);
+  const { requestSignUp: signUp } = useCustomActions(actionCreators);
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -27,18 +27,19 @@ export const SignUp = () => {
 
   useEffect(() => {
     if (isSuccesRequest) {
-      history.push(routePaths.signIn);
+      localStorage.setItem('authorized_basketball', 'success');
+      history.push(routePaths.teams);
     }
   }, [isSuccesRequest]);
 
   const submitHandler = async (data: any) => {
-    const isSucces = await requestSignUp({
+    const isSuccess = await signUp({
       userName: data.userName,
       login: data.login,
       password: data.password,
     });
-    if (isSucces.payload) {
-      setTypeRequest(isSucces.payload);
+    if (isSuccess.payload) {
+      setTypeRequest(isSuccess.payload);
     }
   };
 
@@ -76,18 +77,19 @@ const PosterContainer = styled.div`
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
-  
+  padding: 0 40px;
   @media(max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;
 
 const PosterSignUp = styled.div`
-  width: 660px;
+  flex-basis: 660px;
   height: 414px;
   margin: auto;
-  background: url(${signUp}) no-repeat;
+  background: url(${signUpImage}) no-repeat;
   background-size: contain;
+  background-position: center;
   display: inline-block;
 }
 `;

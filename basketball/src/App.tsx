@@ -7,11 +7,11 @@ import { routePaths } from './helpers/constants/routePaths';
 
 export const App = () => (
   <Switch>
-    <Route exact path={`${routePaths.signUp}`}>
-      <SignUp />
-    </Route>
-    <Route path={`${routePaths.signIn}`}>
+    <Route exact path={`${routePaths.signIn}`}>
       <SignIn />
+    </Route>
+    <Route path={`${routePaths.signUp}`}>
+      <SignUp />
     </Route>
     <Route path={[`${routePaths.mainArgs}`, `${routePaths.mainBase}`]}>
       <BaseLayout />

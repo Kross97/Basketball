@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import signIn from '../../static/images/sign_in.svg';
-import * as actions from '../../store/async_actions/auth';
+import signInImage from '../../static/images/sign_in.svg';
+import { requestSignIn } from '../../store/async_actions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
@@ -15,7 +15,7 @@ import { loadAllPlayers } from '../../store/async_actions/player';
 import { loadAllCommands } from '../../store/async_actions/team';
 
 const actionCreators = {
-  requestSignIn: actions.requestSignIn,
+  requestSignIn,
   loadAllCommands,
   loadAllPlayers,
 };
@@ -23,7 +23,7 @@ const actionCreators = {
 export const SignIn = () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
   const {
-    requestSignIn,
+    requestSignIn: signIn,
     loadAllCommands: getAllCommands,
     loadAllPlayers: getPlayers,
   } = useCustomActions(actionCreators);
@@ -43,20 +43,20 @@ export const SignIn = () => {
 
   useEffect(() => {
     if (isSuccesRequest) {
+      localStorage.setItem('authorized_basketball', 'success');
       getAllCommands(token);
       getPlayers(token);
-      history.push(routePaths.mainBase);
-      localStorage.setItem('authorized_basketball', 'success');
+      history.push(routePaths.teams);
     }
   }, [isSuccesRequest]);
 
   const submitHandler = async (data: ISignInForm) => {
-    const isSucces = await requestSignIn({
+    const isSuccess = await signIn({
       login: data.login,
       password: data.password,
     });
-    if (isSucces.payload) {
-      setTypeRequest(isSucces.payload);
+    if (isSuccess.payload) {
+      setTypeRequest(isSuccess.payload);
     }
   };
 
@@ -96,18 +96,19 @@ const PosterContainer = styled.div`
   justify-content: center;
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
-  
+  padding: 0 40px;
   @media(max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;
 
 const PosterSignIn = styled.div`
-  width: 660px;
+  flex-basis: 660px;
   height: 414px;
   margin: auto;
-  background: url(${signIn}) no-repeat;
+  background: url(${signInImage}) no-repeat;
   background-size: contain;
+  background-position: center;
   display: inline-block;
 }
 `;
