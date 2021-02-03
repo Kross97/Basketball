@@ -168,10 +168,18 @@ const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
 `;
 
 const OutItem = styled(ItemMenu)`
+  padding: 44px 0 32px 0;
   & svg {
     width: 22px;
     height: 18px;
     fill: ${({ theme }) => theme.colors.lightRed};
+  }
+  &:active {
+    background: ${({ theme }) => theme.gradient.sandwichButton};
+  }
+  
+  &:active svg {
+    fill: ${({ theme }) => theme.colors.red}
   }
 `;
 
