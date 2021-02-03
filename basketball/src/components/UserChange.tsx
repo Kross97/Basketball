@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -6,20 +6,20 @@ import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
-import { ContextMenuProvider } from './Baselayout';
 import { changeAuthData } from '../store/async_actions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationMessage } from '../uiComponents/NotificationMessage';
 import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
 import { regExpName } from '../helpers/constants/regularExp';
+import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 
 const actionCreators = {
   changeAuthData,
+  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
 };
 
 export const UserChange = () => {
-  const { toggleStateChangeMenu } = useContext(ContextMenuProvider);
   const {
     avatarUrl,
     token,
@@ -34,7 +34,10 @@ export const UserChange = () => {
     }
   ), shallowEqual);
 
-  const { changeAuthData: changeDataUser } = useCustomActions(actionCreators);
+  const {
+    changeAuthData: changeDataUser,
+    toggleStatusChangeMenu,
+  } = useCustomActions(actionCreators);
 
   const {
     register,
@@ -51,7 +54,7 @@ export const UserChange = () => {
       token,
     });
     if (isSuccessChanged) {
-      toggleStateChangeMenu();
+      toggleStatusChangeMenu();
     }
   };
 
@@ -59,7 +62,7 @@ export const UserChange = () => {
     event.stopPropagation();
   };
   return (
-    <ContainerUserChange onClick={toggleStateChangeMenu}>
+    <ContainerUserChange onClick={toggleStatusChangeMenu}>
       <FormChange onClick={stopSurfacing} onSubmit={handleSubmit(changeUserData)}>
         <ImageUpload defaultImage={avatarUrl} />
         <FieldInputData
@@ -80,7 +83,7 @@ export const UserChange = () => {
             text="Cancel"
             disabled={false}
             type="button"
-            onClick={toggleStateChangeMenu}
+            onClick={toggleStatusChangeMenu}
           />
           <ButtonAction
             isNegativeStyle={false}

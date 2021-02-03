@@ -1,7 +1,7 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as TeamsLogo } from '../static/icons/group_person.svg';
 import { ReactComponent as PlayerLogo } from '../static/icons/person.svg';
@@ -9,27 +9,36 @@ import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
 import { TextExtraSmall } from './Typography';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
-import { ContextMenuProvider } from '../components/Baselayout';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { routePaths } from '../helpers/constants/routePaths';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+
+const actionCreators = {
+  toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
+  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
+};
 
 export const SideSandwichMenu = () => {
   const history = useHistory();
   const { path } = useParams<{ path: string}>();
   const { t } = useTranslation();
   const {
-    isActiveSideMenu,
-    toggleStateMenu,
-    toggleStateChangeMenu,
-  } = useContext(ContextMenuProvider);
+    toggleStatusSandwichMenu,
+    toggleStatusChangeMenu,
+  } = useCustomActions(actionCreators);
 
   const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
     name: authData.name,
     avatarUrl: authData.avatarUrl,
-  }));
+  }), shallowEqual);
+
+  const isActiveSandwich = useSelector((
+    state: IStoreReducer,
+  ) => state.menuReducer.isActiveSandwichMenu);
 
   const clickIconHandler = (route: string) => {
-    toggleStateMenu();
+    toggleStatusSandwichMenu();
     history.push(`/main/${route}`);
   };
 
@@ -39,10 +48,10 @@ export const SideSandwichMenu = () => {
   };
 
   return (
-    <ContainerMenu isActiveMenu={isActiveSideMenu}>
+    <ContainerMenu isActiveMenu={isActiveSandwich}>
       <TeamsPlayers>
         <AutthorizedContainer>
-          <AuthorizedUserLogo onClick={toggleStateChangeMenu} name={name} avatarUrl={avatarUrl} />
+          <AuthorizedUserLogo onClick={toggleStatusChangeMenu} name={name} avatarUrl={avatarUrl} />
         </AutthorizedContainer>
         <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />

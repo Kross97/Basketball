@@ -1,36 +1,30 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Switch, Route, useHistory } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
 import { PlayersRouter } from './listComponents/PlayersRouter';
 import { TeamsRouter } from './listComponents/TeamsRouter';
-import { UserChange } from './UserChange';
 import { routePaths } from '../helpers/constants/routePaths';
+import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
 
-export const ContextMenuProvider = React.createContext({
-  isActiveSideMenu: false,
-  isShowMenuChange: false,
-  toggleStateMenu: () => {},
-  toggleStateChangeMenu: () => {},
-});
+const actionCreators = {
+  toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
+};
 
 export const BaseLayout = () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
   const history = useHistory();
-  const [isActiveSideMenu, setStateMenuSide] = useState<boolean>(false);
-  const [isShowMenuChange, setStateMenuChange] = useState<boolean>(false);
-  const toggleStateMenu = () => {
-    setStateMenuSide(!isActiveSideMenu);
-  };
 
-  const toggleStateChangeMenu = () => {
-    if (!isShowMenuChange) {
-      history.push(routePaths.mainBase);
-    }
-    setStateMenuChange(!isShowMenuChange);
-  };
+  const isActiveSandwichMenu = useSelector((
+    state: IStoreReducer,
+  ) => state.menuReducer.isActiveSandwichMenu);
+
+  const { toggleStatusSandwichMenu } = useCustomActions(actionCreators);
 
   useEffect(() => {
     if (!isAuthorized) {
@@ -39,41 +33,34 @@ export const BaseLayout = () => {
   }, [isAuthorized]);
 
   return (
-    <ContainerLayout isShowMenuChange={isShowMenuChange}>
-      <ContextMenuProvider.Provider value={{
-        isActiveSideMenu,
-        toggleStateMenu,
-        isShowMenuChange,
-        toggleStateChangeMenu,
-      }}
-      >
-        {isShowMenuChange && <UserChange />}
-        <NavigationHeader />
-        <BodyContainer>
-          <BackgroundMenu isActiveSideMenu={isActiveSideMenu} />
-          <SideSandwichMenu />
-          <ContentLayout>
-            <Switch>
-              <Route path={routePaths.teams}>
-                <TeamsRouter />
-              </Route>
-              <Route path={routePaths.players}>
-                <PlayersRouter />
-              </Route>
-            </Switch>
-          </ContentLayout>
-        </BodyContainer>
-      </ContextMenuProvider.Provider>
+    <ContainerLayout>
+      <NavigationHeader />
+      <BodyContainer>
+        <BackgroundMenu
+          onClick={toggleStatusSandwichMenu}
+          isActiveSandwichMenu={isActiveSandwichMenu}
+        />
+        <SideSandwichMenu />
+        <ContentLayout>
+          <Switch>
+            <Route path={routePaths.teams}>
+              <TeamsRouter />
+            </Route>
+            <Route path={routePaths.players}>
+              <PlayersRouter />
+            </Route>
+          </Switch>
+        </ContentLayout>
+      </BodyContainer>
     </ContainerLayout>
   );
 };
 
-const ContainerLayout = styled.div<{ isShowMenuChange: boolean }>`
+const ContainerLayout = styled.div`
   height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
-  overflow: ${({ isShowMenuChange }) => (isShowMenuChange ? 'hidden' : 'auto')};
   scrollbar-сolor: ${({ theme }) => `${theme.colors.lightestGrey} ${theme.colors.grey}`};
   scrollbar-width: thin;
 
@@ -108,10 +95,11 @@ const BodyContainer = styled.div`
   position: relative;
 `;
 
-const BackgroundMenu = styled.div<{ isActiveSideMenu: boolean }>`
+const BackgroundMenu = styled.div<{ isActiveSandwichMenu: boolean }>`
   @media (max-width: ${mobileVersionLayout}) {
+    cursor: pointer;
     z-index: 1;
-    display: ${({ isActiveSideMenu }) => (isActiveSideMenu ? 'block' : 'none')};
+    display: ${({ isActiveSandwichMenu }) => (isActiveSandwichMenu ? 'block' : 'none')};
     position: absolute;
     top: 0;
     bottom: 0;

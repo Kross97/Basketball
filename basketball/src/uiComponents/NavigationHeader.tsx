@@ -1,24 +1,35 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { BrandLogo } from './BrandLogo';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import menuIcon from '../static/icons/menu.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { ContextMenuProvider } from '../components/Baselayout';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+
+const actionCreators = {
+  toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
+  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
+};
 
 export const NavigationHeader = () => {
-  const { toggleStateMenu, toggleStateChangeMenu } = useContext(ContextMenuProvider);
   const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
     name: authData.name,
     avatarUrl: authData.avatarUrl,
   }));
+
+  const {
+    toggleStatusSandwichMenu,
+    toggleStatusChangeMenu,
+  } = useCustomActions(actionCreators);
+
   return (
     <ContainerNavigation>
-      <ButtonSandwich onClick={toggleStateMenu} />
+      <ButtonSandwich onClick={toggleStatusSandwichMenu} />
       <BrandLogo />
-      <AuthorizedUserLogo onClick={toggleStateChangeMenu} name={name} avatarUrl={avatarUrl} />
+      <AuthorizedUserLogo onClick={toggleStatusChangeMenu} name={name} avatarUrl={avatarUrl} />
     </ContainerNavigation>
   );
 };
