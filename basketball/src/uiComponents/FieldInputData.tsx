@@ -77,7 +77,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean, isDateChanged
   font-size: 14px;
   line-height: 24px;
   color: ${({ isDateChanged, type, theme }) => (!isDateChanged && type === 'date' ? 'transparent' : theme.colors.darkGrey)};
-  background: ${({ type }) => type === 'date' && `url(${calendarIcon}) no-repeat right 14px center`};
+  background: ${({ type, theme }) => type === 'date' && `${theme.colors.lightestGrey} url(${calendarIcon}) no-repeat right 14px center`};
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightGrey};
   }
@@ -117,6 +117,8 @@ const TextInput = styled(TextSmall)`
 const TextInputError = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.lightestRed};
   font-size: 12px;
+  position: absolute;
+  bottom: -23px;
 `;
 
 const ButtonChangeType = styled.button<{ typeButton: string; startType: string; }>`

@@ -46,6 +46,7 @@ const customStyles = {
     backgroundSize: '22px 22px',
     backgroundColor: (state.isFocused && theme.colors.lightestRed),
     cursor: 'pointer',
+    borderBottom: !state.data.isLast && `1px solid ${theme.colors.lightGrey}`,
 
     ':active': {
       backgroundColor: theme.colors.darkRed,
@@ -160,7 +161,7 @@ export const MultiSelectEntities: FC<IProps> = ({
   isError,
   onChange,
 }) => (
-  <label>
+  <SelectLabel>
     {text && <TextLabel>{text}</TextLabel>}
     <Select
       onChange={onChange}
@@ -174,8 +175,12 @@ export const MultiSelectEntities: FC<IProps> = ({
       defaultValue={defaultValue}
     />
     {isError && <TextError>Required</TextError>}
-  </label>
+  </SelectLabel>
 );
+
+const SelectLabel = styled.label`
+ position: relative;
+`;
 
 const TextLabel = styled(TextSmall)`
   color: ${(props) => props.theme.colors.middleGrey};
@@ -183,5 +188,6 @@ const TextLabel = styled(TextSmall)`
 
 const TextError = styled(TextExtraSmall)`
   color: ${(props) => props.theme.colors.lightestRed};
-  
+  position: absolute;
+  bottom: -23px;
 `;
