@@ -1,4 +1,6 @@
-export const sizeMobile: string = '445px';
+export const mobileLayout = '615px';
+
+export const sizeMobile: string = '770px';
 
 export const mobileVersionLayout: string = '910px';
 

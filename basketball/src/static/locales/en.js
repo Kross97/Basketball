@@ -50,9 +50,6 @@ export default {
     save: 'Save',
     add: 'Add',
   },
-  errorsForm: {
-    required: 'Required or incorrect enter',
-  },
   markup: {
     add: 'Add',
     select: 'Select...',

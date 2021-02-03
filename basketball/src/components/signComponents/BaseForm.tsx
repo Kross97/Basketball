@@ -13,6 +13,7 @@ import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
+import { formSignErrors } from '../../helpers/constants/formErrors';
 
 interface IProps {
   typeForm: string;
@@ -33,7 +34,7 @@ export const BaseForm: FC<IProps> = ({
     errors,
     getValues,
     setValue,
-    watch,
+    trigger,
   } = useForm();
   const { t } = useTranslation();
 
@@ -44,8 +45,6 @@ export const BaseForm: FC<IProps> = ({
     }
   }, [userData?.login, userData?.password]);
 
-  const watchAccept = watch('acceptAgreement', false);
-
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
     passwordRepeat: 'password',
@@ -55,6 +54,7 @@ export const BaseForm: FC<IProps> = ({
     const newType = typePasswordInputs[name] === 'password' ? 'text' : 'password';
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
+
   return (
     <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>
@@ -65,8 +65,9 @@ export const BaseForm: FC<IProps> = ({
         disabled={false}
         type="text"
         startType="text"
+        onChange={() => trigger('userName')}
         isError={!!errors.userName}
-        errorMessage="Required or incorrect enter"
+        errorMessage={formSignErrors[errors.userName?.type]}
         register={register({ required: true, pattern: regExpName })}
       />
       ) }
@@ -76,8 +77,9 @@ export const BaseForm: FC<IProps> = ({
         disabled={false}
         type="text"
         startType="text"
+        onChange={() => trigger('login')}
         isError={!!errors.login}
-        errorMessage="Required or incorrect enter"
+        errorMessage={formSignErrors[errors.login?.type]}
         register={register({ required: true, pattern: regExpLogin })}
       />
       <FieldInputData
@@ -86,9 +88,10 @@ export const BaseForm: FC<IProps> = ({
         disabled={false}
         type={typePasswordInputs.password}
         startType="password"
+        onChange={() => trigger('password')}
         changeTypeInput={() => changeTypeInput('password')}
         isError={!!errors.password}
-        errorMessage="Required or space exists"
+        errorMessage={formSignErrors[errors.password?.type]}
         register={register({ required: true, pattern: regExpPassword })}
       />
       { typeForm === 'Sign Up' && (
@@ -98,11 +101,10 @@ export const BaseForm: FC<IProps> = ({
         disabled={false}
         type={typePasswordInputs.passwordRepeat}
         startType="password"
+        onChange={() => trigger('passwordRepeat')}
         changeTypeInput={() => changeTypeInput('passwordRepeat')}
         isError={!!errors.passwordRepeat}
-        errorMessage={errors.passwordRepeat?.type === 'validate'
-          ? 'password and repeat password are not the same'
-          : 'Required or space exists'}
+        errorMessage={formSignErrors[errors.passwordRepeat?.type]}
         register={register({
           required: true,
           pattern: regExpPassword,
@@ -113,9 +115,12 @@ export const BaseForm: FC<IProps> = ({
       { typeForm === 'Sign Up' && (
       <CheckboxСhoice
         name="acceptAgreement"
-        register={register}
+        register={register({ required: true })}
         text={t('signUpCheck')}
         disabled={false}
+        onChange={() => trigger('acceptAgreement')}
+        isError={!!errors.acceptAgreement}
+        errorMessage="Required"
       />
       )}
       <ButtonAction
@@ -124,7 +129,7 @@ export const BaseForm: FC<IProps> = ({
         isAdding={false}
         size="large"
         text={typeForm}
-        disabled={Object.keys(errors).length > 0 || (typeForm === 'Sign Up' && !watchAccept)}
+        disabled={Object.keys(errors).length > 0}
       />
       <TextContainer>
         <TextSign>
@@ -136,7 +141,7 @@ export const BaseForm: FC<IProps> = ({
           disabled={false}
         />
       </TextContainer>
-      {notificationErrorMessage !== ''
+      {notificationErrorMessage
             && <Notification><NotificationError text={notificationErrorMessage} /></Notification>}
     </FormSign>
   );
@@ -152,9 +157,10 @@ const FormSign = styled.form`
     width: 65px;
   }
   
-  & label, & button {
+  & > label, &  > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
+  
 `;
 
 const TextContainer = styled.div`

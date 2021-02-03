@@ -22,11 +22,12 @@ export const allTeamsSelector = createSelector(
 
 export const teamsForSelectPlayer = createSelector(
   allTeamsSelector,
-  (teams: ITeam[]) => teams.map((team) => {
+  (teams: ITeam[]) => teams.map((team, index) => {
     const teamOption = {
       value: team.id,
       label: team.name,
       imageSrc: team.imageUrl,
+      isLast: (index + 1) === teams.length,
     };
 
     if (!regExpImageTeam.test(team.imageUrl)) {

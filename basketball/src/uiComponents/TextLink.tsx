@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -12,18 +11,9 @@ interface IProps {
 
 export const TextLink: FC<IProps> = ({ text, to, disabled }) => (
   <CustomLink disabled={disabled} to={to}>
-    <LinkText>{text}</LinkText>
+    <TextSmall>{text}</TextSmall>
   </CustomLink>
 );
-
-const LinkText = styled(TextSmall)`
-  line-height: 19px;
-  font-weight: 600;
-
-  @media(max-width: ${mobileVersionLayout}) {
-    font-size: 12px;
-  }
-`;
 
 const CustomLink = styled(Link)<{ disabled: boolean }>`
   cursor: pointer;

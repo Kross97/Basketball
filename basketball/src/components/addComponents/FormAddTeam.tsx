@@ -8,7 +8,11 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
-import { regExpYear, regExpCommandName, regExpDivision } from '../../helpers/constants/regularExp';
+import {
+  regExpYear, regExpCommandName, regExpDivision, regExpConference,
+} from '../../helpers/constants/regularExp';
+import { formAddErrors } from '../../helpers/constants/formErrors';
+import { validateYearFoundation } from '../../helpers/functions/validateYearFoundation';
 
 interface IProps {
   addNewTeam: (data: IFormAddTeam) => void;
@@ -26,6 +30,7 @@ export const FormAddTeam: FC<IProps> = ({
     register,
     handleSubmit,
     errors,
+    trigger,
   } = useForm();
 
   const cancelAddNewEntity = () => {
@@ -41,7 +46,8 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.name}
-        errorMessage={t('errorsForm:required')}
+        errorMessage={formAddErrors[errors.name?.type]}
+        onChange={() => trigger('name')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
         register={register({ required: true, pattern: regExpCommandName })}
@@ -52,8 +58,9 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.division}
-        errorMessage={t('errorsForm:required')}
+        errorMessage={formAddErrors[errors.division?.type]}
         name="division"
+        onChange={() => trigger('division')}
         defaultValue={teamUpdate ? teamUpdate.division : ''}
         register={register({ pattern: regExpDivision })}
       />
@@ -63,10 +70,11 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.conference}
-        errorMessage={t('errorsForm:required')}
+        errorMessage={formAddErrors[errors.conference?.type]}
         name="conference"
+        onChange={() => trigger('conference')}
         defaultValue={teamUpdate ? teamUpdate.conference : ''}
-        register={register({ pattern: /^[^\W\d]{5,}$/ })}
+        register={register({ pattern: regExpConference })}
       />
       <FieldInputData
         text={t('team:foundation')}
@@ -74,13 +82,14 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.foundationYear}
-        errorMessage={t('errorsForm:required')}
+        errorMessage={formAddErrors[errors.foundationYear?.type]}
         name="foundationYear"
+        onChange={() => trigger('foundationYear')}
         defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}
         register={register({
           required: true,
           pattern: regExpYear,
-          validate: (value) => value <= (new Date()).getFullYear(),
+          validate: (value) => validateYearFoundation(value),
         })}
       />
 

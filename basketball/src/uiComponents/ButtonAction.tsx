@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 import { SizesButton, TypesButton } from '../helpers/types/types';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { sizeMobile } from '../helpers/constants/mobileSize';
 
 interface IProps {
   isNegativeStyle: boolean;
@@ -60,7 +60,7 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
     cursor: auto;
   }
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${sizeMobile}) {
     padding-top: 4px;
     padding-bottom: 4px;
   }

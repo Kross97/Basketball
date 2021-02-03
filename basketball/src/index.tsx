@@ -11,18 +11,26 @@ import { reducer } from './store';
 import reportWebVitals from './reportWebVitals';
 import './i18next';
 
-
 export const store = configureStore({
   reducer,
+  preloadedState: {
+    authDataUser: {
+      authData: {
+        name: localStorage.getItem('name_basketball') || '',
+        avatarUrl: localStorage.getItem('avatar_basketball') || '',
+        token: localStorage.getItem('token_basketball') || '',
+      },
+    },
+  },
 });
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-          <ThemeProvider theme={theme}>
-            <App />
-          </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <App />
+        </ThemeProvider>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>,

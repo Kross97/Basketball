@@ -13,6 +13,8 @@ import { IPlayer, IPostionOption, ITeamOption } from '../../helpers/interfaces/s
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
 import { regExpName } from '../../helpers/constants/regularExp';
+import { validateBirthDay } from '../../helpers/functions/validateBirthDay';
+import { formAddErrors } from '../../helpers/constants/formErrors';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -34,6 +36,7 @@ export const FormAddPlayer: FC<IProps> = ({
     register,
     handleSubmit,
     errors,
+    trigger,
   } = useForm();
 
   const cancelAddNewEntity = () => {
@@ -71,8 +74,9 @@ export const FormAddPlayer: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.name}
-        errorMessage="Required or incorrect enter"
+        errorMessage={formAddErrors[errors.name?.type]}
         name="name"
+        onChange={() => trigger('name')}
         defaultValue={playerUpdate && playerUpdate.name}
         register={register({ required: true, pattern: regExpName })}
       />
@@ -107,8 +111,9 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.height}
-          errorMessage={t('errorsForm:required')}
+          errorMessage={formAddErrors[errors.height?.type]}
           name="height"
+          onChange={() => trigger('height')}
           defaultValue={playerUpdate && playerUpdate.height}
           register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
         />
@@ -118,8 +123,9 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.weight}
-          errorMessage={t('errorsForm:required')}
+          errorMessage={formAddErrors[errors.weight?.type]}
           name="weight"
+          onChange={() => trigger('weight')}
           defaultValue={playerUpdate && playerUpdate.weight}
           register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
         />
@@ -129,12 +135,13 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="date"
           type="date"
           isError={!!errors.birthday}
-          errorMessage={t('errorsForm:required')}
+          errorMessage={formAddErrors[errors.birthday?.type]}
           name="birthday"
+          onChange={() => trigger('birthday')}
           defaultValue={playerUpdate && playerUpdate.birthday.slice(0, 10)}
           register={register({
             required: true,
-            validate: (value) => new Date(value) < new Date(Date.now()),
+            validate: (value) => validateBirthDay(value),
           })}
         />
         <FieldInputData
@@ -143,8 +150,9 @@ export const FormAddPlayer: FC<IProps> = ({
           startType="text"
           type="text"
           isError={!!errors.number}
-          errorMessage={t('errorsForm:required')}
+          errorMessage={formAddErrors[errors.number?.type]}
           name="number"
+          onChange={() => trigger('number')}
           defaultValue={playerUpdate && playerUpdate.number}
           register={register({ required: true, pattern: /^([^\D_]{1,2})$/i })}
         />

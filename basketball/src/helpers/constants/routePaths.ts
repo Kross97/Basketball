@@ -3,8 +3,8 @@ interface IRoutePath {
 }
 
 export const routePaths: IRoutePath = {
-  signUp: '/',
-  signIn: '/signIn',
+  signIn: '/',
+  signUp: '/signUp',
   mainBase: '/main',
   mainArgs: '/main/:path',
   teams: '/main/teams',

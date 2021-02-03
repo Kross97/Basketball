@@ -91,6 +91,7 @@ const BodyAdd = styled.div`
 
   & > label:nth-child(1) {
     margin-right: 136px;
+    align-self: flex-start;
   }
 
   @media (max-width: ${mobileVersionLayout}) {

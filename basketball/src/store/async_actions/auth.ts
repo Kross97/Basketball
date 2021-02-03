@@ -10,8 +10,8 @@ import { signRequestErrors } from '../../api/api_constants/signRequestErrors';
 export const requestSignUp = createAsyncThunk(
   'signUp/request',
   async (newUserData: RegisterUser, { dispatch }) => {
-    dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
     try {
+      dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
       const response: IResponseSignSucces = await signUp('Auth/SignUp', newUserData);
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
@@ -23,6 +23,9 @@ export const requestSignUp = createAsyncThunk(
           },
         }));
       });
+      localStorage.setItem('token_basketball', response.token);
+      localStorage.setItem('name_basketball', response.name);
+      localStorage.setItem('avatarUrl_basketball', response.avatarUrl);
       return true;
     } catch (error) {
       if (error.isCustomError) {
@@ -45,6 +48,9 @@ export const requestSignIn = createAsyncThunk(
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthErrorSignIn({ errorSignIn: '' }));
       });
+      localStorage.setItem('token_basketball', response.token);
+      localStorage.setItem('name_basketball', response.name);
+      localStorage.setItem('avatarUrl_basketball', response.avatarUrl);
       return true;
     } catch (error) {
       if (error.isCustomError) {
