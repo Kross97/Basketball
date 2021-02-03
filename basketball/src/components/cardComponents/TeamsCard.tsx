@@ -82,7 +82,7 @@ export const TeamsCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
-        { errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
+        { errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
       </CardBody>
       { playersCurrentTeam.length > 0 && (
       <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />

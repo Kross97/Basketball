@@ -90,7 +90,7 @@ export const PlayerCard = () => {
             </DescriptionContainer>
           </DataCard>
         </Content>
-        {errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
+        {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
       </CardBody>
     </CardContainer>
   );

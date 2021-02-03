@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  IAddAuth, ILocalUserData, IStateAuthData, IChangeDataUser,
+  IAddAuth, ILocalUserData, IStateAuthData, IChangeDataUser, INotification,
 } from '../../helpers/interfaces/store_interfaces/Auth';
 
 export const authDataUser = createSlice({
@@ -11,7 +11,10 @@ export const authDataUser = createSlice({
       avatarUrl: '',
       token: '',
     },
-    authErrorMessageSignUp: '',
+    authNotificationMessageSignUp: {
+      message: '',
+      isError: false,
+    },
     authErrorMessageSignIn: '',
     errorChangeMessage: '',
     localUserData: {
@@ -23,9 +26,14 @@ export const authDataUser = createSlice({
     addAuthData: (state: IStateAuthData, action: PayloadAction<{ authData: IAddAuth}>) => (
       { ...state, authData: action.payload.authData }
     ),
-    addAuthErrorSignUp: (state: IStateAuthData, action: PayloadAction<{ errorSignUp: string}>) => (
-      { ...state, authErrorMessageSignUp: action.payload.errorSignUp }
+    addAuthNotificationSignUp: (state: IStateAuthData,
+      action: PayloadAction<{ notification: INotification}>) => (
+      { ...state, authNotificationMessageSignUp: action.payload.notification }
     ),
+    clearAuthNotificationSignUp: (state: IStateAuthData) => ({
+      ...state,
+      authNotificationMessageSignUp: { message: '', isError: false },
+    }),
     addAuthErrorSignIn: (state: IStateAuthData, action: PayloadAction<{ errorSignIn: string}>) => (
       { ...state, authErrorMessageSignIn: action.payload.errorSignIn }
     ),

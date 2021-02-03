@@ -8,3 +8,8 @@ export interface ISignUpForm {
   login: string,
   password: string,
 }
+
+export interface IMessageNotification {
+  message: string;
+  isError: boolean;
+}

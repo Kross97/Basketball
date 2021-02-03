@@ -91,7 +91,7 @@ export const UserChange = () => {
             type="submit"
           />
         </BtnGroup>
-        {errorMessage !== '' && <NotificationContainer><NotificationMessage isError text={errorMessage} /></NotificationContainer>}
+        {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
       </FormChange>
     </ContainerUserChange>
   );

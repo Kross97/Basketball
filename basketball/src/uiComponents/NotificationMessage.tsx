@@ -4,10 +4,10 @@ import { TextStandart } from './Typography';
 
 interface IProps {
   text: string;
-  isError: boolean;
+  isError?: boolean;
 }
 
-export const NotificationMessage: FC<IProps> = ({ text, isError }) => (
+export const NotificationMessage: FC<IProps> = ({ text, isError = true }) => (
   <Container isError={isError}>
     <TextStandart>{text}</TextStandart>
   </Container>
@@ -55,6 +55,6 @@ const Container = styled.div<{ isError: boolean }>`
   padding: 8px 16px;
   text-align: center;
   border-radius: 4px;
-  background-color: ${({ theme, isError }) => isError ? theme.colors.lightRed : theme.colors.green};
+  background-color: ${({ theme, isError }) => (isError ? theme.colors.lightRed : theme.colors.green)};
   color: ${({ theme }) => theme.colors.white};
  `;

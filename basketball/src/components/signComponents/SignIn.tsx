@@ -65,7 +65,7 @@ export const SignIn = () => {
       <FormContainer>
         <BaseForm
           typeForm={t('signIn')}
-          notificationErrorMessage={notificationErrorMessage}
+          notificationMessage={{ message: notificationErrorMessage, isError: true }}
           submitHandler={submitHandler}
           userData={userData}
         />

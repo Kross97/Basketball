@@ -52,7 +52,7 @@ export const AddNewEntity: FC<IProps> = ({
       <BodyAdd>
         <ImageUpload defaultImage={imageEntity} />
         {children}
-        {errorMessage !== '' && <Notification><NotificationMessage isError text={errorMessage} /></Notification>}
+        {errorMessage !== '' && <Notification><NotificationMessage text={errorMessage} /></Notification>}
       </BodyAdd>
     </ContainerAdd>
   );

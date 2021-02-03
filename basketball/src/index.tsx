@@ -20,6 +20,11 @@ export const store = configureStore({
         avatarUrl: localStorage.getItem('avatar_basketball') || '',
         token: localStorage.getItem('token_basketball') || '',
       },
+      authNotificationMessageSignUp: {
+        message: '',
+        isError: false,
+      },
+      authErrorMessageSignIn: '',
     },
   },
 });

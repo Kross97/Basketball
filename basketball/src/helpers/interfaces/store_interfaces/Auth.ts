@@ -9,13 +9,18 @@ export interface ILocalUserData {
   password: string,
 }
 
+export interface INotification {
+  message: string;
+  isError: boolean;
+}
+
 export interface IStateAuthData {
   authData: {
     name: string,
     avatarUrl: string,
     token: string,
   },
-  authErrorMessageSignUp: string,
+  authNotificationMessageSignUp: INotification,
   authErrorMessageSignIn: string,
   errorChangeMessage: string,
   localUserData: {

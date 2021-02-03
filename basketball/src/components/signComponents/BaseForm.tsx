@@ -11,20 +11,20 @@ import { TextLabel, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
+import { ISignInForm, IMessageNotification } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
 import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
 import { formSignErrors } from '../../helpers/constants/formErrors';
 
 interface IProps {
   typeForm: string;
-  notificationErrorMessage: string;
+  notificationMessage: IMessageNotification;
   submitHandler: (data: any) => void;
   userData?: ISignInForm,
 }
 
 export const BaseForm: FC<IProps> = ({
   typeForm,
-  notificationErrorMessage,
+  notificationMessage,
   submitHandler,
   userData = undefined,
 }) => {
@@ -55,6 +55,7 @@ export const BaseForm: FC<IProps> = ({
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
 
+  console.log('NOTIFICATION', notificationMessage);
   return (
     <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>
@@ -141,12 +142,12 @@ export const BaseForm: FC<IProps> = ({
           disabled={false}
         />
       </TextContainer>
-      {notificationErrorMessage
+      {notificationMessage.message !== ''
             && (
             <Notification>
               <NotificationMessage
-                isError
-                text={notificationErrorMessage}
+                isError={notificationMessage.isError}
+                text={notificationMessage.message}
               />
             </Notification>
             )}
@@ -189,10 +190,10 @@ const LabelForm = styled(TextLabel)`
 `;
 
 const Notification = styled.div`
-  position: absolute;
-  bottom: -80px;
-  right: 0;
-  left: 0;
+  position: fixed;
+  top: 30px;
+  right: 80px;
+  width: 400px;
   display: flex;
   justify-content: center;
 `;

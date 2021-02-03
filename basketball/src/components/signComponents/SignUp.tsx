@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import signUpImage from '../../static/images/sign_up.svg';
 import { requestSignUp } from '../../store/async_actions/auth';
+import { authDataUser } from '../../store/reducers/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
@@ -13,22 +14,33 @@ import { routePaths } from '../../helpers/constants/routePaths';
 
 const actionCreators = {
   requestSignUp,
+  clearSignUpNotification: authDataUser.actions.clearAuthNotificationSignUp,
 };
 
 export const SignUp = () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
-  const { requestSignUp: signUp } = useCustomActions(actionCreators);
+  const {
+    requestSignUp: signUp,
+    clearSignUpNotification,
+  } = useCustomActions(actionCreators);
   const history = useHistory();
   const { t } = useTranslation();
 
-  const notificationErrorMessage = useSelector(
-    ({ authDataUser: { authErrorMessageSignUp } }: IStoreReducer) => (authErrorMessageSignUp),
+  const notificationMessage = useSelector(
+    ({
+      authDataUser: {
+        authNotificationMessageSignUp,
+      },
+    }: IStoreReducer) => (authNotificationMessageSignUp),
   );
 
   useEffect(() => {
     if (isSuccesRequest) {
       localStorage.setItem('authorized_basketball', 'success');
-      history.push(routePaths.teams);
+      setTimeout(() => {
+        history.push(routePaths.teams);
+        clearSignUpNotification();
+      }, 1800);
     }
   }, [isSuccesRequest]);
 
@@ -48,7 +60,7 @@ export const SignUp = () => {
       <FormContainer>
         <BaseForm
           typeForm={t('signUp')}
-          notificationErrorMessage={notificationErrorMessage}
+          notificationMessage={notificationMessage}
           submitHandler={submitHandler}
         />
       </FormContainer>

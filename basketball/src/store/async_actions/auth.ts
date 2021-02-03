@@ -11,11 +11,11 @@ export const requestSignUp = createAsyncThunk(
   'signUp/request',
   async (newUserData: RegisterUser, { dispatch }) => {
     try {
-      dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
+      dispatch(authDataUser.actions.clearAuthNotificationSignUp());
       const response: IResponseSignSucces = await signUp('Auth/SignUp', newUserData);
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
-        dispatch(authDataUser.actions.addAuthErrorSignUp({ errorSignUp: '' }));
+        dispatch(authDataUser.actions.addAuthNotificationSignUp({ notification: { message: 'Registration was successful', isError: false } }));
         dispatch(authDataUser.actions.addLocalUserData({
           userData: {
             login: newUserData.login,
@@ -29,8 +29,8 @@ export const requestSignUp = createAsyncThunk(
       return true;
     } catch (error) {
       if (error.isCustomError) {
-        dispatch(authDataUser.actions.addAuthErrorSignUp({
-          errorSignUp: signRequestErrors[error.status],
+        dispatch(authDataUser.actions.addAuthNotificationSignUp({
+          notification: { message: signRequestErrors[error.status], isError: true },
         }));
       }
     }
