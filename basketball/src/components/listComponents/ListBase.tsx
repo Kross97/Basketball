@@ -59,6 +59,6 @@ const ListContainer = styled.div`
   }
   
   @media(max-width: 325px) {
-    grid-template-columns: 115px 115px;
+    grid-template-columns: 1fr;
   }
 `;

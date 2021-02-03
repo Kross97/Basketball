@@ -9,6 +9,10 @@ const counts = [
 ];
 
 const customStyles = {
+  dropdownIndicator: (styles: any) => ({
+    ...styles,
+    transform: 'rotate(180deg)',
+  }),
   option: (styles: any, state: any) => ({
     ...styles,
     fontStyle: 'normal',
