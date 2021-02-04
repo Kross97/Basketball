@@ -8,7 +8,7 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextExtraLarge } from '../uiComponents/Typography';
-import { Player } from '../helpers/storybook_mock_constants/Mock_player';
+import { Player } from '../helpers/storybookMockConstants/Mock_player';
 
 export const PlayerCard = () => {
   const { t } = useTranslation();

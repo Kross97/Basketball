@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { IImageState } from '../../helpers/interfaces/store_interfaces/Image';
+import { IImageState } from '../../helpers/interfaces/storeInterfaces/Image';
 
 export const imageLoadData = createSlice({
   name: 'imageLoad',

@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter, PayloadAction } from '@reduxjs/toolkit';
-import { ITeam, IChunkDataTeams } from '../../helpers/interfaces/store_interfaces/Team';
+import { ITeam, IChunkDataTeams } from '../../helpers/interfaces/storeInterfaces/Team';
 
 const teamsAdapter = createEntityAdapter<ITeam>();
 

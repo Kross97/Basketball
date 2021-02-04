@@ -2,7 +2,7 @@ import {
   get, post, put, remove,
 } from './index';
 
-import { ITeam, ITeamUpdate } from '../helpers/interfaces/request_interfaces/Team';
+import { ITeam, ITeamUpdate } from '../helpers/interfaces/requestInterfaces/Team';
 
 export const getTeams = (url: string, token: string) => get(url, token);
 

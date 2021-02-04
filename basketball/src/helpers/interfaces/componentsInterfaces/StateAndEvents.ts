@@ -1,5 +1,5 @@
-import { ITeam } from '../store_interfaces/Team';
-import { IPlayer } from '../store_interfaces/Player';
+import { ITeam } from '../storeInterfaces/Team';
+import { IPlayer } from '../storeInterfaces/Player';
 
 export interface IOption {
   value: string;

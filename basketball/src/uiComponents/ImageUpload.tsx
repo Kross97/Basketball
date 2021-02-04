@@ -5,7 +5,7 @@ import addPhotoIcon from '../static/icons/add_photo.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { imageLoadData } from '../store/reducers/image';
-import { loadNewImage } from '../store/async_actions/image';
+import { loadNewImage } from '../store/asyncActions/image';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 
 interface IProps {

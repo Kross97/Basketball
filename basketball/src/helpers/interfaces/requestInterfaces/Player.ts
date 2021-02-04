@@ -1,4 +1,4 @@
-import { IOption } from '../components_interfaces/StateAndEvents';
+import { IOption } from '../componentsInterfaces/StateAndEvents';
 
 export interface IPlayer {
   name: string,

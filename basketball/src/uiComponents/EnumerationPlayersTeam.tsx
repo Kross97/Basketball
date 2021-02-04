@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall, TextStandart, TextExtraSmall } from './Typography';
-import { IPlayer } from '../helpers/interfaces/store_interfaces/Player';
+import { IPlayer } from '../helpers/interfaces/storeInterfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 

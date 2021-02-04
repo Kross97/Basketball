@@ -1,4 +1,4 @@
-import teamLogo from '../../static/storybook_mock_images/mock_team.svg';
+import teamLogo from '../../static/storybookMockImages/mock_team.svg';
 
 export interface ITeam {
   name: string,

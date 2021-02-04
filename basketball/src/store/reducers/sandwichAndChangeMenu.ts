@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { IMenuState } from '../../helpers/interfaces/store_interfaces/Menu';
+import { IMenuState } from '../../helpers/interfaces/storeInterfaces/Menu';
 
 export const menuReducer = createSlice({
   name: 'menuReducer',

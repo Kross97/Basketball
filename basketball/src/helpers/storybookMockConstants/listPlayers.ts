@@ -1,9 +1,9 @@
-import player1 from '../../static/storybook_mock_images/mock_image_upload.svg';
-import player2 from '../../static/storybook_mock_images/mock_player_1.svg';
-import player3 from '../../static/storybook_mock_images/mock_player_2.svg';
-import player4 from '../../static/storybook_mock_images/mock_player_3.svg';
-import player5 from '../../static/storybook_mock_images/mock_player_4.svg';
-import player6 from '../../static/storybook_mock_images/mock_player_5.svg';
+import player1 from '../../static/storybookMockImages/mock_image_upload.svg';
+import player2 from '../../static/storybookMockImages/mock_player_1.svg';
+import player3 from '../../static/storybookMockImages/mock_player_2.svg';
+import player4 from '../../static/storybookMockImages/mock_player_3.svg';
+import player5 from '../../static/storybookMockImages/mock_player_4.svg';
+import player6 from '../../static/storybookMockImages/mock_player_5.svg';
 
 import { Player } from './Player';
 

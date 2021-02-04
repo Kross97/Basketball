@@ -1,5 +1,5 @@
 import { post } from './index';
-import { RegisterUser, LoginUser, UserChange } from '../helpers/interfaces/request_interfaces/Auth';
+import { RegisterUser, LoginUser, UserChange } from '../helpers/interfaces/requestInterfaces/Auth';
 
 export const signUp = (url: string, body: RegisterUser) => post<string>(url, JSON.stringify(body));
 

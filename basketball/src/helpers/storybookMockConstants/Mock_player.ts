@@ -1,4 +1,4 @@
-import playerImage from '../../static/storybook_mock_images/mock_player.svg';
+import playerImage from '../../static/storybookMockImages/mock_player.svg';
 
 export interface IPlayer {
   name: string,

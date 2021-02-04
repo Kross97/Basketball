@@ -2,8 +2,8 @@ import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import styled from 'styled-components';
 import { CardItemConstructor } from './CardItemForStories';
-import { Team } from '../helpers/storybook_mock_constants/Mock_team';
-import { Player } from '../helpers/storybook_mock_constants/Mock_player';
+import { Team } from '../helpers/storybookMockConstants/Mock_team';
+import { Player } from '../helpers/storybookMockConstants/Mock_player';
 
 export default {
   title: 'Components/ItemConstructor',

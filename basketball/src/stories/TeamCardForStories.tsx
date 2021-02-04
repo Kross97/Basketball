@@ -9,8 +9,8 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import createIcon from '../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../static/icons/delete.svg';
 import { TextExtraLarge } from '../uiComponents/Typography';
-import { Team } from '../helpers/storybook_mock_constants/Mock_team';
-import { listPlayers } from '../helpers/storybook_mock_constants/listPlayers';
+import { Team } from '../helpers/storybookMockConstants/Mock_team';
+import { listPlayers } from '../helpers/storybookMockConstants/listPlayers';
 
 export const TeamsCard = () => {
   const { t } = useTranslation();

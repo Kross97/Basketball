@@ -10,7 +10,10 @@ export default {
 
 export const CalendarBirthDay = () => (
   <MockContainer>
-    <CalendarField />
+    <CalendarField
+      trigger={(key = 'key') => console.log('trigger', key)}
+      register={() => {}}
+    />
   </MockContainer>
 );
 

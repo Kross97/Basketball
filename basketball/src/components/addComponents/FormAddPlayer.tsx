@@ -9,12 +9,13 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { positions } from '../../helpers/constants/playerPositions';
 import { teamsForSelectPlayer } from '../../store/selectors/teamsSelector';
-import { IPlayer, IPostionOption, ITeamOption } from '../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer, IPostionOption, ITeamOption } from '../../helpers/interfaces/storeInterfaces/Player';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { IFormAddPlayer } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
-import { regExpName } from '../../helpers/constants/regularExp';
-import { validateBirthDay } from '../../helpers/functions/validateBirthDay';
+import { IFormAddPlayer } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
+import { regExpName, regExpBirthDay } from '../../helpers/constants/regularExp';
+import { validateBirthDayOld, validateBirthDayYoung } from '../../helpers/functions/validateBirthDay';
 import { formAddPlayersErrors } from '../../helpers/constants/formErrors';
+import { CalendarField } from '../../uiComponents/CalendarField';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -115,7 +116,14 @@ export const FormAddPlayer: FC<IProps> = ({
           name="height"
           onChange={() => trigger('height')}
           defaultValue={playerUpdate && playerUpdate.height}
-          register={register({ required: true, pattern: /^([^\D_]{3})$/i })}
+          register={register({
+            required: true,
+            pattern: /^([^\D_]{3})$/i,
+            validate: {
+              isNotVeryHeight: (value) => value < 250,
+              isNotVeryLow: (value) => value > 150,
+            },
+          })}
         />
         <FieldInputData
           text={t('player:weightForm')}
@@ -127,7 +135,28 @@ export const FormAddPlayer: FC<IProps> = ({
           name="weight"
           onChange={() => trigger('weight')}
           defaultValue={playerUpdate && playerUpdate.weight}
-          register={register({ required: true, pattern: /^([^\D_]{2,3})$/i })}
+          register={register({
+            required: true,
+            pattern: /^([^\D_]{2,3})$/i,
+            validate: {
+              isNotHeavy: (value) => value <= 200,
+              isNotEasy: (value) => value >= 50,
+            },
+          })}
+        />
+        <CalendarField
+          trigger={trigger}
+          isError={!!errors.birthday}
+          errorMessage={formAddPlayersErrors[errors.birthday?.type]}
+          register={register({
+            required: true,
+            pattern: regExpBirthDay,
+            validate: {
+              isCorrectDate: (value) => !isNaN(new Date(value).getFullYear()),
+              isNotYoung: (value) => validateBirthDayYoung(value),
+              isNotOld: (value) => validateBirthDayOld(value),
+            },
+          })}
         />
         <FieldInputData
           text={t('player:number')}

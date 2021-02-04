@@ -2,7 +2,7 @@ import {
   get, post, remove, put,
 } from './index';
 
-import { IPlayer, IPlayerUpdate } from '../helpers/interfaces/request_interfaces/Player';
+import { IPlayer, IPlayerUpdate } from '../helpers/interfaces/requestInterfaces/Player';
 
 export const getPositions = (url: string, token: string) => get(url, token);
 

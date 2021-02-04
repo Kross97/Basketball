@@ -5,13 +5,20 @@ interface IFormErrors {
 export const formAddPlayersErrors: IFormErrors = {
   required: 'Required',
   pattern: 'Data input is incorrect',
-  validate: 'Player must be 18 years old',
+  isCorrectDate: 'There is no such date',
+  isNotYoung: 'Player must be 18 years old',
+  isNotOld: 'The player is very old',
+  isNotHeavy: 'The player is too heavy',
+  isNotEasy: 'The player is too light',
+  isNotVeryHeight: 'The player is too tall',
+  isNotVeryLow: 'The player is too low',
 };
 
 export const formAddTeamsErrors: IFormErrors = {
   required: 'Required',
   pattern: 'Data input is incorrect',
-  validate: 'The year of foundation is incorrect',
+  isNotYoung: 'The year of creation has not yet arrived',
+  isNotOld: 'A year too old for basketball',
 };
 
 export const formSignErrors: IFormErrors = {

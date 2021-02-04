@@ -12,12 +12,12 @@ import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescri
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import imageUnknown from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
-import { removeTeam } from '../../store/async_actions/team';
+import { removeTeam } from '../../store/asyncActions/team';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
 import { playersCurrentTeam } from '../../store/selectors/playersSelector';
-import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { routePaths } from '../../helpers/constants/routePaths';
 

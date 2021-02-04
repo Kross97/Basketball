@@ -4,15 +4,15 @@ import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import signInImage from '../../static/images/sign_in.svg';
-import { requestSignIn } from '../../store/async_actions/auth';
+import { requestSignIn } from '../../store/asyncActions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
-import { ISignInForm } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
+import { ISignInForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { loadAllPlayers } from '../../store/async_actions/player';
-import { loadAllCommands } from '../../store/async_actions/team';
+import { loadAllPlayers } from '../../store/asyncActions/player';
+import { loadAllCommands } from '../../store/asyncActions/team';
 
 const actionCreators = {
   requestSignIn,

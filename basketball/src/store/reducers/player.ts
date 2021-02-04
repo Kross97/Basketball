@@ -1,5 +1,5 @@
 import { createSlice, createEntityAdapter, PayloadAction } from '@reduxjs/toolkit';
-import { IPlayer, IChunkPlayers } from '../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer, IChunkPlayers } from '../../helpers/interfaces/storeInterfaces/Player';
 
 const playersAdapter = createEntityAdapter<IPlayer>();
 

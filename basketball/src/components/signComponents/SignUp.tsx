@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import signUpImage from '../../static/images/sign_up.svg';
-import { requestSignUp } from '../../store/async_actions/auth';
+import { requestSignUp } from '../../store/asyncActions/auth';
 import { authDataUser } from '../../store/reducers/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';

@@ -5,14 +5,14 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
-import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { IFormAddTeam } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import {
   regExpYear, regExpCommandName, regExpDivision, regExpConference,
 } from '../../helpers/constants/regularExp';
 import { formAddTeamsErrors } from '../../helpers/constants/formErrors';
-import { validateYearFoundation } from '../../helpers/functions/validateYearFoundation';
+import { validateYearFoundationOld, validateYearFoundationYoung } from '../../helpers/functions/validateYearFoundation';
 
 interface IProps {
   addNewTeam: (data: IFormAddTeam) => void;
@@ -89,7 +89,10 @@ export const FormAddTeam: FC<IProps> = ({
         register={register({
           required: true,
           pattern: regExpYear,
-          validate: (value) => validateYearFoundation(value),
+          validate: {
+            isNotYoung: (value) => validateYearFoundationYoung(value),
+            isNotOld: (value) => validateYearFoundationOld(value),
+          },
         })}
       />
 

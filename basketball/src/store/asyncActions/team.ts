@@ -5,9 +5,9 @@ import {
 } from '../../api/team';
 import {
   IDataAddTeam, IDataDeleteTeam, IDataUpdateTeam, IDataLoadChunkTeams,
-} from '../../helpers/interfaces/request_interfaces/Team';
+} from '../../helpers/interfaces/requestInterfaces/Team';
 import { addEntityError } from '../reducers/addingError';
-import { teamRequestErrors } from '../../api/api_constants/teamRequestErrors';
+import { teamRequestErrors } from '../../api/apiСonstants/teamRequestErrors';
 import { teamsDataReducer } from '../reducers/team';
 import { deletePlayer } from '../../api/player';
 import { playersDataReducer } from '../reducers/player';

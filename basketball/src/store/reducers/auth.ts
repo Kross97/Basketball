@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   IAddAuth, ILocalUserData, IStateAuthData, IChangeDataUser, INotification,
-} from '../../helpers/interfaces/store_interfaces/Auth';
+} from '../../helpers/interfaces/storeInterfaces/Auth';
 
 export const authDataUser = createSlice({
   name: 'authDataUser',

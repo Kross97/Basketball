@@ -11,7 +11,7 @@ import { TextLabel, TextSmall } from '../../uiComponents/Typography';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { ISignInForm, IMessageNotification } from '../../helpers/interfaces/sign_form_interfaces/SignForms';
+import { ISignInForm, IMessageNotification } from '../../helpers/interfaces/signFormInterfaces/SignForms';
 import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
 import { formSignErrors } from '../../helpers/constants/formErrors';
 

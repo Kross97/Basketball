@@ -1,15 +1,15 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { batch } from 'react-redux';
 import { addEntityError } from '../reducers/addingError';
-import { playerRequestErrors } from '../../api/api_constants/playerRequestErrors';
+import { playerRequestErrors } from '../../api/apiСonstants/playerRequestErrors';
 import {
   addPlayer, getPlayers, deletePlayer, updatePlayer,
 } from '../../api/player';
 import {
   IAddDataPlayer, IRemoveDataPlayer, IUpdateDataPlayer, IDataLoadChunk,
-} from '../../helpers/interfaces/request_interfaces/Player';
+} from '../../helpers/interfaces/requestInterfaces/Player';
 import { playersDataReducer } from '../reducers/player';
-import { IOption } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { IOption } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import { routePaths } from '../../helpers/constants/routePaths';
 
 export const addNewPlayer = createAsyncThunk(

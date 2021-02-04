@@ -1,4 +1,4 @@
-import { IRequestBaseBody } from '../helpers/interfaces/request_interfaces/RequestBase';
+import { IRequestBaseBody } from '../helpers/interfaces/requestInterfaces/RequestBase';
 import { RequestGenericType } from '../helpers/types/types';
 
 const base = process.env.REACT_APP_API;

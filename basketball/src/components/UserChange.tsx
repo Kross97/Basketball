@@ -7,11 +7,11 @@ import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
-import { changeAuthData } from '../store/async_actions/auth';
+import { changeAuthData } from '../store/asyncActions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationMessage } from '../uiComponents/NotificationMessage';
-import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
+import { IDataChangeUser } from '../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import { regExpName } from '../helpers/constants/regularExp';
 import { routePaths } from '../helpers/constants/routePaths';
 

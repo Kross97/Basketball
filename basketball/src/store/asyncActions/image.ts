@@ -1,8 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { saveImage } from '../../api/image';
-import { IImageData } from '../../helpers/interfaces/request_interfaces/Image';
+import { IImageData } from '../../helpers/interfaces/requestInterfaces/Image';
 import { imageLoadData } from '../reducers/image';
-import { imageRequestErrors } from '../../api/api_constants/imageRequestError';
+import { imageRequestErrors } from '../../api/apiСonstants/imageRequestError';
 import { addEntityError } from '../reducers/addingError';
 
 export const loadNewImage = createAsyncThunk('imageLoad',

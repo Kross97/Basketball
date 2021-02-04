@@ -12,12 +12,12 @@ import { FieldSearch } from '../../uiComponents/FieldSearch';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { PaginationCountBtn } from '../../uiComponents/PaginationCountBtn';
 import { SelectCounts } from '../../uiComponents/SelectCounts';
-import { loadChunkTeams } from '../../store/async_actions/team';
-import { loadChunkPlayers } from '../../store/async_actions/player';
+import { loadChunkTeams } from '../../store/asyncActions/team';
+import { loadChunkPlayers } from '../../store/asyncActions/player';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import {
   IStateChangeEntities, IOption, IPaginationValue, IDataSelected, ISelectedDataAll,
-} from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+} from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import style from '../../themes/reactPagination.module.scss';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';

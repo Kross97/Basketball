@@ -1,18 +1,16 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
-import DatePicker from 'react-datepicker';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { TextSmall } from './Typography';
 import calendarIcon from '../static/icons/calendar.svg';
 
 interface IProps {
+  register: (field: any) => void;
+  trigger: (key: string) => void;
   defaultValue?: string;
   isError?: boolean;
   errorMessage?: string;
-  register?: (field: any) => void;
-  onChange?: () => void;
-  onBlur?: () => void;
 }
 
 export const CalendarField: FC<IProps> = ({
@@ -20,41 +18,41 @@ export const CalendarField: FC<IProps> = ({
   isError = false,
   errorMessage = '',
   register,
-  onBlur,
-  onChange,
+  trigger,
 }) => {
-  const [showDateMenu, setShowmenu] = useState<boolean>(false);
   const [dateBirthDay, setBirthDay] = useState<string>('');
-
   const { t } = useTranslation();
 
-  const toggleStateMenu = () => {
-    setShowmenu(!showDateMenu);
+  const changeHandler = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
+    if (value.length === 4 || value.length === 7) {
+      value += '-';
+      setBirthDay(value);
+    } else if (value.length !== 11) {
+      setBirthDay(value);
+    }
+    trigger('birthday');
+  };
+
+  const resetHandler = ({ keyCode }: React.KeyboardEvent<HTMLInputElement>) => {
+    if (keyCode === 8) {
+      setBirthDay('');
+    }
   };
 
   return (
-    <InputContainer htmlFor="birthday" onClick={toggleStateMenu}>
-      {showDateMenu && (
-      <DatePicker
-        selected={startDate}
-        onChange={(date) => setStartDate(date)}
-        peekNextMonth
-        showMonthDropdown
-        showYearDropdown
-        dropdownMode="select"
-      />
-      ) }
+    <InputContainer htmlFor="birthday">
       <TextInput>{t('player:birthday')}</TextInput>
       <CustomInput
-        onChange={onChange}
-        onBlur={onBlur}
+        onChange={changeHandler}
+        onKeyDown={resetHandler}
+        onFocus={() => trigger('birthday')}
         name="birthday"
         type="text"
         isError={isError}
         defaultValue={defaultValue}
-        disabled
         ref={register}
-        value={}
+        value={dateBirthDay}
+        placeholder="yyyy-mm-dd"
       />
       {isError && <TextInputError>{errorMessage}</TextInputError>}
     </InputContainer>

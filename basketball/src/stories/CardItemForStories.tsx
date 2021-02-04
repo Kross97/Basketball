@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmallThin, TextStandart } from '../uiComponents/Typography';
-import { IPlayer } from '../helpers/storybook_mock_constants/Mock_player';
-import { ITeam } from '../helpers/storybook_mock_constants/Mock_team';
+import { IPlayer } from '../helpers/storybookMockConstants/Mock_player';
+import { ITeam } from '../helpers/storybookMockConstants/Mock_team';
 
 interface IProps {
   type: 'team' | 'player',

@@ -3,12 +3,12 @@ import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddNewEntity } from './AddNewEntity';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import { loadNewImage } from '../../store/async_actions/image';
+import { loadNewImage } from '../../store/asyncActions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { addNewTeam, updateCurrentTeam } from '../../store/async_actions/team';
+import { addNewTeam, updateCurrentTeam } from '../../store/asyncActions/team';
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
-import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/StateAndEvents';
+import { IFormAddTeam } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import { FormAddTeam } from './FormAddTeam';
 
 const actionCreators = {

@@ -1,7 +1,11 @@
-export const validateYearFoundation = (value: string) => {
+export const validateYearFoundationYoung = (value: string) => {
   const currentDateYear = (new Date().getFullYear());
-  const oldMaxYear = 1936;
-  const checkingNew = Number(value) < currentDateYear;
+  const checkingNew = Number(value) <= currentDateYear;
+  return checkingNew;
+};
+
+export const validateYearFoundationOld = (value: string): boolean => {
+  const oldMaxYear = 1900;
   const checkingOld = oldMaxYear < Number(value);
-  return checkingNew && checkingOld;
+  return checkingOld;
 };

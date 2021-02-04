@@ -1,7 +1,7 @@
 import React from 'react';
 import { Meta } from '@storybook/react/types-6-0';
 import { EnumerationPlayersTeam } from '../uiComponents/EnumerationPlayersTeam';
-import { listPlayers } from '../helpers/storybook_mock_constants/listPlayers';
+import { listPlayers } from '../helpers/storybookMockConstants/listPlayers';
 
 export default {
   title: 'Components/EnumerationPlayers',

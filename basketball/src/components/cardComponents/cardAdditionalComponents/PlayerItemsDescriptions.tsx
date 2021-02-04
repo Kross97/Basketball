@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { getFullAge } from '../../../helpers/functions/getFullAge';
 import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
 import { sizeMobile } from '../../../helpers/constants/mobileSize';
-import { IPlayer } from '../../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer } from '../../../helpers/interfaces/storeInterfaces/Player';
 
 interface IProps {
   player: IPlayer,

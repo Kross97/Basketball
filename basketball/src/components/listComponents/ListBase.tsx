@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
 import { TypeItem } from '../../helpers/types/types';
 import { mobileVersionList, sizeMobile, mobileLayout } from '../../helpers/constants/mobileSize';
-import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
-import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
+import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
+import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 
 interface IProps {
   entities: (ITeam | IPlayer)[],

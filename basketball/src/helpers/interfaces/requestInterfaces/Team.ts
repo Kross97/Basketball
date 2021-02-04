@@ -1,4 +1,4 @@
-import { IPlayer } from '../store_interfaces/Player';
+import { IPlayer } from '../storeInterfaces/Player';
 
 export interface ITeam {
   name: string,

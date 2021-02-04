@@ -1,6 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
+import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 
 const selectState = (state: IStoreReducer) => state;
 

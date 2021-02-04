@@ -4,8 +4,8 @@ import { signIn, signUp, changeUserData } from '../../api/auth';
 import { authDataUser } from '../reducers/auth';
 import {
   RegisterUser, IResponseSignSucces, LoginUser, IChangedDataUser,
-} from '../../helpers/interfaces/request_interfaces/Auth';
-import { signRequestErrors } from '../../api/api_constants/signRequestErrors';
+} from '../../helpers/interfaces/requestInterfaces/Auth';
+import { signRequestErrors } from '../../api/apiСonstants/signRequestErrors';
 
 export const requestSignUp = createAsyncThunk(
   'signUp/request',
