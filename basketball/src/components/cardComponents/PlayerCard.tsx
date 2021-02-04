@@ -39,8 +39,10 @@ export const PlayerCard = () => {
     token: authDataUser.authData.token,
   }), shallowEqual);
 
-  const teamName = useSelector(({ teamsDataReducer: { entities } }: IStoreReducer) => ((
-    entities[player.team] as ITeam).name));
+  const teamName = useSelector(({ teamsDataReducer: { entities } }: IStoreReducer) => {
+    const nameTeam = player ? (entities[player.team] as ITeam).name : '';
+    return nameTeam;
+  });
 
   const playerUpdate = () => {
     history.replace(`${routePaths.playerAdd}/${player.id}`);
@@ -56,43 +58,46 @@ export const PlayerCard = () => {
   };
 
   return (
-    <CardContainer>
-      <CardNavigation>
-        <div>
-          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
-        </div>
-        <Actions>
-          <BtnUpdate onClick={playerUpdate} type="button" />
-          <BtnDelete onClick={removeCurrentPlayer} type="button">
-            <RemoveIcon />
-          </BtnDelete>
-        </Actions>
-      </CardNavigation>
-      <CardBody>
-        <Content>
-          <ImagePlayer
-            avatarUrl={regExpImageTeam.test(player.avatarUrl) ? player.avatarUrl : imageUnknow}
-          />
-          <DataCard>
-            <PlayerName>
-              {player.name}
-              <PlayerNumber>{`#${player.number}`}</PlayerNumber>
-            </PlayerName>
-            <DescriptionContainer>
-              <PlayerItemsDescription
-                teamName={teamName}
-                player={player}
+    player
+      ? (
+        <CardContainer>
+          <CardNavigation>
+            <div>
+              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
+              <Separator>/</Separator>
+              <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
+              <Separator>/</Separator>
+              <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
+            </div>
+            <Actions>
+              <BtnUpdate onClick={playerUpdate} type="button" />
+              <BtnDelete onClick={removeCurrentPlayer} type="button">
+                <RemoveIcon />
+              </BtnDelete>
+            </Actions>
+          </CardNavigation>
+          <CardBody>
+            <Content>
+              <ImagePlayer
+                avatarUrl={regExpImageTeam.test(player.avatarUrl) ? player.avatarUrl : imageUnknow}
               />
-            </DescriptionContainer>
-          </DataCard>
-        </Content>
-        {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
-      </CardBody>
-    </CardContainer>
+              <DataCard>
+                <PlayerName>
+                  {player.name}
+                  <PlayerNumber>{`#${player.number}`}</PlayerNumber>
+                </PlayerName>
+                <DescriptionContainer>
+                  <PlayerItemsDescription
+                    teamName={teamName}
+                    player={player}
+                  />
+                </DescriptionContainer>
+              </DataCard>
+            </Content>
+            {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
+          </CardBody>
+        </CardContainer>
+      ) : <></>
   );
 };
 

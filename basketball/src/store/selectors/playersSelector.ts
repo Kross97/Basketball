@@ -23,7 +23,7 @@ const selectPlayersTeam = (state:IStoreReducer, idTeam: string) => ({
   idTeam: Number(idTeam),
 });
 
-export const playerCurrentTeam = createSelector(
+export const playersCurrentTeam = createSelector(
   selectPlayersTeam,
   ({
     state: {

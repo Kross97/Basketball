@@ -16,7 +16,7 @@ import { removeTeam } from '../../store/async_actions/team';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { ITeam } from '../../helpers/interfaces/store_interfaces/Team';
 import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
-import { playerCurrentTeam } from '../../store/selectors/playersSelector';
+import { playersCurrentTeam } from '../../store/selectors/playersSelector';
 import { IPlayer } from '../../helpers/interfaces/store_interfaces/Player';
 import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -27,9 +27,12 @@ const actionCreators = {
 
 export const TeamsCard = () => {
   const { id } = useParams<{ id: string }>();
-  const playersCurrentTeam = useSelector((state: IStoreReducer) => playerCurrentTeam(state, id));
   const history = useHistory();
-  const { t } = useTranslation();
+
+  const {
+    removeTeam: deleteTeam,
+  } = useCustomActions(actionCreators);
+
   const { team, token, errorMessage } = useSelector((
     {
       teamsDataReducer,
@@ -41,8 +44,8 @@ export const TeamsCard = () => {
     token: authDataUser.authData.token,
     errorMessage: addEntityError.errorMessage,
   }), shallowEqual);
-
-  const { removeTeam: deleteTeam } = useCustomActions(actionCreators);
+  const playersList = useSelector((state: IStoreReducer) => playersCurrentTeam(state, id));
+  const { t } = useTranslation();
 
   const teamUpdate = () => {
     history.replace(`${routePaths.teamAdd}/${team.id}`);
@@ -54,40 +57,47 @@ export const TeamsCard = () => {
     });
   };
   return (
-    <ContainerCard>
-      <CardNavigation>
-        <Links>
-          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
-          <Separator>/</Separator>
-          <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
-        </Links>
-        <Actions>
-          <BtnUpdate onClick={teamUpdate} type="button" />
-          <BtnDelete onClick={deleteCurrentTeam} type="button">
-            <RemoveIcon />
-          </BtnDelete>
-        </Actions>
-      </CardNavigation>
-      <CardBody>
-        <Content>
-          <LogoTeam imageUrl={regExpImageTeam.test(team.imageUrl) ? team.imageUrl : imageUnknown} />
-          <DataCard>
-            <TeamName>{team.name}</TeamName>
-            <DescriptionContainer>
-              <TeamItemsDescription
-                team={team}
+    team
+      ? (
+        <ContainerCard>
+          <CardNavigation>
+            <Links>
+              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
+              <Separator>/</Separator>
+              <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
+              <Separator>/</Separator>
+              <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
+            </Links>
+            <Actions>
+              <BtnUpdate onClick={teamUpdate} type="button" />
+              <BtnDelete onClick={deleteCurrentTeam} type="button">
+                <RemoveIcon />
+              </BtnDelete>
+            </Actions>
+          </CardNavigation>
+          <CardBody>
+            <Content>
+              <LogoTeam
+                imageUrl={regExpImageTeam.test(team.imageUrl)
+                  ? team.imageUrl
+                  : imageUnknown}
               />
-            </DescriptionContainer>
-          </DataCard>
-        </Content>
-        { errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
-      </CardBody>
-      { playersCurrentTeam.length > 0 && (
-      <EnumerationPlayersTeam players={playersCurrentTeam as IPlayer[]} />
-      )}
-    </ContainerCard>
+              <DataCard>
+                <TeamName>{team.name}</TeamName>
+                <DescriptionContainer>
+                  <TeamItemsDescription
+                    team={team}
+                  />
+                </DescriptionContainer>
+              </DataCard>
+            </Content>
+            { errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
+          </CardBody>
+          { playersList.length > 0 && (
+          <EnumerationPlayersTeam players={playersList as IPlayer[]} />
+          )}
+        </ContainerCard>
+      ) : <></>
   );
 };
 
