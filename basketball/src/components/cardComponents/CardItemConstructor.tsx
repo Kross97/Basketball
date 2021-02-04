@@ -69,6 +69,8 @@ const BodyCard = styled.div<{ type: string }>`
   border-top-right-radius: 4px;
   
   @media(max-width: ${sizeMobile}) {
+    display: flex;
+    justify-content: center;
     padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 0 30px 0')};
   }
 `;
@@ -84,8 +86,15 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   @media(max-width: ${sizeMobile}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
-    display: ${({ type }) => (type === 'team' ? 'inline-block' : 'block')};
-    background-position: ${({ type }) => (type === 'team' ? 'center' : '8px 2px;')};
+    background-position: ${({ type }) => (type === 'team' ? 'center' : '0 2px;')};
+  }
+  
+  @media(max-width: 385px) {
+    height: ${({ type }) => (type === 'team' ? '79px' : '79px')};
+  }
+
+  @media(max-width: 325px) {
+    width: ${({ type }) => (type === 'team' ? '79px' : '105px')};
   }
 `;
 
