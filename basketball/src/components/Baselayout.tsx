@@ -11,6 +11,7 @@ import { routePaths } from '../helpers/constants/routePaths';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
+import { UserChange } from './UserChange';
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
@@ -48,6 +49,9 @@ export const BaseLayout = () => {
             </Route>
             <Route path={routePaths.players}>
               <PlayersRouter />
+            </Route>
+            <Route path={routePaths.changeUser}>
+              <UserChange />
             </Route>
           </Switch>
         </ContentLayout>

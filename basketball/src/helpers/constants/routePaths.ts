@@ -15,4 +15,5 @@ export const routePaths: IRoutePath = {
   players: '/main/players',
   playerAdd: '/main/players/addPlayer',
   playerUpdate: '/main/players/addPlayer/:id',
+  changeUser: '/main/change',
 };

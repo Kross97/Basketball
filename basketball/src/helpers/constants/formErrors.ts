@@ -2,10 +2,16 @@ interface IFormErrors {
   [key: string]: string;
 }
 
-export const formAddErrors: IFormErrors = {
+export const formAddPlayersErrors: IFormErrors = {
   required: 'Required',
   pattern: 'Data input is incorrect',
-  validate: 'This value cannot be entered',
+  validate: 'Player must be 18 years old',
+};
+
+export const formAddTeamsErrors: IFormErrors = {
+  required: 'Required',
+  pattern: 'Data input is incorrect',
+  validate: 'The year of foundation is incorrect',
 };
 
 export const formSignErrors: IFormErrors = {

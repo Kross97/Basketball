@@ -16,7 +16,6 @@ import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
-  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
 };
 
 export const SideSandwichMenu = () => {
@@ -25,7 +24,6 @@ export const SideSandwichMenu = () => {
   const { t } = useTranslation();
   const {
     toggleStatusSandwichMenu,
-    toggleStatusChangeMenu,
   } = useCustomActions(actionCreators);
 
   const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
@@ -50,8 +48,12 @@ export const SideSandwichMenu = () => {
   return (
     <ContainerMenu isActiveMenu={isActiveSandwich}>
       <TeamsPlayers>
-        <AutthorizedContainer>
-          <AuthorizedUserLogo onClick={toggleStatusChangeMenu} name={name} avatarUrl={avatarUrl} />
+        <AutthorizedContainer onClick={toggleStatusSandwichMenu}>
+          <AuthorizedUserLogo
+            onClick={() => history.push(routePaths.changeUser)}
+            name={name}
+            avatarUrl={avatarUrl}
+          />
         </AutthorizedContainer>
         <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />

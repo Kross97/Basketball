@@ -1,58 +1,65 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { TextSmall } from './Typography';
-import closeEyeIcon from '../static/icons/close_eye.svg';
-import eyeIcon from '../static/icons/eye.svg';
-import { TypesInput } from '../helpers/types/types';
+import { useTranslation } from 'react-i18next';
+import DatePicker from 'react-datepicker';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { TextSmall } from './Typography';
+import calendarIcon from '../static/icons/calendar.svg';
 
 interface IProps {
-  text: string;
-  disabled: boolean;
-  startType: TypesInput;
-  type: TypesInput;
-  name: string;
-  onChange?: () => void;
-  onBlur?: () => void;
-  defaultValue?: string | number;
-  register?: (field: any) => void;
-  changeTypeInput?: () => void;
+  defaultValue?: string;
   isError?: boolean;
   errorMessage?: string;
+  register?: (field: any) => void;
+  onChange?: () => void;
+  onBlur?: () => void;
 }
 
-export const FieldInputData: FC<IProps> = ({
-  text,
-  disabled,
-  startType,
-  onChange,
-  onBlur,
-  type,
-  name,
+export const CalendarField: FC<IProps> = ({
   defaultValue,
-  register,
-  changeTypeInput,
   isError = false,
   errorMessage = '',
+  register,
+  onBlur,
+  onChange,
+}) => {
+  const [showDateMenu, setShowmenu] = useState<boolean>(false);
+  const [dateBirthDay, setBirthDay] = useState<string>('');
 
-}) => (
-  <InputContainer htmlFor={name}>
-    <TextInput>{text}</TextInput>
-    <CustomInput
-      onChange={onChange}
-      onBlur={onBlur}
-      name={name}
-      type={type}
-      disabled={disabled}
-      isError={isError}
-      defaultValue={defaultValue}
-      ref={register}
-    />
-    {isError && <TextInputError>{errorMessage}</TextInputError>}
-    {startType === 'password'
-    && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
-  </InputContainer>
-);
+  const { t } = useTranslation();
+
+  const toggleStateMenu = () => {
+    setShowmenu(!showDateMenu);
+  };
+
+  return (
+    <InputContainer htmlFor="birthday" onClick={toggleStateMenu}>
+      {showDateMenu && (
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        peekNextMonth
+        showMonthDropdown
+        showYearDropdown
+        dropdownMode="select"
+      />
+      ) }
+      <TextInput>{t('player:birthday')}</TextInput>
+      <CustomInput
+        onChange={onChange}
+        onBlur={onBlur}
+        name="birthday"
+        type="text"
+        isError={isError}
+        defaultValue={defaultValue}
+        disabled
+        ref={register}
+        value={}
+      />
+      {isError && <TextInputError>{errorMessage}</TextInputError>}
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.label`
   display: flex;
@@ -74,6 +81,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   font-size: 14px;
   line-height: 24px;
   color: ${({ theme }) => theme.colors.darkGrey};
+  background: ${({ theme }) => `${theme.colors.lightestGrey} url(${calendarIcon}) no-repeat right 14px center`};
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightGrey};
   }
@@ -108,20 +116,4 @@ const TextInputError = styled(TextSmall)`
   font-size: 12px;
   position: absolute;
   bottom: -23px;
-`;
-
-const ButtonChangeType = styled.button<{ typeButton: string; startType: string; }>`
-  border: none;
-  outline: none;
-  cursor: pointer;
-  position: absolute;
-  right: 13px;
-  top: 37px;
-  width: 16px;
-  height: 16px;
-  background: ${({ typeButton, startType }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)}  no-repeat;
-  
-  @media(max-width: ${mobileVersionLayout}) {
-    top: 34px;
-  }
 `;

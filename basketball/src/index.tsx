@@ -17,7 +17,7 @@ export const store = configureStore({
     authDataUser: {
       authData: {
         name: localStorage.getItem('name_basketball') || '',
-        avatarUrl: localStorage.getItem('avatar_basketball') || '',
+        avatarUrl: localStorage.getItem('avatarUrl_basketball') || '',
         token: localStorage.getItem('token_basketball') || '',
       },
       authNotificationMessageSignUp: {
@@ -25,6 +25,7 @@ export const store = configureStore({
         isError: false,
       },
       authErrorMessageSignIn: '',
+      errorChangeMessage: '',
     },
   },
 });

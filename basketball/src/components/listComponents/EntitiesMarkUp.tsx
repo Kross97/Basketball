@@ -162,6 +162,9 @@ const ContainerTeams = styled.div`
   @media(max-width: ${mobileVersionLayout}) {
     margin: 32px 0 0;
   }
+  @media(max-width: 325px) {
+    flex-grow: 1;
+  }
 `;
 
 const HeaderTeams = styled.div`
@@ -186,6 +189,7 @@ const HeaderTeams = styled.div`
 `;
 
 const TeamsBody = styled.div`
+  align-self: center;
 `;
 
 const TeamsFooter = styled.div`

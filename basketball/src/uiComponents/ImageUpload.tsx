@@ -50,7 +50,7 @@ export const ImageUpload: FC<IProps> = ({
 
   return (
     <label>
-      <InputLoad onChange={loadImage} type="file" />
+      <InputLoad onChange={loadImage} type="file" accept="image/png, image/jpeg, image/jpg" />
       <ImageContainer imageSrc={srcImage}>
         <AddHover />
       </ImageContainer>

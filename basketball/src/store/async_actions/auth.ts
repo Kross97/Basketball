@@ -72,6 +72,8 @@ export const changeAuthData = createAsyncThunk(
         dispatch(authDataUser.actions.changeAuthData({ changeData: changeData.change }));
         dispatch(authDataUser.actions.addErrorChangeUser({ errorChange: '' }));
       });
+      localStorage.setItem('name_basketball', changeData.change.userName);
+      localStorage.setItem('avatarUrl_basketball', changeData.change.avatarUrl);
       return true;
     } catch (error) {
       if (error.isCustomError) {

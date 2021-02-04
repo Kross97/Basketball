@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
@@ -12,11 +13,10 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationMessage } from '../uiComponents/NotificationMessage';
 import { IDataChangeUser } from '../helpers/interfaces/components_interfaces/StateAndEvents';
 import { regExpName } from '../helpers/constants/regularExp';
-import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+import { routePaths } from '../helpers/constants/routePaths';
 
 const actionCreators = {
   changeAuthData,
-  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
 };
 
 export const UserChange = () => {
@@ -25,24 +25,28 @@ export const UserChange = () => {
     token,
     srcImage,
     errorMessage,
+    userName,
   } = useSelector((state: IStoreReducer) => (
     {
       srcImage: state.imageLoadData.srcImage,
       token: state.authDataUser.authData.token,
       avatarUrl: state.authDataUser.authData.avatarUrl,
+      userName: state.authDataUser.authData.name,
       errorMessage: state.authDataUser.errorChangeMessage,
     }
   ), shallowEqual);
 
+  const history = useHistory();
+
   const {
     changeAuthData: changeDataUser,
-    toggleStatusChangeMenu,
   } = useCustomActions(actionCreators);
 
   const {
     register,
     handleSubmit,
     errors,
+    trigger,
   } = useForm();
 
   const changeUserData = async (data: IDataChangeUser) => {
@@ -54,7 +58,7 @@ export const UserChange = () => {
       token,
     });
     if (isSuccessChanged) {
-      toggleStatusChangeMenu();
+      history.push(routePaths.teams);
     }
   };
 
@@ -62,15 +66,17 @@ export const UserChange = () => {
     event.stopPropagation();
   };
   return (
-    <ContainerUserChange onClick={toggleStatusChangeMenu}>
+    <ContainerUserChange>
+      <ImageUpload defaultImage={avatarUrl} />
       <FormChange onClick={stopSurfacing} onSubmit={handleSubmit(changeUserData)}>
-        <ImageUpload defaultImage={avatarUrl} />
         <FieldInputData
           text="Name"
           disabled={false}
           startType="text"
           type="text"
           name="userName"
+          defaultValue={userName}
+          onChange={() => trigger('userName')}
           register={register({ required: true, pattern: regExpName })}
           isError={!!errors.userName}
           errorMessage="Required or incorrect enter"
@@ -83,7 +89,7 @@ export const UserChange = () => {
             text="Cancel"
             disabled={false}
             type="button"
-            onClick={toggleStatusChangeMenu}
+            onClick={() => history.push(routePaths.teams)}
           />
           <ButtonAction
             isNegativeStyle={false}
@@ -101,30 +107,36 @@ export const UserChange = () => {
 };
 
 const ContainerUserChange = styled.div`
-  position: absolute;
   display: flex;
-  cursor: pointer;
-  z-index: 5;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(1,1,1, 0.5);
+  margin: auto;
+  padding: 15px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 10px;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-direction: column;
+    
+    & > label {
+      margin-bottom: 25px;
+      align-self: center;
+    }
+  }
+  
+  @media(max-width: 475px) {
+    flex-grow: 1;
+    margin: auto 0;
+  }
 `;
 
 const FormChange = styled.form`
-  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin: auto ;
-  border-radius: 10px;
-  padding: 20px;
+  justify-content: center;
+  padding: 0 20px;
   background-color: ${({ theme }) => theme.colors.white};
   
-  & > label:nth-child(2) {
-    align-self: stretch;
-    margin: 17px;
+  & > label {
+    margin-bottom: 45px;
   }
 `;
 
@@ -136,13 +148,15 @@ const BtnGroup = styled.div`
    margin-right: 20px;
  } 
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: 475px) {
     flex-direction: column;
+
     & > button:nth-child(1) {
       margin-right: 0;
-      margin-bottom: 16px;
+      margin-bottom: 20px;
     }
   }
+  
 `;
 
 const NotificationContainer = styled.div`

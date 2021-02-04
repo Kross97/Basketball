@@ -16,11 +16,11 @@
   box-sizing: border-box;
   width: 40px;
   height: 40px;
-  background-color: $white;
   color: $middleGrey;
   text-align: center;
   padding-top: 10px;
   margin: 0 5px 0 5px;
+  background-color: $lightestGrey;
   & a {
     outline: none;
   }
@@ -29,18 +29,12 @@
     background-color: $lightestRed;
     color: $white;
   }
-
-  @media(max-width: 800px) {
-    width: 28px;
-    height: 28px;
-    padding-top: 4px;
-  }
 }
 
 .activeClassName {
   background-color: $red;
   color:$white;
   &:hover {
-    background-color: $red;
+    background-color: $lightRed;
   }
 }

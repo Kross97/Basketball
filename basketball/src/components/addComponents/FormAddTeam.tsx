@@ -11,7 +11,7 @@ import { IFormAddTeam } from '../../helpers/interfaces/components_interfaces/Sta
 import {
   regExpYear, regExpCommandName, regExpDivision, regExpConference,
 } from '../../helpers/constants/regularExp';
-import { formAddErrors } from '../../helpers/constants/formErrors';
+import { formAddTeamsErrors } from '../../helpers/constants/formErrors';
 import { validateYearFoundation } from '../../helpers/functions/validateYearFoundation';
 
 interface IProps {
@@ -46,7 +46,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.name}
-        errorMessage={formAddErrors[errors.name?.type]}
+        errorMessage={formAddTeamsErrors[errors.name?.type]}
         onChange={() => trigger('name')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
@@ -58,7 +58,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.division}
-        errorMessage={formAddErrors[errors.division?.type]}
+        errorMessage={formAddTeamsErrors[errors.division?.type]}
         name="division"
         onChange={() => trigger('division')}
         defaultValue={teamUpdate ? teamUpdate.division : ''}
@@ -70,7 +70,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.conference}
-        errorMessage={formAddErrors[errors.conference?.type]}
+        errorMessage={formAddTeamsErrors[errors.conference?.type]}
         name="conference"
         onChange={() => trigger('conference')}
         defaultValue={teamUpdate ? teamUpdate.conference : ''}
@@ -82,7 +82,7 @@ export const FormAddTeam: FC<IProps> = ({
         startType="text"
         type="text"
         isError={!!errors.foundationYear}
-        errorMessage={formAddErrors[errors.foundationYear?.type]}
+        errorMessage={formAddTeamsErrors[errors.foundationYear?.type]}
         name="foundationYear"
         onChange={() => trigger('foundationYear')}
         defaultValue={teamUpdate ? teamUpdate.foundationYear : ''}

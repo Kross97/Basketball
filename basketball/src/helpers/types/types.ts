@@ -4,7 +4,7 @@ export type TypeItem = 'player' | 'team';
 
 export type TypesButton = 'submit' | 'reset' | 'button';
 
-export type TypesInput = 'text' | 'password' | 'date';
+export type TypesInput = 'text' | 'password';
 
 export type RequestGenericType = string | object;
 

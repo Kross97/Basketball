@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { TextLink } from '../../uiComponents/TextLink';
@@ -115,53 +115,11 @@ const BodyAdd = styled.div`
   }
 `;
 
-const animationNotification = keyframes`
-  from {
-    opacity: 0;
-    transform: scale(0.8);
-  }
-
-  10% {
-    opacity: 0.1;
-    transform: scale(0.9);
-  }
-
-  25% {
-    opacity: 0.3;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-
-  75% {
-    opacity: 0.8;
-    transform: scale(1.2);
-  }
-
-  100% {
-    opacity: 1;
-    transform: scale(1.3);
-  }
-`;
-
 const Notification = styled.div`
-  position: absolute;
+  position: fixed;
+  top: 80px;
+  right: 80px;
+  width: 400px;
   display: flex;
   justify-content: center;
-  width: 50%;
-  bottom: -20px;
-  left: 28%;
-  animation: ${animationNotification} 1.5s linear;
-  animation-direction: alternate;
-  animation-fill-mode: forwards;
-  animation-iteration-count: 2;
-
-  @media (max-width: ${mobileVersionLayout}) {
-    bottom: unset;
-    top: 20px;
-    left: 24%;
-  }
 `;

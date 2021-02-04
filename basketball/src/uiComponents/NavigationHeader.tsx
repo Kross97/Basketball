@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 import { BrandLogo } from './BrandLogo';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import menuIcon from '../static/icons/menu.svg';
@@ -8,10 +9,10 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+import { routePaths } from '../helpers/constants/routePaths';
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
-  toggleStatusChangeMenu: menuReducer.actions.toggleStatusChangeMenu,
 };
 
 export const NavigationHeader = () => {
@@ -20,16 +21,21 @@ export const NavigationHeader = () => {
     avatarUrl: authData.avatarUrl,
   }));
 
+  const history = useHistory();
+
   const {
     toggleStatusSandwichMenu,
-    toggleStatusChangeMenu,
   } = useCustomActions(actionCreators);
 
   return (
     <ContainerNavigation>
       <ButtonSandwich onClick={toggleStatusSandwichMenu} />
       <BrandLogo />
-      <AuthorizedUserLogo onClick={toggleStatusChangeMenu} name={name} avatarUrl={avatarUrl} />
+      <AuthorizedUserLogo
+        onClick={() => history.push(routePaths.changeUser)}
+        name={name}
+        avatarUrl={avatarUrl}
+      />
     </ContainerNavigation>
   );
 };

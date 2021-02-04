@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 import { PagginationBtn } from '../helpers/types/types';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   type: PagginationBtn;
@@ -34,14 +33,8 @@ const PaginationBtn = styled.button`
   align-items: center;
   width: 40px;
   height: 40px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ theme }) => theme.colors.lightestGrey};
   color: ${({ theme }) => theme.colors.middleGrey};
-  
-  @media(max-width: ${mobileVersionLayout}) {
-    width: 28px;
-    height: 28px;
-  }
-  
   
   &:active {
     background-color: ${({ theme }) => theme.colors.red};

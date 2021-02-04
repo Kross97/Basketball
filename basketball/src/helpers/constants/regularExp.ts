@@ -13,3 +13,6 @@ export const regExpLogin = /^([^\W\s]{3,13})$/;
 export const regExpPassword = /^([^\s]+)$/i;
 
 export const regExpYear = /^([^\D_]{4})$/i;
+
+const year = /^\d{4}-\d{2}-\d{2}$/;
+console.log('Y', year);
