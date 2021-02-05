@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TextSmallThin, TextStandart } from '../../uiComponents/Typography';
-import { sizeMobile } from '../../helpers/constants/mobileSize';
+import { sizeMobile, extraSmallLayout } from '../../helpers/constants/mobileSize';
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { TypeItem } from '../../helpers/types/types';
@@ -43,7 +43,7 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
       </BodyCard>
       <FooterCard>
         <DataItem>
-          <Name>
+          <Name type={type}>
             {(type === 'team' && teamName) || item.name}
             {'number' in item && <NumberPlayer>{` #${item.number}`}</NumberPlayer>}
           </Name>
@@ -89,13 +89,10 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
     background-position: ${({ type }) => (type === 'team' ? 'center' : '0 2px;')};
   }
   
-  @media(max-width: 385px) {
-    height: ${({ type }) => (type === 'team' ? '79px' : '79px')};
+  @media(max-width: ${extraSmallLayout}) {
+    height: ${({ type }) => (type === 'team' ? '51px' : '79px')};
   }
-
-  @media(max-width: 325px) {
-    width: ${({ type }) => (type === 'team' ? '79px' : '105px')};
-  }
+  
 `;
 
 const FooterCard = styled.div`
@@ -115,15 +112,15 @@ const DataItem = styled.div`
   align-content: center;
   text-align: center`;
 
-const Name = styled(TextStandart)`
+const Name = styled(TextStandart)<{ type: string }>`
   display: block;
   margin-bottom: 12px;
-  color: ${({ theme }) => theme.colors.white};
   white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  color: ${({ theme }) => theme.colors.white};
+  text-overflow: ${({ type }) => (type === 'team' && 'ellipsis')};
+  overflow: ${({ type }) => (type === 'team' && 'hidden')};
+  max-width: ${({ type }) => (type === 'team' && '94%')};
   align-self: center;
-  max-width: 94%;
   
   @media(max-width: ${sizeMobile}) {
     font-size: 12px;

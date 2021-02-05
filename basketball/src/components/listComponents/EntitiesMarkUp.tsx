@@ -195,5 +195,5 @@ const TeamsBody = styled.div`
 const TeamsFooter = styled.div`
  display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
 `;

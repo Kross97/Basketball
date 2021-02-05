@@ -61,7 +61,7 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
   }
   
   @media(max-width: ${sizeMobile}) {
-    padding-top: 4px;
+    padding-top: 5px;
     padding-bottom: 4px;
   }
 `;

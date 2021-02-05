@@ -1,3 +1,5 @@
+export const extraSmallLayout = '350px';
+
 export const mobileLayout = '615px';
 
 export const sizeMobile: string = '770px';

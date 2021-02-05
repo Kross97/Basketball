@@ -8,14 +8,14 @@ const customStyles = {
   clearIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 550px)': {
+    '@media(max-width: 770px)': {
       padding: '5px',
     },
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 550px)': {
+    '@media(max-width: 770px)': {
       padding: '5px',
     },
   }),
@@ -31,6 +31,9 @@ const customStyles = {
     },
     '@media(max-width: 1000px)': {
       minHeight: '20px',
+    },
+    '@media(max-width: 770px)': {
+      maxHeight: '32px',
     },
   }),
   option: (styles: any, state: any) => ({
@@ -51,8 +54,8 @@ const customStyles = {
       backgroundColor: theme.colors.darkRed,
       color: theme.colors.white,
     },
-    '@media(max-width: 325px)': {
-      fontSize: '12px',
+    '@media(max-width: 475px)': {
+      fontSize: '14px',
     },
   }),
   multiValue: (styles: any) => ({
@@ -65,6 +68,14 @@ const customStyles = {
     borderRadius: '4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
+
+    '@media(max-width: 770px)': {
+      margin: '0',
+      marginTop: '2px',
+      marginBottom: '3px',
+      lineHeight: '11px',
+    },
+
   }),
   singleValue: (styles: any) => ({
     ...styles,
@@ -121,6 +132,10 @@ const customStyles = {
     maxHeight: '40px',
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
+
+    '@media(max-width: 770px)': {
+      maxHeight: '32px',
+    },
 
     '::-webkit-scrollbar-track': {
       backgroundColor: theme.colors.lightestGrey,

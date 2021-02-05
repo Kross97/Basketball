@@ -55,7 +55,6 @@ export const BaseForm: FC<IProps> = ({
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
 
-  console.log('NOTIFICATION', notificationMessage);
   return (
     <FormSign onSubmit={handleSubmit(submitHandler)}>
       <LabelForm>{typeForm}</LabelForm>

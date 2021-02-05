@@ -45,6 +45,6 @@ const CustomSearch = styled.input`
   }
 
   @media(max-width: ${sizeMobile}) {
-    padding: 4px 12px;
+    padding: 7px 12px;
   }
 `;

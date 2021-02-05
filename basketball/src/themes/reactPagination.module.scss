@@ -4,8 +4,14 @@
   display: flex;
   flex-grow: 0.13;
   list-style: none;
+  margin-top: 32px;
+  margin-bottom: 0;
   padding: 0;
   justify-content: flex-start;
+
+  @media(max-width: 770px) {
+    margin-top: 16px;
+  }
 }
 
 .itemPagination {

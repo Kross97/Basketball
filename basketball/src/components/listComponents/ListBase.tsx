@@ -2,7 +2,9 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
 import { TypeItem } from '../../helpers/types/types';
-import { mobileVersionList, sizeMobile, mobileLayout } from '../../helpers/constants/mobileSize';
+import {
+  mobileVersionList, sizeMobile, mobileLayout, extraSmallLayout,
+} from '../../helpers/constants/mobileSize';
 import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 
@@ -42,12 +44,14 @@ const ListContainer = styled.div`
   @media(max-width: ${sizeMobile}) {
     grid-template-columns: 180px 180px 180px;
     grid-template-rows: 1fr 1fr 1fr;
-    grid-column-gap: 12px;
-    grid-row-gap: 12px;
+    grid-column-gap: 24px;
+    grid-row-gap: 24px;
   }
   
-  @media(max-width: ${mobileLayout}) {
-    grid-template-columns: 1fr 1fr;
+  @media(max-width: 600px) {
+    grid-template-columns: 180px 180px;
+    grid-column-gap: 12px;
+    grid-row-gap: 12px;
   }
   
   @media(max-width: 475px) {
@@ -55,10 +59,10 @@ const ListContainer = styled.div`
   }
   
   @media(max-width: 385px) {
-    grid-template-columns: 150px 150px;
+    grid-template-columns: 170px 170px;
   }
   
-  @media(max-width: 325px) {
-    grid-template-columns: 1fr;
+  @media(max-width: ${extraSmallLayout}) {
+    grid-template-columns: 150px 150px;
   }
 `;
