@@ -14,4 +14,4 @@ export const regExpPassword = /^([^\s]+)$/i;
 
 export const regExpYear = /^([^\D_]{4})$/i;
 
-export const regExpBirthDay = /^\d{4}-\d{2}-\d{2}$/;
+export const regExpBirthDay = /^\d{2}\.\d{2}\.\d{4}$/;

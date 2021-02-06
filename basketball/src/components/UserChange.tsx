@@ -162,8 +162,8 @@ const BtnGroup = styled.div`
 const NotificationContainer = styled.div`
   position: fixed;
   top: 80px;
-  right: 80px;
-  width: 400px;
+  right: 36px;
+  width: 470px;
   display: flex;
   justify-content: center;
 

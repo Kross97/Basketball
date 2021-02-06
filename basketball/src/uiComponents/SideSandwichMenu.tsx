@@ -180,7 +180,7 @@ const OutItem = styled(ItemMenu)`
   }
   
   @media(max-width: ${mobileVersionLayout}) {
-    padding: 45px 0 32px 0;
+    padding: 45px 0 32px 24px;
   }
 `;
 

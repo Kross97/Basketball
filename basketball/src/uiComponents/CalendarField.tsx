@@ -24,8 +24,8 @@ export const CalendarField: FC<IProps> = ({
   const { t } = useTranslation();
 
   const changeHandler = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {
-    if (value.length === 4 || value.length === 7) {
-      value += '-';
+    if (value.length === 2 || value.length === 5) {
+      value += '.';
       setBirthDay(value);
     } else if (value.length !== 11) {
       setBirthDay(value);
@@ -52,7 +52,7 @@ export const CalendarField: FC<IProps> = ({
         defaultValue={defaultValue}
         ref={register}
         value={dateBirthDay}
-        placeholder="yyyy-mm-dd"
+        placeholder="dd.mm.yyyy"
       />
       {isError && <TextInputError>{errorMessage}</TextInputError>}
     </InputContainer>

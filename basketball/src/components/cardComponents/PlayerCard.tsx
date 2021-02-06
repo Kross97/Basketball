@@ -208,10 +208,9 @@ const Content = styled.div`
 const ImagePlayer = styled.div<{ avatarUrl: string }>`
   margin-right: 56px;
   flex-shrink: 0.1;
-  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat`};
+  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat center 5px`};
   width: 500px;
   height: 368px;
-  background-position: center 5px;
   background-size: contain;
   align-self: flex-end;
   
@@ -289,18 +288,17 @@ const DescriptionContainer = styled.div`
 `;
 
 const NotificationContainer = styled.div`
-  position: absolute;
-  bottom: -40px;
-  left: 40%;
+  position: fixed;
+  top: 80px;
+  right: 36px;
+  width: 470px;
+  display: flex;
+  justify-content: center;
 
-  @media(max-width: 800px) {
-    left: 30%;
-  }
-  
-  @media(max-width: 600px) {
+  @media(max-width: ${mobliSizeCard}) {
+    width: auto;
+    top: 60px;
+    right: 20%;
     left: 20%;
-  }
-  @media(max-width: 350px) {
-    left: 10%;
   }
 `;

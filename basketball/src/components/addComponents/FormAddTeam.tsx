@@ -6,6 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
+import { mobliSizeCard } from '../../helpers/constants/mobileSize';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddTeam } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import {
@@ -145,4 +146,10 @@ const BtnGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
+  
+  @media(max-width: ${mobliSizeCard}) {
+    & button {
+      padding: 8px 40px;
+    }
+  }
 `;

@@ -9,7 +9,7 @@ import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { addEntityError } from '../../store/reducers/addingError';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobileSizeGridForm, mobliSizeCard } from '../../helpers/constants/mobileSize';
 
 interface IProps {
   isTeam: boolean;
@@ -62,8 +62,8 @@ const ContainerAdd = styled.div`
   margin: 32px auto auto;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
-
-  @media (max-width: ${mobileVersionLayout}) {
+  
+  @media (max-width: ${mobliSizeCard}) {
     border-radius: 0;
     flex-grow: 1;
     margin: 16px auto auto;
@@ -73,7 +73,7 @@ const ContainerAdd = styled.div`
 const HeaderAdd = styled.div`
   padding: 26px 0 19px 32px;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     padding: 15px 0 15px 16px;
   }
 `;
@@ -94,10 +94,21 @@ const BodyAdd = styled.div`
     align-self: flex-start;
   }
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${mobileSizeGridForm}) {
     flex-direction: column;
-    align-items: center;
-    padding: 63px 0 48px 0;
+    padding: 48px 73px;
+
+    & > label:nth-child(1) {
+      margin-right: 0;
+      align-self: center;
+      margin-bottom: 40px;
+    }
+  }
+  
+  @media (max-width: ${mobliSizeCard}) {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 48px 24px;
 
     & > label:nth-child(1) {
       margin-right: 0;
@@ -108,22 +119,18 @@ const BodyAdd = styled.div`
     & input {
       padding: 4px 12px;
     }
-
-    & button {
-      padding: 4px 58px;
-    }
   }
 `;
 
 const Notification = styled.div`
   position: fixed;
   top: 80px;
-  right: 80px;
-  width: 400px;
+  right: 36px;
+  width: 470px;
   display: flex;
   justify-content: center;
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${mobliSizeCard}) {
     width: auto;
     top: 60px;
     right: 20%;

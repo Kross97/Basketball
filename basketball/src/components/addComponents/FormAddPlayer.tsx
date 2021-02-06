@@ -16,6 +16,8 @@ import { regExpName, regExpBirthDay } from '../../helpers/constants/regularExp';
 import { validateBirthDayOld, validateBirthDayYoung } from '../../helpers/functions/validateBirthDay';
 import { formAddPlayersErrors } from '../../helpers/constants/formErrors';
 import { CalendarField } from '../../uiComponents/CalendarField';
+import { mobliSizeCard, mobileSizeGridForm } from '../../helpers/constants/mobileSize';
+import { formatDate } from '../../helpers/functions/formatingDate';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -157,9 +159,9 @@ export const FormAddPlayer: FC<IProps> = ({
             required: true,
             pattern: regExpBirthDay,
             validate: {
-              isCorrectDate: (value) => !isNaN(new Date(value).getFullYear()),
-              isNotYoung: (value) => validateBirthDayYoung(value),
-              isNotOld: (value) => validateBirthDayOld(value),
+              isCorrectDate: (value) => !isNaN(new Date(formatDate(value)).getFullYear()),
+              isNotYoung: (value) => validateBirthDayYoung(formatDate(value)),
+              isNotOld: (value) => validateBirthDayOld(formatDate(value)),
             },
           })}
         />
@@ -212,6 +214,12 @@ const BtnGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
+
+  @media(max-width: ${mobliSizeCard}) {
+    & button {
+      padding: 8px 40px;
+    }
+  }
 `;
 
 const PlayerData = styled.div`
@@ -223,4 +231,8 @@ const PlayerData = styled.div`
  @media( max-width: 1500px) {
    grid-template-columns: repeat(2, 171px) ;
  }
+  
+  @media(max-width: ${mobileSizeGridForm}) {
+    grid-template-columns: auto auto;
+  }
  `;

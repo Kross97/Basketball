@@ -25,8 +25,8 @@ export const BaseLayout = () => {
     teamsDataReducer,
     playersDataReducer,
   }: IStoreReducer) => ({
-    countTeams: teamsDataReducer.ids.length,
-    countPlayer: playersDataReducer.ids.length,
+    countTeams: teamsDataReducer.chunkData.count,
+    countPlayer: playersDataReducer.chunkData.count,
   }));
   const { pathname } = useLocation();
   const history = useHistory();

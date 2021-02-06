@@ -38,8 +38,7 @@ export const FieldInputData: FC<IProps> = ({
   errorMessage = '',
 
 }) => {
-  const [value, setValue] = useState<string>(`${defaultValue}` || '');
-
+  const [value, setValue] = useState<string>((defaultValue && `${defaultValue}`) || '');
   const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     if (valueForCapitalize.has(name)) {
       setValue(capitalize(target.value));
