@@ -108,13 +108,13 @@ export const EntitiesMarkUp: FC<IProps> = ({
         <HeaderTeams>
           <FieldSearch onChange={changeNameEntity} />
           {!isTeam && (
-            <MultiSelectEntities
-              options={teamsOptions}
-              isMulti
-              isPlaceholder={t('markup:select')}
-              isForm={false}
-              onChange={addCommandSearch}
-            />
+          <MultiSelectEntities
+            options={teamsOptions}
+            isMulti
+            isPlaceholder={t('markup:select')}
+            isForm={false}
+            onChange={addCommandSearch}
+          />
           )}
           <ButtonAction
             isNegativeStyle={false}
@@ -132,21 +132,25 @@ export const EntitiesMarkUp: FC<IProps> = ({
             : <SearchNotFound />}
         </TeamsBody>
         <TeamsFooter>
-          <ReactPaginate
-            previousLabel={<PaginationCountBtn type="prev" />}
-            nextLabel={<PaginationCountBtn type="next" />}
-            breakLabel={<PaginationCountBtn type="break" />}
-            pageClassName={style.itemPagination}
-            containerClassName={style.paginationContainer}
-            activeClassName={style.activeClassName}
-            onPageChange={changePage}
-            initialPage={chunkData.page - 1}
-            pageCount={typedSelectedChunk.countEntities / typedSelectedChunk.sizePageEntities}
-            pageRangeDisplayed={2}
-            marginPagesDisplayed={1}
-          />
+          {typedSelectedChunk.chunkEntities.length > 0 && (
+          <>
+            <ReactPaginate
+              previousLabel={<PaginationCountBtn type="prev" />}
+              nextLabel={<PaginationCountBtn type="next" />}
+              breakLabel={<PaginationCountBtn type="break" />}
+              pageClassName={style.itemPagination}
+              containerClassName={style.paginationContainer}
+              activeClassName={style.activeClassName}
+              onPageChange={changePage}
+              initialPage={chunkData.page - 1}
+              pageCount={typedSelectedChunk.countEntities / typedSelectedChunk.sizePageEntities}
+              pageRangeDisplayed={2}
+              marginPagesDisplayed={1}
+            />
 
-          <SelectCounts onChange={changeSize} />
+            <SelectCounts onChange={changeSize} />
+          </>
+          )}
         </TeamsFooter>
       </ContainerTeams>
     )
@@ -158,30 +162,31 @@ const ContainerTeams = styled.div`
   margin: 32px auto 0;
   display: flex;
   flex-direction: column;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     margin: 32px 0 0;
   }
-  @media(max-width: 325px) {
+  @media (max-width: 325px) {
     flex-grow: 1;
   }
 `;
 
 const HeaderTeams = styled.div`
- display: flex;
- justify-content: space-between;
- margin-bottom: 32px;
-  
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 32px;
+
   & > div:nth-child(1), & > label:nth-of-type(1) {
     flex-basis: 32%;
-  } 
-  
-  @media(max-width: ${mobileVersionLayout}) {
+  }
+
+  @media (max-width: ${mobileVersionLayout}) {
     flex-direction: column;
     align-self: stretch;
     & > div:nth-child(1) {
       margin-bottom: 16px;
     }
+
     & > button {
       margin-top: 16px;
     }
@@ -193,7 +198,7 @@ const TeamsBody = styled.div`
 `;
 
 const TeamsFooter = styled.div`
- display: flex;
+  display: flex;
   justify-content: space-between;
   align-items: flex-end;
 `;

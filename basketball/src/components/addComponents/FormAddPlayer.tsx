@@ -108,7 +108,7 @@ export const FormAddPlayer: FC<IProps> = ({
         isMulti={false}
         isForm
         defaultValue={playerUpdate
-        && teamsOptions.find((option) => option.value === playerUpdate.team)}
+                && teamsOptions.find((option) => option.value === playerUpdate.team)}
         isError={!!errors.team}
         options={teamsOptions}
       />
@@ -215,7 +215,7 @@ const BtnGroup = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
 
-  @media(max-width: ${mobliSizeCard}) {
+  @media (max-width: ${mobliSizeCard}) {
     & button {
       padding: 8px 40px;
     }
@@ -223,16 +223,16 @@ const BtnGroup = styled.div`
 `;
 
 const PlayerData = styled.div`
- display: grid;
- grid-template-columns: 1fr 1fr ;
- grid-template-rows: 1fr 1fr;
- grid-column-gap: 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 24px;
 
- @media( max-width: 1500px) {
-   grid-template-columns: repeat(2, 171px) ;
- }
-  
-  @media(max-width: ${mobileSizeGridForm}) {
+  @media ( max-width: 1500px) {
+    grid-template-columns: repeat(2, 171px) ;
+  }
+
+  @media (max-width: ${mobileSizeGridForm}) {
     grid-template-columns: auto auto;
   }
- `;
+`;

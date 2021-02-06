@@ -78,8 +78,8 @@ export const SignIn = () => {
 };
 
 const SignContainer = styled.div`
- display: flex;
- height: 100vh; 
+  display: flex;
+  height: 100vh;
 `;
 
 const FormContainer = styled.div`
@@ -88,7 +88,7 @@ const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   background-color: ${({ theme }) => theme.colors.white};
-  
+
 `;
 
 const PosterContainer = styled.div`
@@ -97,7 +97,7 @@ const PosterContainer = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
   padding: 0 40px;
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;

@@ -20,7 +20,7 @@ const actionCreators = {
 
 export const SideSandwichMenu = () => {
   const history = useHistory();
-  const { path } = useParams<{ path: string}>();
+  const { path } = useParams<{ path: string }>();
   const { t } = useTranslation();
   const {
     toggleStatusSandwichMenu,
@@ -36,7 +36,9 @@ export const SideSandwichMenu = () => {
   ) => state.menuReducer.isActiveSandwichMenu);
 
   const clickIconHandler = (route: string) => {
-    toggleStatusSandwichMenu();
+    if (window.innerWidth < 930) {
+      toggleStatusSandwichMenu();
+    }
     history.push(`/main/${route}`);
   };
 
@@ -73,11 +75,11 @@ export const SideSandwichMenu = () => {
 };
 
 const AutthorizedContainer = styled.div`
-    display: none;
-    padding: 20px 0 20px 20px;
-    border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
+  display: none;
+  padding: 20px 0 20px 20px;
+  border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     display: block;
   }
 `;
@@ -92,8 +94,8 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   transition: 0.7s ease-out;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     margin-top: 0;
     padding: 0;
     top: 0;
@@ -111,7 +113,7 @@ const ItemMenu = styled.div`
   align-items: center;
   cursor: pointer;
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     flex-direction: row;
     padding-left: 25px;
     justify-content: flex-start;
@@ -126,18 +128,22 @@ const TeamItem = styled(ItemMenu)<{ currentPath: string }>`
   flex-grow: 1;
   justify-content: center;
   align-items: center;
+
   &:active {
     background: ${({ theme }) => theme.gradient.sandwichButton};
   }
+
   &:hover svg {
     fill: ${({ theme }) => theme.colors.lightRed};
   }
+
   & svg {
-   width: 22px;
-   height: 14px;
+    width: 22px;
+    height: 14px;
     fill: ${({ currentPath, theme }) => (currentPath === 'teams' ? theme.colors.red : theme.colors.middleGrey)};
- }
-  @media(max-width: ${mobileVersionLayout}) {
+  }
+
+  @media (max-width: ${mobileVersionLayout}) {
     justify-content: flex-start;
   }
 `;
@@ -147,6 +153,7 @@ const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
   justify-content: center;
   align-items: center;
   color: ${({ currentPath, theme }) => (currentPath === 'players' ? theme.colors.red : theme.colors.middleGrey)};
+
   & svg {
     width: 16px;
     height: 16px;
@@ -156,30 +163,34 @@ const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
   &:active {
     background: ${({ theme }) => theme.gradient.sandwichButton};
   }
+
   &:hover svg {
     fill: ${({ theme }) => theme.colors.lightRed};
   }
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     justify-content: flex-start;
   }
 `;
 
 const OutItem = styled(ItemMenu)`
   padding: 44px 0 32px 0;
+
   & svg {
     width: 22px;
     height: 18px;
     fill: ${({ theme }) => theme.colors.lightRed};
   }
+
   &:active {
     background: ${({ theme }) => theme.gradient.sandwichButton};
   }
-  
+
   &:active svg {
     fill: ${({ theme }) => theme.colors.red}
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     padding: 45px 0 32px 24px;
   }
 `;
@@ -189,14 +200,14 @@ const TeamsPlayers = styled.div`
   flex-direction: column;
   justify-content: space-between;
   flex-grow: 0.2;
-  
+
   & ${ItemMenu}:nth-child(1) {
     margin-bottom: 40px;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     flex-grow: 0.1;
-    
+
     & ${ItemMenu}:nth-child(1) {
       margin-bottom: 33px;
     }

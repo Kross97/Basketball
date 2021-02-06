@@ -20,7 +20,7 @@ export const playersDataReducer = createSlice({
     clearPlayers: playersAdapter.removeAll,
     updatePlayer: playersAdapter.updateOne,
     setAllPlayers: playersAdapter.setAll,
-    loadChunkPlayers: (state, action: PayloadAction<{ chunkData: IChunkPlayers}>) => {
+    loadChunkPlayers: (state, action: PayloadAction<{ chunkData: IChunkPlayers }>) => {
       const { chunkData } = action.payload;
       state.chunkData = chunkData;
     },

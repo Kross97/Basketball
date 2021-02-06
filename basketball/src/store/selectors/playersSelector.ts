@@ -18,7 +18,7 @@ export const playersChunkSelector = createSelector(
   }),
 );
 
-const selectPlayersTeam = (state:IStoreReducer, idTeam: string) => ({
+const selectPlayersTeam = (state: IStoreReducer, idTeam: string) => ({
   state,
   idTeam: Number(idTeam),
 });

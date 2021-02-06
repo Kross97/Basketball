@@ -45,8 +45,8 @@ const LabelItem = styled(TextLarge)`
   color: ${({ theme }) => theme.colors.white};
   margin-bottom: 8px;
   font-weight: 700;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 18px;
     line-height: 25px;
   }
@@ -56,8 +56,8 @@ const DataItem = styled(TextStandart)`
   font-size: 18px;
   word-break: break-word;
   color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 14px;
   }
 `;

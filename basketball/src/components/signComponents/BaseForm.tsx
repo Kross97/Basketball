@@ -177,8 +177,8 @@ const FormSign = styled.form`
   & > label, & > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
-  
-  @media(max-width: ${extraSmallLayout}) {
+
+  @media (max-width: ${extraSmallLayout}) {
     & > button {
       padding: 5px 100px 4px;
     }
@@ -210,8 +210,8 @@ const Notification = styled.div`
   width: 470px;
   display: flex;
   justify-content: center;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     width: auto;
     right: 20%;
     left: 20%;

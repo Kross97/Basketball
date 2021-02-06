@@ -21,8 +21,8 @@ const ContainerLogo = styled.div`
   display: inline-flex;
   align-items: center;
   cursor: pointer;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     flex-direction: row-reverse;
   }
 `;
@@ -35,8 +35,8 @@ const UserLogo = styled.div<{ avatarUrl: string | null }>`
   background-size: cover;
   background-position: center;
   border-radius: 20px;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     width: 40px;
     height: 40px;
     margin-left: 0;

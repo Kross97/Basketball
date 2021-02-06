@@ -35,17 +35,18 @@ const PaginationBtn = styled.button`
   height: 40px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   color: ${({ theme }) => theme.colors.middleGrey};
-  
+
   &:active {
     background-color: ${({ theme }) => theme.colors.red};
     color: ${({ theme }) => theme.colors.white};
+
     & ${Arrow} {
-    border-color: ${({ theme }) => theme.colors.white};
-  }
+      border-color: ${({ theme }) => theme.colors.white};
+    }
   }
 `;
 
-const TextPagination = styled(TextStandart)<{ type: string}>`
+const TextPagination = styled(TextStandart)<{ type: string }>`
   font-weight: 700;
   font-size: 19px;
   letter-spacing: 2px;

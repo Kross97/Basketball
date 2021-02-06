@@ -20,8 +20,8 @@ export const FieldSearch: FC<IProps> = ({
 };
 
 const SearchContainer = styled.div`
-display: flex;
-flex-direction: column;  
+  display: flex;
+  flex-direction: column;
 `;
 
 const CustomSearch = styled.input`
@@ -35,7 +35,7 @@ const CustomSearch = styled.input`
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
-  
+
   &::placeholder {
     font-style: normal;
     font-weight: 500;
@@ -44,7 +44,7 @@ const CustomSearch = styled.input`
     color: ${({ theme }) => theme.colors.middleGrey};
   }
 
-  @media(max-width: ${sizeMobile}) {
+  @media (max-width: ${sizeMobile}) {
     padding: 7px 12px;
   }
 `;

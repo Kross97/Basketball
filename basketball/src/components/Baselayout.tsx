@@ -46,7 +46,7 @@ export const BaseLayout = () => {
   return (
     <ContainerLayout
       isEntitiesList={(pathname === routePaths.teams && countTeams !== 0)
-        || (pathname === routePaths.players && countPlayer !== 0)}
+            || (pathname === routePaths.players && countPlayer !== 0)}
     >
       <NavigationHeader />
       <BodyContainer>
@@ -95,8 +95,8 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
   &::-webkit-scrollbar {
     width: 7px;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     flex-basis: 100vh;
   }
 `;
@@ -105,8 +105,9 @@ const ContentLayout = styled.div`
   display: flex;
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
-  
-  @media(max-width: ${mobileVersionLayout}) {}
+
+  @media (max-width: ${mobileVersionLayout}) {
+  }
   justify-content: center;
 `;
 
@@ -114,7 +115,7 @@ const BodyContainer = styled.div`
   display: flex;
   flex-grow: 1;
   position: relative;
-  
+
 `;
 
 const BackgroundMenu = styled.div<{ isActiveSandwichMenu: boolean }>`

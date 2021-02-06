@@ -58,7 +58,7 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
 };
 
 const ContainerCard = styled.div`
- cursor: pointer;
+  cursor: pointer;
 `;
 
 const BodyCard = styled.div<{ type: string }>`
@@ -67,11 +67,14 @@ const BodyCard = styled.div<{ type: string }>`
   text-align: center;
   border-top-left-radius: 4px;
   border-top-right-radius: 4px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     display: flex;
     justify-content: center;
-    padding: ${({ type, theme: { sizes: { cardSizes } } }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 0 30px 0')};
+    padding: ${({
+    type,
+    theme: { sizes: { cardSizes } },
+  }) => (cardSizes[type] ? cardSizes[`${type}Mobile`] : '24px 0 30px 0')};
   }
 `;
 
@@ -82,17 +85,17 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat`};
   background-size: contain;
   background-position: center;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
     background-position: ${({ type }) => (type === 'team' ? 'center' : '0 2px;')};
   }
-  
-  @media(max-width: ${extraSmallLayout}) {
+
+  @media (max-width: ${extraSmallLayout}) {
     height: ${({ type }) => (type === 'team' ? '51px' : '79px')};
   }
-  
+
 `;
 
 const FooterCard = styled.div`
@@ -100,8 +103,8 @@ const FooterCard = styled.div`
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     padding: 19px 10px;
   }
 `;
@@ -121,8 +124,8 @@ const Name = styled(TextStandart)<{ type: string }>`
   overflow: ${({ type }) => (type === 'team' && 'hidden')};
   max-width: ${({ type }) => (type === 'team' && '94%')};
   align-self: center;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 12px;
     margin-bottom: 6px;
     line-height: 150%;
@@ -130,11 +133,11 @@ const Name = styled(TextStandart)<{ type: string }>`
 `;
 
 const NumberPlayer = styled(TextStandart)`
- color: ${({ theme }) => theme.colors.lightRed};
+  color: ${({ theme }) => theme.colors.lightRed};
 
- @media (max-width: ${sizeMobile}) {
-  font-size: 12px;
-}
+  @media (max-width: ${sizeMobile}) {
+    font-size: 12px;
+  }
 `;
 
 const DescriptionItem = styled(TextSmallThin)`
@@ -143,8 +146,8 @@ const DescriptionItem = styled(TextSmallThin)`
   white-space: nowrap;
   overflow: hidden;
   max-width: 99%;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 10px;
     line-height: 14px;
   }

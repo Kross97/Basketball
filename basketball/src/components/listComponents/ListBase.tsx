@@ -29,40 +29,40 @@ export const ListBase: FC<IProps> = ({
 );
 
 const ListContainer = styled.div`
- display: grid;
- grid-template-columns: 1fr 1fr 1fr;
- grid-template-rows: 1fr 1fr; 
- grid-column-gap: 24px;
- grid-row-gap: 24px;
-  
-  @media(max-width: ${mobileVersionList}) {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 24px;
+  grid-row-gap: 24px;
+
+  @media (max-width: ${mobileVersionList}) {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 24px;
     grid-row-gap: 24px;
   }
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     grid-template-columns: 180px 180px 180px;
     grid-template-rows: 1fr 1fr 1fr;
     grid-column-gap: 24px;
     grid-row-gap: 24px;
   }
-  
-  @media(max-width: 600px) {
+
+  @media (max-width: 600px) {
     grid-template-columns: 180px 180px;
     grid-column-gap: 12px;
     grid-row-gap: 12px;
   }
-  
-  @media(max-width: 475px) {
+
+  @media (max-width: 475px) {
     grid-template-columns: 180px 180px;
   }
-  
-  @media(max-width: 385px) {
+
+  @media (max-width: 385px) {
     grid-template-columns: 170px 170px;
   }
-  
-  @media(max-width: ${extraSmallLayout}) {
+
+  @media (max-width: ${extraSmallLayout}) {
     grid-template-columns: 150px 150px;
   }
 `;

@@ -80,6 +80,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   line-height: 24px;
   color: ${({ theme }) => theme.colors.darkGrey};
   background: ${({ theme }) => `${theme.colors.lightestGrey} url(${calendarIcon}) no-repeat right 14px center`};
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightGrey};
   }
@@ -94,15 +95,15 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
-  
+
   &::-webkit-calendar-picker-indicator {
     display: none;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     padding: 4px 12px;
   }
-  
+
 `;
 
 const TextInput = styled(TextSmall)`

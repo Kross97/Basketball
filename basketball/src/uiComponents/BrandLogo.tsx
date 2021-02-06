@@ -10,8 +10,8 @@ export const BrandLogo = () => (
 const Logo = styled(LogoImage)`
   width: 191px;
   height: 48px;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     width: 137px;
     height: 34px;
   }

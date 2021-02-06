@@ -15,7 +15,12 @@ export const requestSignUp = createAsyncThunk(
       const response: IResponseSignSucces = await signUp('Auth/SignUp', newUserData);
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
-        dispatch(authDataUser.actions.addAuthNotificationSignUp({ notification: { message: 'Registration was successful', isError: false } }));
+        dispatch(authDataUser.actions.addAuthNotificationSignUp({
+          notification: {
+            message: 'Registration was successful',
+            isError: false,
+          },
+        }));
         dispatch(authDataUser.actions.addLocalUserData({
           userData: {
             login: newUserData.login,

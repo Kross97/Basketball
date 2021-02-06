@@ -58,7 +58,6 @@ export const removeTeam = createAsyncThunk(
         dispatch(addEntityError.actions.clearErrorMessage());
       });
     } catch (error) {
-      console.log('ERROR', error);
       if (error.isCustomError) {
         dispatch(addEntityError.actions.addErrorMessage({
           errorMessage: teamRequestErrors[error.status],

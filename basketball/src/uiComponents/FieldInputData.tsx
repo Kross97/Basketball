@@ -67,7 +67,7 @@ export const FieldInputData: FC<IProps> = ({
       />
       {isError && <TextInputError>{errorMessage}</TextInputError>}
       {startType === 'password'
-    && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
+            && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
     </InputContainer>
   );
 };
@@ -92,6 +92,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   font-size: 14px;
   line-height: 24px;
   color: ${({ theme }) => theme.colors.darkGrey};
+
   &:hover {
     background-color: ${({ theme }) => theme.colors.lightGrey};
   }
@@ -106,15 +107,15 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
-  
+
   &::-webkit-calendar-picker-indicator {
     display: none;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     padding: 4px 12px;
   }
-  
+
 `;
 
 const TextInput = styled(TextSmall)`
@@ -137,9 +138,12 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
   top: 37px;
   width: 16px;
   height: 16px;
-  background: ${({ typeButton, startType }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)}  no-repeat;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+  background: ${({
+    typeButton,
+    startType,
+  }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)} no-repeat;
+
+  @media (max-width: ${mobileVersionLayout}) {
     top: 34px;
   }
 `;

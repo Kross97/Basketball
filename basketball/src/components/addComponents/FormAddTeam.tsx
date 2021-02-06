@@ -136,7 +136,7 @@ export const FormAddTeam: FC<IProps> = ({
 const FormAdd = styled.form`
   display: flex;
   flex-direction: column;
-  
+
   & label {
     margin-bottom: 24px;
   }
@@ -146,8 +146,8 @@ const BtnGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: ${mobliSizeCard}) {
     & button {
       padding: 8px 40px;
     }

@@ -72,8 +72,8 @@ export const SignUp = () => {
 };
 
 const SignContainer = styled.div`
- display: flex;
-  height: 100vh; 
+  display: flex;
+  height: 100vh;
 `;
 
 const FormContainer = styled.div`
@@ -90,7 +90,7 @@ const PosterContainer = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.colors.lightBlue};
   padding: 0 40px;
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     display: none;
   }
 `;

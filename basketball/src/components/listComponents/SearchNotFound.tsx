@@ -18,16 +18,24 @@ const ConteinerNotFound = styled.div`
   grid-column-gap: 24px;
   grid-row-gap: 24px;
 
-  @media(max-width: ${mobileVersionList}) {
-    grid-template-columns: repeat(2, 400px);
+  @media (max-width: 1390px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media (max-width: ${mobileVersionList}) {
+    grid-template-columns: repeat(2, 1fr);
     grid-column-gap: 24px;
     grid-row-gap: 24px;
   }
 
-  @media(max-width: ${mobileVersionLayout}) {
-    grid-template-columns: 180px 180px;
-    grid-column-gap: 12px;
+  @media (max-width: ${mobileVersionLayout}) {
+    grid-template-columns: 180px 180px 180px 180px;
+    grid-column-gap: 40px;
     grid-row-gap: 12px;
+  }
+
+  @media (max-width: 860px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 
@@ -44,12 +52,22 @@ const TextNotFound = styled(TextExtraLarge)`
   font-size: 65px;
   color: ${({ theme }) => theme.colors.grey};
 
-  @media(max-width: ${mobileVersionList}) {
+  @media (max-width: 1390px) {
+    font-size: 58px;
+  }
+
+
+  @media (max-width: ${mobileVersionList}) {
     font-size: 49px;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+
+  @media (max-width: ${mobileVersionLayout}) {
     text-align: center;
     line-height: 130px;
+  }
+
+  @media (max-width: 860px) {
+    font-size: 40px;
   }
 `;

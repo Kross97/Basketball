@@ -44,8 +44,8 @@ const ContainerEntity = styled.div`
   margin: auto;
   padding: 79px 90px 48px;
   align-items: center;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     border-radius: 0;
     flex-grow: 1;
     padding: 79px 0 48px;
@@ -67,7 +67,7 @@ const ImageEmpty = styled.div<{ isTeam: boolean }>`
   height: ${({ isTeam }) => (isTeam ? '260px' : '320px')};
   background: ${({ isTeam }) => (isTeam ? `url(${teamsEmpty}) no-repeat` : `url(${playersEmpty}) no-repeat`)};
   background-size: contain;
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     width: ${({ isTeam }) => (isTeam ? '339px' : '225px')};
     height: 226px;

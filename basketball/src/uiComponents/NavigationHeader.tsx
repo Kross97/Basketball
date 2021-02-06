@@ -49,8 +49,8 @@ const ButtonSandwich = styled.button`
   background: url(${menuIcon}) no-repeat;
   width: 24px;
   height: 24px;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     display: block;
     position: absolute;
     top: 21px;
@@ -65,9 +65,9 @@ const ContainerNavigation = styled.div`
   padding: 16px 53px;
   box-shadow: 0 1px 10px rgba(209, 209, 209, 0.5);
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     justify-content: center;
-    & div  {
+    & div {
       display: none;
     }
   }

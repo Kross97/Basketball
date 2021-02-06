@@ -19,7 +19,7 @@ export const teamsDataReducer = createSlice({
     clearTeams: teamsAdapter.removeAll,
     updateTeam: teamsAdapter.updateOne,
     setAllTeams: teamsAdapter.setAll,
-    loadChunkTeams: (state, action: PayloadAction<{ chunkData: IChunkDataTeams}>) => {
+    loadChunkTeams: (state, action: PayloadAction<{ chunkData: IChunkDataTeams }>) => {
       const { chunkData } = action.payload;
       state.chunkData = chunkData;
     },

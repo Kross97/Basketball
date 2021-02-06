@@ -11,7 +11,7 @@ export const imageLoadData = createSlice({
       payload: { srcImage },
     }: PayloadAction<{ srcImage: string }>) => ({ srcImage: `${process.env.REACT_APP_URL}${srcImage}` }),
     addSrcImageExisting: (state: IImageState,
-      { payload: { srcImage } }: PayloadAction<{ srcImage: string}>) => ({ srcImage }),
+      { payload: { srcImage } }: PayloadAction<{ srcImage: string }>) => ({ srcImage }),
     clearSrcImage: () => ({ srcImage: '' }),
   },
 });

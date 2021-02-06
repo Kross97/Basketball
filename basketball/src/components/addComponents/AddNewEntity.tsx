@@ -62,7 +62,7 @@ const ContainerAdd = styled.div`
   margin: 32px auto auto;
   border-radius: 10px;
   background-color: ${({ theme }) => theme.colors.white};
-  
+
   @media (max-width: ${mobliSizeCard}) {
     border-radius: 0;
     flex-grow: 1;
@@ -94,7 +94,7 @@ const BodyAdd = styled.div`
     align-self: flex-start;
   }
 
-  @media(max-width: ${mobileSizeGridForm}) {
+  @media (max-width: ${mobileSizeGridForm}) {
     flex-direction: column;
     padding: 48px 73px;
 
@@ -104,7 +104,7 @@ const BodyAdd = styled.div`
       margin-bottom: 40px;
     }
   }
-  
+
   @media (max-width: ${mobliSizeCard}) {
     flex-direction: column;
     align-items: stretch;
@@ -130,7 +130,7 @@ const Notification = styled.div`
   display: flex;
   justify-content: center;
 
-  @media(max-width: ${mobliSizeCard}) {
+  @media (max-width: ${mobliSizeCard}) {
     width: auto;
     top: 60px;
     right: 20%;

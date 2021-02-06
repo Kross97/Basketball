@@ -13,7 +13,13 @@ interface IProps {
 }
 
 export const CheckboxСhoice: FC<IProps> = ({
-  text, disabled, name, onChange, register, isError = false, errorMessage = '',
+  text,
+  disabled,
+  name,
+  onChange,
+  register,
+  isError = false,
+  errorMessage = '',
 }) => (
   <div>
     <CheckboxContainer disabled={disabled}>

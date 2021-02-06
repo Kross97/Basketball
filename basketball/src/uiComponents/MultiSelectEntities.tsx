@@ -169,6 +169,7 @@ interface IProps {
   isError?: boolean,
   text?: string;
 }
+
 export const MultiSelectEntities: FC<IProps> = ({
   options,
   isMulti,
@@ -197,7 +198,7 @@ export const MultiSelectEntities: FC<IProps> = ({
 );
 
 const SelectLabel = styled.label`
- position: relative;
+  position: relative;
 `;
 
 const TextLabel = styled(TextSmall)`

@@ -73,10 +73,11 @@ const AddHover = styled.div`
   background: rgba(156, 156, 156, 0.5) url(${addPhotoIcon}) no-repeat center center;
   background-size: 74px 75px;
   transition: 1s ease;
-  
+
   &:hover {
     background-color: rgba(48, 48, 48, 0.8);
   }
+
   @media (max-width: ${mobileVersionLayout}) {
     background-size: 41px 40px;
   }
@@ -90,7 +91,7 @@ const ImageContainer = styled.div<{ imageSrc: string; }>`
   position: relative;
   background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat center 6px`};
   background-size: contain;
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     width: 185px;
     height: 144px;

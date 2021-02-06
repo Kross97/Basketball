@@ -100,7 +100,12 @@ export const UserChange = () => {
             type="submit"
           />
         </BtnGroup>
-        {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
+        {errorMessage !== ''
+                && (
+                <NotificationContainer>
+                  <NotificationMessage text={errorMessage} />
+                </NotificationContainer>
+                )}
       </FormChange>
     </ContainerUserChange>
   );
@@ -112,17 +117,17 @@ const ContainerUserChange = styled.div`
   padding: 15px;
   background-color: ${({ theme }) => theme.colors.white};
   border-radius: 10px;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     flex-direction: column;
-    
+
     & > label {
       margin-bottom: 25px;
       align-self: center;
     }
   }
-  
-  @media(max-width: 475px) {
+
+  @media (max-width: 475px) {
     flex-grow: 1;
     margin: auto 0;
   }
@@ -134,21 +139,21 @@ const FormChange = styled.form`
   justify-content: center;
   padding: 0 20px;
   background-color: ${({ theme }) => theme.colors.white};
-  
+
   & > label {
     margin-bottom: 45px;
   }
 `;
 
 const BtnGroup = styled.div`
- display: flex;
- flex-direction: row; 
-  
- & > button:nth-child(1) {
-   margin-right: 20px;
- } 
-  
-  @media(max-width: 475px) {
+  display: flex;
+  flex-direction: row;
+
+  & > button:nth-child(1) {
+    margin-right: 20px;
+  }
+
+  @media (max-width: 475px) {
     flex-direction: column;
 
     & > button:nth-child(1) {
@@ -156,7 +161,7 @@ const BtnGroup = styled.div`
       margin-bottom: 20px;
     }
   }
-  
+
 `;
 
 const NotificationContainer = styled.div`
@@ -167,7 +172,7 @@ const NotificationContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileVersionLayout}) {
     width: auto;
     top: 60px;
     right: 20%;

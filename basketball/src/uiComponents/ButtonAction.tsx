@@ -40,7 +40,7 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
   background-color: ${({ isNegativeStyle, theme }) => (isNegativeStyle ? theme.colors.white : theme.colors.red)};
   color: ${({ isNegativeStyle, theme }) => (isNegativeStyle ? theme.colors.grey : theme.colors.white)};
   max-height: 40px;
-  
+
   &:hover {
     background-color: ${({
     isNegativeStyle,
@@ -59,8 +59,8 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
     color: ${({ theme }) => theme.colors.lightGrey};
     cursor: auto;
   }
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     padding-top: 5px;
     padding-bottom: 4px;
   }

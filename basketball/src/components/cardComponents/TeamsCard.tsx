@@ -91,9 +91,14 @@ export const TeamsCard = () => {
                 </DescriptionContainer>
               </DataCard>
             </Content>
-            { errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
+            {errorMessage !== ''
+                        && (
+                        <NotificationContainer>
+                          <NotificationMessage text={errorMessage} />
+                        </NotificationContainer>
+                        )}
           </CardBody>
-          { playersList.length > 0 && (
+          {playersList.length > 0 && (
           <EnumerationPlayersTeam players={playersList as IPlayer[]} />
           )}
         </ContainerCard>
@@ -101,16 +106,16 @@ export const TeamsCard = () => {
   );
 };
 
-const ContainerCard = styled.div<{ countPlayes: number}>`
+const ContainerCard = styled.div<{ countPlayes: number }>`
   margin: 32px auto;
   flex-grow: 0.2;
   position: relative;
-  
-  @media(max-width: 1150px) {
-  margin: 32px;
-}
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: 1150px) {
+    margin: 32px;
+  }
+
+  @media (max-width: ${mobliSizeCard}) {
     margin: 16px 0;
     flex-grow: 1;
   }
@@ -122,9 +127,9 @@ const CardNavigation = styled.nav`
   padding: 26px 35px 21px;
   border-radius: 10px 10px 0 0;
   border: 1px solid ${({ theme }) => theme.colors.grey};
-  background-color: ${({ theme }) => theme.colors.white};  
-  
-  @media(max-width: ${mobliSizeCard}) {
+  background-color: ${({ theme }) => theme.colors.white};
+
+  @media (max-width: ${mobliSizeCard}) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -177,12 +182,12 @@ const CardBody = styled.div`
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
   position: relative;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     padding-left: 85px;
   }
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: ${mobliSizeCard}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -190,7 +195,7 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
-  @media(max-width: ${mobliSizeCard}) {
+  @media (max-width: ${mobliSizeCard}) {
     text-align: center;
   }
 `;
@@ -199,13 +204,13 @@ const Content = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: ${mobliSizeCard}) {
     flex-direction: column;
   }
 `;
 
-const LogoTeam = styled.div<{ imageUrl: string}>`
+const LogoTeam = styled.div<{ imageUrl: string }>`
   margin-right: 146px;
   flex-shrink: 0.1;
   background: ${({ imageUrl }) => `url(${imageUrl}) no-repeat center`};
@@ -213,18 +218,18 @@ const LogoTeam = styled.div<{ imageUrl: string}>`
   width: 210px;
   height: 210px;
 
-  @media(max-width: 1150px) {
+  @media (max-width: 1150px) {
     margin-right: 105px;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     width: 165px;
     height: 165px;
     margin-right: 60px;
   }
-  
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+
+  @media (max-width: ${mobliSizeCard}) {
     width: 140px;
     height: 140px;
     margin-right: 0;
@@ -237,12 +242,12 @@ const TeamName = styled(TextExtraLarge)`
   word-break: break-word;
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 28px;
   }
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: ${mobliSizeCard}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -257,19 +262,19 @@ const DescriptionContainer = styled.div`
   grid-row-gap: 54px;
   grid-column-gap: 80px;
 
-  @media(max-width: 1150px) {
+  @media (max-width: 1150px) {
     grid-column-gap: 50px;
   }
-  
-  @media(max-width: 1000px) {
+
+  @media (max-width: 1000px) {
     grid-template-columns: 1fr;
   }
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     grid-template-columns: 1fr 1fr;
   }
-  
-  @media(max-width: ${mobliSizeCard}) {
+
+  @media (max-width: ${mobliSizeCard}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row-gap: 43px;
@@ -284,7 +289,7 @@ const NotificationContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  @media(max-width: ${mobliSizeCard}) {
+  @media (max-width: ${mobliSizeCard}) {
     width: auto;
     top: 60px;
     right: 20%;

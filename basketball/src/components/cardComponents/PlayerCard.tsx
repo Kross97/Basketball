@@ -94,7 +94,12 @@ export const PlayerCard = () => {
                 </DescriptionContainer>
               </DataCard>
             </Content>
-            {errorMessage !== '' && <NotificationContainer><NotificationMessage text={errorMessage} /></NotificationContainer>}
+            {errorMessage !== ''
+                        && (
+                        <NotificationContainer>
+                          <NotificationMessage text={errorMessage} />
+                        </NotificationContainer>
+                        )}
           </CardBody>
         </CardContainer>
       ) : <></>
@@ -105,11 +110,11 @@ const CardContainer = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
 
-  @media(max-width: 1450px) {
+  @media (max-width: 1450px) {
     margin: 32px;
   }
-  
-  @media(max-width: ${mobileLayout}) {
+
+  @media (max-width: ${mobileLayout}) {
     margin: 16px 0;
     flex-grow: 1;
   }
@@ -173,11 +178,11 @@ const CardBody = styled.div`
   position: relative;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
-  
-  @media(max-width: 1250px) {
+
+  @media (max-width: 1250px) {
     padding-left: 0;
   }
-  
+
   @media (max-width: ${mobileLayout}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
@@ -213,16 +218,16 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   height: 368px;
   background-size: contain;
   align-self: flex-end;
-  
-  @media(max-width: 1250px) {
+
+  @media (max-width: 1250px) {
     margin-right: 0;
   }
-  
-  @media(max-width: 1030px) {
+
+  @media (max-width: 1030px) {
     width: 350px;
     height: 250px;
   }
-  
+
   @media (max-width: ${mobileLayout}) {
     width: 185px;
     height: 144px;
@@ -238,11 +243,11 @@ const PlayerName = styled(TextExtraLarge)`
   color: ${({ theme }) => theme.colors.white};
   font-weight: 700;
   text-transform: capitalize;
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     font-size: 28px;
   }
-  
+
   @media (max-width: ${mobileLayout}) {
     font-size: 24px;
     line-height: 33px;
@@ -263,23 +268,23 @@ const DescriptionContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 54px;
   grid-column-gap: 180px;
-  
-  @media(max-width: 1350px) {
+
+  @media (max-width: 1350px) {
     grid-column-gap: 120px;
   }
 
-  @media(max-width: 1080px) {
+  @media (max-width: 1080px) {
     grid-column-gap: 50px;
   }
-  
-  @media(max-width: ${sizeMobile}) {
+
+  @media (max-width: ${sizeMobile}) {
     grid-column-gap: 0;
   }
-  
-  @media(max-width: ${mobileLayout}) {
+
+  @media (max-width: ${mobileLayout}) {
     grid-template-columns: 1fr 1fr;
   }
-  
+
   @media (max-width: ${mobliSizeCard}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
@@ -295,7 +300,7 @@ const NotificationContainer = styled.div`
   display: flex;
   justify-content: center;
 
-  @media(max-width: ${mobliSizeCard}) {
+  @media (max-width: ${mobliSizeCard}) {
     width: auto;
     top: 60px;
     right: 20%;
