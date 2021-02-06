@@ -50,7 +50,12 @@ export const FormAddTeam: FC<IProps> = ({
         onChange={() => trigger('name')}
         name="name"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
-        register={register({ required: true, pattern: regExpCommandName })}
+        register={register({
+          required: true,
+          minLength: 5,
+          maxLength: 25,
+          pattern: regExpCommandName,
+        })}
       />
       <FieldInputData
         text={t('team:division')}
@@ -62,7 +67,11 @@ export const FormAddTeam: FC<IProps> = ({
         name="division"
         onChange={() => trigger('division')}
         defaultValue={teamUpdate ? teamUpdate.division : ''}
-        register={register({ pattern: regExpDivision })}
+        register={register({
+          pattern: regExpDivision,
+          minLength: 5,
+          maxLength: 25,
+        })}
       />
       <FieldInputData
         text={t('team:conference')}
@@ -74,7 +83,11 @@ export const FormAddTeam: FC<IProps> = ({
         name="conference"
         onChange={() => trigger('conference')}
         defaultValue={teamUpdate ? teamUpdate.conference : ''}
-        register={register({ pattern: regExpConference })}
+        register={register({
+          pattern: regExpConference,
+          minLength: 3,
+          maxLength: 18,
+        })}
       />
       <FieldInputData
         text={t('team:foundation')}

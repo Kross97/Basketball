@@ -77,9 +77,14 @@ export const FormAddPlayer: FC<IProps> = ({
         isError={!!errors.name}
         errorMessage={formAddPlayersErrors[errors.name?.type]}
         name="name"
-        onBlur={() => trigger('name')}
+        onChange={() => trigger('name')}
         defaultValue={playerUpdate && playerUpdate.name}
-        register={register({ required: true, pattern: regExpName })}
+        register={register({
+          required: true,
+          pattern: regExpName,
+          minLength: 3,
+          maxLength: 27,
+        })}
       />
       <MultiSelectEntities
         onChange={changePosition}
