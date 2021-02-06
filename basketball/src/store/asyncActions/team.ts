@@ -43,9 +43,10 @@ export const loadAllCommands = createAsyncThunk(
 export const removeTeam = createAsyncThunk(
   'removeTeam',
   async (removeData: IDataDeleteTeam, { dispatch }) => {
-    dispatch(addEntityError.actions.clearErrorMessage());
+    console.log('REMOVE!!!', removeData);
     try {
-      const idsPlayersTeam = removeData.playersCurrentTeam.map((player) => player.id);
+      dispatch(addEntityError.actions.clearErrorMessage());
+      const idsPlayersTeam = removeData.playersList.map((player) => player.id);
       idsPlayersTeam.forEach((id) => {
         deletePlayer(`Player/Delete?id=${id}`, removeData.token);
       });
@@ -57,6 +58,7 @@ export const removeTeam = createAsyncThunk(
         dispatch(addEntityError.actions.clearErrorMessage());
       });
     } catch (error) {
+      console.log('ERROR', error);
       if (error.isCustomError) {
         dispatch(addEntityError.actions.addErrorMessage({
           errorMessage: teamRequestErrors[error.status],

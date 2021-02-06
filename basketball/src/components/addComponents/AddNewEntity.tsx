@@ -122,4 +122,11 @@ const Notification = styled.div`
   width: 400px;
   display: flex;
   justify-content: center;
+
+  @media(max-width: ${mobileVersionLayout}) {
+    width: auto;
+    top: 60px;
+    right: 20%;
+    left: 20%;
+  }
 `;

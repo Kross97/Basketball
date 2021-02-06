@@ -52,7 +52,7 @@ export const UserChange = () => {
   const changeUserData = async (data: IDataChangeUser) => {
     const { payload: isSuccessChanged } = await changeDataUser({
       change: {
-        userName: data.userName,
+        userName: null,
         avatarUrl: srcImage,
       },
       token,
@@ -160,10 +160,17 @@ const BtnGroup = styled.div`
 `;
 
 const NotificationContainer = styled.div`
- position: absolute;
-  bottom: -30px;
-  right: 0;
-  left: 0;
+  position: fixed;
+  top: 80px;
+  right: 80px;
+  width: 400px;
   display: flex;
   justify-content: center;
+
+  @media(max-width: ${mobileVersionLayout}) {
+    width: auto;
+    top: 60px;
+    right: 20%;
+    left: 20%;
+  }
 `;

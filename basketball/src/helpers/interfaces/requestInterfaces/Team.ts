@@ -25,7 +25,7 @@ export interface IDataAddTeam {
 export interface IDataDeleteTeam {
   id: string,
   history: any,
-  playersCurrentTeam: IPlayer[],
+  playersList: IPlayer[],
   token: string,
 }
 

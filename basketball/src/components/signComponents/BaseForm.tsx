@@ -8,7 +8,7 @@ import { ButtonAction } from '../../uiComponents/ButtonAction';
 import { TextLink } from '../../uiComponents/TextLink';
 import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { TextLabel, TextSmall } from '../../uiComponents/Typography';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { extraSmallLayout, mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { TypesInput } from '../../helpers/types/types';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm, IMessageNotification } from '../../helpers/interfaces/signFormInterfaces/SignForms';
@@ -68,7 +68,12 @@ export const BaseForm: FC<IProps> = ({
           onChange={() => trigger('userName')}
           isError={!!errors.userName}
           errorMessage={formSignErrors[errors.userName?.type]}
-          register={register({ required: true, pattern: regExpName })}
+          register={register({
+            required: true,
+            pattern: regExpName,
+            minLength: 3,
+            maxLength: 27,
+          })}
         />
       )}
       <FieldInputData
@@ -80,7 +85,12 @@ export const BaseForm: FC<IProps> = ({
         onChange={() => trigger('login')}
         isError={!!errors.login}
         errorMessage={formSignErrors[errors.login?.type]}
-        register={register({ required: true, pattern: regExpLogin })}
+        register={register({
+          required: true,
+          pattern: regExpLogin,
+          minLength: 3,
+          maxLength: 13,
+        })}
       />
       <FieldInputData
         name="password"
@@ -167,7 +177,12 @@ const FormSign = styled.form`
   & > label, & > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
-
+  
+  @media(max-width: ${extraSmallLayout}) {
+    & > button {
+      padding: 5px 100px 4px;
+    }
+  }
 `;
 
 const TextContainer = styled.div`
@@ -195,4 +210,10 @@ const Notification = styled.div`
   width: 400px;
   display: flex;
   justify-content: center;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    width: auto;
+    right: 20%;
+    left: 20%;
+  }
 `;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import {
-  Switch, Route, useHistory, useParams,
+  Switch, Route, useHistory, useLocation,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
@@ -28,8 +28,7 @@ export const BaseLayout = () => {
     countTeams: teamsDataReducer.ids.length,
     countPlayer: playersDataReducer.ids.length,
   }));
-  const { path } = useParams<{ path: string }>();
-
+  const { pathname } = useLocation();
   const history = useHistory();
 
   const isActiveSandwichMenu = useSelector((
@@ -45,7 +44,10 @@ export const BaseLayout = () => {
   }, [isAuthorized]);
 
   return (
-    <ContainerLayout isEntitiesList={(path === 'teams' && countTeams !== 0) || (path === 'players' && countPlayer !== 0)}>
+    <ContainerLayout
+      isEntitiesList={(pathname === routePaths.teams && countTeams !== 0)
+        || (pathname === routePaths.players && countPlayer !== 0)}
+    >
       <NavigationHeader />
       <BodyContainer>
         <BackgroundMenu
@@ -92,6 +94,10 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
 
   &::-webkit-scrollbar {
     width: 7px;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-basis: 100vh;
   }
 `;
 

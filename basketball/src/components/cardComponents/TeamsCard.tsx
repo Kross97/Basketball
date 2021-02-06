@@ -53,13 +53,13 @@ export const TeamsCard = () => {
 
   const deleteCurrentTeam = () => {
     deleteTeam({
-      id, history, playersCurrentTeam, token,
+      id, history, playersList, token,
     });
   };
   return (
     team
       ? (
-        <ContainerCard>
+        <ContainerCard countPlayes={playersList.length}>
           <CardNavigation>
             <Links>
               <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
@@ -101,7 +101,7 @@ export const TeamsCard = () => {
   );
 };
 
-const ContainerCard = styled.div`
+const ContainerCard = styled.div<{ countPlayes: number}>`
   margin: 32px auto;
   flex-grow: 0.2;
   position: relative;
