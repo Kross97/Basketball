@@ -49,6 +49,7 @@ const customStyles = {
     backgroundSize: '22px 22px',
     backgroundColor: (state.isFocused && theme.colors.lightestRed),
     cursor: 'pointer',
+    wordBreak: 'break-word',
     borderBottom: !state.data.isLast && `1px solid ${theme.colors.lightGrey}`,
     ':active': {
       backgroundColor: theme.colors.darkRed,

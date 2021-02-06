@@ -7,7 +7,7 @@ import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobliSizeCard, mobileLayout, sizeMobile } from '../../helpers/constants/mobileSize';
 import { PlayerItemsDescription } from './cardAdditionalComponents/PlayerItemsDescriptions';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { removeSelectedPlayer } from '../../store/asyncActions/player';
@@ -105,7 +105,11 @@ const CardContainer = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
 
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: 1450px) {
+    margin: 32px;
+  }
+  
+  @media(max-width: ${mobileLayout}) {
     margin: 16px 0;
     flex-grow: 1;
   }
@@ -169,8 +173,12 @@ const CardBody = styled.div`
   position: relative;
   background: ${({ theme }) => theme.gradient.base};
   border-radius: 0 0 10px 10px;
-
-  @media (max-width: ${mobileVersionLayout}) {
+  
+  @media(max-width: 1250px) {
+    padding-left: 0;
+  }
+  
+  @media (max-width: ${mobileLayout}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -181,7 +189,7 @@ const DataCard = styled.div`
   align-self: self-start;
   margin-bottom: 65px;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileLayout}) {
     text-align: center;
     align-self: center;
   }
@@ -192,7 +200,7 @@ const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobileLayout}) {
     flex-direction: column;
   }
 `;
@@ -203,11 +211,20 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat`};
   width: 500px;
   height: 368px;
-  background-position: center;
+  background-position: center 5px;
   background-size: contain;
   align-self: flex-end;
-
-  @media (max-width: ${mobileVersionLayout}) {
+  
+  @media(max-width: 1250px) {
+    margin-right: 0;
+  }
+  
+  @media(max-width: 1030px) {
+    width: 350px;
+    height: 250px;
+  }
+  
+  @media (max-width: ${mobileLayout}) {
     width: 185px;
     height: 144px;
     margin-right: 0;
@@ -221,8 +238,13 @@ const PlayerName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   font-weight: 700;
-
-  @media (max-width: ${mobileVersionLayout}) {
+  text-transform: capitalize;
+  
+  @media(max-width: ${sizeMobile}) {
+    font-size: 28px;
+  }
+  
+  @media (max-width: ${mobileLayout}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -238,12 +260,28 @@ const PlayerNumber = styled(PlayerName)`
 
 const DescriptionContainer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 165px 1fr;
   grid-template-rows: 1fr 1fr;
-  grid-column-gap: 180px;
   grid-row-gap: 54px;
+  grid-column-gap: 180px;
+  
+  @media(max-width: 1350px) {
+    grid-column-gap: 120px;
+  }
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media(max-width: 1080px) {
+    grid-column-gap: 50px;
+  }
+  
+  @media(max-width: ${sizeMobile}) {
+    grid-column-gap: 0;
+  }
+  
+  @media(max-width: ${mobileLayout}) {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @media (max-width: ${mobliSizeCard}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row-gap: 43px ;

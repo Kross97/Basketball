@@ -45,6 +45,6 @@ export interface IFormAddTeam {
   conference: string,
   division: string,
   foundationYear: string,
-  name: string,
+  teamName: string,
   id?: string,
 }

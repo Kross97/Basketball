@@ -5,6 +5,7 @@ import { getFullAge } from '../../../helpers/functions/getFullAge';
 import { TextLarge, TextStandart } from '../../../uiComponents/Typography';
 import { sizeMobile } from '../../../helpers/constants/mobileSize';
 import { IPlayer } from '../../../helpers/interfaces/storeInterfaces/Player';
+import { parsePositionPlayer } from '../../../helpers/functions/parsePositionPlayer';
 
 interface IProps {
   player: IPlayer,
@@ -17,7 +18,7 @@ export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => {
     <>
       <div>
         <LabelItem>{t('player:position')}</LabelItem>
-        <DataItem>{player.position}</DataItem>
+        <DataItem>{parsePositionPlayer(player.position)}</DataItem>
       </div>
       <div>
         <LabelItem>{t('player:team')}</LabelItem>
@@ -53,6 +54,7 @@ const LabelItem = styled(TextLarge)`
 
 const DataItem = styled(TextStandart)`
   font-size: 18px;
+  word-break: break-word;
   color: ${({ theme }) => theme.colors.white};
   
   @media(max-width: ${sizeMobile}) {

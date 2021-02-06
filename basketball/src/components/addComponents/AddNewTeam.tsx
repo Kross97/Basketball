@@ -38,6 +38,7 @@ export const AddNewTeam = () => {
   const addNewEntity = async (data: IFormAddTeam) => {
     const team = {
       ...data,
+      name: data.teamName,
       foundationYear: Number(data.foundationYear),
       imageUrl: srcImage,
     };

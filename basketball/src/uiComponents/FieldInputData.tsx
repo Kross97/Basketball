@@ -1,10 +1,12 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import styled from 'styled-components';
+import { capitalize } from 'lodash';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
 import { TypesInput } from '../helpers/types/types';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { valueForCapitalize } from '../helpers/constants/formatingNames';
 
 interface IProps {
   text: string;
@@ -35,24 +37,41 @@ export const FieldInputData: FC<IProps> = ({
   isError = false,
   errorMessage = '',
 
-}) => (
-  <InputContainer htmlFor={name}>
-    <TextInput>{text}</TextInput>
-    <CustomInput
-      onChange={onChange}
-      onBlur={onBlur}
-      name={name}
-      type={type}
-      disabled={disabled}
-      isError={isError}
-      defaultValue={defaultValue}
-      ref={register}
-    />
-    {isError && <TextInputError>{errorMessage}</TextInputError>}
-    {startType === 'password'
+}) => {
+  const [value, setValue] = useState<string>(`${defaultValue}` || '');
+
+  const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
+    if (valueForCapitalize.has(name)) {
+      setValue(capitalize(target.value));
+    } else {
+      setValue(target.value);
+    }
+
+    if (onChange) {
+      onChange();
+    }
+  };
+
+  return (
+    <InputContainer htmlFor={name}>
+      <TextInput>{text}</TextInput>
+      <CustomInput
+        onChange={changeHandler}
+        onBlur={onBlur}
+        name={name}
+        type={type}
+        disabled={disabled}
+        isError={isError}
+        defaultValue={defaultValue}
+        ref={register}
+        value={value}
+      />
+      {isError && <TextInputError>{errorMessage}</TextInputError>}
+      {startType === 'password'
     && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
-  </InputContainer>
-);
+    </InputContainer>
+  );
+};
 
 const InputContainer = styled.label`
   display: flex;

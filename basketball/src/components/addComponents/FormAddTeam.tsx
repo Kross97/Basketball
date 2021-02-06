@@ -45,10 +45,10 @@ export const FormAddTeam: FC<IProps> = ({
         disabled={false}
         startType="text"
         type="text"
-        isError={!!errors.name}
-        errorMessage={formAddTeamsErrors[errors.name?.type]}
-        onChange={() => trigger('name')}
-        name="name"
+        isError={!!errors.teamName}
+        errorMessage={formAddTeamsErrors[errors.teamName?.type]}
+        onChange={() => trigger('teamName')}
+        name="teamName"
         defaultValue={teamUpdate ? teamUpdate.name : ''}
         register={register({
           required: true,

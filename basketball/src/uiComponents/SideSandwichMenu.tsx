@@ -113,7 +113,7 @@ const ItemMenu = styled.div`
 
   @media(max-width: ${mobileVersionLayout}) {
     flex-direction: row;
-    margin-left: 25px;
+    padding-left: 25px;
     justify-content: flex-start;
     & svg {
       margin-right: 9px;

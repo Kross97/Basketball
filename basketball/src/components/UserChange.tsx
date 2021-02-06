@@ -52,7 +52,7 @@ export const UserChange = () => {
   const changeUserData = async (data: IDataChangeUser) => {
     const { payload: isSuccessChanged } = await changeDataUser({
       change: {
-        userName: null,
+        userName: data.userName,
         avatarUrl: srcImage,
       },
       token,
