@@ -45,7 +45,7 @@ const LabelItem = styled(TextLarge)`
 
 const DataItem = styled(TextStandart)`
   color: ${({ theme }) => theme.colors.white};
-  
+  word-break: break-word;
   @media(max-width: ${sizeMobile}) {
     font-size: 14px;
   }

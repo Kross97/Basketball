@@ -17,6 +17,7 @@ export const TextLink: FC<IProps> = ({ text, to, disabled }) => (
 
 const CustomLink = styled(Link)<{ disabled: boolean }>`
   cursor: pointer;
+  word-break: break-word;
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'auto')};
   color: ${({ disabled, theme }) => (disabled ? theme.colors.lightGrey : theme.colors.red)}
 `;

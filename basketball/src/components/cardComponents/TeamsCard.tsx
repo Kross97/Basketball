@@ -7,7 +7,7 @@ import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobileVersionLayout, mobliSizeCard, sizeMobile } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import imageUnknown from '../../static/images/item_not_image.png';
@@ -106,7 +106,11 @@ const ContainerCard = styled.div<{ countPlayes: number}>`
   flex-grow: 0.2;
   position: relative;
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: 1150px) {
+  margin: 32px;
+}
+  
+  @media(max-width: ${mobliSizeCard}) {
     margin: 16px 0;
     flex-grow: 1;
   }
@@ -120,7 +124,7 @@ const CardNavigation = styled.nav`
   border: 1px solid ${({ theme }) => theme.colors.grey};
   background-color: ${({ theme }) => theme.colors.white};  
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${mobliSizeCard}) {
     padding: 15px 16px;
     border-radius: 0;
     border: none;
@@ -175,6 +179,10 @@ const CardBody = styled.div`
   position: relative;
   
   @media(max-width: ${mobileVersionLayout}) {
+    padding-left: 85px;
+  }
+  
+  @media(max-width: ${mobliSizeCard}) {
     padding: 48px 15px 43px;
     background: ${({ theme }) => theme.gradient.mobile};
     border-radius: 0;
@@ -182,7 +190,7 @@ const CardBody = styled.div`
 `;
 
 const DataCard = styled.div`
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${mobliSizeCard}) {
     text-align: center;
   }
 `;
@@ -192,7 +200,7 @@ const Content = styled.div`
   justify-content: flex-start;
   align-items: center;
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${mobliSizeCard}) {
     flex-direction: column;
   }
 `;
@@ -204,8 +212,19 @@ const LogoTeam = styled.div<{ imageUrl: string}>`
   background-size: contain;
   width: 210px;
   height: 210px;
+
+  @media(max-width: 1150px) {
+    margin-right: 105px;
+  }
   
   @media(max-width: ${mobileVersionLayout}) {
+    width: 165px;
+    height: 165px;
+    margin-right: 60px;
+  }
+  
+  
+  @media(max-width: ${mobliSizeCard}) {
     width: 140px;
     height: 140px;
     margin-right: 0;
@@ -215,10 +234,15 @@ const LogoTeam = styled.div<{ imageUrl: string}>`
 
 const TeamName = styled(TextExtraLarge)`
   display: block;
+  word-break: break-word;
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   
-  @media(max-width: ${mobileVersionLayout}) {
+  @media(max-width: ${sizeMobile}) {
+    font-size: 28px;
+  }
+  
+  @media(max-width: ${mobliSizeCard}) {
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
@@ -232,8 +256,20 @@ const DescriptionContainer = styled.div`
   grid-template-rows: 1fr 1fr;
   grid-row-gap: 54px;
   grid-column-gap: 80px;
+
+  @media(max-width: 1150px) {
+    grid-column-gap: 50px;
+  }
+  
+  @media(max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
   
   @media(max-width: ${mobileVersionLayout}) {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  @media(max-width: ${mobliSizeCard}) {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-row-gap: 43px;
