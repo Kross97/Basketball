@@ -9,9 +9,10 @@ const counts = [
 ];
 
 const customStyles = {
-  dropdownIndicator: (styles: any) => ({
+  dropdownIndicator: (styles: any, { isFocused }: any) => ({
     ...styles,
-    transform: 'rotate(180deg)',
+    transition: '0.5s ease',
+    transform: isFocused && 'rotate(180deg)',
   }),
   option: (styles: any, state: any) => ({
     ...styles,
@@ -45,6 +46,7 @@ const customStyles = {
       height: '28px',
     },
     ':hover': {
+      cursor: 'pointer',
       borderColor: theme.colors.lightGrey,
     },
   }),
