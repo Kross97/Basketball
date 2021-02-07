@@ -19,9 +19,9 @@ export const TextExtraSmall = styled(TextStandart)`
 export const TextSmallThin = styled.span`
   font-family: Avenir, sans-serif;
   font-style: normal;
-  font-weight: normal;
+  font-weight: 500;
   font-size: 14px;
-  line-height: 19px;
+  line-height: 24px;
 `;
 
 export const TextExtraLarge = styled.span`

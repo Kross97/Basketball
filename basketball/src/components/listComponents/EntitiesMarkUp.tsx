@@ -23,7 +23,7 @@ import {
 } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import style from '../../themes/reactPagination.module.scss';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobileLayout, mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { SearchNotFound } from './SearchNotFound';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -210,4 +210,9 @@ const TeamsFooter = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  padding-bottom: 32px;
+  
+  @media(max-width: ${mobileLayout}) {
+    padding-bottom: 16px;
+  }
 `;

@@ -3,21 +3,16 @@ import Select from 'react-select';
 import styled from 'styled-components';
 import { theme } from '../themes/theme';
 import { TextSmall, TextExtraSmall } from './Typography';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 const customStyles = {
   clearIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 770px)': {
-      padding: '5px',
-    },
   }),
   dropdownIndicator: (styles: any) => ({
     ...styles,
     color: theme.colors.lightGrey,
-    '@media(max-width: 770px)': {
-      padding: '5px',
-    },
   }),
   control: (styles: any, { selectProps }: any) => ({
     ...styles,
@@ -25,17 +20,12 @@ const customStyles = {
     borderColor: selectProps.isError ? theme.colors.lightestRed : selectProps.isForm ? 'transparent' : theme.colors.lightGrey,
     boxShadow: 'none',
     cursor: 'pointer',
+    height: '40px',
     ':hover': {
       borderColor: theme.colors.lightGrey,
       backgroundColor: selectProps.isForm ? theme.colors.lightestGrey : theme.colors.white,
     },
     maxHeight: '40px',
-    '@media(max-width: 1000px)': {
-      minHeight: '20px',
-    },
-    '@media(max-width: 770px)': {
-      maxHeight: '32px',
-    },
   }),
   option: (styles: any, state: any) => ({
     ...styles,
@@ -66,17 +56,10 @@ const customStyles = {
     fontWeight: 'normal',
     fontSize: '14px',
     lineHeight: '19px',
-    padding: '3px 4px',
+    padding: '1px 4px',
     borderRadius: '4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
-
-    '@media(max-width: 770px)': {
-      margin: '0',
-      marginTop: '2px',
-      marginBottom: '3px',
-      lineHeight: '11px',
-    },
 
   }),
   singleValue: (styles: any) => ({
@@ -85,7 +68,7 @@ const customStyles = {
     fontWeight: 'normal',
     fontSize: '14px',
     lineHeight: '19px',
-    padding: '3px 4px',
+    padding: '1px 4px',
     borderRadius: '4px',
     color: theme.colors.white,
     backgroundColor: theme.colors.red,
@@ -104,9 +87,7 @@ const customStyles = {
   }),
   input: (styles: any) => ({
     ...styles,
-    '@media(max-width: 1000px)': {
-      height: '20px',
-    },
+    padding: '4px 8px',
   }),
   menuList: (styles: any) => ({
     ...styles,
@@ -131,12 +112,9 @@ const customStyles = {
     ...styles,
     maxWidth: '300px',
     overflow: 'auto',
-    maxHeight: '38px',
+    maxHeight: '40px',
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
-    '@media(max-width: 770px)': {
-      maxHeight: '32px',
-    },
 
     '::-webkit-scrollbar-track': {
       backgroundColor: theme.colors.lightestGrey,
@@ -203,6 +181,10 @@ const SelectLabel = styled.label`
 
 const TextLabel = styled(TextSmall)`
   color: ${(props) => props.theme.colors.middleGrey};
+  @media(max-width: ${mobileVersionLayout}) {
+    font-size: 17px;
+    line-height: 25px;
+  }
 `;
 
 const TextError = styled(TextExtraSmall)`

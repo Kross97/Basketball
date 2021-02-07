@@ -1,4 +1,4 @@
-export const extraSmallLayout = '350px';
+export const extraSmallLayout = '360px';
 
 export const mobileLayout = '615px';
 

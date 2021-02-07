@@ -72,7 +72,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   box-sizing: border-box;
   border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
   border-radius: 4px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
   font-weight: 500;
@@ -101,7 +101,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   }
 
   @media (max-width: ${mobileVersionLayout}) {
-    padding: 4px 12px;
+    font-size: 15px;
   }
 
   @media(max-width: 360px) {
@@ -112,6 +112,11 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
 
 const TextInput = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
+
+  @media(max-width: ${mobileVersionLayout}) {
+    font-size: 17px;
+    line-height: 25px;
+  }
 `;
 
 const TextInputError = styled(TextSmall)`

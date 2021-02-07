@@ -27,6 +27,11 @@
   padding-top: 10px;
   margin: 0 5px 0 5px;
   background-color: $lightestGrey;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 25px;
+
   & a {
     outline: none;
   }
@@ -35,11 +40,20 @@
     background-color: $lightestRed;
     color: $white;
   }
+
+  @media(max-width: 615px) {
+    width: 28px;
+    height: 28px;
+    padding-top: 6px;
+    font-size: 12px;
+    line-height: 150%;
+  }
 }
 
 .activeClassName {
   background-color: $red;
-  color:$white;
+  color: $white;
+
   &:hover {
     background-color: $lightRed;
   }

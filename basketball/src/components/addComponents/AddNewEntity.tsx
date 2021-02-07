@@ -116,10 +116,10 @@ const BodyAdd = styled.div`
       margin-bottom: 48px;
       align-self: center;
     }
-
-    & input {
-      padding: 4px 12px;
-    }
+  }
+  
+  @media(max-width: 370px) {
+    padding: 48px 20px;
   }
 `;
 

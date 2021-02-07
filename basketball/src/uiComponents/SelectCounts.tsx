@@ -13,6 +13,21 @@ const customStyles = {
     ...styles,
     transition: '0.5s ease',
     transform: isFocused && 'rotate(180deg)',
+    '@media(max-width: 615px)': {
+      padding: '2px',
+    },
+  }),
+  indicatorsContainer: (styles: any) => ({
+    ...styles,
+    alignItems: 'flex-start',
+    paddingTop: '2px',
+  }),
+  indicatorSeparator: (styles: any) => ({
+    ...styles,
+    '@media(max-width: 615px)': {
+      marginBottom: '12px',
+      marginTop: '5px',
+    },
   }),
   option: (styles: any, state: any) => ({
     ...styles,
@@ -25,6 +40,10 @@ const customStyles = {
     ':active': {
       backgroundColor: theme.colors.darkRed,
     },
+    '@media(max-width: 615px)': {
+      fontSize: '12px',
+      lineHeight: '150%',
+    },
   }),
   singleValue: (styles: any) => ({
     ...styles,
@@ -32,7 +51,13 @@ const customStyles = {
     fontWeight: '500',
     fontSize: '18px',
     lineHeight: '25px',
-    color: theme.colors.grey,
+    color: theme.colors.darkGrey,
+    left: '38%',
+    '@media(max-width: 615px)': {
+      top: '40%',
+      fontSize: '12px',
+      lineHeight: '150%',
+    },
   }),
   control: (styles: any) => ({
     ...styles,
@@ -41,9 +66,10 @@ const customStyles = {
     boxShadow: 'none',
     width: '90px',
     height: '40px',
-    '@media(max-width: 800px)': {
-      width: '80px',
+    '@media(max-width: 615px)': {
+      width: '60px',
       height: '28px',
+      minHeight: '28px',
     },
     ':hover': {
       cursor: 'pointer',
@@ -54,6 +80,9 @@ const customStyles = {
     ...styles,
     position: 'absolute',
     top: '-150px',
+    '@media(max-width: 615px)': {
+      top: '-125px',
+    },
   }),
 };
 

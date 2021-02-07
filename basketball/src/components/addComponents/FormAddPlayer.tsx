@@ -16,7 +16,7 @@ import { regExpName, regExpBirthDay } from '../../helpers/constants/regularExp';
 import { validateBirthDayOld, validateBirthDayYoung } from '../../helpers/functions/validateBirthDay';
 import { formAddPlayersErrors } from '../../helpers/constants/formErrors';
 import { CalendarField } from '../../uiComponents/CalendarField';
-import { mobliSizeCard, mobileSizeGridForm } from '../../helpers/constants/mobileSize';
+import { mobileSizeGridForm } from '../../helpers/constants/mobileSize';
 import { formatDateForServer, formatDateForForm } from '../../helpers/functions/formatingDate';
 
 interface IProps {
@@ -215,17 +215,28 @@ const BtnGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
-
-  @media (max-width: ${mobliSizeCard}) {
-    & button {
-      padding: 8px 40px;
+  
+    & button > span {
+      font-size: 15px;
     }
+
+  @media (max-width: 485px) {
+    grid-template-columns: 41vw 41vw;
+    grid-column-gap: 33px;
   }
   
-  @media(max-width: 360px) {
-    grid-template-columns: 38vw 38vw;
-    align-self: center;
+  @media (max-width: 445px) {
+    display: flex;
+    justify-content: space-between;
+    & button {
+      flex-basis: 44%;
+      padding: 8px 30px;
+    }
   }
+  @media (max-width: 320px) {
+    & button {
+      width: 42%;
+    }
   }
 `;
 
@@ -242,18 +253,23 @@ const PlayerData = styled.div`
   @media (max-width: ${mobileSizeGridForm}) {
     grid-template-columns: auto auto;
   }
-  @media(max-width: 440px) {
+  @media (max-width: 485px) {
     grid-template-columns: 41vw 41vw;
-    grid-column-gap: 25px;
+    grid-column-gap: 33px;
   }
-  @media(max-width: 405px) {
-    grid-template-columns: 39vw 39vw;
-    grid-column-gap: 31px;
-    align-self: center;
+  @media (max-width: 445px) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    & > label {
+      width: 44%;
+    }
+  }
+
+  @media (max-width: 320px) {
+    & > label {
+      width: 42%;
+    }
   }
   
-  @media(max-width: 360px) {
-    grid-template-columns: 37vw 37vw;
-    align-self: center;
-  }
 `;

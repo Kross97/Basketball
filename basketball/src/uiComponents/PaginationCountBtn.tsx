@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 import { PagginationBtn } from '../helpers/types/types';
+import { mobileLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   type: PagginationBtn;
@@ -43,6 +44,11 @@ const PaginationBtn = styled.button`
     & ${Arrow} {
       border-color: ${({ theme }) => theme.colors.white};
     }
+  }
+  
+  @media(max-width: ${mobileLayout}) {
+    width: 28px;
+    height: 28px;
   }
 `;
 

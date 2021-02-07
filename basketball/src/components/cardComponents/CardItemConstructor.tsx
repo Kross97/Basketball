@@ -124,31 +124,36 @@ const Name = styled(TextStandart)<{ type: string }>`
   overflow: ${({ type }) => (type === 'team' && 'hidden')};
   max-width: ${({ type }) => (type === 'team' && '94%')};
   align-self: center;
-
+  font-size: 18px;
+  line-height: 25px;
+  
   @media (max-width: ${sizeMobile}) {
-    font-size: 12px;
+    font-size: 15px;
+    line-height: 24px;
     margin-bottom: 6px;
-    line-height: 150%;
   }
 `;
 
 const NumberPlayer = styled(TextStandart)`
   color: ${({ theme }) => theme.colors.lightRed};
-
+  font-size: 18px;
+  line-height: 25px;
+  
   @media (max-width: ${sizeMobile}) {
-    font-size: 12px;
+    font-size: 15px;
+    line-height: 24px;
   }
 `;
 
 const DescriptionItem = styled(TextSmallThin)`
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme }) => theme.colors.grey};
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   max-width: 99%;
 
   @media (max-width: ${sizeMobile}) {
-    font-size: 10px;
-    line-height: 14px;
+    font-size: 13px;
+    line-height: 18px;
   }
 `;
