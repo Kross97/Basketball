@@ -29,6 +29,7 @@ const customStyles = {
       borderColor: theme.colors.lightGrey,
       backgroundColor: selectProps.isForm ? theme.colors.lightestGrey : theme.colors.white,
     },
+    maxHeight: '40px',
     '@media(max-width: 1000px)': {
       minHeight: '20px',
     },
@@ -130,10 +131,9 @@ const customStyles = {
     ...styles,
     maxWidth: '300px',
     overflow: 'auto',
-    maxHeight: '40px',
+    maxHeight: '38px',
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
-
     '@media(max-width: 770px)': {
       maxHeight: '32px',
     },
