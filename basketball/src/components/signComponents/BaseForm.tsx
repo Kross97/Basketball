@@ -164,6 +164,10 @@ export const BaseForm: FC<IProps> = React.memo(({
   );
 });
 
+const TextContainer = styled.div`
+  align-self: center;
+`;
+
 const FormSign = styled.form`
   display: flex;
   flex-direction: column;
@@ -177,16 +181,21 @@ const FormSign = styled.form`
   & > label, & > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
+  @media (max-width: ${mobileVersionLayout}) {
+    & > ${TextContainer} span {
+      font-size: 15px;
+    }
 
+    & > button {
+      padding-top: 8px;
+      padding-bottom: 8px;
+    }
+   }
   @media (max-width: ${extraSmallLayout}) {
     & > button {
-      padding: 5px 100px 4px;
+      padding: 8px 100px 8px;
     }
   }
-`;
-
-const TextContainer = styled.div`
-  align-self: center;
 `;
 
 const TextSign = styled(TextSmall)`

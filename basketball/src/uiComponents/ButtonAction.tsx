@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextStandart } from './Typography';
 import { SizesButton, TypesButton } from '../helpers/types/types';
-import { sizeMobile } from '../helpers/constants/mobileSize';
+import { mobileVersionLayout, sizeMobile } from '../helpers/constants/mobileSize';
 
 interface IProps {
   isNegativeStyle: boolean;
@@ -24,9 +24,9 @@ export const ButtonAction: FC<IProps> = React.memo(({
     size={size}
     onClick={onClick}
   >
-    <TextStandart>
+    <TextButton>
       {text}
-    </TextStandart>
+    </TextButton>
     {isAdding && <TextAdd>+</TextAdd>}
   </ButtonStyled>
 ));
@@ -64,6 +64,12 @@ const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
     padding-top: 5px;
     padding-bottom: 4px;
   }
+`;
+
+const TextButton = styled(TextStandart)`
+ @media(max-width: ${mobileVersionLayout}) {
+   font-size: 15px;
+ }
 `;
 
 const TextAdd = styled(TextStandart)`

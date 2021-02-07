@@ -85,7 +85,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
   box-sizing: border-box;
   border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
   border-radius: 4px;
-  padding: 7px 12px;
+  padding: 8px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
   font-weight: 500;
@@ -107,19 +107,20 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
-
-  &::-webkit-calendar-picker-indicator {
-    display: none;
-  }
-
+  
   @media (max-width: ${mobileVersionLayout}) {
-    padding: 4px 12px;
+    font-size: 15px;
   }
 
 `;
 
 const TextInput = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    font-size: 17px;
+    line-height: 25px;
+  }
 `;
 
 const TextInputError = styled(TextSmall)`
@@ -135,15 +136,11 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
   cursor: pointer;
   position: absolute;
   right: 13px;
-  top: 37px;
+  top: 40px;
   width: 16px;
   height: 16px;
   background: ${({
     typeButton,
     startType,
   }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)} no-repeat;
-
-  @media (max-width: ${mobileVersionLayout}) {
-    top: 34px;
-  }
 `;

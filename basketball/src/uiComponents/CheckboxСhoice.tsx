@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
+import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
   text: string;
@@ -41,6 +42,10 @@ const CheckboxContainer = styled.label<{ disabled: boolean }>`
 
 const TextCheckBox = styled(TextSmall)`
   margin-left: 10px;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    font-size: 15px;
+  }
 `;
 
 const CheckboxCustom = styled.div<{ isError: boolean }>`
