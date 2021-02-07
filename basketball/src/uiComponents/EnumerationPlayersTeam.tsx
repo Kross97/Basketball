@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import { TextSmall, TextStandart, TextExtraSmall } from './Typography';
 import { IPlayer } from '../helpers/interfaces/storeInterfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
-import { mobliSizeCard } from '../helpers/constants/mobileSize';
+import { mobliSizeCard, mobileDataCard } from '../helpers/constants/mobileSize';
+import { parsePositionPlayer } from '../helpers/functions/parsePositionPlayer';
 
 interface IProps {
   players: IPlayer[],
@@ -34,14 +35,14 @@ export const EnumerationPlayersTeam: FC<IProps> = React.memo(({ players }) => (
               <ImagePlayer imageSrc={player.avatarUrl} />
               <PositionName>
                 <NamePlayer>{player.name}</NamePlayer>
-                <PositionPlayer>{player.position}</PositionPlayer>
+                <PositionPlayer>{parsePositionPlayer(player.position)}</PositionPlayer>
               </PositionName>
             </ContainerImage>
           </ContainerPlayerImage>
           <ContainerDataPlayer>
-            <TextSpecifications>{`${player.height} cm`}</TextSpecifications>
-            <TextSpecifications>{`${player.weight} kg`}</TextSpecifications>
-            <TextSpecifications>{getFullAge(player.birthday)}</TextSpecifications>
+            <TextSpecificationsPlayer>{`${player.height} cm`}</TextSpecificationsPlayer>
+            <TextSpecificationsPlayer>{`${player.weight} kg`}</TextSpecificationsPlayer>
+            <TextSpecificationsPlayer>{getFullAge(player.birthday)}</TextSpecificationsPlayer>
           </ContainerDataPlayer>
         </ItemPlayer>
       ))}
@@ -50,22 +51,36 @@ export const EnumerationPlayersTeam: FC<IProps> = React.memo(({ players }) => (
 ));
 
 const TextSpecifications = styled(TextSmall)`
-  font-weight: 600;
   color: ${({ theme }) => theme.colors.middleGrey};
+  @media(max-width: ${mobileDataCard}) {
+    font-size: 15px;
+  }
 `;
 
-const NumberText = styled(TextSpecifications)`
+const TextSpecificationsPlayer = styled(TextSpecifications)`
+  line-height: 19px;
+`;
+
+const NumberText = styled(TextSpecificationsPlayer)`
   align-self: center;
+  @media(max-width: ${mobileDataCard}) {
+    font-size: 13px;
+    line-height: 18px;
+  }
 `;
 
 const HeadEnumeration = styled(TextStandart)`
   display: inline-block;
   font-size: 18px;
+  line-height: 25px;
   color: ${({ theme }) => theme.colors.middleGrey};
   padding: 14px 0 14px 32px;
 
   @media (max-width: ${mobliSizeCard}) {
     padding: 12px 0 12px 16px;
+  }
+  @media(max-width: ${mobileDataCard}) {
+    font-size: 15px;
   }
 `;
 
@@ -169,8 +184,11 @@ const PositionName = styled.div`
 `;
 
 const NamePlayer = styled(TextSmall)`
-  font-weight: 600;
+  line-height: 21px;
   color: ${({ theme }) => theme.colors.middleGrey};
+  @media(max-width: ${mobileDataCard}) {
+    font-size: 15px;
+  }
 `;
 
 const PositionPlayer = styled(TextExtraSmall)`

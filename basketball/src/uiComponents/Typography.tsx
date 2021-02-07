@@ -27,7 +27,7 @@ export const TextSmallThin = styled.span`
 export const TextExtraLarge = styled.span`
   font-family: Avenir, sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 36px;
   line-height: 49px;
 `;
@@ -35,7 +35,7 @@ export const TextExtraLarge = styled.span`
 export const TextLarge = styled.span`
   font-family: Avenir, sans-serif;
   font-style: normal;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 24px;
   line-height: 33px;
 `;

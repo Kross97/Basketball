@@ -1,5 +1,7 @@
 export const extraSmallLayout = '360px';
 
+export const mobileDataCard = '450px';
+
 export const mobileLayout = '615px';
 
 export const mobliSizeCard = '650px';

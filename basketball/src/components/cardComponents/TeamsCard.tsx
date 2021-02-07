@@ -7,7 +7,9 @@ import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobileVersionLayout, mobliSizeCard, sizeMobile } from '../../helpers/constants/mobileSize';
+import {
+  mobileVersionLayout, mobliSizeCard, sizeMobile, mobileDataCard,
+} from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
 import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import imageUnknown from '../../static/images/item_not_image.png';
@@ -237,6 +239,10 @@ const LogoTeam = styled.div<{ imageUrl: string }>`
     margin-right: 0;
     margin-bottom: 48px;
   }
+  @media(max-width: ${mobileDataCard}) {
+    width: 89px;
+    height: 90px;
+  }
 `;
 
 const TeamName = styled(TextExtraLarge)`
@@ -250,10 +256,9 @@ const TeamName = styled(TextExtraLarge)`
   }
 
   @media (max-width: ${mobliSizeCard}) {
-    font-size: 24px;
-    line-height: 33px;
+    font-size: 17px;
+    line-height: 25px;
     margin-bottom: 32px;
-    font-weight: 700;
   }
 `;
 

@@ -55,6 +55,11 @@ const ContainerEntity = styled.div`
     flex-grow: 1;
     padding: 79px 0 48px;
   }
+  @media(max-width: 350px) {
+    & button {
+      padding: 10px 110px;
+    }
+  }
 `;
 
 const LabelEmpty = styled(TextLabel)`
@@ -63,7 +68,8 @@ const LabelEmpty = styled(TextLabel)`
   margin-top: 77px;
 
   @media (max-width: ${mobileVersionLayout}) {
-    font-size: 24px;
+    font-size: 17px;
+    line-height: 25px;
   }
 `;
 
@@ -77,6 +83,10 @@ const ImageEmpty = styled.div<{ isTeam: boolean }>`
     width: ${({ isTeam }) => (isTeam ? '339px' : '225px')};
     height: 226px;
   }
+  @media(max-width: 350px) {
+    width: ${({ isTeam }) => (isTeam && '280px')};
+    height:  ${({ isTeam }) => (isTeam && '200px')};
+  }
 `;
 
 const TextEntity = styled(TextLarge)`
@@ -85,6 +95,7 @@ const TextEntity = styled(TextLarge)`
   margin: 24px 0 48px 0;
 
   @media (max-width: ${mobileVersionLayout}) {
-    font-size: 18px;
+    font-size: 15px;
+    line-height: 24px;
   }
 `;
