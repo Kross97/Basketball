@@ -13,7 +13,7 @@ interface IProps {
   isTeam: boolean;
 }
 
-export const EmptyEntity: FC<IProps> = ({
+export const EmptyEntity: FC<IProps> = React.memo(({
   isTeam,
 }) => {
   const { t } = useTranslation();
@@ -34,7 +34,7 @@ export const EmptyEntity: FC<IProps> = ({
       />
     </ContainerEntity>
   );
-};
+});
 
 const ContainerEntity = styled.div`
   border-radius: 15px;

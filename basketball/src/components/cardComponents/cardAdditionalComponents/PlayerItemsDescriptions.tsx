@@ -12,7 +12,7 @@ interface IProps {
   teamName: string,
 }
 
-export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => {
+export const PlayerItemsDescription: FC<IProps> = React.memo(({ player, teamName }) => {
   const { t } = useTranslation();
   return (
     <>
@@ -38,7 +38,7 @@ export const PlayerItemsDescription: FC<IProps> = ({ player, teamName }) => {
       </div>
     </>
   );
-};
+});
 
 const LabelItem = styled(TextLarge)`
   display: block;

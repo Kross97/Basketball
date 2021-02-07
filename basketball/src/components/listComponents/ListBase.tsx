@@ -13,7 +13,7 @@ interface IProps {
   type: TypeItem,
 }
 
-export const ListBase: FC<IProps> = ({
+export const ListBase: FC<IProps> = React.memo(({
   entities,
   type,
 }) => (
@@ -26,7 +26,7 @@ export const ListBase: FC<IProps> = ({
       />
     ))}
   </ListContainer>
-);
+));
 
 const ListContainer = styled.div`
   display: grid;

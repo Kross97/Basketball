@@ -18,7 +18,7 @@ const actionCreators = {
   addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
 };
 
-export const ImageUpload: FC<IProps> = ({
+export const ImageUpload: FC<IProps> = React.memo(({
   defaultImage,
 }) => {
   const { token, srcImage } = useSelector((state: IStoreReducer) => ({
@@ -56,7 +56,7 @@ export const ImageUpload: FC<IProps> = ({
       </ImageContainer>
     </label>
   );
-};
+});
 
 const InputLoad = styled.input`
   display: none;

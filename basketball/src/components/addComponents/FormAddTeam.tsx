@@ -20,7 +20,7 @@ interface IProps {
   teamUpdate: ITeam | undefined;
 }
 
-export const FormAddTeam: FC<IProps> = ({
+export const FormAddTeam: FC<IProps> = React.memo(({
   addNewTeam,
   teamUpdate,
 }) => {
@@ -131,7 +131,7 @@ export const FormAddTeam: FC<IProps> = ({
       </BtnGroup>
     </FormAdd>
   );
-};
+});
 
 const FormAdd = styled.form`
   display: flex;

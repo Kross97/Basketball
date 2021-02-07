@@ -10,12 +10,12 @@ interface IProps {
   onClick: () => void;
 }
 
-export const AuthorizedUserLogo: FC<IProps> = ({ name, avatarUrl, onClick }) => (
+export const AuthorizedUserLogo: FC<IProps> = React.memo(({ name, avatarUrl, onClick }) => (
   <ContainerLogo onClick={onClick}>
     <TextSmall>{name}</TextSmall>
     <UserLogo avatarUrl={avatarUrl} />
   </ContainerLogo>
-);
+));
 
 const ContainerLogo = styled.div`
   display: inline-flex;

@@ -22,7 +22,7 @@ interface IProps {
   userData?: ISignInForm,
 }
 
-export const BaseForm: FC<IProps> = ({
+export const BaseForm: FC<IProps> = React.memo(({
   typeForm,
   notificationMessage,
   submitHandler,
@@ -162,7 +162,7 @@ export const BaseForm: FC<IProps> = ({
             )}
     </FormSign>
   );
-};
+});
 
 const FormSign = styled.form`
   display: flex;

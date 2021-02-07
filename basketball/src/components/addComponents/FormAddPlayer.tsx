@@ -24,7 +24,7 @@ interface IProps {
   playerUpdate: IPlayer | undefined;
 }
 
-export const FormAddPlayer: FC<IProps> = ({
+export const FormAddPlayer: FC<IProps> = React.memo(({
   addNewPlayer,
   playerUpdate,
 }) => {
@@ -199,7 +199,7 @@ export const FormAddPlayer: FC<IProps> = ({
       </BtnGroup>
     </FormAdd>
   );
-};
+});
 
 const FormAdd = styled.form`
   display: flex;

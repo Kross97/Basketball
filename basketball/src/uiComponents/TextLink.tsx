@@ -9,11 +9,11 @@ interface IProps {
   disabled: boolean;
 }
 
-export const TextLink: FC<IProps> = ({ text, to, disabled }) => (
+export const TextLink: FC<IProps> = React.memo(({ text, to, disabled }) => (
   <CustomLink disabled={disabled} to={to}>
     <TextSmall>{text}</TextSmall>
   </CustomLink>
-);
+));
 
 const CustomLink = styled(Link)<{ disabled: boolean }>`
   cursor: pointer;

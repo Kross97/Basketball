@@ -7,11 +7,11 @@ interface IProps {
   isError?: boolean;
 }
 
-export const NotificationMessage: FC<IProps> = ({ text, isError = true }) => (
+export const NotificationMessage: FC<IProps> = React.memo(({ text, isError = true }) => (
   <Container isError={isError}>
     <TextStandart>{text}</TextStandart>
   </Container>
-);
+));
 
 const animationNotification = keyframes`
   from {

@@ -35,7 +35,7 @@ interface IProps {
   isTeam: boolean,
 }
 
-export const EntitiesMarkUp: FC<IProps> = ({
+export const EntitiesMarkUp: FC<IProps> = React.memo(({
   isTeam,
 }) => {
   const { t } = useTranslation();
@@ -159,7 +159,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
     )
       : <EmptyEntity isTeam={isTeam} />
   );
-};
+});
 
 const ContainerTeams = styled.div`
   margin: 32px auto 0;

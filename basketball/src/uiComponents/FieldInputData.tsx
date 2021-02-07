@@ -23,7 +23,7 @@ interface IProps {
   errorMessage?: string;
 }
 
-export const FieldInputData: FC<IProps> = ({
+export const FieldInputData: FC<IProps> = React.memo(({
   text,
   disabled,
   startType,
@@ -70,7 +70,7 @@ export const FieldInputData: FC<IProps> = ({
             && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
     </InputContainer>
   );
-};
+});
 
 const InputContainer = styled.label`
   display: flex;

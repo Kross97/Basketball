@@ -61,7 +61,7 @@ interface IProps {
   onChange: (e: any) => void;
 }
 
-export const SelectCounts: FC<IProps> = ({
+export const SelectCounts: FC<IProps> = React.memo(({
   onChange,
 }) => (
   <Select
@@ -73,4 +73,4 @@ export const SelectCounts: FC<IProps> = ({
     placeholder={false}
     onChange={onChange}
   />
-);
+));

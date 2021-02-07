@@ -170,7 +170,7 @@ interface IProps {
   text?: string;
 }
 
-export const MultiSelectEntities: FC<IProps> = ({
+export const MultiSelectEntities: FC<IProps> = React.memo(({
   options,
   isMulti,
   isPlaceholder,
@@ -195,7 +195,7 @@ export const MultiSelectEntities: FC<IProps> = ({
     />
     {isError && <TextError>Required</TextError>}
   </SelectLabel>
-);
+));
 
 const SelectLabel = styled.label`
   position: relative;

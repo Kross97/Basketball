@@ -20,7 +20,7 @@ const actionCreators = {
   clearErrorMessage: addEntityError.actions.clearErrorMessage,
 };
 
-export const AddNewEntity: FC<IProps> = ({
+export const AddNewEntity: FC<IProps> = React.memo(({
   isTeam,
   imageEntity,
   children,
@@ -56,7 +56,8 @@ export const AddNewEntity: FC<IProps> = ({
       </BodyAdd>
     </ContainerAdd>
   );
-};
+});
+
 const ContainerAdd = styled.div`
   flex-grow: 0.5;
   margin: 32px auto auto;

@@ -8,7 +8,7 @@ interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FieldSearch: FC<IProps> = ({
+export const FieldSearch: FC<IProps> = React.memo(({
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -17,7 +17,7 @@ export const FieldSearch: FC<IProps> = ({
       <CustomSearch onChange={onChange} type="text" placeholder={t('markup:search')} />
     </SearchContainer>
   );
-};
+});
 
 const SearchContainer = styled.div`
   display: flex;

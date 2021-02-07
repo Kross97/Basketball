@@ -13,7 +13,7 @@ interface IProps {
   errorMessage?: string;
 }
 
-export const CalendarField: FC<IProps> = ({
+export const CalendarField: FC<IProps> = React.memo(({
   defaultValue,
   isError = false,
   errorMessage = '',
@@ -57,7 +57,7 @@ export const CalendarField: FC<IProps> = ({
       {isError && <TextInputError>{errorMessage}</TextInputError>}
     </InputContainer>
   );
-};
+});
 
 const InputContainer = styled.label`
   display: flex;

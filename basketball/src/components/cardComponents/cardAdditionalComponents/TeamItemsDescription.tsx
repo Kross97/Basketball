@@ -9,7 +9,7 @@ interface IProps {
   team: ITeam,
 }
 
-export const TeamItemsDescription: FC<IProps> = ({
+export const TeamItemsDescription: FC<IProps> = React.memo(({
   team,
 }) => {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ export const TeamItemsDescription: FC<IProps> = ({
       </div>
     </>
   );
-};
+});
 
 const LabelItem = styled(TextLarge)`
   display: block;

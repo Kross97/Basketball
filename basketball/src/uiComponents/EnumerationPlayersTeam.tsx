@@ -9,7 +9,7 @@ interface IProps {
   players: IPlayer[],
 }
 
-export const EnumerationPlayersTeam: FC<IProps> = ({ players }) => (
+export const EnumerationPlayersTeam: FC<IProps> = React.memo(({ players }) => (
   <ContainerEnumeration>
     <HeadEnumeration>
       Roster
@@ -47,7 +47,7 @@ export const EnumerationPlayersTeam: FC<IProps> = ({ players }) => (
       ))}
     </AllPlayers>
   </ContainerEnumeration>
-);
+));
 
 const TextSpecifications = styled(TextSmall)`
   font-weight: 600;

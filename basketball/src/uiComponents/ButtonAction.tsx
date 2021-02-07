@@ -14,7 +14,7 @@ interface IProps {
   onClick?: () => void;
 }
 
-export const ButtonAction: FC<IProps> = ({
+export const ButtonAction: FC<IProps> = React.memo(({
   type, isNegativeStyle, isAdding, size, text, disabled, onClick,
 }) => (
   <ButtonStyled
@@ -29,7 +29,7 @@ export const ButtonAction: FC<IProps> = ({
     </TextStandart>
     {isAdding && <TextAdd>+</TextAdd>}
   </ButtonStyled>
-);
+));
 
 const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
   cursor: pointer;

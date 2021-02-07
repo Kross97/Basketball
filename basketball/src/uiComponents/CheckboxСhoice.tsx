@@ -12,7 +12,7 @@ interface IProps {
   errorMessage?: string;
 }
 
-export const CheckboxСhoice: FC<IProps> = ({
+export const CheckboxСhoice: FC<IProps> = React.memo(({
   text,
   disabled,
   name,
@@ -31,7 +31,7 @@ export const CheckboxСhoice: FC<IProps> = ({
     </CheckboxContainer>
     {isError && <TextError>{errorMessage}</TextError>}
   </div>
-);
+));
 
 const CheckboxContainer = styled.label<{ disabled: boolean }>`
   display: flex;

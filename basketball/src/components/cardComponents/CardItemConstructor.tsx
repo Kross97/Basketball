@@ -17,7 +17,7 @@ interface IProps {
   item: IPlayer | ITeam;
 }
 
-export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
+export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
   const history = useHistory();
 
   const idTeam = type === 'team' ? item.id : (item as IPlayer).team;
@@ -55,7 +55,7 @@ export const CardItemConstructor: FC<IProps> = ({ type, item }) => {
       </FooterCard>
     </ContainerCard>
   );
-};
+});
 
 const ContainerCard = styled.div`
   cursor: pointer;

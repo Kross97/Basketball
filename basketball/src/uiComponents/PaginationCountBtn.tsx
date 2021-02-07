@@ -7,11 +7,11 @@ interface IProps {
   type: PagginationBtn;
 }
 
-export const PaginationCountBtn: FC<IProps> = ({ type }) => (
+export const PaginationCountBtn: FC<IProps> = React.memo(({ type }) => (
   <PaginationBtn>
     <TextPagination type={type}>{type === 'break' ? '...' : <Arrow type={type} />}</TextPagination>
   </PaginationBtn>
-);
+));
 
 const Arrow = styled.div<{ type: string }>`
   border: 2px solid grey;
