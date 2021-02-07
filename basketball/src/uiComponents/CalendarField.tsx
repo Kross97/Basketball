@@ -104,6 +104,10 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     padding: 4px 12px;
   }
 
+  @media(max-width: 360px) {
+    background-position: right 5px center;
+  }
+  
 `;
 
 const TextInput = styled(TextSmall)`

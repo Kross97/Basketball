@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TextSmall, TextStandart, TextExtraSmall } from './Typography';
 import { IPlayer } from '../helpers/interfaces/storeInterfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { mobileVersionLayout, mobliSizeCard } from '../helpers/constants/mobileSize';
 
 interface IProps {
   players: IPlayer[],
@@ -64,7 +64,7 @@ const HeadEnumeration = styled(TextStandart)`
   color: ${({ theme }) => theme.colors.middleGrey};
   padding: 14px 0 14px 32px;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     padding: 12px 0 12px 16px;
   }
 `;
@@ -76,7 +76,7 @@ const Specifications = styled.div`
   border-top: 1px solid ${({ theme }) => theme.colors.grey};
   border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     padding: 8px 16px;
   }
 `;
@@ -88,7 +88,7 @@ const NumberPlayer = styled.div`
     margin-right: 48px;
   }
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     & > span:nth-of-type(1) {
       margin-right: 32px;
     }
@@ -102,7 +102,7 @@ const PersonalData = styled.div`
     margin-right: 84px;
   }
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     display: none;
   }
 `;
@@ -113,7 +113,7 @@ const ContainerEnumeration = styled.div`
   background-color: ${({ theme }) => theme.colors.white};
   margin-top: 24px;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     border-radius: 0;
     border-right: none;
     border-left: none;
@@ -129,7 +129,7 @@ const ItemPlayer = styled.div<{ isLastPlayer: boolean }>`
   box-sizing: border-box;
   border-bottom: ${({ isLastPlayer, theme }) => (isLastPlayer ? 'none' : `1px solid ${theme.colors.grey}`)};
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     padding: 5px 18px 5px 14px;
   }
 `;
@@ -141,7 +141,7 @@ const ContainerPlayerImage = styled.div`
     margin-right: 35px;
   }
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     & > span:nth-of-type(1) {
       margin-right: 18px;
     }
@@ -183,7 +183,7 @@ const ContainerDataPlayer = styled.div`
   grid-column-gap: 82px;
   align-self: center;
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (max-width: ${mobliSizeCard}) {
     display: none;
   }
 `;

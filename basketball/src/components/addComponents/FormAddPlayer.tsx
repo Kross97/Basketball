@@ -220,6 +220,12 @@ const BtnGroup = styled.div`
       padding: 8px 40px;
     }
   }
+  
+  @media(max-width: 360px) {
+    grid-template-columns: 38vw 38vw;
+    align-self: center;
+  }
+  }
 `;
 
 const PlayerData = styled.div`
@@ -234,5 +240,19 @@ const PlayerData = styled.div`
 
   @media (max-width: ${mobileSizeGridForm}) {
     grid-template-columns: auto auto;
+  }
+  @media(max-width: 440px) {
+    grid-template-columns: 41vw 41vw;
+    grid-column-gap: 25px;
+  }
+  @media(max-width: 405px) {
+    grid-template-columns: 39vw 39vw;
+    grid-column-gap: 31px;
+    align-self: center;
+  }
+  
+  @media(max-width: 360px) {
+    grid-template-columns: 37vw 37vw;
+    align-self: center;
   }
 `;
