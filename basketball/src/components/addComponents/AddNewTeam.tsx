@@ -18,7 +18,7 @@ const actionCreators = {
   addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
 };
 
-export const AddNewTeam = () => {
+export default () => {
   const history = useHistory();
   const { id } = useParams<{ id: string }>();
 

@@ -17,7 +17,7 @@ const actionCreators = {
   clearSignUpNotification: authDataUser.actions.clearAuthNotificationSignUp,
 };
 
-export const SignUp = () => {
+export default () => {
   const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
   const {
     requestSignUp: signUp,

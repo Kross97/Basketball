@@ -23,7 +23,7 @@ const actionCreators = {
   removeSelectedPlayer,
 };
 
-export const PlayerCard = () => {
+export default () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const { t } = useTranslation();

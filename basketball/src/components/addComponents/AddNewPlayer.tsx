@@ -19,7 +19,7 @@ const actionCreators = {
   addSrcImageExisting: imageLoadData.actions.addSrcImageExisting,
 };
 
-export const AddNewPlayer = () => {
+export default () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
   const playerUpdate = useSelector(({ playersDataReducer }: IStoreReducer) => (

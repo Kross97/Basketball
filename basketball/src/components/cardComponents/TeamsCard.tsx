@@ -25,7 +25,7 @@ const actionCreators = {
   removeTeam,
 };
 
-export const TeamsCard = () => {
+export default () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
 

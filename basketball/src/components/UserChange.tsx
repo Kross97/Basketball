@@ -19,7 +19,7 @@ const actionCreators = {
   changeAuthData,
 };
 
-export const UserChange = () => {
+export default () => {
   const {
     avatarUrl,
     token,

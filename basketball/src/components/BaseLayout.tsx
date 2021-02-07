@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, lazy } from 'react';
 import styled from 'styled-components';
 import {
   Switch, Route, useHistory, useLocation,
@@ -7,19 +7,20 @@ import { useSelector } from 'react-redux';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
-import { PlayersRouter } from './listComponents/PlayersRouter';
-import { TeamsRouter } from './listComponents/TeamsRouter';
 import { routePaths } from '../helpers/constants/routePaths';
 import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
-import { UserChange } from './UserChange';
+
+const PlayersRouter = lazy(() => import('./listComponents/PlayersRouter'));
+const TeamsRouter = lazy(() => import('./listComponents/TeamsRouter'));
+const UserChange = lazy(() => import('./UserChange'));
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
 };
 
-export const BaseLayout = () => {
+export default () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
   const { countTeams, countPlayer } = useSelector(({
     teamsDataReducer,
