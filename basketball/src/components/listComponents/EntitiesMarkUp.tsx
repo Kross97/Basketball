@@ -1,4 +1,6 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, {
+  useEffect, useState, FC, useCallback,
+} from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
@@ -104,6 +106,10 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
     loadNewChunk({ chunkData: newCommandsChunk, token });
   };
 
+  const showAddNewEntityForm = useCallback(() => {
+    history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd);
+  }, []);
+
   return (
     typedSelectedAll.length > 0 ? (
 
@@ -126,7 +132,7 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
             text={t('markup:add')}
             disabled={false}
             type="button"
-            onClick={() => history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd)}
+            onClick={showAddNewEntityForm}
           />
         </HeaderTeams>
         <TeamsBody>

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -34,9 +34,9 @@ export const FormAddTeam: FC<IProps> = React.memo(({
     trigger,
   } = useForm();
 
-  const cancelAddNewEntity = () => {
+  const cancelAddNewEntity = useCallback(() => {
     history.replace(routePaths.teams);
-  };
+  }, []);
 
   return (
     <FormAdd onSubmit={handleSubmit(addNewTeam)}>

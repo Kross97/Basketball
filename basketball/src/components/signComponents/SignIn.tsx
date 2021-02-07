@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -50,7 +50,7 @@ export const SignIn = () => {
     }
   }, [isSuccesRequest]);
 
-  const submitHandler = async (data: ISignInForm) => {
+  const submitHandler = useCallback(async (data: ISignInForm) => {
     const isSuccess = await signIn({
       login: data.login,
       password: data.password,
@@ -58,7 +58,7 @@ export const SignIn = () => {
     if (isSuccess.payload) {
       setTypeRequest(isSuccess.payload);
     }
-  };
+  }, []);
 
   return (
     <SignContainer>

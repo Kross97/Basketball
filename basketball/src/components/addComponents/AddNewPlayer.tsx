@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddNewEntity } from './AddNewEntity';
@@ -36,7 +36,7 @@ export default () => {
     updateSelectedPlayer: updatePlayer,
   } = useCustomActions(actionCreators);
 
-  const addNewEntity = async (data: IFormAddPlayer) => {
+  const addNewEntity = useCallback(async (data: IFormAddPlayer) => {
     const player = {
       ...data,
       birthday: formatDateForServer(data.birthday),
@@ -69,7 +69,7 @@ export default () => {
     if (isSuccessAdding) {
       history.push(routePaths.players);
     }
-  };
+  }, [srcImage]);
 
   return (
     <AddNewEntity

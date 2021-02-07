@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -27,12 +27,16 @@ export const NavigationHeader = () => {
     toggleStatusSandwichMenu,
   } = useCustomActions(actionCreators);
 
+  const showUserChange = useCallback(() => {
+    history.push(routePaths.changeUser);
+  }, []);
+
   return (
     <ContainerNavigation>
       <ButtonSandwich onClick={toggleStatusSandwichMenu} />
       <BrandLogo />
       <AuthorizedUserLogo
-        onClick={() => history.push(routePaths.changeUser)}
+        onClick={showUserChange}
         name={name}
         avatarUrl={avatarUrl}
       />

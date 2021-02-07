@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
@@ -18,13 +18,18 @@ export const EmptyEntity: FC<IProps> = React.memo(({
 }) => {
   const { t } = useTranslation();
   const history = useHistory();
+
+  const showFormAdd = useCallback(() => {
+    history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd);
+  }, []);
+
   return (
     <ContainerEntity>
       <ImageEmpty isTeam={isTeam} />
       <LabelEmpty>{t('emptyEntity:label')}</LabelEmpty>
       <TextEntity>{isTeam ? t('emptyEntity:emptyTeam') : t('emptyEntity:emptyPlayer')}</TextEntity>
       <ButtonAction
-        onClick={() => history.push(isTeam ? routePaths.teamAdd : routePaths.playerAdd)}
+        onClick={showFormAdd}
         isNegativeStyle={false}
         isAdding
         size="large"

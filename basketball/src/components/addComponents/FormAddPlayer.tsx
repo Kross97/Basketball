@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import styled from 'styled-components';
 import { useTranslation } from 'react-i18next';
 import { useForm } from 'react-hook-form';
@@ -42,9 +42,9 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
     trigger,
   } = useForm();
 
-  const cancelAddNewEntity = () => {
+  const cancelAddNewEntity = useCallback(() => {
     history.replace(routePaths.players);
-  };
+  }, []);
 
   const changePosition = (targetPosition: IPostionOption) => {
     if (targetPosition) {
@@ -65,7 +65,7 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
       setTeam('');
     }
   };
-  console.log('PLAYER', playerUpdate);
+
   return (
     <FormAdd onSubmit={handleSubmit(addNewPlayer)}>
       {playerUpdate && <input type="hidden" name="id" ref={register} value={playerUpdate.id} />}

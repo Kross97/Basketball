@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router-dom';
 import { AddNewEntity } from './AddNewEntity';
@@ -35,14 +35,14 @@ export default () => {
     updateCurrentTeam: updateTeam,
   } = useCustomActions(actionCreators);
 
-  const addNewEntity = async (data: IFormAddTeam) => {
+  const addNewEntity = useCallback(async (data: IFormAddTeam) => {
     const team = {
       ...data,
       name: data.teamName,
       foundationYear: Number(data.foundationYear),
       imageUrl: srcImage,
     };
-
+    console.log('Team', team, 'SRC', srcImage);
     if ('id' in team) {
       const {
         payload: isSuccesUpdate,
@@ -58,7 +58,7 @@ export default () => {
     if (isSuccesAdd) {
       history.push(routePaths.teams);
     }
-  };
+  }, [srcImage]);
 
   return (
     <AddNewEntity

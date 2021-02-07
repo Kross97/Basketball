@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -62,6 +62,10 @@ export default () => {
     }
   };
 
+  const returnForTeamsPage = useCallback(() => {
+    history.push(routePaths.teams);
+  }, []);
+
   const stopSurfacing = (event: React.MouseEvent<HTMLFormElement>) => {
     event.stopPropagation();
   };
@@ -89,7 +93,7 @@ export default () => {
             text="Cancel"
             disabled={false}
             type="button"
-            onClick={() => history.push(routePaths.teams)}
+            onClick={returnForTeamsPage}
           />
           <ButtonAction
             isNegativeStyle={false}

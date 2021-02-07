@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import styled from 'styled-components';
 import { useParams, useHistory } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -47,12 +47,16 @@ export const SideSandwichMenu = () => {
     history.replace(routePaths.signIn);
   };
 
+  const showUserChange = useCallback(() => {
+    history.push(routePaths.changeUser);
+  }, []);
+
   return (
     <ContainerMenu isActiveMenu={isActiveSandwich}>
       <TeamsPlayers>
         <AutthorizedContainer onClick={toggleStatusSandwichMenu}>
           <AuthorizedUserLogo
-            onClick={() => history.push(routePaths.changeUser)}
+            onClick={showUserChange}
             name={name}
             avatarUrl={avatarUrl}
           />

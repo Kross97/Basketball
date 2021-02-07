@@ -4,9 +4,11 @@ export interface ISignInForm {
 }
 
 export interface ISignUpForm {
-  userName: string,
+  acceptAgreement: boolean,
   login: string,
   password: string,
+  passwordRepeat: string,
+  userName: string,
 }
 
 export interface IMessageNotification {

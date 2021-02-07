@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -11,6 +11,7 @@ import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
+import { ISignUpForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
 
 const actionCreators = {
   requestSignUp,
@@ -44,7 +45,7 @@ export default () => {
     }
   }, [isSuccesRequest]);
 
-  const submitHandler = async (data: any) => {
+  const submitHandler = useCallback(async (data: ISignUpForm) => {
     const isSuccess = await signUp({
       userName: data.userName,
       login: data.login,
@@ -53,7 +54,7 @@ export default () => {
     if (isSuccess.payload) {
       setTypeRequest(isSuccess.payload);
     }
-  };
+  }, []);
 
   return (
     <SignContainer>
