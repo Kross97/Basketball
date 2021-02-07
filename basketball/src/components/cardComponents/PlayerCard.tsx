@@ -7,7 +7,9 @@ import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobileLayout, mobliSizeCard, sizeMobile } from '../../helpers/constants/mobileSize';
+import {
+  mobileLayout, mobliSizeCard, sizeMobile, mobileDataCard,
+} from '../../helpers/constants/mobileSize';
 import { PlayerItemsDescription } from './cardAdditionalComponents/PlayerItemsDescriptions';
 import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { removeSelectedPlayer } from '../../store/asyncActions/player';
@@ -238,7 +240,6 @@ const PlayerName = styled(TextExtraLarge)`
   display: block;
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
-  font-weight: 700;
   text-transform: capitalize;
 
   @media (max-width: ${sizeMobile}) {
@@ -249,6 +250,10 @@ const PlayerName = styled(TextExtraLarge)`
     font-size: 24px;
     line-height: 33px;
     margin-bottom: 32px;
+  }
+  @media(max-width: ${mobileDataCard}) {
+    font-size: 17px;
+    line-height: 25px;
   }
 `;
 

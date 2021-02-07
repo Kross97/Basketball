@@ -203,7 +203,7 @@ const TeamsPlayers = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 0.2;
+  flex-grow: 0.13;
 
   & ${ItemMenu}:nth-child(1) {
     margin-bottom: 40px;

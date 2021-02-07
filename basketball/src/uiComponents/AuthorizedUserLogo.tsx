@@ -12,7 +12,7 @@ interface IProps {
 
 export const AuthorizedUserLogo: FC<IProps> = React.memo(({ name, avatarUrl, onClick }) => (
   <ContainerLogo onClick={onClick}>
-    <TextSmall>{name}</TextSmall>
+    <NameUser>{name}</NameUser>
     <UserLogo avatarUrl={avatarUrl} />
   </ContainerLogo>
 ));
@@ -42,4 +42,10 @@ const UserLogo = styled.div<{ avatarUrl: string | null }>`
     margin-left: 0;
     margin-right: 12px;
   }
+`;
+
+const NameUser = styled(TextSmall)`
+ @media(max-width: ${mobileVersionLayout}) {
+   font-size: 15px;
+ }
 `;

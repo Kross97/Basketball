@@ -96,8 +96,8 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
   &::-webkit-scrollbar {
     width: 7px;
   }
-
-  @media (max-width: ${mobileVersionLayout}) {
+  
+  @media (max-width: 1025px) {
     flex-basis: 100vh;
   }
 `;

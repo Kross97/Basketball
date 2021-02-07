@@ -44,20 +44,21 @@ const LabelItem = styled(TextLarge)`
   display: block;
   color: ${({ theme }) => theme.colors.white};
   margin-bottom: 8px;
-  font-weight: 700;
 
   @media (max-width: ${sizeMobile}) {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 25px;
   }
 `;
 
 const DataItem = styled(TextStandart)`
   font-size: 18px;
+  line-height: 25px;
   word-break: break-word;
   color: ${({ theme }) => theme.colors.white};
 
   @media (max-width: ${sizeMobile}) {
-    font-size: 14px;
+    font-size: 15px;
+    line-height: 24px;
   }
 `;
