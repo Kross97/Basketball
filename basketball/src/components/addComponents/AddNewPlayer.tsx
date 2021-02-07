@@ -10,7 +10,7 @@ import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { IFormAddPlayer } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import { FormAddPlayer } from './FormAddPlayer';
-import { formatDate } from '../../helpers/functions/formatingDate';
+import { formatDateForServer } from '../../helpers/functions/formatingDate';
 
 const actionCreators = {
   loadNewImage,
@@ -39,7 +39,7 @@ export default () => {
   const addNewEntity = async (data: IFormAddPlayer) => {
     const player = {
       ...data,
-      birthday: formatDate(data.birthday),
+      birthday: formatDateForServer(data.birthday),
       team: Number(data.team),
       number: Number(data.number),
       weight: Number(data.weight),

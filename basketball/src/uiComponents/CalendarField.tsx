@@ -20,7 +20,7 @@ export const CalendarField: FC<IProps> = React.memo(({
   register,
   trigger,
 }) => {
-  const [dateBirthDay, setBirthDay] = useState<string>('');
+  const [dateBirthDay, setBirthDay] = useState<string>(defaultValue || '');
   const { t } = useTranslation();
 
   const changeHandler = ({ target: { value } }: React.ChangeEvent<HTMLInputElement>) => {

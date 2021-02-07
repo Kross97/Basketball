@@ -17,7 +17,7 @@ import { validateBirthDayOld, validateBirthDayYoung } from '../../helpers/functi
 import { formAddPlayersErrors } from '../../helpers/constants/formErrors';
 import { CalendarField } from '../../uiComponents/CalendarField';
 import { mobliSizeCard, mobileSizeGridForm } from '../../helpers/constants/mobileSize';
-import { formatDate } from '../../helpers/functions/formatingDate';
+import { formatDateForServer, formatDateForForm } from '../../helpers/functions/formatingDate';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -65,7 +65,7 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
       setTeam('');
     }
   };
-
+  console.log('PLAYER', playerUpdate);
   return (
     <FormAdd onSubmit={handleSubmit(addNewPlayer)}>
       {playerUpdate && <input type="hidden" name="id" ref={register} value={playerUpdate.id} />}
@@ -155,13 +155,14 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
           trigger={trigger}
           isError={!!errors.birthday}
           errorMessage={formAddPlayersErrors[errors.birthday?.type]}
+          defaultValue={playerUpdate && formatDateForForm(playerUpdate.birthday)}
           register={register({
             required: true,
             pattern: regExpBirthDay,
             validate: {
-              isCorrectDate: (value) => !isNaN(new Date(formatDate(value)).getFullYear()),
-              isNotYoung: (value) => validateBirthDayYoung(formatDate(value)),
-              isNotOld: (value) => validateBirthDayOld(formatDate(value)),
+              isCorrectDate: (value) => !isNaN(new Date(formatDateForServer(value)).getFullYear()),
+              isNotYoung: (value) => validateBirthDayYoung(formatDateForServer(value)),
+              isNotOld: (value) => validateBirthDayOld(formatDateForServer(value)),
             },
           })}
         />
