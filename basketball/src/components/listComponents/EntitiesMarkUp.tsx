@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import { useTranslation } from 'react-i18next';
+import { debounce } from 'lodash';
 import { teamsChunkSelector, teamsForSelectPlayer, allTeamsSelector } from '../../store/selectors/teamsSelector';
 import { playersChunkSelector, allPlayersSelector } from '../../store/selectors/playersSelector';
 import { ListBase } from './ListBase';
@@ -79,9 +80,11 @@ export const EntitiesMarkUp: FC<IProps> = ({
   };
 
   const changeSize = (option: IOption) => {
-    const newSizeChunk = { ...chunkData, page: 1, size: option.value };
-    setChunkData(newSizeChunk);
-    loadNewChunk({ chunkData: newSizeChunk, token });
+    if (chunkData.size !== option.value) {
+      const newSizeChunk = { ...chunkData, page: 1, size: option.value };
+      setChunkData(newSizeChunk);
+      loadNewChunk({ chunkData: newSizeChunk, token });
+    }
   };
 
   const changePage = (page: IPaginationValue) => {
@@ -106,7 +109,7 @@ export const EntitiesMarkUp: FC<IProps> = ({
 
       <ContainerTeams>
         <HeaderTeams>
-          <FieldSearch onChange={changeNameEntity} />
+          <FieldSearch onChange={debounce(changeNameEntity, 300)} />
           {!isTeam && (
           <MultiSelectEntities
             options={teamsOptions}
