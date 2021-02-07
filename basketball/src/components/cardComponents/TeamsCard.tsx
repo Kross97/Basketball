@@ -9,12 +9,11 @@ import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
 import { mobileVersionLayout, mobliSizeCard, sizeMobile } from '../../helpers/constants/mobileSize';
 import { TeamItemsDescription } from './cardAdditionalComponents/TeamItemsDescription';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import imageUnknown from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { removeTeam } from '../../store/asyncActions/team';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import { EnumerationPlayersTeam } from '../../uiComponents/EnumerationPlayersTeam';
 import { playersCurrentTeam } from '../../store/selectors/playersSelector';
 import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
@@ -38,17 +37,20 @@ export default () => {
       teamsDataReducer,
       authDataUser,
       addEntityError,
-    }: IStoreReducer,
+    }: StoreReducer,
   ) => ({
-    team: teamsDataReducer.entities[id] as ITeam,
+    team: teamsDataReducer.entities[id],
     token: authDataUser.authData.token,
     errorMessage: addEntityError.errorMessage,
   }), shallowEqual);
-  const playersList = useSelector((state: IStoreReducer) => playersCurrentTeam(state, id));
+  const playersList = useSelector((state: StoreReducer) => playersCurrentTeam(state, id));
+
   const { t } = useTranslation();
 
   const teamUpdate = () => {
-    history.replace(`${routePaths.teamAdd}/${team.id}`);
+    if (team) {
+      history.replace(`${routePaths.teamAdd}/${team.id}`);
+    }
   };
 
   const deleteCurrentTeam = () => {
@@ -59,7 +61,7 @@ export default () => {
   return (
     team
       ? (
-        <ContainerCard countPlayes={playersList.length}>
+        <ContainerCard countPlayers={playersList.length}>
           <CardNavigation>
             <Links>
               <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
@@ -106,7 +108,7 @@ export default () => {
   );
 };
 
-const ContainerCard = styled.div<{ countPlayes: number }>`
+const ContainerCard = styled.div<{ countPlayers: number }>`
   margin: 32px auto;
   flex-grow: 0.2;
   position: relative;

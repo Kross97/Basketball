@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
-import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { changeAuthData } from '../store/asyncActions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
@@ -26,7 +26,7 @@ export default () => {
     srcImage,
     errorMessage,
     userName,
-  } = useSelector((state: IStoreReducer) => (
+  } = useSelector((state: StoreReducer) => (
     {
       srcImage: state.imageLoadData.srcImage,
       token: state.authDataUser.authData.token,

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { TextSmall, TextStandart, TextExtraSmall } from './Typography';
 import { IPlayer } from '../helpers/interfaces/storeInterfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
-import { mobileVersionLayout, mobliSizeCard } from '../helpers/constants/mobileSize';
+import { mobliSizeCard } from '../helpers/constants/mobileSize';
 
 interface IProps {
   players: IPlayer[],

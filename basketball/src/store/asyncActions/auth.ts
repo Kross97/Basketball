@@ -3,16 +3,16 @@ import { batch } from 'react-redux';
 import { signIn, signUp, changeUserData } from '../../api/auth';
 import { authDataUser } from '../reducers/auth';
 import {
-  RegisterUser, IResponseSignSucces, LoginUser, IChangedDataUser,
+  IRegisterUser, IResponseSignSuccess, ILoginUser, IChangedDataUser,
 } from '../../helpers/interfaces/requestInterfaces/Auth';
 import { signRequestErrors } from '../../api/apiСonstants/signRequestErrors';
 
 export const requestSignUp = createAsyncThunk(
   'signUp/request',
-  async (newUserData: RegisterUser, { dispatch }) => {
+  async (newUserData: IRegisterUser, { dispatch }) => {
     try {
       dispatch(authDataUser.actions.clearAuthNotificationSignUp());
-      const response: IResponseSignSucces = await signUp('Auth/SignUp', newUserData);
+      const response: IResponseSignSuccess = await signUp('Auth/SignUp', newUserData);
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));
         dispatch(authDataUser.actions.addAuthNotificationSignUp({
@@ -44,10 +44,10 @@ export const requestSignUp = createAsyncThunk(
 
 export const requestSignIn = createAsyncThunk(
   'signIn/request',
-  async (dataLogin: LoginUser, { dispatch }) => {
+  async (dataLogin: ILoginUser, { dispatch }) => {
     dispatch(authDataUser.actions.addAuthErrorSignIn({ errorSignIn: '' }));
     try {
-      const response: IResponseSignSucces = await signIn('Auth/SignIn', dataLogin);
+      const response: IResponseSignSuccess = await signIn('Auth/SignIn', dataLogin);
 
       batch(() => {
         dispatch(authDataUser.actions.addAuthData({ authData: response }));

@@ -17,7 +17,7 @@ interface IProps {
   onChange?: () => void;
   onBlur?: () => void;
   defaultValue?: string | number;
-  register?: (field: any) => void;
+  register?: (field: HTMLInputElement) => void;
   changeTypeInput?: () => void;
   isError?: boolean;
   errorMessage?: string;

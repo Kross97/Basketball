@@ -17,7 +17,7 @@ import { PaginationCountBtn } from '../../uiComponents/PaginationCountBtn';
 import { SelectCounts } from '../../uiComponents/SelectCounts';
 import { loadChunkTeams } from '../../store/asyncActions/team';
 import { loadChunkPlayers } from '../../store/asyncActions/player';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import {
   IStateChangeEntities, IOption, IPaginationValue, IDataSelected, ISelectedDataAll,
 } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
@@ -41,12 +41,12 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
   isTeam,
 }) => {
   const { t } = useTranslation();
-  const selectedChunk = useSelector<IStoreReducer>(
+  const selectedChunk = useSelector<StoreReducer>(
     isTeam
       ? teamsChunkSelector
       : playersChunkSelector,
   );
-  const selectedAll = useSelector<IStoreReducer>(
+  const selectedAll = useSelector<StoreReducer>(
     isTeam
       ? allTeamsSelector
       : allPlayersSelector,
@@ -55,7 +55,7 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
   const typedSelectedAll = selectedAll as ISelectedDataAll;
   const teamsOptions = useSelector(teamsForSelectPlayer);
 
-  const token = useSelector(({ authDataUser: { authData } }: IStoreReducer) => authData.token);
+  const token = useSelector(({ authDataUser: { authData } }: StoreReducer) => authData.token);
   const history = useHistory();
   const {
     loadChunkTeams: loadNewChunkTeams,

@@ -1,3 +1,3 @@
 import { reducer } from '../../store';
 
-export type IStoreReducer = ReturnType<typeof reducer>;
+export type StoreReducer = ReturnType<typeof reducer>;

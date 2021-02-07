@@ -9,7 +9,7 @@ import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { TypeItem } from '../../helpers/types/types';
 import imageUknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { routePaths } from '../../helpers/constants/routePaths';
 
 interface IProps {
@@ -20,18 +20,18 @@ interface IProps {
 export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
   const history = useHistory();
 
-  const idTeam = type === 'team' ? item.id : (item as IPlayer).team;
+  const idTeam = type === 'player' && 'team' in item ? item.team : item.id;
 
   const teamName = useSelector(({
     teamsDataReducer: { entities },
-  }: IStoreReducer) => (idTeam ? (entities[idTeam] as ITeam)?.name : undefined));
+  }: StoreReducer) => (idTeam ? entities[idTeam]?.name : undefined));
 
   const showItemCard = () => {
     if (type === 'team') {
       history.push(`${routePaths.teams}/${item.id}`);
-      return;
+    } else {
+      history.push(`${routePaths.players}/${item.id}`);
     }
-    history.push(`${routePaths.players}/${item.id}`);
   };
 
   const typeItemUrl = 'avatarUrl' in item ? item.avatarUrl : item.imageUrl;

@@ -6,7 +6,7 @@ import { SignIn } from './components/signComponents/SignIn';
 import { loadAllCommands } from './store/asyncActions/team';
 import { loadAllPlayers } from './store/asyncActions/player';
 import { routePaths } from './helpers/constants/routePaths';
-import { IStoreReducer } from './helpers/interfaces/StoreReducer';
+import { StoreReducer } from './helpers/interfaces/StoreReducer';
 import { useCustomActions } from './helpers/functions/useCustomActions';
 
 const SignUp = lazy(() => import('./components/signComponents/SignUp'));
@@ -18,7 +18,7 @@ const actionCreator = {
 };
 
 export const App = () => {
-  const token = useSelector(({ authDataUser: { authData } }: IStoreReducer) => authData.token);
+  const token = useSelector(({ authDataUser: { authData } }: StoreReducer) => authData.token);
   const {
     loadAllCommands: getAllCommands,
     loadAllPlayers: getAllPlayers,

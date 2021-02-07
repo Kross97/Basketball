@@ -8,7 +8,7 @@ import { requestSignIn } from '../../store/asyncActions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { ISignInForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { loadAllPlayers } from '../../store/asyncActions/player';
@@ -35,7 +35,7 @@ export const SignIn = () => {
       localUserData,
       authData,
     },
-  }: IStoreReducer) => ({
+  }: StoreReducer) => ({
     notificationErrorMessage: authErrorMessageSignIn,
     userData: localUserData,
     token: authData.token,

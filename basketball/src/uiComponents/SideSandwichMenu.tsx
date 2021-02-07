@@ -9,7 +9,7 @@ import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
 import { TextExtraSmall } from './Typography';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
-import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { routePaths } from '../helpers/constants/routePaths';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
@@ -26,13 +26,13 @@ export const SideSandwichMenu = () => {
     toggleStatusSandwichMenu,
   } = useCustomActions(actionCreators);
 
-  const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
+  const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: StoreReducer) => ({
     name: authData.name,
     avatarUrl: authData.avatarUrl,
   }), shallowEqual);
 
   const isActiveSandwich = useSelector((
-    state: IStoreReducer,
+    state: StoreReducer,
   ) => state.menuReducer.isActiveSandwichMenu);
 
   const clickIconHandler = (route: string) => {

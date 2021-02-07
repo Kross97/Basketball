@@ -1,10 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 
-const selectState = (state: IStoreReducer) => state;
+const selectState = (state: StoreReducer) => state;
 
 export const teamsChunkSelector = createSelector(
   selectState,

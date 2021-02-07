@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { CardItemConstructor } from '../cardComponents/CardItemConstructor';
 import { TypeItem } from '../../helpers/types/types';
 import {
-  mobileVersionList, sizeMobile, mobileLayout, extraSmallLayout,
+  mobileVersionList, sizeMobile, extraSmallLayout,
 } from '../../helpers/constants/mobileSize';
 import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';

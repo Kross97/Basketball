@@ -1,8 +1,7 @@
 import { createSelector } from '@reduxjs/toolkit';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
-import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 
-const selectState = (state: IStoreReducer) => state;
+const selectState = (state: StoreReducer) => state;
 
 export const allPlayersSelector = createSelector(
   selectState,
@@ -18,7 +17,7 @@ export const playersChunkSelector = createSelector(
   }),
 );
 
-const selectPlayersTeam = (state: IStoreReducer, idTeam: string) => ({
+const selectPlayersTeam = (state: StoreReducer, idTeam: string) => ({
   state,
   idTeam: Number(idTeam),
 });
@@ -33,6 +32,7 @@ export const playersCurrentTeam = createSelector(
       },
     },
     idTeam,
-  }) => ids.map((id) => ((entities[id] as IPlayer).team === idTeam && entities[id]))
-    .filter((entity) => entity),
+  }) => (
+    ids.map((id) => (entities[id]?.team === idTeam && entities[id]))
+  ),
 );

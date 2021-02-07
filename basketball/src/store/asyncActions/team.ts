@@ -43,7 +43,6 @@ export const loadAllCommands = createAsyncThunk(
 export const removeTeam = createAsyncThunk(
   'removeTeam',
   async (removeData: IDataDeleteTeam, { dispatch }) => {
-    console.log('REMOVE!!!', removeData);
     try {
       dispatch(addEntityError.actions.clearErrorMessage());
       const idsPlayersTeam = removeData.playersList.map((player) => player.id);

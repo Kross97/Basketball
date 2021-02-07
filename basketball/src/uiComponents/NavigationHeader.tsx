@@ -6,7 +6,7 @@ import { BrandLogo } from './BrandLogo';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import menuIcon from '../static/icons/menu.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { routePaths } from '../helpers/constants/routePaths';
@@ -16,7 +16,7 @@ const actionCreators = {
 };
 
 export const NavigationHeader = () => {
-  const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: IStoreReducer) => ({
+  const { name, avatarUrl } = useSelector(({ authDataUser: { authData } }: StoreReducer) => ({
     name: authData.name,
     avatarUrl: authData.avatarUrl,
   }));

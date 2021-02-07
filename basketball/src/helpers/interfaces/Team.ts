@@ -1,4 +1,4 @@
-export interface Team {
+export interface ITeam {
   name: string,
   foundationYear: number,
   division: string,

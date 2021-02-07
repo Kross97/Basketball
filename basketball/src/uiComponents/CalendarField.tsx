@@ -6,7 +6,7 @@ import { TextSmall } from './Typography';
 import calendarIcon from '../static/icons/calendar.svg';
 
 interface IProps {
-  register: (field: any) => void;
+  register: (field: HTMLInputElement) => void;
   trigger: (key: string) => void;
   defaultValue?: string;
   isError?: boolean;

@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 import { TextLink } from '../../uiComponents/TextLink';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ImageUpload } from '../../uiComponents/ImageUpload';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { NotificationMessage } from '../../uiComponents/NotificationMessage';
 import { addEntityError } from '../../store/reducers/addingError';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -31,7 +31,7 @@ export const AddNewEntity: FC<IProps> = React.memo(({
     clearErrorMessage();
   }, []);
 
-  const { errorMessage } = useSelector((state: IStoreReducer) => (
+  const { errorMessage } = useSelector((state: StoreReducer) => (
     {
       errorMessage: state.addEntityError.errorMessage,
     }));

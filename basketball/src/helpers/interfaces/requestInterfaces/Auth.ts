@@ -1,20 +1,20 @@
-export interface RegisterUser {
+export interface IRegisterUser {
   userName: string,
   login: string,
   password: string
 }
 
-export interface UserChange {
+export interface IUserChange {
   userName: string,
   avatarUrl: string
 }
 
-export interface LoginUser {
+export interface ILoginUser {
   login: string,
   password: string
 }
 
-export interface IResponseSignSucces {
+export interface IResponseSignSuccess {
   name: string,
   avatarUrl: string,
   token: string,

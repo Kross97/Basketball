@@ -4,7 +4,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { AddNewEntity } from './AddNewEntity';
 import { loadNewImage } from '../../store/asyncActions/image';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { addNewPlayer, updateSelectedPlayer } from '../../store/asyncActions/player';
 import { imageLoadData } from '../../store/reducers/image';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -22,10 +22,10 @@ const actionCreators = {
 export default () => {
   const { id } = useParams<{ id: string }>();
   const history = useHistory();
-  const playerUpdate = useSelector(({ playersDataReducer }: IStoreReducer) => (
+  const playerUpdate = useSelector(({ playersDataReducer }: StoreReducer) => (
     id ? playersDataReducer.entities[id] : undefined));
 
-  const { token, srcImage } = useSelector((state: IStoreReducer) => (
+  const { token, srcImage } = useSelector((state: StoreReducer) => (
     {
       token: state.authDataUser.authData.token,
       srcImage: state.imageLoadData.srcImage,

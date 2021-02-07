@@ -1,18 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useHistory, useParams } from 'react-router-dom';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import createIcon from '../../static/icons/create.svg';
 import { ReactComponent as DeleteIcon } from '../../static/icons/delete.svg';
 import { TextLink } from '../../uiComponents/TextLink';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobliSizeCard, mobileLayout, sizeMobile } from '../../helpers/constants/mobileSize';
+import { mobileLayout, mobliSizeCard, sizeMobile } from '../../helpers/constants/mobileSize';
 import { PlayerItemsDescription } from './cardAdditionalComponents/PlayerItemsDescriptions';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { removeSelectedPlayer } from '../../store/asyncActions/player';
-import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
-import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
@@ -33,28 +31,27 @@ export default () => {
     playersDataReducer: { entities },
     authDataUser,
     addEntityError,
-  }: IStoreReducer) => ({
+  }: StoreReducer) => ({
     errorMessage: addEntityError.errorMessage,
-    player: entities[id] as IPlayer,
+    player: entities[id],
     token: authDataUser.authData.token,
   }), shallowEqual);
 
-  const teamName = useSelector(({ teamsDataReducer: { entities } }: IStoreReducer) => {
-    const nameTeam = player ? (entities[player.team] as ITeam).name : '';
-    return nameTeam;
-  });
+  const teamName = useSelector(({ teamsDataReducer: { entities } }: StoreReducer) => (player ? entities[player.team]?.name : ''));
 
   const playerUpdate = () => {
-    history.replace(`${routePaths.playerAdd}/${player.id}`);
+    history.replace(`${routePaths.playerAdd}/${player?.id}`);
   };
 
   const removeCurrentPlayer = () => {
-    removePlayer({
-      id: player.id,
-      srcImage: player.avatarUrl,
-      token,
-      history,
-    });
+    if (player) {
+      removePlayer({
+        id: player.id,
+        srcImage: player.avatarUrl,
+        token,
+        history,
+      });
+    }
   };
 
   return (
@@ -88,7 +85,7 @@ export default () => {
                 </PlayerName>
                 <DescriptionContainer>
                   <PlayerItemsDescription
-                    teamName={teamName}
+                    teamName={teamName || ''}
                     player={player}
                   />
                 </DescriptionContainer>

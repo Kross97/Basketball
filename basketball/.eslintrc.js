@@ -37,7 +37,5 @@ module.exports = {
         "no-param-reassign": 0,
         "no-nested-ternary": 0,
         "no-restricted-globals": 0,
-        "no-console": 0,
-        "@typescript-eslint/no-unused-vars": 0,
     },
 };

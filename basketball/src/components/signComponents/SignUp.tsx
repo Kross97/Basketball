@@ -8,7 +8,7 @@ import { requestSignUp } from '../../store/asyncActions/auth';
 import { authDataUser } from '../../store/reducers/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
-import { IStoreReducer } from '../../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignUpForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
@@ -32,7 +32,7 @@ export default () => {
       authDataUser: {
         authNotificationMessageSignUp,
       },
-    }: IStoreReducer) => (authNotificationMessageSignUp),
+    }: StoreReducer) => (authNotificationMessageSignUp),
   );
 
   useEffect(() => {

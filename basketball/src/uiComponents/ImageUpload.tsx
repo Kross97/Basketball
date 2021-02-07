@@ -6,7 +6,7 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { imageLoadData } from '../store/reducers/image';
 import { loadNewImage } from '../store/asyncActions/image';
-import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 
 interface IProps {
   defaultImage?: string | undefined;
@@ -21,7 +21,7 @@ const actionCreators = {
 export const ImageUpload: FC<IProps> = React.memo(({
   defaultImage,
 }) => {
-  const { token, srcImage } = useSelector((state: IStoreReducer) => ({
+  const { token, srcImage } = useSelector((state: StoreReducer) => ({
     token: state.authDataUser.authData.token,
     srcImage: state.imageLoadData.srcImage,
   }));

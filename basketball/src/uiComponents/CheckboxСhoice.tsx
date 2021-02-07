@@ -7,7 +7,7 @@ interface IProps {
   disabled: boolean;
   name: string;
   onChange?: () => void;
-  register?: (ref: any) => void;
+  register?: (ref: HTMLInputElement) => void;
   isError?: boolean;
   errorMessage?: string;
 }

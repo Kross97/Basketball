@@ -8,7 +8,7 @@ import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { SideSandwichMenu } from '../uiComponents/SideSandwichMenu';
 import { NavigationHeader } from '../uiComponents/NavigationHeader';
 import { routePaths } from '../helpers/constants/routePaths';
-import { IStoreReducer } from '../helpers/interfaces/StoreReducer';
+import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 
@@ -25,7 +25,7 @@ export default () => {
   const { countTeams, countPlayer } = useSelector(({
     teamsDataReducer,
     playersDataReducer,
-  }: IStoreReducer) => ({
+  }: StoreReducer) => ({
     countTeams: teamsDataReducer.chunkData.count,
     countPlayer: playersDataReducer.chunkData.count,
   }));
@@ -33,7 +33,7 @@ export default () => {
   const history = useHistory();
 
   const isActiveSandwichMenu = useSelector((
-    state: IStoreReducer,
+    state: StoreReducer,
   ) => state.menuReducer.isActiveSandwichMenu);
 
   const { toggleStatusSandwichMenu } = useCustomActions(actionCreators);
