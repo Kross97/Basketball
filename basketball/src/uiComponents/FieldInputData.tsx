@@ -39,6 +39,7 @@ export const FieldInputData: FC<IProps> = React.memo(({
 
 }) => {
   const [value, setValue] = useState<string>((defaultValue && `${defaultValue}`) || '');
+
   const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
     if (valueForCapitalize.has(name)) {
       setValue(capitalize(target.value));

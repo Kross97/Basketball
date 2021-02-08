@@ -22,6 +22,8 @@ const actionCreators = {
 
 export default () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
+  const [isScrolling, setStateScrolling] = useState<boolean>(false);
+
   const { countTeams, countPlayer } = useSelector(({
     teamsDataReducer,
     playersDataReducer,
@@ -29,7 +31,9 @@ export default () => {
     countTeams: teamsDataReducer.chunkData.count,
     countPlayer: playersDataReducer.chunkData.count,
   }));
+
   const { pathname } = useLocation();
+
   const history = useHistory();
 
   const isActiveSandwichMenu = useSelector((
@@ -44,10 +48,28 @@ export default () => {
     }
   }, [isAuthorized]);
 
+  useEffect(() => {
+    setStateScrolling(false);
+  }, [pathname]);
+
+  const changeSize = () => {
+    if (!isScrolling) {
+      setStateScrolling(true);
+    }
+  };
+
   return (
     <ContainerLayout
-      isEntitiesList={(pathname === routePaths.teams && countTeams !== 0)
-            || (pathname === routePaths.players && countPlayer !== 0)}
+      onScroll={
+                (pathname === routePaths.teams || pathname === routePaths.players)
+                  ? undefined
+                  : changeSize
+            }
+      isEntitiesList={
+          (pathname === routePaths.teams && countTeams !== 0)
+          || (pathname === routePaths.players && countPlayer !== 0)
+                || isScrolling
+            }
     >
       <NavigationHeader />
       <BodyContainer>
@@ -81,7 +103,7 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
   position: relative;
   scrollbar-сolor: ${({ theme }) => `${theme.colors.lightestGrey} ${theme.colors.grey}`};
   scrollbar-width: thin;
-
+  overflow: auto;
 
   &::-webkit-scrollbar-track {
     background-color: ${({ theme }) => theme.colors.lightestGrey};
@@ -96,10 +118,6 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
   &::-webkit-scrollbar {
     width: 7px;
   }
-  
-  @media (max-width: 1025px) {
-    flex-basis: 100vh;
-  }
 `;
 
 const ContentLayout = styled.div`
@@ -107,9 +125,13 @@ const ContentLayout = styled.div`
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
 
-  @media (max-width: ${mobileVersionLayout}) {
+  @media (min-height: 1000px) {
+    padding-bottom: 50px;
   }
-  justify-content: center;
+
+  @media (max-width: ${mobileVersionLayout}) {
+    justify-content: center;
+  }
 `;
 
 const BodyContainer = styled.div`

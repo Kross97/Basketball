@@ -35,6 +35,10 @@ const ListContainer = styled.div`
   grid-column-gap: 24px;
   grid-row-gap: 24px;
 
+  @media (max-width: 1025px) {
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+
   @media (max-width: ${mobileVersionList}) {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 24px;
