@@ -238,6 +238,7 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   
   @media(max-width: ${mobliSizeCard}) {
     width: 320px;
+    background-position-y: 9px;
   }
   
   @media (max-width: ${mobileLayout}) {
@@ -246,6 +247,7 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
     margin-right: 0;
     margin-bottom: 48px;
     align-self: center;
+    background-position-y: 0;
   }
 `;
 
@@ -254,9 +256,13 @@ const PlayerName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   text-transform: capitalize;
-
+  
+  @media(max-width: 1080px) {
+    font-size: 32px;
+  }
+  
   @media (max-width: ${sizeMobile}) {
-    font-size: 28px;
+    font-size: 23px;
   }
 
   @media (max-width: ${mobileLayout}) {
