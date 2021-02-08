@@ -5,6 +5,8 @@ import { IPlayer } from '../helpers/interfaces/storeInterfaces/Player';
 import { getFullAge } from '../helpers/functions/getFullAge';
 import { mobliSizeCard, mobileDataCard } from '../helpers/constants/mobileSize';
 import { parsePositionPlayer } from '../helpers/functions/parsePositionPlayer';
+import { regExpImageTeam } from '../helpers/constants/regularExp';
+import imageUnknow from '../static/images/item_not_image.png';
 
 interface IProps {
   players: IPlayer[],
@@ -32,7 +34,10 @@ export const EnumerationPlayersTeam: FC<IProps> = React.memo(({ players }) => (
           <ContainerPlayerImage>
             <NumberText>{player.number}</NumberText>
             <ContainerImage>
-              <ImagePlayer imageSrc={player.avatarUrl} />
+              <ImagePlayer
+                imageSrc={!regExpImageTeam.test(player.avatarUrl) ? imageUnknow : player.avatarUrl}
+                isUnknowImg={!regExpImageTeam.test(player.avatarUrl)}
+              />
               <PositionName>
                 <NamePlayer>{player.name}</NamePlayer>
                 <PositionPlayer>{parsePositionPlayer(player.position)}</PositionPlayer>
@@ -169,12 +174,13 @@ const ContainerImage = styled.div`
   justify-content: space-between;
 `;
 
-const ImagePlayer = styled.div<{ imageSrc: string }>`
+const ImagePlayer = styled.div<{ imageSrc: string, isUnknowImg: boolean }>`
   width: 40px;
   height: 40px;
   border-radius: 25px;
-  background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat -5px 1px`};
-  background-size: cover;
+  background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat`};
+  background-size: ${({ isUnknowImg }) => (isUnknowImg ? 'contain' : 'cover')};
+  background-position: ${({ isUnknowImg }) => (isUnknowImg ? '11px 0px' : '-5px 1px')};
   margin-right: 10px;
 `;
 

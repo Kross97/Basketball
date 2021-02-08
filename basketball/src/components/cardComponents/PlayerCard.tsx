@@ -192,7 +192,16 @@ const CardBody = styled.div`
 const DataCard = styled.div`
   align-self: self-start;
   margin-bottom: 65px;
-
+  padding: 0 20px;
+  
+  @media(max-width: 1080px) {
+    padding: 0 15px;
+  }
+  
+  @media(max-width: ${sizeMobile}) {
+    padding: 0 5px 0 0;
+  }
+  
   @media (max-width: ${mobileLayout}) {
     text-align: center;
     align-self: center;
@@ -226,7 +235,11 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
     width: 350px;
     height: 250px;
   }
-
+  
+  @media(max-width: ${mobliSizeCard}) {
+    width: 320px;
+  }
+  
   @media (max-width: ${mobileLayout}) {
     width: 185px;
     height: 144px;
@@ -272,7 +285,7 @@ const DescriptionContainer = styled.div`
   grid-column-gap: 180px;
 
   @media (max-width: 1350px) {
-    grid-column-gap: 120px;
+    grid-column-gap: 90px;
   }
 
   @media (max-width: 1080px) {

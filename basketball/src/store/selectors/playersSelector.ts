@@ -33,6 +33,6 @@ export const playersCurrentTeam = createSelector(
     },
     idTeam,
   }) => (
-    ids.map((id) => (entities[id]?.team === idTeam && entities[id]))
+    ids.map((id) => (entities[id]?.team === idTeam && entities[id])).filter((entity) => entity)
   ),
 );

@@ -49,12 +49,16 @@ const ListContainer = styled.div`
   }
 
   @media (max-width: 600px) {
-    grid-template-columns: 180px 180px;
+    grid-template-columns: 180px 180px 180px;
     grid-column-gap: 12px;
     grid-row-gap: 12px;
   }
-
-  @media (max-width: 475px) {
+  
+  @media(max-width: 575px) {
+    grid-template-columns: 170px 170px 170px;
+  }
+  
+  @media (max-width: 542px) {
     grid-template-columns: 180px 180px;
   }
 

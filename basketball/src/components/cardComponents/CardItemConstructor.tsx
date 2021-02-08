@@ -7,7 +7,7 @@ import { sizeMobile, extraSmallLayout } from '../../helpers/constants/mobileSize
 import { ITeam } from '../../helpers/interfaces/storeInterfaces/Team';
 import { IPlayer } from '../../helpers/interfaces/storeInterfaces/Player';
 import { TypeItem } from '../../helpers/types/types';
-import imageUknow from '../../static/images/item_not_image.png';
+import imageUnknow from '../../static/images/item_not_image.png';
 import { regExpImageTeam } from '../../helpers/constants/regularExp';
 import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -35,7 +35,7 @@ export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
   };
 
   const typeItemUrl = 'avatarUrl' in item ? item.avatarUrl : item.imageUrl;
-  const actualImage = !regExpImageTeam.test(typeItemUrl) ? imageUknow : typeItemUrl;
+  const actualImage = !regExpImageTeam.test(typeItemUrl) ? imageUnknow : typeItemUrl;
   return (
     <ContainerCard onClick={showItemCard}>
       <BodyCard type={type}>
@@ -59,6 +59,10 @@ export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
 
 const ContainerCard = styled.div`
   cursor: pointer;
+  @media(max-width: ${sizeMobile}) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const BodyCard = styled.div<{ type: string }>`
@@ -89,7 +93,7 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
   @media (max-width: ${sizeMobile}) {
     width: ${({ type }) => (type === 'team' ? '58px' : '121px')};
     height: ${({ type }) => (type === 'team' ? '51px' : '93px')};
-    background-position: ${({ type }) => (type === 'team' ? 'center' : '0 2px;')};
+    background-position: ${({ type }) => (type === 'team' ? 'center' : 'bottom')};
   }
 
   @media (max-width: ${extraSmallLayout}) {
@@ -103,9 +107,13 @@ const FooterCard = styled.div`
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
-
+  
   @media (max-width: ${sizeMobile}) {
-    padding: 19px 10px;
+    padding: 0;
+    align-items: center;
+    flex-basis: 94px;
+    display: flex;
+    justify-content: center;
   }
 `;
 
@@ -118,11 +126,7 @@ const DataItem = styled.div`
 const Name = styled(TextStandart)<{ type: string }>`
   display: block;
   margin-bottom: 12px;
-  white-space: nowrap;
   color: ${({ theme }) => theme.colors.white};
-  text-overflow: ${({ type }) => (type === 'team' && 'ellipsis')};
-  overflow: ${({ type }) => (type === 'team' && 'hidden')};
-  max-width: ${({ type }) => (type === 'team' && '94%')};
   align-self: center;
   font-size: 18px;
   line-height: 25px;
@@ -147,13 +151,12 @@ const NumberPlayer = styled(TextStandart)`
 
 const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.grey};
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  max-width: 99%;
 
   @media (max-width: ${sizeMobile}) {
     font-size: 13px;
     line-height: 18px;
+  }
+  @media(max-width: ${extraSmallLayout}) {
+    font-size: 12px;
   }
 `;

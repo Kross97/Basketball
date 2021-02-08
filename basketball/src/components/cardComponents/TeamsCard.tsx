@@ -60,6 +60,7 @@ export default () => {
       id, history, playersList, token,
     });
   };
+
   return (
     team
       ? (
