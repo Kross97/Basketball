@@ -64,7 +64,7 @@ export default () => {
   return (
     team
       ? (
-        <ContainerCard countPlayers={playersList.length}>
+        <ContainerCard>
           <CardNavigation>
             <Links>
               <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
@@ -111,7 +111,7 @@ export default () => {
   );
 };
 
-const ContainerCard = styled.div<{ countPlayers: number }>`
+const ContainerCard = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
   position: relative;
@@ -240,7 +240,7 @@ const LogoTeam = styled.div<{ imageUrl: string }>`
     margin-right: 0;
     margin-bottom: 48px;
   }
-  @media(max-width: ${mobileDataCard}) {
+  @media (max-width: ${mobileDataCard}) {
     width: 89px;
     height: 90px;
   }

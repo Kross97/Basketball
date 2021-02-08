@@ -22,7 +22,6 @@ const actionCreators = {
 
 export default () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
-  const [isScrolling, setStateScrolling] = useState<boolean>(false);
 
   const { countTeams, countPlayer } = useSelector(({
     teamsDataReducer,
@@ -48,28 +47,12 @@ export default () => {
     }
   }, [isAuthorized]);
 
-  useEffect(() => {
-    setStateScrolling(false);
-  }, [pathname]);
-
-  const changeSize = () => {
-    if (!isScrolling) {
-      setStateScrolling(true);
-    }
-  };
-
   return (
     <ContainerLayout
-      onScroll={
-                (pathname === routePaths.teams || pathname === routePaths.players)
-                  ? undefined
-                  : changeSize
-            }
       isEntitiesList={
           (pathname === routePaths.teams && countTeams !== 0)
           || (pathname === routePaths.players && countPlayer !== 0)
-                || isScrolling
-            }
+      }
     >
       <NavigationHeader />
       <BodyContainer>
@@ -103,7 +86,6 @@ const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
   position: relative;
   scrollbar-сolor: ${({ theme }) => `${theme.colors.lightestGrey} ${theme.colors.grey}`};
   scrollbar-width: thin;
-  overflow: auto;
 
   &::-webkit-scrollbar-track {
     background-color: ${({ theme }) => theme.colors.lightestGrey};
