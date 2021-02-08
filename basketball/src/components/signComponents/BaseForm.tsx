@@ -14,6 +14,7 @@ import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignInForm, IMessageNotification } from '../../helpers/interfaces/signFormInterfaces/SignForms';
 import { regExpName, regExpLogin, regExpPassword } from '../../helpers/constants/regularExp';
 import { formSignErrors } from '../../helpers/constants/formErrors';
+import { signRequestErrors } from '../../api/apiСonstants/signRequestErrors';
 
 interface IProps {
   typeForm: string;
@@ -44,6 +45,14 @@ export const BaseForm: FC<IProps> = React.memo(({
       setValue('password', userData.password);
     }
   }, [userData?.login, userData?.password]);
+
+  useEffect(() => {
+    if (notificationMessage.message === signRequestErrors[403]) {
+      errors.password = { type: 'custom' };
+    } else {
+      delete errors.password;
+    }
+  }, [notificationMessage.message]);
 
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
     password: 'password',
