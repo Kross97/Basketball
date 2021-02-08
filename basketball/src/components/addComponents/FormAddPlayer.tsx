@@ -266,7 +266,7 @@ const PlayerData = styled.div`
     }
   }
 
-  @media (max-width: 320px) {
+  @media (max-width: 300px) {
     & > label {
       width: 42%;
     }

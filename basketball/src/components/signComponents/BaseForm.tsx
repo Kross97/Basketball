@@ -201,6 +201,8 @@ const FormSign = styled.form`
     }
    }
   @media (max-width: ${extraSmallLayout}) {
+    padding-top: 100px;
+    padding-bottom: 40px;
     & > button {
       padding: 8px 100px 8px;
     }

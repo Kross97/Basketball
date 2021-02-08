@@ -22,7 +22,7 @@ export const CheckboxСhoice: FC<IProps> = React.memo(({
   isError = false,
   errorMessage = '',
 }) => (
-  <div>
+  <Container>
     <CheckboxContainer disabled={disabled}>
       <CheckboxNative onChange={onChange} name={name} ref={register} disabled={disabled} type="checkbox" />
       <CheckboxCustom isError={isError}>
@@ -31,8 +31,12 @@ export const CheckboxСhoice: FC<IProps> = React.memo(({
       <TextCheckBox>{text}</TextCheckBox>
     </CheckboxContainer>
     {isError && <TextError>{errorMessage}</TextError>}
-  </div>
+  </Container>
 ));
+
+const Container = styled.div`
+ position: relative;
+`;
 
 const CheckboxContainer = styled.label<{ disabled: boolean }>`
   display: flex;
@@ -67,6 +71,8 @@ const CheckboxCustom = styled.div<{ isError: boolean }>`
 const TextError = styled(TextSmall)`
   font-size: 12px;
   color: ${({ theme }) => theme.colors.lightestRed};
+  position: absolute;
+  bottom: -23px;
 `;
 
 const Arrow = styled.div`
