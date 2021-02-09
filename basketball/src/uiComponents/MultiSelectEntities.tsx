@@ -46,8 +46,14 @@ const customStyles = {
       backgroundColor: theme.colors.darkRed,
       color: theme.colors.white,
     },
+    '@media(max-width: 1300px)': {
+      fontSize: '15px',
+    },
+    '@media(max-width: 930px)': {
+      fontSize: '18px',
+    },
     '@media(max-width: 475px)': {
-      fontSize: '14px',
+      fontSize: '15px',
     },
   }),
   multiValue: (styles: any) => ({
@@ -105,7 +111,7 @@ const customStyles = {
     },
 
     '::-webkit-scrollbar': {
-      width: '5px',
+      width: '2px',
     },
   }),
   valueContainer: (styles: any) => ({
