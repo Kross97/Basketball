@@ -1,7 +1,7 @@
 import React, { useEffect, useState, lazy } from 'react';
 import styled from 'styled-components';
 import {
-  Switch, Route, useHistory, useLocation,
+  Switch, Route, useHistory,
 } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
@@ -23,16 +23,6 @@ const actionCreators = {
 export default () => {
   const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
 
-  const { countTeams, countPlayer } = useSelector(({
-    teamsDataReducer,
-    playersDataReducer,
-  }: StoreReducer) => ({
-    countTeams: teamsDataReducer.chunkData.count,
-    countPlayer: playersDataReducer.chunkData.count,
-  }));
-
-  const { pathname } = useLocation();
-
   const history = useHistory();
 
   const isActiveSandwichMenu = useSelector((
@@ -48,12 +38,7 @@ export default () => {
   }, [isAuthorized]);
 
   return (
-    <ContainerLayout
-      isEntitiesList={
-          (pathname === routePaths.teams && countTeams !== 0)
-          || (pathname === routePaths.players && countPlayer !== 0)
-      }
-    >
+    <ContainerLayout>
       <NavigationHeader />
       <BodyContainer>
         <BackgroundMenu
@@ -78,9 +63,8 @@ export default () => {
     </ContainerLayout>
   );
 };
-
-const ContainerLayout = styled.div<{ isEntitiesList: boolean }>`
-  flex-basis: ${({ isEntitiesList }) => (isEntitiesList ? '100%' : '100vh')};
+const ContainerLayout = styled.div`
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   position: relative;
