@@ -62,7 +62,6 @@ export const FieldInputData: FC<IProps> = React.memo(({
         type={type}
         disabled={disabled}
         isError={isError}
-        defaultValue={defaultValue}
         ref={register}
         value={value}
       />
