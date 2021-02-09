@@ -37,8 +37,9 @@ export const BaseForm: FC<IProps> = React.memo(({
     setValue,
     trigger,
   } = useForm();
-  const { t } = useTranslation();
+  const [wrongPassword, setWrongMessage] = useState<string>('');
 
+  const { t } = useTranslation();
   useEffect(() => {
     if (userData?.login && userData?.password) {
       setValue('login', userData.login);
@@ -48,9 +49,9 @@ export const BaseForm: FC<IProps> = React.memo(({
 
   useEffect(() => {
     if (notificationMessage.message === signRequestErrors[403]) {
-      errors.password = { type: 'custom' };
+      setWrongMessage('Wrong password. Please, try again.');
     } else {
-      delete errors.password;
+      setWrongMessage('');
     }
   }, [notificationMessage.message]);
 
@@ -107,10 +108,10 @@ export const BaseForm: FC<IProps> = React.memo(({
         disabled={false}
         type={typePasswordInputs.password}
         startType="password"
-        onChange={() => trigger('password')}
+        onChange={() => { trigger('password'); setWrongMessage(''); }}
         changeTypeInput={() => changeTypeInput('password')}
-        isError={!!errors.password}
-        errorMessage={formSignErrors[errors.password?.type]}
+        isError={!!wrongPassword || !!errors.password}
+        errorMessage={wrongPassword || formSignErrors[errors.password?.type]}
         register={register({ required: true, pattern: regExpPassword })}
       />
       {typeForm === 'Sign Up' && (
