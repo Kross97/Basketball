@@ -29,18 +29,20 @@ export const App = () => {
     getAllPlayers(token);
   }, [token]);
   return (
-    <Suspense fallback={SuspenseAnimation}>
-      <Switch>
-        <Route exact path={`${routePaths.signIn}`}>
-          <SignIn />
-        </Route>
-        <Route path={`${routePaths.signUp}`}>
-          <SignUp />
-        </Route>
-        <Route path={[`${routePaths.mainArgs}`, `${routePaths.mainBase}`]}>
-          <BaseLayout />
-        </Route>
-      </Switch>
-    </Suspense>
+    <>
+      <Suspense fallback={<SuspenseAnimation />}>
+        <Switch>
+          <Route exact path={`${routePaths.signIn}`}>
+            <SignIn />
+          </Route>
+          <Route path={`${routePaths.signUp}`}>
+            <SignUp />
+          </Route>
+          <Route path={[`${routePaths.mainArgs}`, `${routePaths.mainBase}`]}>
+            <BaseLayout />
+          </Route>
+        </Switch>
+      </Suspense>
+    </>
   );
 };
