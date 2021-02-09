@@ -63,11 +63,11 @@ export const SideSandwichMenu = () => {
         </AutthorizedContainer>
         <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
           <TeamsLogo />
-          <TextExtraSmall>{t('menu:teams')}</TextExtraSmall>
+          <TextItem>{t('menu:teams')}</TextItem>
         </TeamItem>
         <PlayerItem currentPath={path} onClick={() => clickIconHandler('players')}>
           <PlayerLogo />
-          <TextExtraSmall>{t('menu:players')}</TextExtraSmall>
+          <TextItem>{t('menu:players')}</TextItem>
         </PlayerItem>
       </TeamsPlayers>
       <OutItem onClick={goOutSite}>
@@ -124,6 +124,14 @@ const ItemMenu = styled.div`
     & svg {
       margin-right: 9px;
     }
+  }
+`;
+
+const TextItem = styled(TextExtraSmall)`
+ line-height: 150%;
+  @media(max-width: ${mobileVersionLayout}) {
+    font-size: 13px;
+    line-height: 18px;
   }
 `;
 
@@ -218,6 +226,6 @@ const TeamsPlayers = styled.div`
   }
 `;
 
-const TextSignAndPlayers = styled(TextExtraSmall)`
+const TextSignAndPlayers = styled(TextItem)`
   color: ${({ theme }) => theme.colors.red};
 `;
