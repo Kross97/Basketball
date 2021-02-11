@@ -24,7 +24,6 @@
   height: 40px;
   color: $middleGrey;
   text-align: center;
-  padding-top: 10px;
   margin: 0 5px 0 5px;
   background-color: $lightestGrey;
   font-style: normal;
@@ -48,6 +47,14 @@
     font-size: 12px;
     line-height: 150%;
   }
+}
+
+.itemLinkPagination {
+  display: inline-block;
+  width: inherit;
+  height: inherit;
+  padding-top: 10px;
+  box-sizing: border-box;
 }
 
 .activeClassName {

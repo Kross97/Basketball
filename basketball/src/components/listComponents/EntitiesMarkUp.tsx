@@ -148,6 +148,7 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
               nextLabel={<PaginationCountBtn type="next" />}
               breakLabel={<PaginationCountBtn type="break" />}
               pageClassName={style.itemPagination}
+              pageLinkClassName={style.itemLinkPagination}
               containerClassName={style.paginationContainer}
               activeClassName={style.activeClassName}
               onPageChange={changePage}
