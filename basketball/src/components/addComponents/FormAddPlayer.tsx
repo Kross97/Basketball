@@ -18,6 +18,7 @@ import { formAddPlayersErrors } from '../../helpers/constants/formErrors';
 import { CalendarField } from '../../uiComponents/CalendarField';
 import { mobileSizeGridForm } from '../../helpers/constants/mobileSize';
 import { formatDateForServer, formatDateForForm } from '../../helpers/functions/formatingDate';
+import { parsePositionPlayer } from '../../helpers/functions/parsePositionPlayer';
 
 interface IProps {
   addNewPlayer: (data: IFormAddPlayer) => void;
@@ -96,8 +97,8 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
         isForm
         isError={!!errors.position}
         defaultValue={playerUpdate && {
-          value: playerUpdate.position,
-          label: playerUpdate.position,
+          value: parsePositionPlayer(playerUpdate.position),
+          label: parsePositionPlayer(playerUpdate.position),
         }}
         options={positions}
       />
@@ -215,16 +216,16 @@ const BtnGroup = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 24px;
-  
-    & button > span {
-      font-size: 15px;
-    }
+
+  & button > span {
+    font-size: 15px;
+  }
 
   @media (max-width: 485px) {
     grid-template-columns: 41vw 41vw;
     grid-column-gap: 33px;
   }
-  
+
   @media (max-width: 445px) {
     display: flex;
     justify-content: space-between;
@@ -271,5 +272,5 @@ const PlayerData = styled.div`
       width: 42%;
     }
   }
-  
+
 `;
