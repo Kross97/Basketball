@@ -136,7 +136,7 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
   cursor: pointer;
   position: absolute;
   right: 13px;
-  top: 40px;
+  top: 37px;
   width: 16px;
   height: 16px;
   background: ${({
