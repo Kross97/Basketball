@@ -143,4 +143,8 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
     typeButton,
     startType,
   }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)} no-repeat;
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    top: 38px;
+  }
 `;
