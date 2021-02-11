@@ -45,7 +45,9 @@ export default () => {
     token: authDataUser.authData.token,
     errorMessage: addEntityError.errorMessage,
   }), shallowEqual);
-  const playersList = useSelector((state: StoreReducer) => playersCurrentTeam(state, id));
+  const playersList = useSelector<StoreReducer, IPlayer[]>(
+    (state) => playersCurrentTeam(state, id),
+  );
 
   const { t } = useTranslation();
 
@@ -102,7 +104,7 @@ export default () => {
                         )}
           </CardBody>
           {playersList.length > 0 && (
-          <EnumerationPlayersTeam players={playersList as IPlayer[]} />
+          <EnumerationPlayersTeam players={playersList} />
           )}
         </ContainerCard>
       ) : <></>
