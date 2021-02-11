@@ -41,18 +41,17 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
   isTeam,
 }) => {
   const { t } = useTranslation();
-  const selectedChunk = useSelector<StoreReducer>(
+  const typedSelectedChunk = useSelector<StoreReducer, IDataSelected>(
     isTeam
       ? teamsChunkSelector
       : playersChunkSelector,
   );
-  const selectedAll = useSelector<StoreReducer>(
+  const typedSelectedAll = useSelector<StoreReducer, ISelectedDataAll>(
     isTeam
       ? allTeamsSelector
       : allPlayersSelector,
   );
-  const typedSelectedChunk = selectedChunk as IDataSelected;
-  const typedSelectedAll = selectedAll as ISelectedDataAll;
+
   const teamsOptions = useSelector(teamsForSelectPlayer);
 
   const token = useSelector(({ authDataUser: { authData } }: StoreReducer) => authData.token);

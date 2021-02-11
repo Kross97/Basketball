@@ -5,7 +5,7 @@ const selectState = (state: StoreReducer) => state;
 
 export const allPlayersSelector = createSelector(
   selectState,
-  (({ playersDataReducer: { ids, entities } }) => ids.map((id) => entities[id])),
+  (({ playersDataReducer: { ids, entities } }) => ids.map((id) => entities[id]!)),
 );
 
 export const playersChunkSelector = createSelector(
