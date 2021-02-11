@@ -41,7 +41,7 @@ export default () => {
       addEntityError,
     }: StoreReducer,
   ) => ({
-    team: teamsDataReducer.entities[id],
+    team: teamsDataReducer.entities[id]!,
     token: authDataUser.authData.token,
     errorMessage: addEntityError.errorMessage,
   }), shallowEqual);
@@ -50,9 +50,7 @@ export default () => {
   const { t } = useTranslation();
 
   const teamUpdate = () => {
-    if (team) {
-      history.replace(`${routePaths.teamAdd}/${team.id}`);
-    }
+    history.replace(`${routePaths.teamAdd}/${team.id}`);
   };
 
   const deleteCurrentTeam = () => {

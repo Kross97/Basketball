@@ -35,7 +35,7 @@ export default () => {
     addEntityError,
   }: StoreReducer) => ({
     errorMessage: addEntityError.errorMessage,
-    player: entities[id],
+    player: entities[id]!,
     token: authDataUser.authData.token,
   }), shallowEqual);
 
@@ -46,14 +46,12 @@ export default () => {
   };
 
   const removeCurrentPlayer = () => {
-    if (player) {
-      removePlayer({
-        id: player.id,
-        srcImage: player.avatarUrl,
-        token,
-        history,
-      });
-    }
+    removePlayer({
+      id: player.id,
+      srcImage: player.avatarUrl,
+      token,
+      history,
+    });
   };
 
   return (
