@@ -116,7 +116,7 @@ const ContainerCard = styled.div`
   flex-grow: 0.2;
   position: relative;
 
-  @media (max-width: 1150px) {
+  @media (max-width: 1350px) {
     margin: 32px;
   }
 

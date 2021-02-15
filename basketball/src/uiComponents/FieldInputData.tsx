@@ -1,12 +1,10 @@
 import React, { FC, useState } from 'react';
 import styled from 'styled-components';
-import { capitalize } from 'lodash';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
 import { TypesInput } from '../helpers/types/types';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { valueForCapitalize } from '../helpers/constants/formatingNames';
 
 interface IProps {
   text: string;
@@ -41,12 +39,7 @@ export const FieldInputData: FC<IProps> = React.memo(({
   const [value, setValue] = useState<string>((defaultValue && `${defaultValue}`) || '');
 
   const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (valueForCapitalize.has(name)) {
-      setValue(capitalize(target.value));
-    } else {
-      setValue(target.value);
-    }
-
+    setValue(target.value);
     if (onChange) {
       onChange();
     }
@@ -83,7 +76,10 @@ const InputContainer = styled.label`
 const CustomInput = styled.input<{ type: string, isError: boolean }>`
   outline: none;
   box-sizing: border-box;
-  border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : `1px solid ${theme.colors.lightestGrey}`)};
+  border: ${({
+    isError,
+    theme,
+  }) => (isError ? `1px solid ${theme.colors.lightestRed}` : `1px solid ${theme.colors.lightestGrey}`)};
   border-radius: 4px;
   padding: 7px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
@@ -107,7 +103,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     font-size: 15px;
   }
@@ -116,8 +112,8 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
 
 const TextInput = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     font-size: 17px;
     line-height: 25px;
   }
@@ -143,8 +139,8 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
     typeButton,
     startType,
   }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)} no-repeat;
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     top: 38px;
   }
 `;

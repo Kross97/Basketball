@@ -107,7 +107,7 @@ const CardContainer = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
 
-  @media (max-width: 1450px) {
+  @media (max-width: 1550px) {
     margin: 32px;
   }
 
@@ -219,7 +219,7 @@ const Content = styled.div`
 const ImagePlayer = styled.div<{ avatarUrl: string }>`
   margin-right: 56px;
   flex-shrink: 0.1;
-  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat center 5px`};
+  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat center 9px`};
   width: 500px;
   height: 368px;
   background-size: contain;
@@ -236,7 +236,7 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   
   @media(max-width: ${mobliSizeCard}) {
     width: 320px;
-    background-position-y: 17px;
+    background-position-y: 20px;
   }
   
   @media (max-width: ${mobileLayout}) {

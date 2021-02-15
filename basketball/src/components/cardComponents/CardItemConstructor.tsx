@@ -107,6 +107,7 @@ const FooterCard = styled.div`
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  flex-grow: 1;
   
   @media (max-width: ${sizeMobile}) {
     padding: 0;
@@ -130,6 +131,7 @@ const Name = styled(TextStandart)<{ type: string }>`
   align-self: center;
   font-size: 18px;
   line-height: 25px;
+  word-break: break-word;
   
   @media (max-width: ${sizeMobile}) {
     font-size: 15px;
@@ -151,7 +153,8 @@ const NumberPlayer = styled(TextStandart)`
 
 const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.grey};
-
+  word-break: break-word;
+  
   @media (max-width: ${sizeMobile}) {
     font-size: 13px;
     line-height: 18px;
