@@ -7,7 +7,7 @@ import { ReactComponent as TeamsLogo } from '../static/icons/group_person.svg';
 import { ReactComponent as PlayerLogo } from '../static/icons/person.svg';
 import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
 import { TextExtraSmall } from './Typography';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { mobileVersionLayout, mobliSizeCard } from '../helpers/constants/mobileSize';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { routePaths } from '../helpers/constants/routePaths';
@@ -98,7 +98,11 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   transition: 0.7s ease-out;
-
+  
+  @media(max-width: ${mobliSizeCard}) {
+    transition: 0.5s ease-out;
+  }
+  
   @media (max-width: ${mobileVersionLayout}) {
     margin-top: 0;
     padding: 0;
