@@ -117,10 +117,11 @@ const customStyles = {
   valueContainer: (styles: any) => ({
     ...styles,
     overflow: 'auto',
-    maxHeight: '38px',
+    maxHeight: '40px',
+    height: '40px',
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
-    padding: '1px 8px',
+    padding: '0 8px',
 
     '::-webkit-scrollbar-track': {
       backgroundColor: theme.colors.lightestGrey,

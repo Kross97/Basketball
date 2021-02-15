@@ -184,7 +184,9 @@ const HeaderTeams = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
-
+  & > div, & > button, & > label {
+    margin: 0;
+  }
   & > div:nth-child(1), & > label:nth-of-type(1) {
     flex-basis: 32%;
   }

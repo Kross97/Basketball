@@ -27,6 +27,7 @@ const SearchContainer = styled.div`
 const CustomSearch = styled.input`
   outline: none;
   cursor: pointer;
+  margin: 0;
   border: ${({ theme }) => `1px solid ${theme.colors.lightGrey}`};
   border-radius: 4px;
   padding: 7px 12px;
