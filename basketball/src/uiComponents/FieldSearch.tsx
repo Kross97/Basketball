@@ -32,7 +32,7 @@ const CustomSearch = styled.input`
   padding: 7px 12px;
   background: ${({ theme }) => theme.colors.white} url(${search}) no-repeat right 18px center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 
