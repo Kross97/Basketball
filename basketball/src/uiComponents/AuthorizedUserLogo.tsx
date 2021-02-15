@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { TextSmall } from './Typography';
 import profileLogo from '../static/icons/profile.svg';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { regExpImageTeam } from '../helpers/constants/regularExp';
 
 interface IProps {
   name: string;
@@ -13,7 +14,7 @@ interface IProps {
 export const AuthorizedUserLogo: FC<IProps> = React.memo(({ name, avatarUrl, onClick }) => (
   <ContainerLogo onClick={onClick}>
     <NameUser>{name}</NameUser>
-    <UserLogo avatarUrl={avatarUrl} />
+    <UserLogo avatarUrl={regExpImageTeam.test(`${avatarUrl}`) ? avatarUrl : profileLogo} />
   </ContainerLogo>
 ));
 
@@ -37,14 +38,15 @@ const UserLogo = styled.div<{ avatarUrl: string | null }>`
   border-radius: 20px;
 
   @media (max-width: ${mobileVersionLayout}) {
-    width: 40px;
-    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
     margin-left: 0;
     margin-right: 12px;
   }
 `;
 
 const NameUser = styled(TextSmall)`
+  word-break: break-word;
  @media(max-width: ${mobileVersionLayout}) {
    font-size: 15px;
  }

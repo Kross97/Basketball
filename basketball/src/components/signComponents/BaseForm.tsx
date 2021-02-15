@@ -82,7 +82,7 @@ export const BaseForm: FC<IProps> = React.memo(({
             required: true,
             pattern: regExpName,
             minLength: 3,
-            maxLength: 19,
+            maxLength: 24,
           })}
         />
       )}
@@ -99,7 +99,7 @@ export const BaseForm: FC<IProps> = React.memo(({
           required: true,
           pattern: regExpLogin,
           minLength: 3,
-          maxLength: 13,
+          maxLength: 15,
         })}
       />
       <FieldInputData

@@ -236,7 +236,7 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   
   @media(max-width: ${mobliSizeCard}) {
     width: 320px;
-    background-position-y: 9px;
+    background-position-y: 17px;
   }
   
   @media (max-width: ${mobileLayout}) {
@@ -254,6 +254,7 @@ const PlayerName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   text-transform: capitalize;
+  word-break: break-word;
   
   @media(max-width: 1080px) {
     font-size: 32px;
