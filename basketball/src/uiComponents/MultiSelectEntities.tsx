@@ -99,7 +99,7 @@ const customStyles = {
     ...styles,
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
-
+    padding: '0',
     '::-webkit-scrollbar-track': {
       backgroundColor: theme.colors.lightestGrey,
     },
@@ -121,7 +121,7 @@ const customStyles = {
     height: '40px',
     scrollbarColor: `${theme.colors.grey} ${theme.colors.lightestGrey}`,
     scrollbarWidth: 'thin',
-    padding: '0 8px',
+    padding: '0 12px',
 
     '::-webkit-scrollbar-track': {
       backgroundColor: theme.colors.lightestGrey,
@@ -168,6 +168,7 @@ export const MultiSelectEntities: FC<IProps> = React.memo(({
   <SelectLabel>
     {text && <TextLabel>{text}</TextLabel>}
     <Select
+      isSearchable={false}
       onChange={onChange}
       placeholder={isPlaceholder}
       isMulti={isMulti}
