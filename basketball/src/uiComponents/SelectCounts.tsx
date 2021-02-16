@@ -89,6 +89,12 @@ const customStyles = {
     ...styles,
     padding: '0',
   }),
+  valueContainer: (styles: any) => ({
+    ...styles,
+    '@media(max-width: 615px)': {
+      padding: '0',
+    },
+  }),
 };
 
 interface IProps {
