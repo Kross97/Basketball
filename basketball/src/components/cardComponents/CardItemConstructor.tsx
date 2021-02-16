@@ -110,7 +110,7 @@ const FooterCard = styled.div`
   @media (max-width: ${sizeMobile}) {
     padding: 0;
     align-items: center;
-    flex-basis: 94px;
+    min-height: 94px;
     display: flex;
     justify-content: center;
   }
