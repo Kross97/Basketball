@@ -39,6 +39,7 @@ export const FieldInputData: FC<IProps> = React.memo(({
   <InputContainer htmlFor={name}>
     <TextInput>{text}</TextInput>
     <CustomInput
+      id={name}
       onChange={onChange}
       onBlur={onBlur}
       name={name}
