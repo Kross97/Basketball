@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
@@ -35,35 +35,24 @@ export const FieldInputData: FC<IProps> = React.memo(({
   isError = false,
   errorMessage = '',
 
-}) => {
-  const [value, setValue] = useState<string>((defaultValue && `${defaultValue}`) || '');
-
-  const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(target.value);
-    if (onChange) {
-      onChange();
-    }
-  };
-
-  return (
-    <InputContainer htmlFor={name}>
-      <TextInput>{text}</TextInput>
-      <CustomInput
-        onChange={changeHandler}
-        onBlur={onBlur}
-        name={name}
-        type={type}
-        disabled={disabled}
-        isError={isError}
-        ref={register}
-        value={value}
-      />
-      {isError && <TextInputError>{errorMessage}</TextInputError>}
-      {startType === 'password'
+}) => (
+  <InputContainer htmlFor={name}>
+    <TextInput>{text}</TextInput>
+    <CustomInput
+      onChange={onChange}
+      onBlur={onBlur}
+      name={name}
+      type={type}
+      disabled={disabled}
+      isError={isError}
+      ref={register}
+      defaultValue={defaultValue || ''}
+    />
+    {isError && <TextInputError>{errorMessage}</TextInputError>}
+    {startType === 'password'
             && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
-    </InputContainer>
-  );
-});
+  </InputContainer>
+));
 
 const InputContainer = styled.label`
   display: flex;

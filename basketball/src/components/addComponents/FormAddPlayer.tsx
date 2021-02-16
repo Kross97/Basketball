@@ -236,7 +236,7 @@ const BtnGroup = styled.div`
   }
   @media (max-width: 320px) {
     & button {
-      width: 42%;
+      flex-basis: 42%;
     }
   }
 `;
@@ -267,7 +267,7 @@ const PlayerData = styled.div`
     }
   }
 
-  @media (max-width: 300px) {
+  @media (max-width: 320px) {
     & > label {
       width: 42%;
     }
