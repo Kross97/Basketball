@@ -76,6 +76,7 @@ const InputContainer = styled.label`
 const CustomInput = styled.input<{ type: string, isError: boolean }>`
   outline: none;
   box-sizing: border-box;
+  margin: 0;
   border: ${({
     isError,
     theme,

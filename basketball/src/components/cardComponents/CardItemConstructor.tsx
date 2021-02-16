@@ -59,10 +59,8 @@ export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
 
 const ContainerCard = styled.div`
   cursor: pointer;
-  @media(max-width: ${sizeMobile}) {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 const BodyCard = styled.div<{ type: string }>`

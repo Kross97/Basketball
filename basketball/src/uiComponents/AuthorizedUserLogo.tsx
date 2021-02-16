@@ -8,11 +8,10 @@ import { regExpImageTeam } from '../helpers/constants/regularExp';
 interface IProps {
   name: string;
   avatarUrl: string | null;
-  onClick: () => void;
 }
 
-export const AuthorizedUserLogo: FC<IProps> = React.memo(({ name, avatarUrl, onClick }) => (
-  <ContainerLogo onClick={onClick}>
+export const AuthorizedUserLogo: FC<IProps> = React.memo(({ name, avatarUrl }) => (
+  <ContainerLogo>
     <NameUser>{name}</NameUser>
     <UserLogo avatarUrl={regExpImageTeam.test(`${avatarUrl}`) ? avatarUrl : profileLogo} />
   </ContainerLogo>
@@ -47,6 +46,7 @@ const UserLogo = styled.div<{ avatarUrl: string | null }>`
 
 const NameUser = styled(TextSmall)`
   word-break: break-word;
+  color: ${({ theme }) => theme.colors.darkGrey};
  @media(max-width: ${mobileVersionLayout}) {
    font-size: 15px;
  }

@@ -13,16 +13,11 @@ export const FieldSearch: FC<IProps> = React.memo(({
 }) => {
   const { t } = useTranslation();
   return (
-    <SearchContainer>
+    <div>
       <CustomSearch onChange={onChange} type="text" placeholder={t('markup:search')} />
-    </SearchContainer>
+    </div>
   );
 });
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const CustomSearch = styled.input`
   outline: none;

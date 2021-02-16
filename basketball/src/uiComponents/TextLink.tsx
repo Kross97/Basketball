@@ -5,14 +5,18 @@ import { TextSmall } from './Typography';
 import { mobileLayout } from '../helpers/constants/mobileSize';
 
 interface IProps {
-  text: string;
   to: string;
   disabled: boolean;
+  text?: string;
+  onClick?: () => void;
 }
 
-export const TextLink: FC<IProps> = React.memo(({ text, to, disabled }) => (
-  <CustomLink disabled={disabled} to={to}>
-    <LinkText>{text}</LinkText>
+export const TextLink: FC<IProps> = React.memo(({
+  text, onClick, to, disabled, children,
+}) => (
+  <CustomLink disabled={disabled} to={to} onClick={onClick}>
+    {text && <LinkText>{text}</LinkText>}
+    {children}
   </CustomLink>
 ));
 

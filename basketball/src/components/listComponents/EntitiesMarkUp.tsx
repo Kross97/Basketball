@@ -23,7 +23,7 @@ import {
 } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import style from '../../themes/reactPagination.module.scss';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { mobileLayout, mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobileLayout, mobileVersionLayout, mobileVersionList } from '../../helpers/constants/mobileSize';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { SearchNotFound } from './SearchNotFound';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -114,16 +114,18 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
 
       <ContainerTeams>
         <HeaderTeams>
-          <FieldSearch onChange={debounce(changeNameEntity, 300)} />
-          {!isTeam && (
-          <MultiSelectEntities
-            options={teamsOptions}
-            isMulti
-            isPlaceholder={t('markup:select')}
-            isForm={false}
-            onChange={addCommandSearch}
-          />
-          )}
+          <FieldGroup>
+            <FieldSearch onChange={debounce(changeNameEntity, 300)} />
+            {!isTeam && (
+            <MultiSelectEntities
+              options={teamsOptions}
+              isMulti
+              isPlaceholder={t('markup:select')}
+              isForm={false}
+              onChange={addCommandSearch}
+            />
+            )}
+          </FieldGroup>
           <ButtonAction
             isNegativeStyle={false}
             isAdding
@@ -184,23 +186,48 @@ const HeaderTeams = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
-  & > div, & > button, & > label {
-    margin: 0;
-  }
-  & > div:nth-child(1), & > label:nth-of-type(1) {
-    flex-basis: 32%;
-  }
-
+  
   @media (max-width: ${mobileVersionLayout}) {
     flex-direction: column;
     align-self: stretch;
-    & > div:nth-child(1) {
-      margin-bottom: 16px;
-    }
-
+    
     & > button {
       margin-top: 16px;
     }
+  }
+`;
+
+const FieldGroup = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  flex-basis: 66%;
+  & > div {
+    display: flex;
+    flex-basis: 49%;
+    & > input {
+      flex-grow: 1;
+    }
+    @media(max-width: ${mobileVersionLayout}) {
+      & {
+        margin-bottom: 16px;
+      }
+    }
+  }
+  
+  & > label {
+    flex-basis: 49%;
+    margin-left: 24px;
+    @media(max-width: ${mobileVersionLayout}) {
+      margin-left: 0;
+    }
+  }
+  
+  @media(max-width: ${mobileVersionList}) {
+    flex-basis: 84%;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-direction: column;
   }
 `;
 
@@ -213,8 +240,8 @@ const TeamsFooter = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 32px;
-  
-  @media(max-width: ${mobileLayout}) {
+
+  @media (max-width: ${mobileLayout}) {
     padding-bottom: 16px;
   }
 `;
