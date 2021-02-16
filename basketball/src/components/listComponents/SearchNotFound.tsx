@@ -71,7 +71,7 @@ const TextNotFound = styled(TextExtraLarge)`
 
 
   @media (max-width: ${mobileVersionList}) {
-    font-size: 46px;
+    font-size: 45px;
   }
 
 
@@ -81,6 +81,6 @@ const TextNotFound = styled(TextExtraLarge)`
   }
 
   @media (max-width: 860px) {
-    font-size: 36px;
+    font-size: 35px;
   }
 `;
