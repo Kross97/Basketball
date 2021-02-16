@@ -25,7 +25,7 @@ const customStyles = {
   indicatorSeparator: (styles: any) => ({
     ...styles,
     '@media(max-width: 615px)': {
-      marginBottom: '12px',
+      marginBottom: '5px',
       marginTop: '5px',
     },
   }),
@@ -54,7 +54,7 @@ const customStyles = {
     color: theme.colors.darkGrey,
     left: '38%',
     '@media(max-width: 615px)': {
-      top: '40%',
+      top: '55%',
       fontSize: '12px',
       lineHeight: '150%',
     },
@@ -80,9 +80,14 @@ const customStyles = {
     ...styles,
     position: 'absolute',
     top: '-150px',
+    borderRadius: '4px',
     '@media(max-width: 615px)': {
       top: '-125px',
     },
+  }),
+  menuList: (styles: any) => ({
+    ...styles,
+    padding: '0',
   }),
 };
 
@@ -94,6 +99,7 @@ export const SelectCounts: FC<IProps> = React.memo(({
   onChange,
 }) => (
   <Select
+    isSearchable={false}
     isMulti={false}
     isClearable={false}
     styles={customStyles}
