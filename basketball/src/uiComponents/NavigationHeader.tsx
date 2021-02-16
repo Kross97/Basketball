@@ -27,7 +27,7 @@ export const NavigationHeader = () => {
 
   return (
     <ContainerNavigation>
-      <ButtonSandwich onClick={toggleStatusSandwichMenu} />
+      <ButtonSandwich onClick={() => toggleStatusSandwichMenu()} />
       <BrandLogo />
       <TextLink disabled={false} to={routePaths.changeUser}>
         <AuthorizedUserLogo

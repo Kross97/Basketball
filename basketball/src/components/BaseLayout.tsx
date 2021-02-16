@@ -42,7 +42,7 @@ export default () => {
       <NavigationHeader />
       <BodyContainer>
         <BackgroundMenu
-          onClick={toggleStatusSandwichMenu}
+          onClick={() => toggleStatusSandwichMenu()}
           isActiveSandwichMenu={isActiveSandwichMenu}
         />
         <SideSandwichMenu />
@@ -90,11 +90,7 @@ const ContentLayout = styled.div`
   display: flex;
   flex-grow: 1;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
-
-  @media (min-height: 1000px) {
-    padding-bottom: 50px;
-  }
-
+  
   @media (max-width: ${mobileVersionLayout}) {
     justify-content: center;
   }

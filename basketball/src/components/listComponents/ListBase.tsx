@@ -31,14 +31,10 @@ export const ListBase: FC<IProps> = React.memo(({
 const ListContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr;
   grid-column-gap: 24px;
   grid-row-gap: 24px;
-
-  @media (max-width: 1025px) {
-    grid-template-rows: 1fr 1fr 1fr;
-  }
-
+  
   @media (max-width: ${mobileVersionList}) {
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 24px;
@@ -47,7 +43,6 @@ const ListContainer = styled.div`
 
   @media (max-width: ${sizeMobile}) {
     grid-template-columns: 180px 180px 180px;
-    grid-template-rows: 1fr 1fr 1fr;
     grid-column-gap: 24px;
     grid-row-gap: 24px;
   }

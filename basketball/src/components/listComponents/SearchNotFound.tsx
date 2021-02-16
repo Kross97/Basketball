@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { TextExtraLarge } from '../../uiComponents/Typography';
-import { mobileVersionList, mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import {
+  mobileVersionList, mobileVersionLayout, sizeMobile, extraSmallLayout,
+} from '../../helpers/constants/mobileSize';
 
 export const SearchNotFound = () => (
   <ConteinerNotFound>
@@ -13,29 +15,40 @@ export const SearchNotFound = () => (
 
 const ConteinerNotFound = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 400px);
+  grid-template-columns: repeat(3, 380px);
   grid-template-rows: repeat(2, 300px);
-  grid-column-gap: 24px;
-  grid-row-gap: 24px;
 
-  @media (max-width: 1390px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
 
   @media (max-width: ${mobileVersionList}) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 376px);
+  }
+
+  @media (max-width: ${sizeMobile}) {
+    grid-template-columns: 180px 180px 180px;
     grid-column-gap: 24px;
     grid-row-gap: 24px;
   }
 
-  @media (max-width: ${mobileVersionLayout}) {
-    grid-template-columns: 180px 180px 180px 180px;
-    grid-column-gap: 40px;
+  @media (max-width: 600px) {
+    grid-template-columns: 180px 180px 180px;
+    grid-column-gap: 12px;
     grid-row-gap: 12px;
   }
 
-  @media (max-width: 860px) {
-    grid-template-columns: 1fr 1fr 1fr;
+  @media(max-width: 575px) {
+    grid-template-columns: 170px 170px 170px;
+  }
+
+  @media (max-width: 542px) {
+    grid-template-columns: 180px 180px;
+  }
+
+  @media (max-width: 385px) {
+    grid-template-columns: 170px 170px;
+  }
+
+  @media (max-width: ${extraSmallLayout}) {
+    grid-template-columns: 150px 150px;
   }
 `;
 
@@ -58,7 +71,7 @@ const TextNotFound = styled(TextExtraLarge)`
 
 
   @media (max-width: ${mobileVersionList}) {
-    font-size: 49px;
+    font-size: 46px;
   }
 
 
@@ -68,6 +81,6 @@ const TextNotFound = styled(TextExtraLarge)`
   }
 
   @media (max-width: 860px) {
-    font-size: 40px;
+    font-size: 36px;
   }
 `;

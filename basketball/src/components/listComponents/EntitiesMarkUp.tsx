@@ -173,7 +173,8 @@ const ContainerTeams = styled.div`
   margin: 32px auto 0;
   display: flex;
   flex-direction: column;
-
+  justify-content: space-between;
+  
   @media (max-width: ${mobileVersionLayout}) {
     margin: 32px 0 0;
   }
@@ -232,7 +233,7 @@ const FieldGroup = styled.div`
 `;
 
 const TeamsBody = styled.div`
-  align-self: center;
+  margin: 0 0 auto;
 `;
 
 const TeamsFooter = styled.div`
