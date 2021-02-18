@@ -101,7 +101,7 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
 `;
 
 const FooterCard = styled.div`
-  padding: 21px 15px 24px;
+  padding: 21px 0 24px;
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
@@ -120,7 +120,9 @@ const DataItem = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
-  text-align: center`;
+  text-align: center;
+  padding: 0 15px;
+`;
 
 const Name = styled(TextStandart)<{ type: string }>`
   display: block;

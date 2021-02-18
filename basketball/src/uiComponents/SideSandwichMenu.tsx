@@ -141,6 +141,9 @@ const ItemMenu = styled.div`
     & svg {
       margin-right: 9px;
     }
+    & > span {
+      margin-top: 0;
+    }
   }
 `;
 

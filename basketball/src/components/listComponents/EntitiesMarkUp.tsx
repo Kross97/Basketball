@@ -200,11 +200,11 @@ const HeaderTeams = styled.div`
 
 const FieldGroup = styled.div`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-basis: 66%;
   & > div {
     display: flex;
-    flex-basis: 49%;
+    flex-basis: 48.5%;
     & > input {
       flex-grow: 1;
     }
@@ -214,13 +214,8 @@ const FieldGroup = styled.div`
       }
     }
   }
-  
   & > label {
-    flex-basis: 49%;
-    margin-left: 24px;
-    @media(max-width: ${mobileVersionLayout}) {
-      margin-left: 0;
-    }
+    flex-basis: 48.5%;
   }
   
   @media(max-width: ${mobileVersionList}) {

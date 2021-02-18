@@ -86,7 +86,7 @@ export const FormAddPlayer: FC<IProps> = React.memo(({
           required: true,
           pattern: regExpName,
           minLength: 3,
-          maxLength: 24,
+          maxLength: 22,
         })}
       />
       <MultiSelectEntities
