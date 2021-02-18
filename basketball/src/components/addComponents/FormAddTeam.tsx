@@ -86,7 +86,7 @@ export const FormAddTeam: FC<IProps> = React.memo(({
         register={register({
           pattern: regExpConference,
           minLength: 3,
-          maxLength: 18,
+          maxLength: 20,
         })}
       />
       <FieldInputData
