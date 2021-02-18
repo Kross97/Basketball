@@ -60,8 +60,6 @@ export default () => {
         <CardContainer>
           <CardNavigation>
             <div>
-              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-              <Separator>/</Separator>
               <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
               <Separator>/</Separator>
               <TextLink text={`${player.name}`} to={`${player.name}`} disabled />

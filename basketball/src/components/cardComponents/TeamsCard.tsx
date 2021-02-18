@@ -67,8 +67,6 @@ export default () => {
         <ContainerCard>
           <CardNavigation>
             <Links>
-              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-              <Separator>/</Separator>
               <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
               <Separator>/</Separator>
               <TextLink text={`${team.name}`} to={`${team.name}`} disabled />

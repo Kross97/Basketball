@@ -52,7 +52,7 @@ export const FormAddTeam: FC<IProps> = React.memo(({
         defaultValue={teamUpdate ? teamUpdate.name : ''}
         register={register({
           required: true,
-          minLength: 5,
+          minLength: 3,
           maxLength: 25,
           pattern: regExpCommandName,
         })}
