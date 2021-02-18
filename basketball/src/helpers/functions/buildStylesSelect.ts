@@ -73,6 +73,8 @@ export const buildStyleSelect = () => ({
     borderRadius: '4px',
     color: selectProps.isForm ? theme.colors.darkGrey : theme.colors.white,
     backgroundColor: selectProps.isForm ? 'transparent' : theme.colors.red,
+    paddingLeft: '0',
+    marginLeft: '0',
     '@media(max-width: 380px)': {
       fontSize: '11px',
     },
@@ -93,6 +95,7 @@ export const buildStyleSelect = () => ({
     fontSize: '14px',
     lineHeight: '24px',
     color: theme.colors.middleGrey,
+    marginLeft: '0',
   }),
   input: (styles: any) => ({
     ...styles,
