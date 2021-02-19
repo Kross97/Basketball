@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import styled from 'styled-components';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useForm } from 'react-hook-form';
@@ -7,7 +7,7 @@ import { ImageUpload } from '../uiComponents/ImageUpload';
 import { FieldInputData } from '../uiComponents/FieldInputData';
 import { ButtonAction } from '../uiComponents/ButtonAction';
 import { StoreReducer } from '../helpers/interfaces/StoreReducer';
-import { changeAuthData } from '../store/asyncActions/auth';
+import { changeUserSagaAction } from '../store/sagaActions/auth';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
 import { NotificationMessage } from '../uiComponents/NotificationMessage';
@@ -15,12 +15,32 @@ import { IDataChangeUser } from '../helpers/interfaces/componentsInterfaces/Stat
 import { regExpName } from '../helpers/constants/regularExp';
 import { routePaths } from '../helpers/constants/routePaths';
 import { userChangeErrors } from '../helpers/constants/formErrors';
+import { successOperationReducer } from '../store/reducers/successOperation';
 
 const actionCreators = {
-  changeAuthData,
+  changeUserSagaAction,
+  setErrorChangeUser: successOperationReducer.actions.setErrorChangeUser,
 };
 
 export default () => {
+  const {
+    setErrorChangeUser,
+    changeUserSagaAction: changeDataUser,
+  } = useCustomActions(actionCreators);
+
+  const isSuccessChanged = useSelector(({
+    successOperationReducer: { changeUser },
+  }: StoreReducer) => changeUser);
+
+  useEffect(() => {
+    if (isSuccessChanged) {
+      history.push(routePaths.teams);
+    }
+    return () => {
+      setErrorChangeUser();
+    };
+  }, [isSuccessChanged]);
+
   const {
     avatarUrl,
     token,
@@ -40,27 +60,20 @@ export default () => {
   const history = useHistory();
 
   const {
-    changeAuthData: changeDataUser,
-  } = useCustomActions(actionCreators);
-
-  const {
     register,
     handleSubmit,
     errors,
     trigger,
   } = useForm();
 
-  const changeUserData = async (data: IDataChangeUser) => {
-    const { payload: isSuccessChanged } = await changeDataUser({
+  const changeUserData = (data: IDataChangeUser) => {
+    changeDataUser({
       change: {
         userName: data.userName,
         avatarUrl: srcImage,
       },
       token,
     });
-    if (isSuccessChanged) {
-      history.push(routePaths.teams);
-    }
   };
 
   const returnForTeamsPage = useCallback(() => {

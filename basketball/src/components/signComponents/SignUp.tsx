@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
+import { signOutSaGaAction } from '../../store/sagaActions/auth';
 import signUpImage from '../../static/images/sign_up.svg';
-import { requestSignUp } from '../../store/asyncActions/auth';
 import { authDataUser } from '../../store/reducers/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
@@ -14,14 +14,16 @@ import { routePaths } from '../../helpers/constants/routePaths';
 import { ISignUpForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
 
 const actionCreators = {
-  requestSignUp,
+  signOutSaGaAction,
   clearSignUpNotification: authDataUser.actions.clearAuthNotificationSignUp,
 };
 
 export default () => {
-  const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
+  const isSuccessRequest = useSelector(({
+    successOperationReducer: { signOut },
+  }: StoreReducer) => signOut);
   const {
-    requestSignUp: signUp,
+    signOutSaGaAction: signUp,
     clearSignUpNotification,
   } = useCustomActions(actionCreators);
   const history = useHistory();
@@ -36,24 +38,21 @@ export default () => {
   );
 
   useEffect(() => {
-    if (isSuccesRequest) {
+    if (isSuccessRequest) {
       localStorage.setItem('authorized_basketball', 'success');
       setTimeout(() => {
         history.push(routePaths.teams);
         clearSignUpNotification();
       }, 1800);
     }
-  }, [isSuccesRequest]);
+  }, [isSuccessRequest]);
 
-  const submitHandler = useCallback(async (data: ISignUpForm) => {
-    const isSuccess = await signUp({
+  const submitHandler = useCallback((data: ISignUpForm) => {
+    signUp({
       userName: data.userName,
       login: data.login,
       password: data.password,
     });
-    if (isSuccess.payload) {
-      setTypeRequest(isSuccess.payload);
-    }
   }, []);
 
   return (
