@@ -5,6 +5,7 @@ import { playersDataReducer } from './reducers/player';
 import { imageLoadData } from './reducers/image';
 import { addEntityError } from './reducers/addingError';
 import { menuReducer } from './reducers/sandwichAndChangeMenu';
+import { successOperationReducer } from './reducers/successOperation';
 
 export const reducer = combineReducers({
   menuReducer: menuReducer.reducer,
@@ -13,4 +14,5 @@ export const reducer = combineReducers({
   playersDataReducer: playersDataReducer.reducer,
   imageLoadData: imageLoadData.reducer,
   addEntityError: addEntityError.reducer,
+  successOperationReducer: successOperationReducer.reducer,
 });

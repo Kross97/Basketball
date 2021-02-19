@@ -14,8 +14,10 @@ import { routePaths } from '../helpers/constants/routePaths';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { TextLink } from './TextLink';
+import { successOperationReducer } from '../store/reducers/successOperation';
 
 const actionCreators = {
+  setErrorSignIn: successOperationReducer.actions.setErrorSignIn,
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
 };
 
@@ -23,6 +25,7 @@ export const SideSandwichMenu = () => {
   const { path } = useParams<{ path: string }>();
   const { t } = useTranslation();
   const {
+    setErrorSignIn,
     toggleStatusSandwichMenu,
   } = useCustomActions(actionCreators);
 
@@ -42,6 +45,7 @@ export const SideSandwichMenu = () => {
   };
 
   const goOutSite = () => {
+    setErrorSignIn();
     localStorage.removeItem('authorized_basketball');
   };
 

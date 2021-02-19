@@ -1,10 +1,9 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import signInImage from '../../static/images/sign_in.svg';
-import { requestSignIn } from '../../store/asyncActions/auth';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileVersionLayout } from '../../helpers/constants/mobileSize';
 import { ISignInForm } from '../../helpers/interfaces/signFormInterfaces/SignForms';
@@ -13,17 +12,21 @@ import { BaseForm } from './BaseForm';
 import { routePaths } from '../../helpers/constants/routePaths';
 import { loadAllPlayers } from '../../store/asyncActions/player';
 import { loadAllCommands } from '../../store/asyncActions/team';
+import { signInSaGaAction } from '../../store/sagaActions/auth';
 
 const actionCreators = {
-  requestSignIn,
+  signInSaGaAction,
   loadAllCommands,
   loadAllPlayers,
 };
 
 export const SignIn = () => {
-  const [isSuccesRequest, setTypeRequest] = useState<boolean>(false);
+  const isSuccessRequest = useSelector(({
+    successOperationReducer: { signIn },
+  }: StoreReducer) => signIn);
+
   const {
-    requestSignIn: signIn,
+    signInSaGaAction: signIn,
     loadAllCommands: getAllCommands,
     loadAllPlayers: getAllPlayers,
   } = useCustomActions(actionCreators);
@@ -42,22 +45,19 @@ export const SignIn = () => {
   }));
 
   useEffect(() => {
-    if (isSuccesRequest) {
+    if (isSuccessRequest) {
       localStorage.setItem('authorized_basketball', 'success');
       getAllCommands(token);
       getAllPlayers(token);
       history.push(routePaths.teams);
     }
-  }, [isSuccesRequest]);
+  }, [isSuccessRequest]);
 
-  const submitHandler = useCallback(async (data: ISignInForm) => {
-    const isSuccess = await signIn({
+  const submitHandler = useCallback((data: ISignInForm) => {
+    signIn({
       login: data.login,
       password: data.password,
     });
-    if (isSuccess.payload) {
-      setTypeRequest(isSuccess.payload);
-    }
   }, []);
 
   return (

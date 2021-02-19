@@ -4,12 +4,16 @@ import { Provider } from 'react-redux';
 import { configureStore } from '@reduxjs/toolkit';
 import { ThemeProvider } from 'styled-components';
 import { BrowserRouter } from 'react-router-dom';
+import createSagaMiddleware from 'redux-saga';
 import { theme } from './themes/theme';
 import './index.css';
+import { rootSaga } from './rootSaga';
 import { App } from './App';
 import { reducer } from './store';
 import reportWebVitals from './reportWebVitals';
 import './i18next';
+
+const sagaMiddleware = createSagaMiddleware();
 
 export const store = configureStore({
   reducer,
@@ -28,7 +32,10 @@ export const store = configureStore({
       errorChangeMessage: '',
     },
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(sagaMiddleware),
 });
+
+sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <BrowserRouter>
