@@ -39,8 +39,6 @@ export const AddNewEntity: FC<IProps> = React.memo(({
   return (
     <ContainerAdd>
       <HeaderAdd>
-        <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-        <Separator>/</Separator>
         <TextLink
           text={isTeam ? t('team:teams') : t('player:players')}
           to={isTeam ? routePaths.teams : routePaths.players}

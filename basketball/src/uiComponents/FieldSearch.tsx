@@ -13,26 +13,22 @@ export const FieldSearch: FC<IProps> = React.memo(({
 }) => {
   const { t } = useTranslation();
   return (
-    <SearchContainer>
+    <div>
       <CustomSearch onChange={onChange} type="text" placeholder={t('markup:search')} />
-    </SearchContainer>
+    </div>
   );
 });
-
-const SearchContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const CustomSearch = styled.input`
   outline: none;
   cursor: pointer;
+  margin: 0;
   border: ${({ theme }) => `1px solid ${theme.colors.lightGrey}`};
   border-radius: 4px;
   padding: 7px 12px;
   background: ${({ theme }) => theme.colors.white} url(${search}) no-repeat right 18px center;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 14px;
   line-height: 24px;
 

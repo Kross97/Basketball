@@ -41,18 +41,18 @@ export default () => {
       addEntityError,
     }: StoreReducer,
   ) => ({
-    team: teamsDataReducer.entities[id],
+    team: teamsDataReducer.entities[id]!,
     token: authDataUser.authData.token,
     errorMessage: addEntityError.errorMessage,
   }), shallowEqual);
-  const playersList = useSelector((state: StoreReducer) => playersCurrentTeam(state, id));
+  const playersList = useSelector<StoreReducer, IPlayer[]>(
+    (state) => playersCurrentTeam(state, id),
+  );
 
   const { t } = useTranslation();
 
   const teamUpdate = () => {
-    if (team) {
-      history.replace(`${routePaths.teamAdd}/${team.id}`);
-    }
+    history.replace(`${routePaths.teamAdd}/${team.id}`);
   };
 
   const deleteCurrentTeam = () => {
@@ -67,8 +67,6 @@ export default () => {
         <ContainerCard>
           <CardNavigation>
             <Links>
-              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-              <Separator>/</Separator>
               <TextLink text={t('team:teams')} to={routePaths.teams} disabled={false} />
               <Separator>/</Separator>
               <TextLink text={`${team.name}`} to={`${team.name}`} disabled />
@@ -104,7 +102,7 @@ export default () => {
                         )}
           </CardBody>
           {playersList.length > 0 && (
-          <EnumerationPlayersTeam players={playersList as IPlayer[]} />
+          <EnumerationPlayersTeam players={playersList} />
           )}
         </ContainerCard>
       ) : <></>
@@ -116,7 +114,7 @@ const ContainerCard = styled.div`
   flex-grow: 0.2;
   position: relative;
 
-  @media (max-width: 1150px) {
+  @media (max-width: 1350px) {
     margin: 32px;
   }
 

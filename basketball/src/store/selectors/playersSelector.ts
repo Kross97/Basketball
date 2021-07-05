@@ -5,7 +5,7 @@ const selectState = (state: StoreReducer) => state;
 
 export const allPlayersSelector = createSelector(
   selectState,
-  (({ playersDataReducer: { ids, entities } }) => ids.map((id) => entities[id])),
+  (({ playersDataReducer: { ids, entities } }) => ids.map((id) => entities[id]!)),
 );
 
 export const playersChunkSelector = createSelector(
@@ -33,6 +33,6 @@ export const playersCurrentTeam = createSelector(
     },
     idTeam,
   }) => (
-    ids.map((id) => (entities[id]?.team === idTeam && entities[id])).filter((entity) => entity)
+    ids.map((id) => entities[id]!).filter((entity) => entity?.team === idTeam)
   ),
 );

@@ -16,7 +16,7 @@ export const PlayerCard = () => {
     <CardContainer>
       <CardNavigation>
         <div>
-          <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
+          <TextLink text={t('main')} to="" disabled={false} />
           <Separator>/</Separator>
           <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
           <Separator>/</Separator>

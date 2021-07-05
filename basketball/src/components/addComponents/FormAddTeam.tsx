@@ -52,7 +52,7 @@ export const FormAddTeam: FC<IProps> = React.memo(({
         defaultValue={teamUpdate ? teamUpdate.name : ''}
         register={register({
           required: true,
-          minLength: 5,
+          minLength: 3,
           maxLength: 25,
           pattern: regExpCommandName,
         })}
@@ -70,7 +70,7 @@ export const FormAddTeam: FC<IProps> = React.memo(({
         register={register({
           pattern: regExpDivision,
           minLength: 5,
-          maxLength: 25,
+          maxLength: 20,
         })}
       />
       <FieldInputData
@@ -86,7 +86,7 @@ export const FormAddTeam: FC<IProps> = React.memo(({
         register={register({
           pattern: regExpConference,
           minLength: 3,
-          maxLength: 18,
+          maxLength: 20,
         })}
       />
       <FieldInputData

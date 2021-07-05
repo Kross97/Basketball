@@ -34,6 +34,7 @@ export const ButtonAction: FC<IProps> = React.memo(({
 const ButtonStyled = styled.button<{ isNegativeStyle: boolean, size: string }>`
   cursor: pointer;
   outline: none;
+  margin: 0;
   border: ${({ isNegativeStyle, theme }) => (isNegativeStyle ? `1px solid ${theme.colors.grey}` : 'none')};
   border-radius: 4px;
   padding: ${({ size, theme }) => theme.sizes.buttonsSizes[size]};

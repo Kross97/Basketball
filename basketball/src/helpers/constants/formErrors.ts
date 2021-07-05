@@ -31,5 +31,11 @@ export const formSignErrors: IFormErrors = {
   minLength: 'Value of at least 3 characters',
   maxLength: 'The value is too long',
   validate: 'Password and repeat password are not the same',
-  custom: 'Wrong password. Please, try again.',
+};
+
+export const userChangeErrors: IFormErrors = {
+  required: 'Required',
+  pattern: 'Data input is incorrect',
+  minLength: 'Name of at least 3 characters',
+  maxLength: 'The name is too long',
 };

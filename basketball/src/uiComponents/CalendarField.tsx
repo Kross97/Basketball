@@ -70,9 +70,9 @@ const InputContainer = styled.label`
 const CustomInput = styled.input<{ type: string, isError: boolean }>`
   outline: none;
   box-sizing: border-box;
-  border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
+  border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : `1px solid ${theme.colors.lightestGrey}`)};
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 7px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
   font-weight: 500;

@@ -175,8 +175,8 @@ const ContainerImage = styled.div`
 `;
 
 const ImagePlayer = styled.div<{ imageSrc: string, isUnknowImg: boolean }>`
-  width: 40px;
-  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
   border-radius: 25px;
   background: ${({ imageSrc }) => `url(${imageSrc}) no-repeat`};
   background-size: ${({ isUnknowImg }) => (isUnknowImg ? 'contain' : 'cover')};
@@ -190,6 +190,7 @@ const PositionName = styled.div`
 `;
 
 const NamePlayer = styled(TextSmall)`
+  word-break: break-all;
   line-height: 21px;
   color: ${({ theme }) => theme.colors.middleGrey};
   @media(max-width: ${mobileDataCard}) {
@@ -203,10 +204,10 @@ const PositionPlayer = styled(TextExtraSmall)`
 
 const ContainerDataPlayer = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 16px;
+  grid-template-columns: 46px 46px 16px;
   grid-column-gap: 82px;
   align-self: center;
-
+  margin-left: 30px;
   @media (max-width: ${mobliSizeCard}) {
     display: none;
   }

@@ -1,14 +1,14 @@
 export const regExpImageTeam = /^(http:\/\/)dev\.trainee/;
 
-export const regExpName = /^([A-ZА-Я]{2,13})\s?([A-ZА-Я]{1,13})?[A-ZА-Я]$/i;
+export const regExpName = /^([A-ZА-Я\s']+)\s?([A-ZА-Я\s']+)?[A-ZА-Я']$/i;
 
-export const regExpCommandName = /^([A-ZА-Я]{2,15})\s?([\sA-ZА-Я]{2,15})[A-ZА-Я]$/i;
+export const regExpCommandName = /^([A-ZА-Я\s']+)\s?([\sA-ZА-Я']+)[A-ZА-Я']$/i;
 
-export const regExpDivision = /^([A-ZА-Я\d]{2,15})\s?([\s\dA-ZА-Я]{2,15})[A-ZА-Я]$/i;
+export const regExpDivision = /^([A-ZА-Я\d]+)\s?([\s\dA-ZА-Я]+)[A-ZА-Я]$/i;
 
-export const regExpConference = /^[A-ZА-Я\d]{3,18}$/i;
+export const regExpConference = /^[\sA-ZА-Я\d]+$/i;
 
-export const regExpLogin = /^([^\W\s]{3,13})$/;
+export const regExpLogin = /^([^\W\s]+)$/;
 
 export const regExpPassword = /^([^\s]+)$/i;
 

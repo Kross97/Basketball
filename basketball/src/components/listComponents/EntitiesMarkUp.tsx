@@ -23,7 +23,7 @@ import {
 } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import style from '../../themes/reactPagination.module.scss';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
-import { mobileLayout, mobileVersionLayout } from '../../helpers/constants/mobileSize';
+import { mobileLayout, mobileVersionLayout, mobileVersionList } from '../../helpers/constants/mobileSize';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
 import { SearchNotFound } from './SearchNotFound';
 import { routePaths } from '../../helpers/constants/routePaths';
@@ -41,18 +41,17 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
   isTeam,
 }) => {
   const { t } = useTranslation();
-  const selectedChunk = useSelector<StoreReducer>(
+  const typedSelectedChunk = useSelector<StoreReducer, IDataSelected>(
     isTeam
       ? teamsChunkSelector
       : playersChunkSelector,
   );
-  const selectedAll = useSelector<StoreReducer>(
+  const typedSelectedAll = useSelector<StoreReducer, ISelectedDataAll>(
     isTeam
       ? allTeamsSelector
       : allPlayersSelector,
   );
-  const typedSelectedChunk = selectedChunk as IDataSelected;
-  const typedSelectedAll = selectedAll as ISelectedDataAll;
+
   const teamsOptions = useSelector(teamsForSelectPlayer);
 
   const token = useSelector(({ authDataUser: { authData } }: StoreReducer) => authData.token);
@@ -115,16 +114,18 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
 
       <ContainerTeams>
         <HeaderTeams>
-          <FieldSearch onChange={debounce(changeNameEntity, 300)} />
-          {!isTeam && (
-          <MultiSelectEntities
-            options={teamsOptions}
-            isMulti
-            isPlaceholder={t('markup:select')}
-            isForm={false}
-            onChange={addCommandSearch}
-          />
-          )}
+          <FieldGroup>
+            <FieldSearch onChange={debounce(changeNameEntity, 300)} />
+            {!isTeam && (
+            <MultiSelectEntities
+              options={teamsOptions}
+              isMulti
+              isPlaceholder={t('markup:select')}
+              isForm={false}
+              onChange={addCommandSearch}
+            />
+            )}
+          </FieldGroup>
           <ButtonAction
             isNegativeStyle={false}
             isAdding
@@ -148,6 +149,7 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
               nextLabel={<PaginationCountBtn type="next" />}
               breakLabel={<PaginationCountBtn type="break" />}
               pageClassName={style.itemPagination}
+              pageLinkClassName={style.itemLinkPagination}
               containerClassName={style.paginationContainer}
               activeClassName={style.activeClassName}
               onPageChange={changePage}
@@ -171,7 +173,8 @@ const ContainerTeams = styled.div`
   margin: 32px auto 0;
   display: flex;
   flex-direction: column;
-
+  justify-content: space-between;
+  
   @media (max-width: ${mobileVersionLayout}) {
     margin: 32px 0 0;
   }
@@ -184,26 +187,48 @@ const HeaderTeams = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
-
-  & > div:nth-child(1), & > label:nth-of-type(1) {
-    flex-basis: 32%;
-  }
-
+  
   @media (max-width: ${mobileVersionLayout}) {
     flex-direction: column;
     align-self: stretch;
-    & > div:nth-child(1) {
-      margin-bottom: 16px;
-    }
-
+    
     & > button {
       margin-top: 16px;
     }
   }
 `;
 
+const FieldGroup = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-basis: 66%;
+  & > div {
+    display: flex;
+    flex-basis: 48.5%;
+    & > input {
+      flex-grow: 1;
+    }
+    @media(max-width: ${mobileVersionLayout}) {
+      & {
+        margin-bottom: 16px;
+      }
+    }
+  }
+  & > label {
+    flex-basis: 48.5%;
+  }
+  
+  @media(max-width: ${mobileVersionList}) {
+    flex-basis: 84%;
+  }
+  
+  @media(max-width: ${mobileVersionLayout}) {
+    flex-direction: column;
+  }
+`;
+
 const TeamsBody = styled.div`
-  align-self: center;
+  margin: 0 0 auto;
 `;
 
 const TeamsFooter = styled.div`
@@ -211,8 +236,8 @@ const TeamsFooter = styled.div`
   justify-content: space-between;
   align-items: flex-end;
   padding-bottom: 32px;
-  
-  @media(max-width: ${mobileLayout}) {
+
+  @media (max-width: ${mobileLayout}) {
     padding-bottom: 16px;
   }
 `;

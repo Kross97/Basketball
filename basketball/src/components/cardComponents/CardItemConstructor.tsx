@@ -59,10 +59,8 @@ export const CardItemConstructor: FC<IProps> = React.memo(({ type, item }) => {
 
 const ContainerCard = styled.div`
   cursor: pointer;
-  @media(max-width: ${sizeMobile}) {
-    display: flex;
-    flex-direction: column;
-  }
+  display: flex;
+  flex-direction: column;
 `;
 
 const BodyCard = styled.div<{ type: string }>`
@@ -103,15 +101,16 @@ const LogoItem = styled.div<{ type: string, imageUrl: string }>`
 `;
 
 const FooterCard = styled.div`
-  padding: 21px 15px 24px;
+  padding: 21px 0 24px;
   background-color: ${({ theme }) => theme.colors.darkGrey};
   border-bottom-left-radius: 4px;
   border-bottom-right-radius: 4px;
+  flex-grow: 1;
   
   @media (max-width: ${sizeMobile}) {
     padding: 0;
     align-items: center;
-    flex-basis: 94px;
+    min-height: 94px;
     display: flex;
     justify-content: center;
   }
@@ -121,7 +120,9 @@ const DataItem = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
-  text-align: center`;
+  text-align: center;
+  padding: 0 15px;
+`;
 
 const Name = styled(TextStandart)<{ type: string }>`
   display: block;
@@ -130,6 +131,7 @@ const Name = styled(TextStandart)<{ type: string }>`
   align-self: center;
   font-size: 18px;
   line-height: 25px;
+  word-break: break-word;
   
   @media (max-width: ${sizeMobile}) {
     font-size: 15px;
@@ -151,7 +153,8 @@ const NumberPlayer = styled(TextStandart)`
 
 const DescriptionItem = styled(TextSmallThin)`
   color: ${({ theme }) => theme.colors.grey};
-
+  word-break: break-word;
+  
   @media (max-width: ${sizeMobile}) {
     font-size: 13px;
     line-height: 18px;

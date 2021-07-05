@@ -5,9 +5,10 @@ const teamsAdapter = createEntityAdapter<ITeam>();
 
 export const teamsDataReducer = createSlice({
   name: 'teamDataReducer',
-  initialState: teamsAdapter.getInitialState({
+  initialState: teamsAdapter.getInitialState<{ chunkData: IChunkDataTeams}>({
     chunkData: {
-      data: [] as ITeam[],
+      data: [],
+      page: 0,
       count: 0,
       size: 0,
     },

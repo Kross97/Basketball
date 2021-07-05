@@ -1,25 +1,25 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { ReactComponent as TeamsLogo } from '../static/icons/group_person.svg';
 import { ReactComponent as PlayerLogo } from '../static/icons/person.svg';
 import { ReactComponent as SignOutLogo } from '../static/icons/input.svg';
 import { TextExtraSmall } from './Typography';
-import { mobileVersionLayout } from '../helpers/constants/mobileSize';
+import { mobileVersionLayout, mobliSizeCard } from '../helpers/constants/mobileSize';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { routePaths } from '../helpers/constants/routePaths';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
+import { TextLink } from './TextLink';
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
 };
 
 export const SideSandwichMenu = () => {
-  const history = useHistory();
   const { path } = useParams<{ path: string }>();
   const { t } = useTranslation();
   const {
@@ -35,45 +35,50 @@ export const SideSandwichMenu = () => {
     state: StoreReducer,
   ) => state.menuReducer.isActiveSandwichMenu);
 
-  const clickIconHandler = (route: string) => {
+  const clickIconHandler = () => {
     if (window.innerWidth < 930) {
       toggleStatusSandwichMenu();
     }
-    history.push(`/main/${route}`);
   };
 
   const goOutSite = () => {
     localStorage.removeItem('authorized_basketball');
-    history.replace(routePaths.signIn);
   };
-
-  const showUserChange = useCallback(() => {
-    history.push(routePaths.changeUser);
-  }, []);
 
   return (
     <ContainerMenu isActiveMenu={isActiveSandwich}>
       <TeamsPlayers>
-        <AutthorizedContainer onClick={toggleStatusSandwichMenu}>
-          <AuthorizedUserLogo
-            onClick={showUserChange}
-            name={name}
-            avatarUrl={avatarUrl}
-          />
+        <AutthorizedContainer>
+          <TextLink
+            onClick={toggleStatusSandwichMenu}
+            disabled={false}
+            to={routePaths.changeUser}
+          >
+            <AuthorizedUserLogo
+              name={name}
+              avatarUrl={avatarUrl}
+            />
+          </TextLink>
         </AutthorizedContainer>
-        <TeamItem currentPath={path} onClick={() => clickIconHandler('teams')}>
-          <TeamsLogo />
-          <TextExtraSmall>{t('menu:teams')}</TextExtraSmall>
-        </TeamItem>
-        <PlayerItem currentPath={path} onClick={() => clickIconHandler('players')}>
-          <PlayerLogo />
-          <TextExtraSmall>{t('menu:players')}</TextExtraSmall>
-        </PlayerItem>
+        <TextLink onClick={clickIconHandler} disabled={false} to={routePaths.teams}>
+          <TeamItem currentPath={path}>
+            <TeamsLogo />
+            <TextItem>{t('menu:teams')}</TextItem>
+          </TeamItem>
+        </TextLink>
+        <TextLink onClick={clickIconHandler} disabled={false} to={routePaths.players}>
+          <PlayerItem currentPath={path}>
+            <PlayerLogo />
+            <TextItem>{t('menu:players')}</TextItem>
+          </PlayerItem>
+        </TextLink>
       </TeamsPlayers>
-      <OutItem onClick={goOutSite}>
-        <SignOutLogo />
-        <TextSignAndPlayers>{t('menu:out')}</TextSignAndPlayers>
-      </OutItem>
+      <TextLink onClick={goOutSite} disabled={false} to={routePaths.signIn}>
+        <OutItem>
+          <SignOutLogo />
+          <TextSignAndPlayers>{t('menu:out')}</TextSignAndPlayers>
+        </OutItem>
+      </TextLink>
     </ContainerMenu>
   );
 };
@@ -82,7 +87,7 @@ const AutthorizedContainer = styled.div`
   display: none;
   padding: 20px 0 20px 20px;
   border-bottom: ${({ theme }) => `1px solid ${theme.colors.grey}`};
-
+  
   @media (max-width: ${mobileVersionLayout}) {
     display: block;
   }
@@ -98,6 +103,14 @@ const ContainerMenu = styled.div<{ isActiveMenu: boolean }>`
   background-color: ${({ theme }) => theme.colors.white};
   box-sizing: border-box;
   transition: 0.7s ease-out;
+
+  & a {
+    text-decoration: none;
+  }
+
+  @media (max-width: ${mobliSizeCard}) {
+    transition: 0.5s ease-out;
+  }
 
   @media (max-width: ${mobileVersionLayout}) {
     margin-top: 0;
@@ -117,63 +130,48 @@ const ItemMenu = styled.div`
   align-items: center;
   cursor: pointer;
 
+  & > span {
+    margin-top: 9px;
+  }
+
   @media (max-width: ${mobileVersionLayout}) {
     flex-direction: row;
     padding-left: 25px;
-    justify-content: flex-start;
+    align-items: flex-end;
     & svg {
       margin-right: 9px;
+    }
+    & > span {
+      margin-top: 0;
     }
   }
 `;
 
+const TextItem = styled(TextExtraSmall)`
+  line-height: 150%;
+  @media (max-width: ${mobileVersionLayout}) {
+    font-size: 13px;
+    line-height: 18px;
+  }
+`;
+
 const TeamItem = styled(ItemMenu)<{ currentPath: string }>`
-  color: ${({ currentPath, theme }) => (currentPath === 'teams' ? theme.colors.red : theme.colors.middleGrey)};
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-
-  &:active {
-    background: ${({ theme }) => theme.gradient.sandwichButton};
-  }
-
-  &:hover svg {
-    fill: ${({ theme }) => theme.colors.lightRed};
-  }
+  color: ${({ currentPath, theme }) => (currentPath === 'teams' && theme.colors.red)};
 
   & svg {
     width: 22px;
     height: 14px;
     fill: ${({ currentPath, theme }) => (currentPath === 'teams' ? theme.colors.red : theme.colors.middleGrey)};
   }
-
-  @media (max-width: ${mobileVersionLayout}) {
-    justify-content: flex-start;
-  }
 `;
 
 const PlayerItem = styled(ItemMenu)<{ currentPath: string }>`
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center;
-  color: ${({ currentPath, theme }) => (currentPath === 'players' ? theme.colors.red : theme.colors.middleGrey)};
+  color: ${({ currentPath, theme }) => (currentPath === 'players' && theme.colors.red)};
 
   & svg {
     width: 16px;
     height: 16px;
     fill: ${({ currentPath, theme }) => (currentPath === 'players' ? theme.colors.red : theme.colors.middleGrey)};
-  }
-
-  &:active {
-    background: ${({ theme }) => theme.gradient.sandwichButton};
-  }
-
-  &:hover svg {
-    fill: ${({ theme }) => theme.colors.lightRed};
-  }
-
-  @media (max-width: ${mobileVersionLayout}) {
-    justify-content: flex-start;
   }
 `;
 
@@ -203,21 +201,38 @@ const TeamsPlayers = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex-grow: 0.13;
-
-  & ${ItemMenu}:nth-child(1) {
-    margin-bottom: 40px;
-  }
+  flex-basis: 150px;
 
   @media (max-width: ${mobileVersionLayout}) {
-    flex-grow: 0.1;
+    flex-basis: 170px;
+  }
 
-    & ${ItemMenu}:nth-child(1) {
-      margin-bottom: 33px;
+  & > a {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: ${({ theme }) => theme.colors.middleGrey};
+
+    &:active {
+      background: ${({ theme }) => theme.gradient.sandwichButton};
     }
+
+    &:hover {
+      color: ${({ theme }) => theme.colors.lightRed};
+    }
+
+    &:hover svg {
+      fill: ${({ theme }) => theme.colors.lightRed};
+    }
+
+    @media (max-width: ${mobileVersionLayout}) {
+      justify-content: flex-start;
+    }
+
   }
 `;
 
-const TextSignAndPlayers = styled(TextExtraSmall)`
+const TextSignAndPlayers = styled(TextItem)`
   color: ${({ theme }) => theme.colors.red};
 `;

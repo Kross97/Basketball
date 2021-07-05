@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 import { FieldInputData } from '../../uiComponents/FieldInputData';
 import { CheckboxСhoice } from '../../uiComponents/CheckboxСhoice';
 import { ButtonAction } from '../../uiComponents/ButtonAction';
@@ -29,6 +30,15 @@ export const BaseForm: FC<IProps> = React.memo(({
   submitHandler,
   userData = undefined,
 }) => {
+  const [isAuthorized] = useState<boolean>(() => localStorage.getItem('authorized_basketball') === 'success');
+  const [isSubmit, setIsSubmit] = useState<boolean>(!notificationMessage.message);
+
+  const history = useHistory();
+  useEffect(() => {
+    if (isAuthorized) {
+      history.replace(routePaths.teams);
+    }
+  }, [isAuthorized]);
   const {
     register,
     handleSubmit,
@@ -37,8 +47,9 @@ export const BaseForm: FC<IProps> = React.memo(({
     setValue,
     trigger,
   } = useForm();
-  const { t } = useTranslation();
+  const [wrongPassword, setWrongMessage] = useState<string>('');
 
+  const { t } = useTranslation();
   useEffect(() => {
     if (userData?.login && userData?.password) {
       setValue('login', userData.login);
@@ -48,10 +59,11 @@ export const BaseForm: FC<IProps> = React.memo(({
 
   useEffect(() => {
     if (notificationMessage.message === signRequestErrors[403]) {
-      errors.password = { type: 'custom' };
+      setWrongMessage('Wrong password. Please, try again.');
     } else {
-      delete errors.password;
+      setWrongMessage('');
     }
+    setIsSubmit(!notificationMessage.message);
   }, [notificationMessage.message]);
 
   const [typePasswordInputs, setNewTypes] = useState<{ [key: string]: TypesInput }>({
@@ -64,8 +76,15 @@ export const BaseForm: FC<IProps> = React.memo(({
     setNewTypes({ ...typePasswordInputs, [name]: newType });
   };
 
+  const changeValue = () => {
+    setIsSubmit(true);
+  };
+
   return (
-    <FormSign onSubmit={handleSubmit(submitHandler)}>
+    <FormSign
+      onChange={changeValue}
+      onSubmit={handleSubmit(isSubmit ? submitHandler : () => {})}
+    >
       <LabelForm>{typeForm}</LabelForm>
       {typeForm === 'Sign Up' && (
         <FieldInputData
@@ -81,7 +100,7 @@ export const BaseForm: FC<IProps> = React.memo(({
             required: true,
             pattern: regExpName,
             minLength: 3,
-            maxLength: 19,
+            maxLength: 24,
           })}
         />
       )}
@@ -98,7 +117,7 @@ export const BaseForm: FC<IProps> = React.memo(({
           required: true,
           pattern: regExpLogin,
           minLength: 3,
-          maxLength: 13,
+          maxLength: 15,
         })}
       />
       <FieldInputData
@@ -107,10 +126,13 @@ export const BaseForm: FC<IProps> = React.memo(({
         disabled={false}
         type={typePasswordInputs.password}
         startType="password"
-        onChange={() => trigger('password')}
+        onChange={() => {
+          trigger('password');
+          setWrongMessage('');
+        }}
         changeTypeInput={() => changeTypeInput('password')}
-        isError={!!errors.password}
-        errorMessage={formSignErrors[errors.password?.type]}
+        isError={!!wrongPassword || !!errors.password}
+        errorMessage={wrongPassword || formSignErrors[errors.password?.type]}
         register={register({ required: true, pattern: regExpPassword })}
       />
       {typeForm === 'Sign Up' && (
@@ -190,6 +212,7 @@ const FormSign = styled.form`
   & > label, & > button, & > div:nth-of-type(1) {
     margin-bottom: 24px;
   }
+
   @media (max-width: ${mobileVersionLayout}) {
     & > ${TextContainer} span {
       font-size: 15px;
@@ -199,7 +222,7 @@ const FormSign = styled.form`
       padding-top: 8px;
       padding-bottom: 8px;
     }
-   }
+  }
   @media (max-width: ${extraSmallLayout}) {
     padding-top: 100px;
     padding-bottom: 40px;

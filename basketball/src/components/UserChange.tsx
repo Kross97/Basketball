@@ -14,6 +14,7 @@ import { NotificationMessage } from '../uiComponents/NotificationMessage';
 import { IDataChangeUser } from '../helpers/interfaces/componentsInterfaces/StateAndEvents';
 import { regExpName } from '../helpers/constants/regularExp';
 import { routePaths } from '../helpers/constants/routePaths';
+import { userChangeErrors } from '../helpers/constants/formErrors';
 
 const actionCreators = {
   changeAuthData,
@@ -81,9 +82,14 @@ export default () => {
           name="userName"
           defaultValue={userName}
           onChange={() => trigger('userName')}
-          register={register({ required: true, pattern: regExpName })}
+          register={register({
+            required: true,
+            pattern: regExpName,
+            minLength: 3,
+            maxLength: 27,
+          })}
           isError={!!errors.userName}
-          errorMessage="Required or incorrect enter"
+          errorMessage={userChangeErrors[errors.userName?.type]}
         />
         <BtnGroup>
           <ButtonAction

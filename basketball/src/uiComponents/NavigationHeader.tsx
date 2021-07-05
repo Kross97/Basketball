@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useHistory } from 'react-router-dom';
 import { BrandLogo } from './BrandLogo';
 import { AuthorizedUserLogo } from './AuthorizedUserLogo';
 import menuIcon from '../static/icons/menu.svg';
@@ -10,6 +9,7 @@ import { StoreReducer } from '../helpers/interfaces/StoreReducer';
 import { useCustomActions } from '../helpers/functions/useCustomActions';
 import { menuReducer } from '../store/reducers/sandwichAndChangeMenu';
 import { routePaths } from '../helpers/constants/routePaths';
+import { TextLink } from './TextLink';
 
 const actionCreators = {
   toggleStatusSandwichMenu: menuReducer.actions.toggleStatusSandwichMenu,
@@ -21,25 +21,20 @@ export const NavigationHeader = () => {
     avatarUrl: authData.avatarUrl,
   }));
 
-  const history = useHistory();
-
   const {
     toggleStatusSandwichMenu,
   } = useCustomActions(actionCreators);
 
-  const showUserChange = useCallback(() => {
-    history.push(routePaths.changeUser);
-  }, []);
-
   return (
     <ContainerNavigation>
-      <ButtonSandwich onClick={toggleStatusSandwichMenu} />
+      <ButtonSandwich onClick={() => toggleStatusSandwichMenu()} />
       <BrandLogo />
-      <AuthorizedUserLogo
-        onClick={showUserChange}
-        name={name}
-        avatarUrl={avatarUrl}
-      />
+      <TextLink disabled={false} to={routePaths.changeUser}>
+        <AuthorizedUserLogo
+          name={name}
+          avatarUrl={avatarUrl}
+        />
+      </TextLink>
     </ContainerNavigation>
   );
 };
@@ -68,7 +63,12 @@ const ContainerNavigation = styled.div`
   justify-content: space-between;
   padding: 16px 53px;
   box-shadow: 0 1px 10px rgba(209, 209, 209, 0.5);
-
+  
+  & > a {
+    text-decoration: none;
+    display: flex;
+  }
+  
   @media (max-width: ${mobileVersionLayout}) {
     justify-content: center;
     & div {

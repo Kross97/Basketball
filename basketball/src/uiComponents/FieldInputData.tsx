@@ -1,12 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styled from 'styled-components';
-import { capitalize } from 'lodash';
 import { TextSmall } from './Typography';
 import closeEyeIcon from '../static/icons/close_eye.svg';
 import eyeIcon from '../static/icons/eye.svg';
 import { TypesInput } from '../helpers/types/types';
 import { mobileVersionLayout } from '../helpers/constants/mobileSize';
-import { valueForCapitalize } from '../helpers/constants/formatingNames';
 
 interface IProps {
   text: string;
@@ -37,41 +35,25 @@ export const FieldInputData: FC<IProps> = React.memo(({
   isError = false,
   errorMessage = '',
 
-}) => {
-  const [value, setValue] = useState<string>((defaultValue && `${defaultValue}`) || '');
-
-  const changeHandler = ({ target }: React.ChangeEvent<HTMLInputElement>) => {
-    if (valueForCapitalize.has(name)) {
-      setValue(capitalize(target.value));
-    } else {
-      setValue(target.value);
-    }
-
-    if (onChange) {
-      onChange();
-    }
-  };
-
-  return (
-    <InputContainer htmlFor={name}>
-      <TextInput>{text}</TextInput>
-      <CustomInput
-        onChange={changeHandler}
-        onBlur={onBlur}
-        name={name}
-        type={type}
-        disabled={disabled}
-        isError={isError}
-        defaultValue={defaultValue}
-        ref={register}
-        value={value}
-      />
-      {isError && <TextInputError>{errorMessage}</TextInputError>}
-      {startType === 'password'
+}) => (
+  <InputContainer htmlFor={name}>
+    <TextInput>{text}</TextInput>
+    <CustomInput
+      id={name}
+      onChange={onChange}
+      onBlur={onBlur}
+      name={name}
+      type={type}
+      disabled={disabled}
+      isError={isError}
+      ref={register}
+      defaultValue={defaultValue || ''}
+    />
+    {isError && <TextInputError>{errorMessage}</TextInputError>}
+    {startType === 'password'
             && <ButtonChangeType type="button" onClick={changeTypeInput} typeButton={type} startType={startType} />}
-    </InputContainer>
-  );
-});
+  </InputContainer>
+));
 
 const InputContainer = styled.label`
   display: flex;
@@ -84,9 +66,13 @@ const InputContainer = styled.label`
 const CustomInput = styled.input<{ type: string, isError: boolean }>`
   outline: none;
   box-sizing: border-box;
-  border: ${({ isError, theme }) => (isError ? `1px solid ${theme.colors.lightestRed}` : 'none')};
+  margin: 0;
+  border: ${({
+    isError,
+    theme,
+  }) => (isError ? `1px solid ${theme.colors.lightestRed}` : `1px solid ${theme.colors.lightestGrey}`)};
   border-radius: 4px;
-  padding: 8px 12px;
+  padding: 7px 12px;
   background-color: ${({ theme }) => theme.colors.lightestGrey};
   font-style: normal;
   font-weight: 500;
@@ -108,7 +94,7 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
     background-color: ${({ theme }) => theme.colors.lightestGrey};
     color: ${({ theme }) => theme.colors.lightGrey};
   }
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     font-size: 15px;
   }
@@ -117,8 +103,8 @@ const CustomInput = styled.input<{ type: string, isError: boolean }>`
 
 const TextInput = styled(TextSmall)`
   color: ${({ theme }) => theme.colors.middleGrey};
-  
-  @media(max-width: ${mobileVersionLayout}) {
+
+  @media (max-width: ${mobileVersionLayout}) {
     font-size: 17px;
     line-height: 25px;
   }
@@ -137,11 +123,15 @@ const ButtonChangeType = styled.button<{ typeButton: string; startType: string; 
   cursor: pointer;
   position: absolute;
   right: 13px;
-  top: 40px;
+  top: 37px;
   width: 16px;
   height: 16px;
   background: ${({
     typeButton,
     startType,
   }) => (typeButton === startType ? `url(${closeEyeIcon})` : `url(${eyeIcon})`)} no-repeat;
+
+  @media (max-width: ${mobileVersionLayout}) {
+    top: 38px;
+  }
 `;

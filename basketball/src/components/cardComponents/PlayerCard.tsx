@@ -35,7 +35,7 @@ export default () => {
     addEntityError,
   }: StoreReducer) => ({
     errorMessage: addEntityError.errorMessage,
-    player: entities[id],
+    player: entities[id]!,
     token: authDataUser.authData.token,
   }), shallowEqual);
 
@@ -46,14 +46,12 @@ export default () => {
   };
 
   const removeCurrentPlayer = () => {
-    if (player) {
-      removePlayer({
-        id: player.id,
-        srcImage: player.avatarUrl,
-        token,
-        history,
-      });
-    }
+    removePlayer({
+      id: player.id,
+      srcImage: player.avatarUrl,
+      token,
+      history,
+    });
   };
 
   return (
@@ -62,8 +60,6 @@ export default () => {
         <CardContainer>
           <CardNavigation>
             <div>
-              <TextLink text={t('main')} to={routePaths.mainBase} disabled={false} />
-              <Separator>/</Separator>
               <TextLink text={t('player:players')} to={routePaths.players} disabled={false} />
               <Separator>/</Separator>
               <TextLink text={`${player.name}`} to={`${player.name}`} disabled />
@@ -109,7 +105,7 @@ const CardContainer = styled.div`
   margin: 32px auto;
   flex-grow: 0.2;
 
-  @media (max-width: 1450px) {
+  @media (max-width: 1550px) {
     margin: 32px;
   }
 
@@ -221,7 +217,7 @@ const Content = styled.div`
 const ImagePlayer = styled.div<{ avatarUrl: string }>`
   margin-right: 56px;
   flex-shrink: 0.1;
-  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat center 5px`};
+  background: ${({ avatarUrl }) => `url(${avatarUrl}) no-repeat center 9px`};
   width: 500px;
   height: 368px;
   background-size: contain;
@@ -238,7 +234,7 @@ const ImagePlayer = styled.div<{ avatarUrl: string }>`
   
   @media(max-width: ${mobliSizeCard}) {
     width: 320px;
-    background-position-y: 9px;
+    background-position-y: 20px;
   }
   
   @media (max-width: ${mobileLayout}) {
@@ -256,6 +252,7 @@ const PlayerName = styled(TextExtraLarge)`
   margin-bottom: 40px;
   color: ${({ theme }) => theme.colors.white};
   text-transform: capitalize;
+  word-break: break-word;
   
   @media(max-width: 1080px) {
     font-size: 32px;
