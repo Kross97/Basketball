@@ -69,6 +69,7 @@ export const requestSignIn = createAsyncThunk(
 
 export const changeAuthData = createAsyncThunk(
   'changeUser',
+  // @ts-ignore
   async (changeData: IChangedDataUser, { dispatch }) => {
     dispatch(authDataUser.actions.addErrorChangeUser({ errorChange: '' }));
     try {

@@ -5,7 +5,7 @@ const playersAdapter = createEntityAdapter<IPlayer>();
 
 export const playersDataReducer = createSlice({
   name: 'playerDataReducer',
-  initialState: playersAdapter.getInitialState<{ chunkData: IChunkPlayers}>({
+  initialState: playersAdapter.getInitialState<{ chunkData: IChunkPlayers }>({
     chunkData: {
       data: [],
       count: 0,

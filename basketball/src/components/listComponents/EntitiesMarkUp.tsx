@@ -21,7 +21,6 @@ import { StoreReducer } from '../../helpers/interfaces/StoreReducer';
 import {
   IStateChangeEntities, IOption, IPaginationValue, IDataSelected, ISelectedDataAll,
 } from '../../helpers/interfaces/componentsInterfaces/StateAndEvents';
-import style from '../../themes/reactPagination.module.scss';
 import { useCustomActions } from '../../helpers/functions/useCustomActions';
 import { mobileLayout, mobileVersionLayout, mobileVersionList } from '../../helpers/constants/mobileSize';
 import { MultiSelectEntities } from '../../uiComponents/MultiSelectEntities';
@@ -148,10 +147,10 @@ export const EntitiesMarkUp: FC<IProps> = React.memo(({
               previousLabel={<PaginationCountBtn type="prev" />}
               nextLabel={<PaginationCountBtn type="next" />}
               breakLabel={<PaginationCountBtn type="break" />}
-              pageClassName={style.itemPagination}
-              pageLinkClassName={style.itemLinkPagination}
-              containerClassName={style.paginationContainer}
-              activeClassName={style.activeClassName}
+              pageClassName="style.itemPagination"
+              pageLinkClassName="style.itemLinkPagination"
+              containerClassName="style.paginationContainer"
+              activeClassName="style.activeClassName"
               onPageChange={changePage}
               initialPage={chunkData.page - 1}
               pageCount={typedSelectedChunk.countEntities / typedSelectedChunk.sizePageEntities}
@@ -174,7 +173,7 @@ const ContainerTeams = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     margin: 32px 0 0;
   }
@@ -187,11 +186,11 @@ const HeaderTeams = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 32px;
-  
+
   @media (max-width: ${mobileVersionLayout}) {
     flex-direction: column;
     align-self: stretch;
-    
+
     & > button {
       margin-top: 16px;
     }
@@ -217,11 +216,11 @@ const FieldGroup = styled.div`
   & > label {
     flex-basis: 48.5%;
   }
-  
+
   @media(max-width: ${mobileVersionList}) {
     flex-basis: 84%;
   }
-  
+
   @media(max-width: ${mobileVersionLayout}) {
     flex-direction: column;
   }

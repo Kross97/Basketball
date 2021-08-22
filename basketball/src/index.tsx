@@ -14,6 +14,7 @@ import './i18next';
 export const store = configureStore({
   reducer,
   preloadedState: {
+    // @ts-ignore
     authDataUser: {
       authData: {
         name: localStorage.getItem('name_basketball') || '',
